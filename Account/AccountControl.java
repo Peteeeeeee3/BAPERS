@@ -1,14 +1,14 @@
 package Account;
 
-public class AccountControl implements I_Account {
-	public VectorOfAccounts vecAcc;
-	public VectorOfUsers vecUser;
+public class AccountControl implements Account.I_Account {
+	public Account.VectorOfAccounts vecAcc;
+	public Account.VectorOfUsers vecUser;
 
-	public UserAccount retrieveUser(int staffID) {
+	public Account.UserAccount retrieveUser(int staffID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Customer retrieveCustomer(int accountNo) {
+	public Account.Customer retrieveCustomer(int accountNo) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -47,4 +47,5 @@ public class AccountControl implements I_Account {
 	public void updateAccess(int staffID, Object newAccess) {
 		throw new UnsupportedOperationException();
 	}
+	//test
 }
