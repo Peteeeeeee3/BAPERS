@@ -1,12 +1,15 @@
 package Database;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public interface I_Database {
 
-	public void connectDB();
+	public void connectDB() throws ClassNotFoundException, SQLException;
 
-	public void disconnectDB();
+	public void disconnectDB() throws SQLException;
 
-	public ResultSet read(String sql);
+	public ResultSet read(String sql) throws SQLException;
 
-	public void write(String sql);
+	public void write(String sql) throws SQLException;
 }

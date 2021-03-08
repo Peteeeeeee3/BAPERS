@@ -6,7 +6,7 @@ import Account.Customer;
 public class VectorOfAccounts {
 	private int noOfCustAccounts = 0;
 	public Receptionist staff;
-	public AccountControl accControl.;
+	public AccountControl accControl;
 	public Vector<Customer> customer = new Vector<Customer>();
 
 	public void addCustAccount(Object customer) {

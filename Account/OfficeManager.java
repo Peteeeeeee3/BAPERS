@@ -39,6 +39,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public OfficeManager(UserAccount user) {
+		super(user);
 		throw new UnsupportedOperationException();
 	}
 }

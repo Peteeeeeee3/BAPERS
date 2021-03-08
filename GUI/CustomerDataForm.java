@@ -1,6 +1,8 @@
 package GUI;
 
-public class CustomerDataForm extends Form {
+import javax.swing.*;
+
+public class CustomerDataForm<JField> extends Form {
 	private String state;
 	private JPanel searchCustPanel;
 	private JTextField searchTextField;

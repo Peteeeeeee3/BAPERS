@@ -32,6 +32,7 @@ public class Receptionist extends UserAccount {
 	}
 
 	public Receptionist(UserAccount user) {
+		super(user.getPassword(), user.getAccess(), user.getVecUser());
 		throw new UnsupportedOperationException();
 	}
 }

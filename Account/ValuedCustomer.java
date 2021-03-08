@@ -12,6 +12,6 @@ public class ValuedCustomer extends Customer {
 	}
 
 	public ValuedCustomer(Customer customer) {
-		throw new UnsupportedOperationException();
+		super(customer.getCompany(), customer.getName(), customer.getAddress(), customer.getPhone());
 	}
 }

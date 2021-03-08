@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.*;
+
 public class Form {
 	private JButton confirmButton;
 	private JButton backButton;

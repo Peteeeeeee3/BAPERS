@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.*;
+
 public class StaffPageForm extends Form {
 	private String state;
 	private JTextPane welcomeMessageTextPane;

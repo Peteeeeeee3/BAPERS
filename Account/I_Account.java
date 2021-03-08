@@ -1,5 +1,7 @@
 package Account;
 
+import java.sql.SQLException;
+
 public interface I_Account {
 
 	public UserAccount retrieveUser(int staffID);
@@ -17,4 +19,8 @@ public interface I_Account {
 	public void editDiscount(int accountNo);
 
 	public void makePayment(Object[] jobs);
+
+	public boolean login(int ID, String password) throws SQLException;
+
+	public void logout();
 }

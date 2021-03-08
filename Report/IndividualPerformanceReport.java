@@ -38,7 +38,8 @@ public class IndividualPerformanceReport extends Report {
 		this.endTime = endTime;
 	}
 
-	public IndividualPerformanceReport(String name, int date, int startTime, int endTime) {
+	public IndividualPerformanceReport(String name, int date, int startTime, int endTime, Report report) {
+		super(report.getReportID());
 		throw new UnsupportedOperationException();
 	}
 }

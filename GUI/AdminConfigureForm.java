@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.*;
+
 public class AdminConfigureForm extends Form {
 	private String state;
 	private JButton upgradeCustomerButton;

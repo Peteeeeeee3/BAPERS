@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.*;
+
 public class DiscountForm extends Form {
 	private String state;
 	private JPanel fixedDiscountPanel;

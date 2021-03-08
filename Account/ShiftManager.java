@@ -25,6 +25,7 @@ public class ShiftManager extends Receptionist {
 	}
 
 	public ShiftManager(UserAccount user) {
+		super(user);
 		throw new UnsupportedOperationException();
 	}
 }

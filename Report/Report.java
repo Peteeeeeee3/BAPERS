@@ -3,7 +3,6 @@ package Report;
 public class Report {
 	private int time;
 	private int reportID;
-	private String userName;
 	private int timeTaken;
 	public ReportFacadeControl RFC;
 
@@ -43,7 +42,7 @@ public class Report {
 		this.timeTaken = timeTaken;
 	}
 
-	public Report(int time, int reportID, String userName) {
+	public Report(int reportID) {
 		throw new UnsupportedOperationException();
 	}
 }

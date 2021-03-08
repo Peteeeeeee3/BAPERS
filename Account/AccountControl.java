@@ -1,14 +1,23 @@
 package Account;
 
-public class AccountControl implements Account.I_Account {
-	public Account.VectorOfAccounts vecAcc;
-	public Account.VectorOfUsers vecUser;
+import Control.Control;
+import Control.I_Control;
+import Database.I_Database;
 
-	public Account.UserAccount retrieveUser(int staffID) {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class AccountControl implements Account.I_Account, I_Database {
+	public VectorOfAccounts vecAcc;
+	private VectorOfUsers vecUser;
+	private Control control;
+
+
+	public UserAccount retrieveUser(int staffID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Account.Customer retrieveCustomer(int accountNo) {
+	public Customer retrieveCustomer(int accountNo) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -40,14 +49,43 @@ public class AccountControl implements Account.I_Account {
 		throw new UnsupportedOperationException();
 	}
 
-	public AccountControl() {
-		throw new UnsupportedOperationException();
+	@Override
+	public boolean login(int ID, String password) throws SQLException {
+		return vecUser.login(ID, password);
+	}
+
+	@Override
+	public void logout() {
+
 	}
 
 	public void updateAccess(int staffID, Object newAccess) {
 		throw new UnsupportedOperationException();
 	}
-	//test
-    //peter
-    //munish
+
+	public AccountControl() {}
+
+	public void addControl(Control control) {
+		this.control = control;
+	}
+
+	@Override
+	public void connectDB() throws ClassNotFoundException, SQLException {
+
+	}
+
+	@Override
+	public void disconnectDB() throws SQLException {
+
+	}
+
+	@Override
+	public ResultSet read(String sql) throws SQLException {
+		return control.getDBC().read(sql);
+	}
+
+	@Override
+	public void write(String sql) throws SQLException {
+
+	}
 }

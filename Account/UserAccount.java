@@ -1,18 +1,13 @@
 package Account;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class UserAccount {
 	private int staffID;
 	private String password;
 	private int access;
 	public VectorOfUsers vecUser;
-
-	public void login(String username, String password) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void logout() {
-		throw new UnsupportedOperationException();
-	}
 
 	public int getStaffID() {
 		return this.staffID;
@@ -38,7 +33,18 @@ public class UserAccount {
 		this.access = access;
 	}
 
-	public UserAccount(String password, int access) {
-		throw new UnsupportedOperationException();
+	public VectorOfUsers getVecUser() {
+		return vecUser;
+	}
+
+	private void generateID() {
+		staffID = vecUser.getLargestID() + 1;
+	}
+
+	public UserAccount(String password, int access, VectorOfUsers vecUser) {
+		this.password = password;
+		this.access = access;
+		this.vecUser = vecUser;
+		generateID();
 	}
 }

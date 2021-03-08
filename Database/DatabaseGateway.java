@@ -1,14 +1,19 @@
 package Database;
 
+import java.sql.*;
+
 public class DatabaseGateway {
 	public DBControl DBControl;
+	private Connection connection;
 
-	public void connectToDB() {
-		throw new UnsupportedOperationException();
+	//connects to localhost
+	public void connectToDB() throws SQLException {
+		connection = DriverManager.getConnection("dbc:mysql://db_ip:3306/bapers_v4", "root", "");
 	}
 
-	public void disconnectFromDB() {
-		throw new UnsupportedOperationException();
+	//terminates connection to localhost
+	public void disconnectFromDB() throws SQLException {
+		connection.close();
 	}
 
 	public void backupToDB() {
@@ -19,15 +24,25 @@ public class DatabaseGateway {
 		throw new UnsupportedOperationException();
 	}
 
-	public ResultSet read(String sql) {
-		throw new UnsupportedOperationException();
+	//handles reading from database. Call this function if reading is required.
+	public ResultSet read(String sql) throws SQLException {
+		connectToDB();
+		Statement stmt = connection.createStatement();
+		ResultSet result = stmt.executeQuery(sql);
+		disconnectFromDB();
+		return result;
 	}
 
-	public void write(String sql) {
-		throw new UnsupportedOperationException();
+	//handles writing to database. Call this function if writing is required.
+	public void write(String sql) throws SQLException {
+		connectToDB();
+		Statement stmt = connection.createStatement();
+		stmt.executeQuery(sql);
+		disconnectFromDB();
 	}
 
-	public DatabaseGateway() {
-		throw new UnsupportedOperationException();
+	public DatabaseGateway() throws ClassNotFoundException {
+		//initialise JDBC driver for class
+		Class.forName("com.mysql.jdbc.Driver");
 	}
 }

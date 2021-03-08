@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.*;
+
 public class ReportForm extends Form {
 	private String state;
 	private JButton configureScheduleButton;

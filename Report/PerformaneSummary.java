@@ -29,7 +29,8 @@ public class PerformaneSummary extends Report {
 		this.endDate = endDate;
 	}
 
-	public PerformaneSummary(int date, int startDate, int endDate) {
+	public PerformaneSummary(int date, int startDate, int endDate, Report report) {
+		super(report.getReportID());
 		throw new UnsupportedOperationException();
 	}
 }
