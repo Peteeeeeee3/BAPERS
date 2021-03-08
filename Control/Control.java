@@ -3,7 +3,6 @@ package Control;
 import Account.AccountControl;
 import Database.DBControl;
 
-import java.awt.image.PackedColorModel;
 import java.sql.SQLException;
 
 public class Control implements I_Control {
@@ -22,14 +21,10 @@ public class Control implements I_Control {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		////Test Login Start (do not remove)////
-//		Control controller = new Control();
-//		controller.accountControl = new AccountControl();
-//		controller.accountControl.addControl(controller);
-//		controller.accountControl.login(1, "password");
+		Control controller = new Control();
+		controller.accountControl = new AccountControl();
+		controller.accountControl.addControl(controller);
+		controller.accountControl.login(1, "password");
 		////Test Login End////
-	}
-
-	public void setAccountControl(AccountControl accountControl) {
-		this.accountControl = accountControl;
 	}
 }

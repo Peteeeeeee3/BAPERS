@@ -5,7 +5,7 @@ import java.sql.*;
 public class DBControl implements I_Database {
 	public DatabaseGateway DBGateway;
 
-	public void connectDB() throws SQLException {
+	public void connectDB() throws SQLException, ClassNotFoundException {
 		DBGateway.connectToDB();
 	}
 
@@ -13,10 +13,10 @@ public class DBControl implements I_Database {
 		DBGateway.disconnectFromDB();
 	}
 
-	public ResultSet read(String sql) throws SQLException {
+	public ResultSet read(String sql) throws SQLException, ClassNotFoundException {
 		return DBGateway.read(sql);
 	}
-	public void write(String sql) throws SQLException {
+	public void write(String sql) throws SQLException, ClassNotFoundException {
 		DBGateway.write(sql);
 	}
 

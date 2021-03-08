@@ -9,7 +9,7 @@ public interface I_Database {
 
 	public void disconnectDB() throws SQLException;
 
-	public ResultSet read(String sql) throws SQLException;
+	public ResultSet read(String sql) throws SQLException, ClassNotFoundException;
 
-	public void write(String sql) throws SQLException;
+	public void write(String sql) throws SQLException, ClassNotFoundException;
 }

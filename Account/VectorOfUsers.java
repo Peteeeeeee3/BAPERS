@@ -52,7 +52,7 @@ public class VectorOfUsers {
 	}
 
 	//returns true if matching data is found and false if none is found
-	public boolean login(int ID, String password) throws SQLException {
+	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException {
 		////local data version////
 //		for (int i = 0; i < vector.size(); i++) {
 //			if (vector.get(i).getStaffID() == ID && vector.get(i).getPassword() == password) {
@@ -82,7 +82,7 @@ public class VectorOfUsers {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfUsers() {
-		throw new UnsupportedOperationException();
+	public VectorOfUsers(AccountControl accountControl) {
+		this.accControl = accountControl;
 	}
 }

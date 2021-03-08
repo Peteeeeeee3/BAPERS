@@ -7,8 +7,10 @@ public class DatabaseGateway {
 	private Connection connection;
 
 	//connects to localhost
-	public void connectToDB() throws SQLException {
-		connection = DriverManager.getConnection("dbc:mysql://db_ip:3306/bapers_v4", "root", "");
+	public void connectToDB() throws SQLException, ClassNotFoundException {
+		//initialise JDBC driver for class
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		connection = DriverManager.getConnection("dbc:mysql://localhost/bapers/bapers_v4", "root", "");
 	}
 
 	//terminates connection to localhost
@@ -25,7 +27,7 @@ public class DatabaseGateway {
 	}
 
 	//handles reading from database. Call this function if reading is required.
-	public ResultSet read(String sql) throws SQLException {
+	public ResultSet read(String sql) throws SQLException, ClassNotFoundException {
 		connectToDB();
 		Statement stmt = connection.createStatement();
 		ResultSet result = stmt.executeQuery(sql);
@@ -34,7 +36,7 @@ public class DatabaseGateway {
 	}
 
 	//handles writing to database. Call this function if writing is required.
-	public void write(String sql) throws SQLException {
+	public void write(String sql) throws SQLException, ClassNotFoundException {
 		connectToDB();
 		Statement stmt = connection.createStatement();
 		stmt.executeQuery(sql);
@@ -42,7 +44,5 @@ public class DatabaseGateway {
 	}
 
 	public DatabaseGateway() throws ClassNotFoundException {
-		//initialise JDBC driver for class
-		Class.forName("com.mysql.jdbc.Driver");
 	}
 }
