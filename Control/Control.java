@@ -19,15 +19,17 @@ public class Control implements I_Control {
 		return DBC;
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		////Test Login Start (do not remove)////
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
+		//controller setup
 		Control controller = new Control();
 		controller.accountControl = new AccountControl();
 		controller.accountControl.addControl(controller);
-		controller.accountControl.login(1, "password");
+
+		////Test Login Start (do not remove)////
+		//controller.accountControl.login(1, "password");
 		////Test Login End////
 
 		//Test for Creat Customer//
-		controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",07555513157);
+		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",07555513157);
 	}
 }

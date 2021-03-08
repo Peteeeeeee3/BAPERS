@@ -50,7 +50,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	@Override
-	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException {
+	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return vecUser.login(ID, password);
 	}
 
@@ -82,7 +82,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	@Override
-	public ResultSet read(String sql) throws SQLException, ClassNotFoundException {
+	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return control.getDBC().read(sql);
 	}
 

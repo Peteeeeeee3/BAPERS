@@ -19,7 +19,7 @@ public class VectorOfUsers {
 	}
 
 	public void addUser(UserAccount user) {
-		throw new UnsupportedOperationException();
+		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getAccess()));
 	}
 
 	public void removeUser(int staffID) {
@@ -52,7 +52,7 @@ public class VectorOfUsers {
 	}
 
 	//returns true if matching data is found and false if none is found
-	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException {
+	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 		////local data version////
 //		for (int i = 0; i < vector.size(); i++) {
 //			if (vector.get(i).getStaffID() == ID && vector.get(i).getPassword() == password) {

@@ -62,7 +62,6 @@ public class Customer {
 		this.address=address;
 		this.phone=phone;
 		getAccountNo();
-		throw new UnsupportedOperationException();
 	}
 
 }
