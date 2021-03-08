@@ -57,6 +57,12 @@ public class Customer {
 	}
 
 	public Customer(String company, String name, String address, int phone) {
+		this.company=company;
+		this.name=name;
+		this.address=address;
+		this.phone=phone;
+		getAccountNo();
 		throw new UnsupportedOperationException();
 	}
+
 }

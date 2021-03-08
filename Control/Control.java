@@ -26,5 +26,8 @@ public class Control implements I_Control {
 		controller.accountControl.addControl(controller);
 		controller.accountControl.login(1, "password");
 		////Test Login End////
+
+		//Test for Creat Customer//
+		controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",07555513157);
 	}
 }
