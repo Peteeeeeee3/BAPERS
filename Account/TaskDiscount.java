@@ -8,4 +8,12 @@ public class TaskDiscount extends Discount {
 		super(rate);
 		throw new UnsupportedOperationException();
 	}
+
+	public int getTaskID() {
+		return taskID;
+	}
+
+	public float getRate() {
+		return rate;
+	}
 }

@@ -30,7 +30,7 @@ public class ValuedCustomer extends Customer {
 			int rangeItr = 0;
 			//for every rate add one band
 			for (int rateItr = 0; rateItr < rates.length; rateItr++) {
-				//ranges are stored: max, min, max, min, max, min, etc.
+				//ranges are stored: min, max, min, max, min, max etc.
 				discSet.addDiscount(new DiscountBand(ranges[rangeItr], ranges[rangeItr + 1], rates[rateItr]));
 				rangeItr += 2;
 			}
@@ -39,6 +39,10 @@ public class ValuedCustomer extends Customer {
 
 	public void alertManager() {
 		throw new UnsupportedOperationException();
+	}
+
+	public DiscountSet getDiscSet() {
+		return discSet;
 	}
 
 	public ValuedCustomer(Customer customer) {
