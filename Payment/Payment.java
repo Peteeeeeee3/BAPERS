@@ -13,6 +13,14 @@ public class Payment {
 	public VectorOfPayments vecPaym;
 	public Card card;
 
+	public int getiD() {
+		return iD;
+	}
+
+	public void setiD(int iD) {
+		this.iD = iD;
+	}
+
 	public float getAmount() {
 		return this.amount;
 	}

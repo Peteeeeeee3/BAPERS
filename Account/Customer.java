@@ -1,4 +1,5 @@
 package Account;
+import Payment.*;
 
 public class Customer {
 	private String company;
@@ -7,6 +8,8 @@ public class Customer {
 	private String address;
 	private int phone;
 	public VectorOfAccounts vecAcc;
+	public VectorOfPayments vecPayment;
+	public Payment payment;
 
 	public void addJob() {
 		throw new UnsupportedOperationException();
@@ -56,13 +59,30 @@ public class Customer {
 		this.phone = phone;
 	}
 
+	public int generateAccountNo(){
+		return accountNo=vecAcc.getCustomerID()+1;
+	}
+    //this is incomplete as we need to link this to a new job being added this will increase the no of payment with a customer.
+	public int listOfPayment(){
+		int paymentID= 0;
+		int i=0;
+
+		while(i==generateAccountNo()){
+			++paymentID;
+		}
+		return paymentID;
+
+	}
+
+
 	public Customer(String company, String name, String address, int phone) {
 		this.company=company;
 		this.name=name;
 		this.address=address;
 		this.phone=phone;
-		getAccountNo();
-		throw new UnsupportedOperationException();
+		generateAccountNo();
+		listOfPayment();
+
 	}
 
 }

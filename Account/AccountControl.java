@@ -22,7 +22,6 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void createCustomer(String company, String name, String address, int phone) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void createUser(String password, int access) {
@@ -88,6 +87,5 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public void write(String sql) throws SQLException {
 
 	}
-    
-    //munish
+
 }

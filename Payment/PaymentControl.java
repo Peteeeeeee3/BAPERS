@@ -6,6 +6,7 @@ import Job.Job;
 public class PaymentControl implements I_Payment {
 	public VectorOfPayments unnamed_VectorOfPayments_;
 	public VectorOfCards unnamed_VectorOfCards_;
+	public Customer customer;
 
 	public Payment retrievePayment(int iD) {
 		throw new UnsupportedOperationException();
@@ -29,5 +30,10 @@ public class PaymentControl implements I_Payment {
 
 	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate) {
 		throw new UnsupportedOperationException();
+	}
+
+	public int PaymentToCustomer(int ID, int accountNo){
+		return customer.listOfPayment();
+
 	}
 }

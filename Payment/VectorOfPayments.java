@@ -11,7 +11,7 @@ public class VectorOfPayments {
 	public VectorOfCards vecCards;
 
 	public void addPayment(Payment payment) {
-		throw new UnsupportedOperationException();
+
 	}
 
 	public Payment retrievePayment(int iD) {
@@ -27,6 +27,7 @@ public class VectorOfPayments {
 	}
 
 	public VectorOfPayments(Customer customer) {
-		throw new UnsupportedOperationException();
+		this.customer=customer;
+
 	}
 }
