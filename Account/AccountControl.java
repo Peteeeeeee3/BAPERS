@@ -12,6 +12,8 @@ public class AccountControl implements Account.I_Account, I_Database {
 	private VectorOfUsers vecUser;
 	private Control control;
 
+	//testing
+
 
 	public UserAccount retrieveUser(int staffID) {
 		throw new UnsupportedOperationException();
