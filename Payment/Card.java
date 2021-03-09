@@ -6,8 +6,6 @@ public class Card {
 	private String type;
 	private int expiryDate;
 	private int last4Digits;
-	private Customer customer;
-	public Payment payment;
 
 	public String getType() {
 		return this.type;
@@ -34,6 +32,8 @@ public class Card {
 	}
 
 	public Card(String type, int expiryDate, int last4Digits) {
-		throw new UnsupportedOperationException();
+		this.type = type;
+		this.expiryDate = expiryDate;
+		this.last4Digits = last4Digits;
 	}
 }

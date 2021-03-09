@@ -1,12 +1,13 @@
 package Account;
 
+import java.util.Set;
 import java.util.Vector;
 import Account.Discount;
 
 public class DiscountSet {
 	private int noOfDiscounts = 0;
 	public ValuedCustomer vCust;
-	public Vector<Discount> discount = new Vector<Discount>();
+	public Set<Discount> discount;
 
 	public void addDiscount(Discount discount) {
 		throw new UnsupportedOperationException();

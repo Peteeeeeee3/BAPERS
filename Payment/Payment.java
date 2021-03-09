@@ -45,11 +45,28 @@ public class Payment {
 		return this.jobs;
 	}
 
-	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate) {
-		throw new UnsupportedOperationException();
+	public int getiD() {
+		return iD;
 	}
 
-	public static void Payment2(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) {
-		throw new UnsupportedOperationException();
+	public Card getCard() {
+		return card;
+	}
+
+	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate) {
+		this.amount = amount;
+		this.date = date;
+		this.customer = customer;
+		this.jobs = jobs;
+		this.dueDate = dueDate;
+	}
+
+	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) {
+		this.amount = amount;
+		this.date = date;
+		this.customer = customer;
+		this.jobs = jobs;
+		this.dueDate = dueDate;
+		this.card = card;
 	}
 }
