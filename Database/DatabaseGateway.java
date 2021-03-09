@@ -8,7 +8,29 @@ public class DatabaseGateway {
 
 	//connects to localhost
 	public void connectToDB() throws SQLException {
+		//Peter
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+
+		//Hanan
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Tulsi
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Abdullah
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Farhan
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Abdullah
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Munish
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Rashidul
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
 	}
 
 	//terminates connection to localhost
