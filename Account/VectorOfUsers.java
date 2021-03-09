@@ -62,9 +62,12 @@ public class VectorOfUsers {
 //		return false;
 
 		////database version////
-		ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + ID + ", staff_member.password = " + password + ";");
-		int access = rs.getInt("access");
-		System.out.println("Success " + access);
+		ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + ID + " AND staff_member.password = '" + password + "';");
+		int access = -1;
+		while (rs.next()) {
+			access = rs.getInt(1);
+		}
+		//System.out.println(access + " " + ID + " " + password);
 		switch (access) {
 			case 1:
 				return true;

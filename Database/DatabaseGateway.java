@@ -7,10 +7,8 @@ public class DatabaseGateway {
 	private Connection connection;
 
 	//connects to localhost
-	public void connectToDB() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-		//initialise JDBC driver for class
-		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-		connection = DriverManager.getConnection("dbc:mysql://localhost/bapers/bapers_v4", "root", "");
+	public void connectToDB() throws SQLException {
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 	}
 
 	//terminates connection to localhost
@@ -28,21 +26,19 @@ public class DatabaseGateway {
 
 	//handles reading from database. Call this function if reading is required.
 	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		connectToDB();
 		Statement stmt = connection.createStatement();
-		ResultSet result = stmt.executeQuery(sql);
-		disconnectFromDB();
-		return result;
+		return stmt.executeQuery(sql);
 	}
 
 	//handles writing to database. Call this function if writing is required.
-	public void write(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		connectToDB();
+	public void write(String sql) throws SQLException {
 		Statement stmt = connection.createStatement();
 		stmt.executeQuery(sql);
-		disconnectFromDB();
 	}
 
-	public DatabaseGateway() throws ClassNotFoundException {
+	public DatabaseGateway() throws ClassNotFoundException, SQLException {
+		//initialise JDBC driver for class
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		connectToDB();
 	}
 }

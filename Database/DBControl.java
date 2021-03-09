@@ -20,7 +20,7 @@ public class DBControl implements I_Database {
 		DBGateway.write(sql);
 	}
 
-	public DBControl() throws ClassNotFoundException {
+	public DBControl() throws ClassNotFoundException, SQLException {
 		DBGateway = new DatabaseGateway();
 	}
 }

@@ -11,7 +11,7 @@ public class Control implements I_Control {
 	private DBControl DBC;
 	private AccountControl accountControl;
 
-	public Control() throws ClassNotFoundException {
+	public Control() throws ClassNotFoundException, SQLException {
 		DBC = new DBControl();
 	}
 
@@ -26,7 +26,7 @@ public class Control implements I_Control {
 		controller.accountControl.addControl(controller);
 
 		////Test Login Start (do not remove)////
-		//controller.accountControl.login(1, "password");
+		controller.accountControl.login(6, "password6");
 		////Test Login End////
 
 		//Test for Creat Customer//
