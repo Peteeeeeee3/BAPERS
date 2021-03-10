@@ -20,7 +20,7 @@ public class PaymentControl implements I_Payment {
 	}
 
 	public Payment[] retrieveListOfPayments(Customer customer) {
-		return customer.listOfPayment();
+		throw new UnsupportedOperationException();
 	}
 
 	public Card[] retrieveCards(Customer customer) {
@@ -71,10 +71,5 @@ public class PaymentControl implements I_Payment {
 	}
 
 
-
-	public int PaymentToCustomer(int ID, int accountNo){
-		return customer.listOfPayment();
-
-	}
 
 }

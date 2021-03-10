@@ -38,9 +38,13 @@ public class VectorOfPayments {
 		return this.customer;
 	}
 
+	public void vectorOfPayments(Customer customer) {
+		this.customer = customer;
+	}
 
 	public VectorOfPayments(Customer customer, VectorOfCards vecCards) {
 		this.customer = customer;
 		this.vecCards = vecCards;
 
 	}
+}
