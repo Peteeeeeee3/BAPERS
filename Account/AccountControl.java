@@ -13,16 +13,26 @@ public class AccountControl implements Account.I_Account, I_Database {
 	private Control control;
 	public Vector<VectorOfUsers> vecVecUser;
 	public OfficeManager officeManager;
+	public Customer customer;
 
 	public UserAccount retrieveUser(int staffID) {
 		return vecUser.retrieveUser(staffID);
 	}
 
 	public Customer retrieveCustomer(int accountNo) {
-		throw new UnsupportedOperationException();
+		return vecAcc.retrieveCustAccount(accountNo);
 	}
 
-	public void createCustomer(String company, String name, String address, int phone) {
+	public void createCustomer(String company, String name, String address, int phone)  {
+		Customer vecCustomer =null;
+		for( int i=0; i<vecAcc.getCustomerVector().size(); i++){
+			if(vecAcc.getCustomerVector().get(i).getName()== name){
+				vecCustomer=vecAcc.getCustomerVector().get(i);
+				break;
+			}
+
+		}
+		vecAcc.addCustAccount(new Customer(company,name,address,phone));
 	}
 
 	public void createUser(int ID, String password, String name, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {

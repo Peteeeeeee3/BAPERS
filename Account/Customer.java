@@ -70,8 +70,6 @@ public class Customer {
 		while(i==generateAccountNo()){
 			vecPayment.retrievePayment(i);
 		}
-
-
 		return new Payment[accountNo];
 	}
 

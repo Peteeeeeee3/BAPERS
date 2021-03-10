@@ -9,28 +9,43 @@ public class VectorOfAccounts {
 	public AccountControl accControl;
 	public Vector<Customer> customer = new Vector<Customer>();
 
-	public void addCustAccount(Object customer) {
-		throw new UnsupportedOperationException();
+	public void addCustAccount(Customer customer) {
+		incrementNoOfCustAccounts();
 	}
 
 	public void removeCustAccount(int accountNo) {
-		throw new UnsupportedOperationException();
+		decrementNoOfCustAccounts();
 	}
 
 	public Customer retrieveCustAccount(int accountNo) {
-		throw new UnsupportedOperationException();
+		for(int i=0; i<customer.size(); ++i) {
+			if(customer.get(i).getAccountNo()==accountNo){
+				return customer.get(i);
+			}
+
+		}
+		return null;
 	}
 
-	public Customer traverseVector(int accountNo) {
-		throw new UnsupportedOperationException();
+	public int traverseVector(int accountNo) {
+		for(int i=0; i<customer.size(); ++i){
+			if(customer.get(i).getAccountNo()==accountNo){
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public void incrementNoOfCustAccounts() {
-		throw new UnsupportedOperationException();
+		noOfCustAccounts++;
 	}
 
 	public void decrementNoOfCustAccounts() {
-		throw new UnsupportedOperationException();
+		noOfCustAccounts--;
+	}
+
+	public Vector<Customer> getCustomerVector(){
+		return customer;
 	}
 
 	public int getCustomerID(){
@@ -46,6 +61,5 @@ public class VectorOfAccounts {
 
 	public VectorOfAccounts(Vector<Customer> customer) {
 		this.customer=customer;
-		throw new UnsupportedOperationException();
 	}
 }
