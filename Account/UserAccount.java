@@ -7,7 +7,6 @@ public class UserAccount {
 	private int staffID;
 	private String password;
 	private int access;
-	public VectorOfUsers vecUser;
 
 	public int getStaffID() {
 		return this.staffID;
@@ -33,18 +32,9 @@ public class UserAccount {
 		this.access = access;
 	}
 
-	public VectorOfUsers getVecUser() {
-		return vecUser;
-	}
-
-	private void generateID() {
-		staffID = vecUser.getLargestID() + 1;
-	}
-
-	public UserAccount(String password, int access, VectorOfUsers vecUser) {
+	public UserAccount(int id, String password, int access) {
 		this.password = password;
 		this.access = access;
-		this.vecUser = vecUser;
-		generateID();
+		this.staffID = id;
 	}
 }

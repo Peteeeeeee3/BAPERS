@@ -8,7 +8,29 @@ public class DatabaseGateway {
 
 	//connects to localhost
 	public void connectToDB() throws SQLException {
-		connection = DriverManager.getConnection("dbc:mysql://db_ip:3306/bapers_v4", "root", "");
+		//Peter
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+
+		//Hanan
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Tulsi
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Abdullah
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Farhan
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Abdullah
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Munish
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+		//Rashidul
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
 	}
 
 	//terminates connection to localhost
@@ -25,24 +47,20 @@ public class DatabaseGateway {
 	}
 
 	//handles reading from database. Call this function if reading is required.
-	public ResultSet read(String sql) throws SQLException {
-		connectToDB();
+	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Statement stmt = connection.createStatement();
-		ResultSet result = stmt.executeQuery(sql);
-		disconnectFromDB();
-		return result;
+		return stmt.executeQuery(sql);
 	}
 
 	//handles writing to database. Call this function if writing is required.
 	public void write(String sql) throws SQLException {
-		connectToDB();
 		Statement stmt = connection.createStatement();
 		stmt.executeQuery(sql);
-		disconnectFromDB();
 	}
 
-	public DatabaseGateway() throws ClassNotFoundException {
+	public DatabaseGateway() throws ClassNotFoundException, SQLException {
 		//initialise JDBC driver for class
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		connectToDB();
 	}
 }

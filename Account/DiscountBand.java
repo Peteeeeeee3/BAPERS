@@ -20,8 +20,9 @@ public class DiscountBand extends Discount {
 		this.range_max = range_max;
 	}
 
-	public DiscountBand(float max, float min, float rate) {
+	public DiscountBand(float min, float max, float rate) {
 		super(rate);
-		throw new UnsupportedOperationException();
+		range_min = min;
+		range_max = max;
 	}
 }

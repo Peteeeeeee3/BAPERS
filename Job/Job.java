@@ -9,7 +9,6 @@ public class Job {
 	private int endTime;
 	private int urgency = 24;
 	private boolean isPaid = false;
-	public VectorOfJobs vecJob;
 	public VectorOfTasksForJob vecTaskJ;
 
 	public void assignID() {
@@ -82,6 +81,10 @@ public class Job {
 
 	public void setIsPaid(boolean isPaid) {
 		this.isPaid = isPaid;
+	}
+
+	public VectorOfTasksForJob getVecTaskJ() {
+		return vecTaskJ;
 	}
 
 	public Job(String summary, int startTime, int urgency) {

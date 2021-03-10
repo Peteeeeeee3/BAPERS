@@ -12,6 +12,8 @@ public class AccountControl implements Account.I_Account, I_Database {
 	private VectorOfUsers vecUser;
 	private Control control;
 
+	//testing
+
 
 	public UserAccount retrieveUser(int staffID) {
 		throw new UnsupportedOperationException();
@@ -49,7 +51,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	@Override
-	public boolean login(int ID, String password) throws SQLException {
+	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return vecUser.login(ID, password);
 	}
 
@@ -62,7 +64,9 @@ public class AccountControl implements Account.I_Account, I_Database {
 		throw new UnsupportedOperationException();
 	}
 
-	public AccountControl() {}
+	public AccountControl() {
+		vecUser = new VectorOfUsers(this);
+	}
 
 	public void addControl(Control control) {
 		this.control = control;
@@ -79,7 +83,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	@Override
-	public ResultSet read(String sql) throws SQLException {
+	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return control.getDBC().read(sql);
 	}
 

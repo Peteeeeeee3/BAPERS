@@ -7,9 +7,10 @@ public class Customer {
 	private String name;
 	private String address;
 	private int phone;
-	public VectorOfAccounts vecAcc;
+	private VectorOfAccounts vecAcc;
 	public VectorOfPayments vecPayment;
 	public Payment payment;
+
 
 	public void addJob() {
 		throw new UnsupportedOperationException();

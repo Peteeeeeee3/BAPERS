@@ -20,7 +20,7 @@ public interface I_Account {
 
 	public void makePayment(Object[] jobs);
 
-	public boolean login(int ID, String password) throws SQLException;
+	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
 	public void logout();
 }

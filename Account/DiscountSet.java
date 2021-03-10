@@ -1,27 +1,36 @@
 package Account;
 
+import java.util.Set;
 import java.util.Vector;
-import Account.Discount;
 
 public class DiscountSet {
 	private int noOfDiscounts = 0;
-	public ValuedCustomer vCust;
-	public Vector<Discount> discount = new Vector<Discount>();
+	private Vector<Discount> discounts;
 
 	public void addDiscount(Discount discount) {
-		throw new UnsupportedOperationException();
+		discounts.add(discount);
+		incrementNoOfDiscounts();
 	}
 
 	public void removeDiscount(Discount discount) {
-		throw new UnsupportedOperationException();
+		discounts.remove(discount);
+		decrementNoOfDiscounts();
 	}
 
 	public void incrementNoOfDiscounts() {
-		throw new UnsupportedOperationException();
+		noOfDiscounts++;
 	}
 
 	public void decrementNoOfDiscounts() {
-		throw new UnsupportedOperationException();
+		noOfDiscounts--;
+	}
+
+	public int getNoOfDiscounts() {
+		return noOfDiscounts;
+	}
+
+	public Vector<Discount> getDiscounts() {
+		return discounts;
 	}
 
 	public DiscountSet() {

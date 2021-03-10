@@ -6,28 +6,44 @@ import Payment.Payment;
 
 public class VectorOfPayments {
 	private Customer customer;
-	public PaymentControl unnamed_PaymentControl_;
-	public Vector<Payment> payment = new Vector<Payment>();
+	public Vector<Payment> vecPaym = new Vector<Payment>();
 	public VectorOfCards vecCards;
 
 	public void addPayment(Payment payment) {
 
+		vecPaym.add(payment);
+		if (payment.getCard() != null) {
+			vecCards.addCard(payment.getCard());
+		}
 	}
 
 	public Payment retrievePayment(int iD) {
-		throw new UnsupportedOperationException();
+		for (int i = 0; i < vecPaym.size(); i++) {
+			if (vecPaym.get(i).getiD() == iD) {
+				return vecPaym.get(i);
+			}
+		}
+		return null;
 	}
 
 	public int traverse(int iD) {
-		throw new UnsupportedOperationException();
+		for (int i = 0; i < vecPaym.size(); i++) {
+			if (vecPaym.get(i).getiD() == iD) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public Customer getCustomer() {
 		return this.customer;
 	}
 
-	public VectorOfPayments(Customer customer) {
+	public vectorOfPayments(Customer customer) {
 		this.customer=customer;
 
+	public VectorOfPayments(Customer customer, VectorOfCards vecCards) {
+		this.customer = customer;
+		this.vecCards = vecCards;
 	}
 }
