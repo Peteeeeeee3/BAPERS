@@ -10,6 +10,7 @@ public class VectorOfPayments {
 	public VectorOfCards vecCards;
 
 	public void addPayment(Payment payment) {
+
 		vecPaym.add(payment);
 		if (payment.getCard() != null) {
 			vecCards.addCard(payment.getCard());
@@ -37,6 +38,9 @@ public class VectorOfPayments {
 	public Customer getCustomer() {
 		return this.customer;
 	}
+
+	public vectorOfPayments(Customer customer) {
+		this.customer=customer;
 
 	public VectorOfPayments(Customer customer, VectorOfCards vecCards) {
 		this.customer = customer;

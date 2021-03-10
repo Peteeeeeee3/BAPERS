@@ -24,7 +24,6 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void createCustomer(String company, String name, String address, int phone) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void createUser(int ID, String password, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
@@ -102,6 +101,5 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public void write(String sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		control.getDBC().write(sql);
 	}
-    
-    //munish
+
 }

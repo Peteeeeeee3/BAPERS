@@ -33,7 +33,19 @@ public class VectorOfAccounts {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfAccounts() {
+	public int getCustomerID(){
+		int j=0, largest=0;
+		while(j<customer.size()){
+			if(customer.get(j).getAccountNo()>largest){
+				largest=customer.get(j).getAccountNo();
+			}
+			++j;
+		}
+		return largest;
+	}
+
+	public VectorOfAccounts(Vector<Customer> customer) {
+		this.customer=customer;
 		throw new UnsupportedOperationException();
 	}
 }

@@ -8,6 +8,9 @@ import Control.Control;
 import java.util.Vector;
 
 public class PaymentControl implements I_Payment {
+	//public VectorOfPayments unnamed_VectorOfPayments_;
+	//public VectorOfCards unnamed_VectorOfCards_;
+	public Customer customer;
 	public Vector<VectorOfPayments> vVecPaym;
 	public VectorOfCards vecCard;
 	private Control control;
@@ -67,7 +70,9 @@ public class PaymentControl implements I_Payment {
 		vecCard = new VectorOfCards();
 	}
 
-	public void addControl(Control control){
-		this.control = control;
+
+	public int PaymentToCustomer(int ID, int accountNo){
+		return customer.listOfPayment();
+
 	}
 }
