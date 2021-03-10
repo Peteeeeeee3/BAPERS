@@ -3,12 +3,14 @@ package Payment;
 import Account.Customer;
 import Account.ValuedCustomer;
 import Job.Job;
+import Control.Control;
 
 import java.util.Vector;
 
 public class PaymentControl implements I_Payment {
 	public Vector<VectorOfPayments> vVecPaym;
 	public VectorOfCards vecCard;
+	private Control control;
 
 	public Payment retrievePayment(int iD) {
 		throw new UnsupportedOperationException();
@@ -63,5 +65,9 @@ public class PaymentControl implements I_Payment {
 
 	public PaymentControl() {
 		vecCard = new VectorOfCards();
+	}
+
+	public void addControl(Control control){
+		this.control = control;
 	}
 }

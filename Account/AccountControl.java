@@ -3,17 +3,17 @@ package Account;
 import Control.Control;
 import Control.I_Control;
 import Database.I_Database;
+import Payment.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class AccountControl implements Account.I_Account, I_Database {
 	public VectorOfAccounts vecAcc;
 	private VectorOfUsers vecUser;
 	private Control control;
-
-	//testing
-
+	public Vector<VectorOfUsers> vecVecUser;
 
 	public UserAccount retrieveUser(int staffID) {
 		throw new UnsupportedOperationException();
@@ -27,8 +27,18 @@ public class AccountControl implements Account.I_Account, I_Database {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createUser(String password, int access) {
-		throw new UnsupportedOperationException();
+	public void createUser(int ID, String password, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		//VectorOfUsers vecU = null;
+		//for (int i = 0; i < vecVecUser.size(); i++) {
+		//	if (vecVecUser.get(i).getLargestID() == ID) {
+		//		vecU = vecVecUser.get(i);
+	//			break;
+	//		}
+	//	}
+	//	if (vecU == null){
+	//		return;
+	//	}
+		vecUser.addUser(new UserAccount(ID, password, access));
 	}
 
 	public void updateAccess(int staffID, int newAccess) {
@@ -89,8 +99,8 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	@Override
-	public void write(String sql) throws SQLException {
-
+	public void write(String sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		control.getDBC().write(sql);
 	}
     
     //munish
