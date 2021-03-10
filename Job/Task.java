@@ -45,6 +45,9 @@ public class Task {
 	}
 
 	public Task(String location, String description, float price, int duration) {
-		throw new UnsupportedOperationException();
+		this.location=location;
+		this.description=description;
+		this.price=price;
+		this.duration=duration;
 	}
 }
