@@ -18,7 +18,7 @@ public class PaymentControl implements I_Payment {
 	}
 
 	public Payment[] retrieveListOfPayments(Customer customer) {
-		throw new UnsupportedOperationException();
+		return customer.listOfPayment();
 	}
 
 	public Card[] retrieveCards(Customer customer) {
@@ -68,8 +68,4 @@ public class PaymentControl implements I_Payment {
 		vecCard = new VectorOfCards();
 	}
 
-	public int PaymentToCustomer(int ID, int accountNo){
-		return customer.listOfPayment();
-
-	}
 }

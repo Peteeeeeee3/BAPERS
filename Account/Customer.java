@@ -64,15 +64,15 @@ public class Customer {
 		return accountNo=vecAcc.getCustomerID()+1;
 	}
     //this is incomplete as we need to link this to a new job being added this will increase the no of payment with a customer.
-	public int listOfPayment(){
+	public Payment[] listOfPayment(){
 		int paymentID= 0;
 		int i=0;
-
 		while(i==generateAccountNo()){
-			++paymentID;
+			vecPayment.retrievePayment(i);
 		}
-		return paymentID;
 
+
+		return new Payment[accountNo];
 	}
 
 
