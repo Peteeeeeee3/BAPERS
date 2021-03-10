@@ -9,19 +9,19 @@ public class DatabaseGateway {
 	//connects to localhost
 	public void connectToDB() throws SQLException {
 		//Peter
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		//Hanan
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
 
 		//Tulsi
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
 
 		//Abdullah
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
 		//Farhan
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
 
 		//Abdullah
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -55,7 +55,12 @@ public class DatabaseGateway {
 	//handles writing to database. Call this function if writing is required.
 	public void write(String sql) throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.executeQuery(sql);
+		stmt.executeUpdate(sql);
+	}
+
+	public void PreparedStatement(String sql) throws SQLException {
+		PreparedStatement pstmt=connection.prepareStatement(sql);
+		pstmt.execute();
 	}
 
 	public DatabaseGateway() throws ClassNotFoundException, SQLException {
@@ -63,4 +68,6 @@ public class DatabaseGateway {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		connectToDB();
 	}
+
+
 }

@@ -11,7 +11,7 @@ public class Technician extends UserAccount {
 	}
 
 	public Technician(UserAccount user) {
-		super(user.getStaffID(), user.getPassword(), user.getAccess());
+		super(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess());
 		throw new UnsupportedOperationException();
 	}
 }

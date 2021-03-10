@@ -1,22 +1,21 @@
 package Account;
 
 import Control.Control;
-import Control.I_Control;
 import Database.I_Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class AccountControl implements Account.I_Account, I_Database {
 	public VectorOfAccounts vecAcc;
 	private VectorOfUsers vecUser;
 	private Control control;
-
-	//testing
-
+	public Vector<VectorOfUsers> vecVecUser;
+	public OfficeManager officeManager;
 
 	public UserAccount retrieveUser(int staffID) {
-		throw new UnsupportedOperationException();
+		return vecUser.retrieveUser(staffID);
 	}
 
 	public Customer retrieveCustomer(int accountNo) {
@@ -26,12 +25,22 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public void createCustomer(String company, String name, String address, int phone) {
 	}
 
-	public void createUser(String password, int access) {
-		throw new UnsupportedOperationException();
+	public void createUser(int ID, String password, String name, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		UserAccount vecU = null;
+		for (int i = 0; i < vecUser.getVector().size(); i++) {
+			if (vecUser.getVector().get(i).getStaffID() == ID) {
+				vecU = vecUser.getVector().get(i);
+				break;
+			}
+		}
+		if (vecU == null){
+			return;
+		}
+		vecUser.addUser(new UserAccount(ID, password, name, access));
 	}
 
-	public void updateAccess(int staffID, int newAccess) {
-		throw new UnsupportedOperationException();
+	public void updateAccess(int staffID, int newAccess) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		officeManager.editAccess(staffID,newAccess);
 	}
 
 	public void upgradeCust(int accountNo) {
@@ -65,7 +74,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public AccountControl() {
-		vecUser = new VectorOfUsers(this);
+		vecUser = new VectorOfUsers(vecUser, this);
 	}
 
 	public void addControl(Control control) {
@@ -82,14 +91,22 @@ public class AccountControl implements Account.I_Account, I_Database {
 
 	}
 
+	public void addUserVector(UserAccount user){
+		vecVecUser.add(new VectorOfUsers(vecUser, this));
+	}
+
 	@Override
 	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return control.getDBC().read(sql);
 	}
 
 	@Override
-	public void write(String sql) throws SQLException {
+	public void write(String sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		control.getDBC().write(sql);
+	}
 
+	public void PreparedStatement(String sql) throws SQLException {
+		control.getDBC().PreparedStatement(sql);
 	}
 
 }

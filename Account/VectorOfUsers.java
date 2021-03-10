@@ -3,35 +3,62 @@ package Account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import Account.UserAccount;
 
 public class VectorOfUsers {
+	private UserAccount user;
+	public VectorOfUsers vecUser;
 	private int noOfUsers = 0;
 	public AccountControl accControl;
 	public Vector<UserAccount> vector = new Vector<UserAccount>();
 
+
 	public void incrementNoOfUsers() {
-		throw new UnsupportedOperationException();
+		noOfUsers++;
 	}
 
 	public void decrementNoOfUsers() {
-		throw new UnsupportedOperationException();
+		noOfUsers--;
 	}
 
-	public void addUser(UserAccount user) {
-		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getAccess()));
-	}
+	public void addUser(UserAccount user) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getName(), user.getAccess()));
+		//Not sure if we want to use the one above or the one below. Thinking of having a different addUser for createUser
+		//vector.add(user);
+		incrementNoOfUsers();
 
-	public void removeUser(int staffID) {
-		throw new UnsupportedOperationException();
+		accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
+		System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
+		}
+
+
+
+	public void removeUser(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		vector.remove(staffID);
+		decrementNoOfUsers();
+
+		accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
 	}
 
 	public UserAccount retrieveUser(int staffID) {
-		throw new UnsupportedOperationException();
+		for (int i = 0; i < vector.size(); i++) {
+			if (vector.get(i).getStaffID() == staffID) {
+				return vector.get(i);
+			}
+		}
+		return null;
 	}
 
 	public AccountControl getAccControl() {
 		return accControl;
+	}
+
+	public int traverse(int staffID) {
+		for (int i = 0; i < vector.size(); i++) {
+			if (vector.get(i).getStaffID() == staffID) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public int getLargestID() {
@@ -85,7 +112,9 @@ public class VectorOfUsers {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfUsers(AccountControl accountControl) {
+	public VectorOfUsers(VectorOfUsers vecUser, AccountControl accountControl) {
+		this.vecUser = vecUser;
 		this.accControl = accountControl;
 	}
+
 }
