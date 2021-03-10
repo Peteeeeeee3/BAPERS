@@ -40,10 +40,12 @@ public class VectorOfPayments {
 	}
 
 	public vectorOfPayments(Customer customer) {
-		this.customer=customer;
+		this.customer = customer;
+	}
 
 	public VectorOfPayments(Customer customer, VectorOfCards vecCards) {
 		this.customer = customer;
 		this.vecCards = vecCards;
+
 	}
 }

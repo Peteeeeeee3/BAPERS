@@ -16,7 +16,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public Vector<VectorOfUsers> vecVecUser;
 
 	public UserAccount retrieveUser(int staffID) {
-		throw new UnsupportedOperationException();
+		return vecUser.retrieveUser(staffID);
 	}
 
 	public Customer retrieveCustomer(int accountNo) {
@@ -27,16 +27,16 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void createUser(int ID, String password, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		//VectorOfUsers vecU = null;
-		//for (int i = 0; i < vecVecUser.size(); i++) {
-		//	if (vecVecUser.get(i).getLargestID() == ID) {
-		//		vecU = vecVecUser.get(i);
-	//			break;
-	//		}
-	//	}
-	//	if (vecU == null){
-	//		return;
-	//	}
+		VectorOfUsers vecU = null;
+		for (int i = 0; i < vecVecUser.size(); i++) {
+			if (vecVecUser.get(i).getLargestID() == ID) {
+				vecU = vecVecUser.get(i);
+				break;
+			}
+		}
+		if (vecU == null){
+			return;
+		}
 		vecUser.addUser(new UserAccount(ID, password, access));
 	}
 
@@ -90,6 +90,10 @@ public class AccountControl implements Account.I_Account, I_Database {
 	@Override
 	public void disconnectDB() throws SQLException {
 
+	}
+
+	public void addUserVector(UserAccount user){
+		vecVecUser.add(1,vecUser);
 	}
 
 	@Override

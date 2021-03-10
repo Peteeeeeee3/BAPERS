@@ -27,7 +27,6 @@ public class Control implements I_Control {
 		controller.accountControl = new AccountControl();
 		controller.accountControl.addControl(controller);
 		controller.paymentControl = new PaymentControl();
-		controller.paymentControl.addControl(controller);
 
 
 		////Test Login Start (do not remove)////
