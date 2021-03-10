@@ -66,19 +66,19 @@ public class Payment {
 				return amount * (1 - ((ValuedCustomer) customer).getDiscSet().getDiscounts().get(0).getDiscountRate());
 			}
 			//process banded discount
-			if (((ValuedCustomer) customer).getDiscSet().getDiscounts().get(0).getClass() == DiscountBand.class) {
+				if (((ValuedCustomer) customer).getDiscSet().getDiscounts().get(0) instanceof DiscountBand) {
 				//find correct band
 				for (int bandItr = 0; bandItr < ((ValuedCustomer) customer).getDiscSet().getDiscounts().size(); bandItr++) {
 					//get correct band (this needs to be changed to previous month's expenses
 					if (((DiscountBand)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(bandItr)).getRange_min() <= amount
 							&& amount < ((DiscountBand)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(bandItr)).getRange_max()) {
 						//apply discount for band
-						return amount * (1 - ((DiscountBand)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(bandItr)).getDiscountRate());
+						return amount * (1 - ((ValuedCustomer) customer).getDiscSet().getDiscounts().get(bandItr).getDiscountRate());
 					}
 				}
 			}
 			//process task discount
-			if (((ValuedCustomer) customer).getDiscSet().getDiscounts().get(0).getClass() == TaskDiscount.class) {
+			if (((ValuedCustomer) customer).getDiscSet().getDiscounts().get(0) instanceof TaskDiscount) {
 				//enter code here
 			}
 		}

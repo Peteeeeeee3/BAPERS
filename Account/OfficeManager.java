@@ -1,5 +1,6 @@
 package Account;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -27,21 +28,26 @@ public class OfficeManager extends ShiftManager {
 		}
 
 		//Database//
-		ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + staffID);
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT access FROM staff_member WHERE staff_member.staffID = ?");
+		preparedStatement.setInt(1, staffID);
+		ResultSet rs = accControl.read(preparedStatement);
 		int access = -1;
 		while (rs.next()){
 			access = rs.getInt(1);
 		}
+		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("UPDATE staff_member SET access = ? WHERE staff_member.staffID = ?");
 		switch(access){
 			case 1:
 				editAccess(staffID, accessLevel + 1);
-				accControl.write("UPDATE Staff_Member SET access = " + accessLevel + "WHERE StaffID = " + staffID);
+				//accControl.write("UPDATE Staff_Member SET access = " + accessLevel + "WHERE StaffID = " + staffID);
 			case 2:
 				editAccess(staffID, accessLevel + 1);
-				accControl.write("UPDATE Staff_Member SET access = " + accessLevel + "WHERE StaffID = " + staffID);
+				prepStat.setInt(1, accessLevel);
+				prepStat.setInt(2, staffID);
 			case 3:
 				editAccess(staffID, accessLevel + 1);
-				accControl.write("UPDATE Staff_Member SET access = " + accessLevel + "WHERE StaffID = " + staffID);
+				prepStat.setInt(1, accessLevel);
+				prepStat.setInt(2, staffID);
 		}
 	}
 

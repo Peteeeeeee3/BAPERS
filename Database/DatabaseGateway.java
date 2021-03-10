@@ -1,18 +1,19 @@
 package Database;
 
+import com.mysql.cj.x.protobuf.MysqlxPrepare;
+
 import java.sql.*;
 
 public class DatabaseGateway {
-	public DBControl DBControl;
 	private Connection connection;
 
 	//connects to localhost
 	public void connectToDB() throws SQLException {
 		//Peter
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		//Hanan
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
 
 		//Tulsi
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
@@ -47,21 +48,14 @@ public class DatabaseGateway {
 	}
 
 	//handles reading from database. Call this function if reading is required.
-	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Statement stmt = connection.createStatement();
-		return stmt.executeQuery(sql);
+	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		return sql.executeQuery();
 	}
 
 	//handles writing to database. Call this function if writing is required.
-	public void write(String sql) throws SQLException {
-		Statement stmt = connection.createStatement();
-		stmt.executeUpdate(sql);
-	}
-
-	public void PreparedStatement(String sql) throws SQLException {
-		PreparedStatement pstmt=connection.prepareStatement(sql);
-		pstmt.execute();
-	}
+	public void write(PreparedStatement sql) throws SQLException {
+		sql.executeUpdate();
+}
 
 	public DatabaseGateway() throws ClassNotFoundException, SQLException {
 		//initialise JDBC driver for class
@@ -69,5 +63,7 @@ public class DatabaseGateway {
 		connectToDB();
 	}
 
-
+	public Connection getConnection() {
+		return connection;
+	}
 }

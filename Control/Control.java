@@ -36,16 +36,15 @@ public class Control implements I_Control {
 		controller.paymentControl = new PaymentControl();
 
 
+
 		////Test Login Start (do not remove)////
-		//controller.accountControl.login(1, "asd");
+		//controller.accountControl.login(6, "password6");
 		////Test Login End////
 
 		//Test for Creat Customer//
 		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",07555513157);
 
 		//Test for Create User//
-		//controller.accountControl.createUser(1, "password1", "farhan", 1);
-
-
+		controller.accountControl.createUser(8, "password1", "farhan", 1);
 	}
 }

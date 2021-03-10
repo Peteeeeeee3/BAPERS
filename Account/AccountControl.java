@@ -3,6 +3,7 @@ package Account;
 import Control.Control;
 import Database.I_Database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -96,17 +97,20 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	@Override
-	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return control.getDBC().read(sql);
 	}
 
 	@Override
-	public void write(String sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+	public void write(PreparedStatement sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		control.getDBC().write(sql);
 	}
 
-	public void PreparedStatement(String sql) throws SQLException {
-		control.getDBC().PreparedStatement(sql);
-	}
+//	public void PreparedStatement(String sql) throws SQLException {
+//		control.getDBC().PreparedStatement(sql);
+//	}
 
+	public Control getControl() {
+		return control;
+	}
 }
