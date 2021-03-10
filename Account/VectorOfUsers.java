@@ -3,12 +3,14 @@ package Account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import Account.UserAccount;
 
 public class VectorOfUsers {
+	private UserAccount user;
+	public VectorOfUsers vecUser;
 	private int noOfUsers = 0;
 	public AccountControl accControl;
 	public Vector<UserAccount> vector = new Vector<UserAccount>();
+
 
 	public void incrementNoOfUsers() {
 		noOfUsers++;
@@ -19,13 +21,13 @@ public class VectorOfUsers {
 	}
 
 	public void addUser(UserAccount user) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getAccess()));
+		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getName(), user.getAccess()));
 		//Not sure if we want to use the one above or the one below. Thinking of having a different addUser for createUser
 		//vector.add(user);
 		incrementNoOfUsers();
 
-		accControl.write("INSERT INTO Staff_Member" + "VALUES (" + user.getStaffID() + user.getPassword() + user.getAccess() + ")");
-		System.out.println(user.getStaffID() + user.getPassword() + user.getAccess());
+		accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
+		System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
 
 
@@ -34,7 +36,7 @@ public class VectorOfUsers {
 		vector.remove(staffID);
 		decrementNoOfUsers();
 
-		accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID);
+		accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
 	}
 
 	public UserAccount retrieveUser(int staffID) {
@@ -110,7 +112,8 @@ public class VectorOfUsers {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfUsers(AccountControl accountControl) {
+	public VectorOfUsers(VectorOfUsers vecUser, AccountControl accountControl) {
+		this.vecUser = vecUser;
 		this.accControl = accountControl;
 	}
 

@@ -53,9 +53,6 @@ public class Payment {
 		return this.jobs;
 	}
 
-	public int getiD() {
-		return iD;
-	}
 
 	public Card getCard() {
 		return card;

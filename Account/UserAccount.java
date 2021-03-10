@@ -1,12 +1,10 @@
 package Account;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class UserAccount {
 	private int staffID;
 	private String password;
 	private int access;
+	private String name;
 
 	public int getStaffID() {
 		return this.staffID;
@@ -32,9 +30,14 @@ public class UserAccount {
 		this.access = access;
 	}
 
-	public UserAccount(int id, String password, int access) {
+	public String getName(){return this.name;}
+
+	public void setName(String name){this.name = name;}
+
+	public UserAccount(int id, String password, String name, int access) {
 		this.password = password;
 		this.access = access;
 		this.staffID = id;
+		this.name = name;
 	}
 }

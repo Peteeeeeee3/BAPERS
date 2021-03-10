@@ -21,7 +21,7 @@ public class DatabaseGateway {
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
 
 		//Farhan
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
 
 		//Abdullah
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -55,7 +55,12 @@ public class DatabaseGateway {
 	//handles writing to database. Call this function if writing is required.
 	public void write(String sql) throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.executeQuery(sql);
+		stmt.executeUpdate(sql);
+	}
+
+	public void PreparedStatement(String sql) throws SQLException {
+		PreparedStatement pstmt=connection.prepareStatement(sql);
+		pstmt.execute();
 	}
 
 	public DatabaseGateway() throws ClassNotFoundException, SQLException {
@@ -63,4 +68,6 @@ public class DatabaseGateway {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		connectToDB();
 	}
+
+
 }

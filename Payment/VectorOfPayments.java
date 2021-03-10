@@ -2,7 +2,6 @@ package Payment;
 
 import Account.Customer;
 import java.util.Vector;
-import Payment.Payment;
 
 public class VectorOfPayments {
 	private Customer customer;
@@ -39,7 +38,7 @@ public class VectorOfPayments {
 		return this.customer;
 	}
 
-	public vectorOfPayments(Customer customer) {
+	public void vectorOfPayments(Customer customer) {
 		this.customer = customer;
 	}
 

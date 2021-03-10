@@ -1,9 +1,7 @@
 package Account;
 
 import Control.Control;
-import Control.I_Control;
 import Database.I_Database;
-import Payment.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +12,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	private VectorOfUsers vecUser;
 	private Control control;
 	public Vector<VectorOfUsers> vecVecUser;
+	public OfficeManager officeManager;
 
 	public UserAccount retrieveUser(int staffID) {
 		return vecUser.retrieveUser(staffID);
@@ -26,22 +25,22 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public void createCustomer(String company, String name, String address, int phone) {
 	}
 
-	public void createUser(int ID, String password, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		VectorOfUsers vecU = null;
-		for (int i = 0; i < vecVecUser.size(); i++) {
-			if (vecVecUser.get(i).getLargestID() == ID) {
-				vecU = vecVecUser.get(i);
+	public void createUser(int ID, String password, String name, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		UserAccount vecU = null;
+		for (int i = 0; i < vecUser.getVector().size(); i++) {
+			if (vecUser.getVector().get(i).getStaffID() == ID) {
+				vecU = vecUser.getVector().get(i);
 				break;
 			}
 		}
 		if (vecU == null){
 			return;
 		}
-		vecUser.addUser(new UserAccount(ID, password, access));
+		vecUser.addUser(new UserAccount(ID, password, name, access));
 	}
 
-	public void updateAccess(int staffID, int newAccess) {
-		throw new UnsupportedOperationException();
+	public void updateAccess(int staffID, int newAccess) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		officeManager.editAccess(staffID,newAccess);
 	}
 
 	public void upgradeCust(int accountNo) {
@@ -75,7 +74,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public AccountControl() {
-		vecUser = new VectorOfUsers(this);
+		vecUser = new VectorOfUsers(vecUser, this);
 	}
 
 	public void addControl(Control control) {
@@ -93,7 +92,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void addUserVector(UserAccount user){
-		vecVecUser.add(1,vecUser);
+		vecVecUser.add(new VectorOfUsers(vecUser, this));
 	}
 
 	@Override
@@ -104,6 +103,10 @@ public class AccountControl implements Account.I_Account, I_Database {
 	@Override
 	public void write(String sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		control.getDBC().write(sql);
+	}
+
+	public void PreparedStatement(String sql) throws SQLException {
+		control.getDBC().PreparedStatement(sql);
 	}
 
 }

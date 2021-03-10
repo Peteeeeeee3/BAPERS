@@ -37,7 +37,7 @@ public class Control implements I_Control {
 		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",07555513157);
 
 		//Test for Create User//
-		//controller.accountControl.createUser(1, "asd", 1);
+		//controller.accountControl.createUser(1, "password1", "farhan", 1);
 
 
 	}
