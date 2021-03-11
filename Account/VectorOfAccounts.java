@@ -14,8 +14,10 @@ public class VectorOfAccounts {
 		customers.add(new Customer(customer.getCompany(),customer.getName(),customer.getAddress(),customer.getPhone()));
 		incrementNoOfCustAccounts();
 
-		accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany());
+		//accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany()+ "has been inserted");
+		System.out.println("Data: " + customer.getCompany() + customer.getName() + customer.getAddress() + customer.getPhone() + "have been inserted");
 	}
+
 
 	public void removeCustAccount(int accountNo) {
 		customers.remove(accountNo);

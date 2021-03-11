@@ -1,14 +1,11 @@
 package Job;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import Account.OfficeManager;
-import Account.VectorOfAccounts;
-import Account.VectorOfUsers;
 import Control.Control;
-import Job.JobHistory;
 import Account.Customer;
 
 public abstract class JobFacadeControl implements I_Job {
@@ -86,12 +83,12 @@ public abstract class JobFacadeControl implements I_Job {
 	}
 
 
-	public ResultSet read(String sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return control.getDBC().read(sql);
 	}
 
 
-	public void write(String sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+	public void write(PreparedStatement sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		control.getDBC().write(sql);
 	}
 

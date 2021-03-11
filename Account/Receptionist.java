@@ -1,22 +1,32 @@
 package Account;
 
+import java.sql.SQLException;
+
 public class Receptionist extends UserAccount {
 	public VectorOfAccounts vecAcc;
+	public AccountControl accControl;
+
 
 	public void acceptJob() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createCustomer() {
-		throw new UnsupportedOperationException();
+	public void createCustomer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		accControl.createCustomer(company,name,address,phone);
 	}
 
-	public void assignTask(int jogID, int taskID) {
+	public void assignTask(int jobID, int taskID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Customer searchCustomer(int accountNo) {
-		throw new UnsupportedOperationException();
+		for(int i=0; i<vecAcc.getCustomerVector().size(); ++i ){
+			if(vecAcc.getCustomerID()==accountNo){
+				accountNo=vecAcc.getCustomerID();
+				break;
+			}
+		}
+		return searchCustomer(accountNo);
 	}
 
 	public void assignUrgency(int jobID, int urgency) {

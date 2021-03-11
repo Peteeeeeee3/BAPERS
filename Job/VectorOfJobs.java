@@ -6,10 +6,9 @@ import Job.Job;
 public class VectorOfJobs {
 	private int noOfJobs = 0;
 	public JobHistory jHist;
-	public Vector<Job> job = new Vector<Job>();
+	public Vector<Job> jobs = new Vector<Job>();
 
 	public void addJob(Job job) {
-		throw new UnsupportedOperationException();
 	}
 
 	public Job retrieveJob(int iD) {
@@ -21,15 +20,19 @@ public class VectorOfJobs {
 	}
 
 	public void incrementNoOfJobs() {
-		throw new UnsupportedOperationException();
+		noOfJobs++;
 	}
 
 	public void decrementNoOfJobs() {
-		throw new UnsupportedOperationException();
+		noOfJobs--;
 	}
 
 	public int getNoOfJobs() {
 		return this.noOfJobs;
+	}
+
+	public Vector<Job> getJobVector(){
+		return jobs;
 	}
 
 	public VectorOfJobs() {

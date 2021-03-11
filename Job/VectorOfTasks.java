@@ -13,8 +13,8 @@ public class VectorOfTasks {
 		tasks.add(new Task(generateTaskID(), task.getLocation(),task.getDescription(),task.getPrice(),task.getDuration()));
 		incrementNoOfTasks();
 
-		jfc.write("INSET INTO Task_Table" + "(taskID, location, desrciption, price, duration" + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + ")");
-		System.out.println("Data: " + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration());
+		//jfc.write("INSET INTO Task_Table" + "(taskID, location, desrciption, price, duration" + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + ")");
+		System.out.println("Data: " + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration()+ "have been inserted");
 	}
 
 	public void removeTask(int taskID) {
