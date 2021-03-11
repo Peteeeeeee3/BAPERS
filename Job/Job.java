@@ -1,5 +1,7 @@
 package Job;
 
+import java.sql.SQLException;
+
 public class Job {
 	private int iD;
 	private int price;
@@ -85,6 +87,10 @@ public class Job {
 
 	public VectorOfTasksForJob getVecTaskJ() {
 		return vecTaskJ;
+	}
+
+	private void upload() throws SQLException{
+
 	}
 
 	public Job(String summary, int startTime, int urgency) {

@@ -51,7 +51,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void updateAccess(int staffID, int newAccess) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		officeManager.editAccess(staffID,newAccess);
+		officeManager.editAccess(staffID,newAccess, retrieveUser(staffID));
 	}
 
 	public void upgradeCust(int accountNo) {

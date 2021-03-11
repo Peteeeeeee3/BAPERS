@@ -24,6 +24,6 @@ public class JobHistory {
 	}
 
 	public JobHistory(Customer customer) {
-		throw new UnsupportedOperationException();
+		this.customer = customer;
 	}
 }
