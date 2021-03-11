@@ -81,6 +81,6 @@ public class Customer {
 		this.phone=phone;
 		generateAccountNo();
 		listOfPayment();
-		this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard());
+		this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard(), vecPayment.getPaymCtrl());
 	}
 }
