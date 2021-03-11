@@ -4,6 +4,7 @@ import Account.AccountControl;
 import Account.Customer;
 import Database.DBControl;
 import Job.Job;
+import Job.JobFacadeControl;
 import Payment.I_Payment;
 import Payment.Payment;
 import Payment.PaymentControl;
@@ -17,6 +18,7 @@ public class Control implements I_Control, I_Payment {
 	private DBControl DBC;
 	private AccountControl accountControl;
 	private PaymentControl paymentControl;
+	private JobFacadeControl jobControl;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
 		//controller setup
@@ -24,6 +26,7 @@ public class Control implements I_Control, I_Payment {
 		controller.accountControl = new AccountControl();
 		controller.accountControl.addControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
+
 
 
 		////Test Login Start (do not remove)////

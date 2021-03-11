@@ -88,6 +88,8 @@ public class Job {
 	}
 
 	public Job(String summary, int startTime, int urgency) {
-		throw new UnsupportedOperationException();
+		this.summary = summary;
+		this.startTime = startTime;
+		this.urgency = urgency;
 	}
 }
