@@ -117,6 +117,8 @@ public class Payment {
 			prepStat.setString(2, "cash");
 		}
 		prepStat.setFloat(3, amount);
+		//write to DB
+		vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().write(prepStat);
 	}
 
 	private int generatedID() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {

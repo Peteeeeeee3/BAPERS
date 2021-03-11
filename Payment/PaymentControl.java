@@ -5,6 +5,8 @@ import Account.ValuedCustomer;
 import Job.Job;
 import Control.Control;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Vector;
 
 public class PaymentControl implements I_Payment {
@@ -31,7 +33,8 @@ public class PaymentControl implements I_Payment {
 		throw new UnsupportedOperationException();
 	}
 
-	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) {
+	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card)
+			throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
 		VectorOfPayments vecp = null;
 		float price;
 		//find correct payment vector
