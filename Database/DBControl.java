@@ -22,9 +22,9 @@ public class DBControl implements I_Database {
 
 	}
 
-//	public void PreparedStatement(String sql) throws SQLException {
-//		DBGateway.PreparedStatement(sql);
-//	}
+	public void PreparedStatement(String sql) throws SQLException {
+		DBGateway.PreparedStatement(sql);
+	}
 
 	public DBControl() throws ClassNotFoundException, SQLException {
 		DBGateway = new DatabaseGateway();
@@ -33,4 +33,6 @@ public class DBControl implements I_Database {
 	public DatabaseGateway getDBGateway() {
 		return DBGateway;
 	}
+
+
 }

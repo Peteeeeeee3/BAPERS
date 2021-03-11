@@ -1,5 +1,7 @@
 package Job;
 
+import java.sql.SQLException;
+
 public class Job {
 	private int iD;
 	private int price;
@@ -87,7 +89,14 @@ public class Job {
 		return vecTaskJ;
 	}
 
-	public Job(String summary, int startTime, int urgency) {
-		throw new UnsupportedOperationException();
+	private void upload() throws SQLException{
+
+	}
+
+	public Job(int ID, String summary, int startTime, int urgency) {
+		this.iD = ID;
+		this.summary = summary;
+		this.startTime = startTime;
+		this.urgency = urgency;
 	}
 }

@@ -51,7 +51,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void updateAccess(int staffID, int newAccess) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		officeManager.editAccess(staffID,newAccess);
+		officeManager.editAccess(staffID,newAccess, retrieveUser(staffID));
 	}
 
 	public void upgradeCust(int accountNo) {
@@ -116,9 +116,9 @@ public class AccountControl implements Account.I_Account, I_Database {
 		control.getDBC().write(sql);
 	}
 
-//	public void PreparedStatement(String sql) throws SQLException {
-//		control.getDBC().PreparedStatement(sql);
-//	}
+	public void PreparedStatement(String sql) throws SQLException {
+		control.getDBC().PreparedStatement(sql);
+	}
 
 	public Control getControl() {
 		return control;

@@ -12,7 +12,7 @@ public class JobHistory {
 	}
 
 	public void addJob(Job job) {
-		throw new UnsupportedOperationException();
+		vecJob.addJob(job);
 	}
 
 	public void updateStatus(int iD) {
@@ -24,6 +24,6 @@ public class JobHistory {
 	}
 
 	public JobHistory(Customer customer) {
-		throw new UnsupportedOperationException();
+		this.customer = customer;
 	}
 }
