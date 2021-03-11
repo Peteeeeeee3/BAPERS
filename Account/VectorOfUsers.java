@@ -1,5 +1,6 @@
 package Account;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -26,7 +27,7 @@ public class VectorOfUsers {
 		//vector.add(user);
 		incrementNoOfUsers();
 
-		accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
+		//accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
 		System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
 
@@ -36,7 +37,7 @@ public class VectorOfUsers {
 		vector.remove(staffID);
 		decrementNoOfUsers();
 
-		accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
+		//accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
 	}
 
 	public UserAccount retrieveUser(int staffID) {
@@ -89,7 +90,13 @@ public class VectorOfUsers {
 //		return false;
 
 		////database version////
-		ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + ID + " AND staff_member.password = '" + password + "';");
+		String sql = "SELECT access FROM staff_member WHERE staff_member.staffID = ? AND staff_member.password = ?";
+		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		//ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + ID + " AND staff_member.password = '" + password + "';");
+		prepStat.setInt(1, ID);
+		prepStat.setString(2, password);
+		System.out.println(prepStat.toString());
+		ResultSet rs = accControl.read(prepStat);
 		int access = -1;
 		while (rs.next()) {
 			access = rs.getInt(1);
