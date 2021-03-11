@@ -2,6 +2,7 @@ package Control;
 
 import Account.AccountControl;
 import Database.DBControl;
+import Job.JobFacadeControl;
 import Payment.PaymentControl;
 
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ public class Control implements I_Control {
 	private String state = "";
 	private DBControl DBC;
 	private AccountControl accountControl;
+	private JobFacadeControl jobControl;
 	private PaymentControl paymentControl;
 
 	public Control() throws ClassNotFoundException, SQLException {
@@ -21,10 +23,13 @@ public class Control implements I_Control {
 		return DBC;
 	}
 
-
-
 	public void setAccountControl(AccountControl accountControl) {
 		this.accountControl = accountControl;
+	}
+
+	public void setJobContol (JobFacadeControl jobContol){
+		this.jobControl=jobContol;
+
 	}
 
 
@@ -33,6 +38,7 @@ public class Control implements I_Control {
 		Control controller = new Control();
 		controller.accountControl = new AccountControl();
 		controller.accountControl.addControl(controller);
+		controller.jobControl.addControl(controller);
 		controller.paymentControl = new PaymentControl();
 
 
@@ -45,6 +51,9 @@ public class Control implements I_Control {
 
 		//Test for Create User//
 		//controller.accountControl.createUser(1, "password1", "farhan", 1);
+
+		//Test for Create Task//
+		//controller.jobControl.addTask(003,"Printer Room", "print in colour", 12, 2);
 
 
 	}

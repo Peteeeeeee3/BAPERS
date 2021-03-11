@@ -1,5 +1,6 @@
 package Account;
 
+import java.sql.SQLException;
 import java.util.Vector;
 import Account.Customer;
 
@@ -7,20 +8,24 @@ public class VectorOfAccounts {
 	private int noOfCustAccounts = 0;
 	public Receptionist staff;
 	public AccountControl accControl;
-	public Vector<Customer> customer = new Vector<Customer>();
+	public Vector<Customer> customers = new Vector<Customer>();
 
-	public void addCustAccount(Customer customer) {
+	public void addCustAccount(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		customers.add(new Customer(customer.getCompany(),customer.getName(),customer.getAddress(),customer.getPhone()));
 		incrementNoOfCustAccounts();
+
+		accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany());
 	}
 
 	public void removeCustAccount(int accountNo) {
+		customers.remove(accountNo);
 		decrementNoOfCustAccounts();
 	}
 
 	public Customer retrieveCustAccount(int accountNo) {
-		for(int i=0; i<customer.size(); ++i) {
-			if(customer.get(i).getAccountNo()==accountNo){
-				return customer.get(i);
+		for(int i=0; i<customers.size(); ++i) {
+			if(customers.get(i).getAccountNo()==accountNo){
+				return customers.get(i);
 			}
 
 		}
@@ -28,13 +33,14 @@ public class VectorOfAccounts {
 	}
 
 	public int traverseVector(int accountNo) {
-		for(int i=0; i<customer.size(); ++i){
-			if(customer.get(i).getAccountNo()==accountNo){
+		for(int i=0; i<customers.size(); ++i){
+			if(customers.get(i).getAccountNo()==accountNo){
 				return i;
 			}
 		}
 		return -1;
 	}
+
 
 	public void incrementNoOfCustAccounts() {
 		noOfCustAccounts++;
@@ -45,14 +51,14 @@ public class VectorOfAccounts {
 	}
 
 	public Vector<Customer> getCustomerVector(){
-		return customer;
+		return customers;
 	}
 
 	public int getCustomerID(){
 		int j=0, largest=0;
-		while(j<customer.size()){
-			if(customer.get(j).getAccountNo()>largest){
-				largest=customer.get(j).getAccountNo();
+		while(j<customers.size()){
+			if(customers.get(j).getAccountNo()>largest){
+				largest=customers.get(j).getAccountNo();
 			}
 			++j;
 		}
@@ -60,6 +66,6 @@ public class VectorOfAccounts {
 	}
 
 	public VectorOfAccounts(Vector<Customer> customer) {
-		this.customer=customer;
+		this.customers=customer;
 	}
 }

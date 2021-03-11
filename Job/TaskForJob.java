@@ -47,7 +47,6 @@ public class TaskForJob extends Task {
 	}
 
 	public TaskForJob(Task task) {
-		super(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration());
-		throw new UnsupportedOperationException();
+		super(task.getTaskID(),task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration());
 	}
 }

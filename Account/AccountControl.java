@@ -23,12 +23,15 @@ public class AccountControl implements Account.I_Account, I_Database {
 		return vecAcc.retrieveCustAccount(accountNo);
 	}
 
-	public void createCustomer(String company, String name, String address, int phone)  {
-		Customer vecCustomer =null;
+	public void createCustomer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		Customer vecCustomer=null;
 		for( int i=0; i<vecAcc.getCustomerVector().size(); i++){
-			if(vecAcc.getCustomerVector().get(i).getName()== name){
+			if(vecAcc.getCustomerVector().get(i).getCompany()== company){
 				vecCustomer=vecAcc.getCustomerVector().get(i);
 				break;
+			}
+			if(vecCustomer== null){
+				return;
 			}
 
 		}

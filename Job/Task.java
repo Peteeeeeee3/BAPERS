@@ -12,6 +12,10 @@ public class Task {
 		return this.taskID;
 	}
 
+	public void setTaskID(int taskID) {
+		this.taskID = taskID;
+	}
+
 	public String getLocation() {
 		return this.location;
 	}
@@ -44,7 +48,8 @@ public class Task {
 		this.duration = duration;
 	}
 
-	public Task(String location, String description, float price, int duration) {
+	public Task(int taskID, String location, String description, float price, int duration) {
+		this.taskID=taskID;
 		this.location=location;
 		this.description=description;
 		this.price=price;
