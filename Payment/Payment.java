@@ -3,14 +3,21 @@ package Payment;
 import Account.*;
 import Job.Job;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Payment {
 	private int iD;
 	private float amount;
-	private int date;
+	private Date date;
 	private Customer customer;
 	private Job[] jobs;
 	private int dueDate;
-	public VectorOfPayments vecPaym;
+	private VectorOfPayments vecPaym;
 	private Card card;
 
 	public int getiD() {
@@ -29,12 +36,12 @@ public class Payment {
 		this.amount = amount;
 	}
 
-	public int getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(int date) {
-		this.date = date;
+	public void setDate(int date) throws ParseException {
+		this.date = convertDate(date);
 	}
 
 	public Customer getCustomer() {
@@ -52,7 +59,6 @@ public class Payment {
 	public Job[] getJobs() {
 		return this.jobs;
 	}
-
 
 	public Card getCard() {
 		return card;
@@ -79,26 +85,94 @@ public class Payment {
 			}
 			//process task discount
 			if (((ValuedCustomer) customer).getDiscSet().getDiscounts().get(0) instanceof TaskDiscount) {
-				//enter code here
+				float totalDisc = 0;
+				//loop through jobs
+				for (int jobVecItr = 0; jobVecItr < jobs.length; jobVecItr++) {
+					//cycle through each job's tasks
+					for (int taskVecitr = 0; jobVecItr < jobs[jobVecItr].vecTaskJ.getTaskJ().size(); taskVecitr++) {
+						//check whether tasks of the jobs are contained in that of the discounts
+						for (int discountTasksItr = 0; discountTasksItr < ((ValuedCustomer) customer).getDiscSet().getDiscounts().size(); discountTasksItr++) {
+							//compare ID of task part of the job to those in the discount set
+							if (jobs[jobVecItr].getVecTaskJ().getTaskJ().get(taskVecitr).getTaskID() ==
+									((TaskDiscount)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(discountTasksItr)).getTaskID()) {
+								totalDisc += jobs[jobVecItr].getVecTaskJ().getTaskJ().get(taskVecitr).getPrice() * (1 - ((TaskDiscount)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(discountTasksItr)).getRate());
+							}
+						}
+					}
+				}
+				amount -= totalDisc;
 			}
 		}
 		return amount;
 	}
 
-	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate) {
-		this.amount = amount;
-		this.date = date;
+	private void upload() throws SQLException {
+		//upload to database (also generates ID
+		String sql = "INSERT INTO payment (`date`, `paymentType`, `amount`) VALUES (?, ?, ?);";
+		PreparedStatement prepStat = vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		prepStat.setDate(1, date);
+		if (card != null) {
+			prepStat.setString(2, "card");
+		} else {
+			prepStat.setString(2, "cash");
+		}
+		prepStat.setFloat(3, amount);
+	}
+
+	private int generatedID() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		//retrieves payment with highest ID with matching values
+		String sql = "SELECT `paymentID` FROM `payment` WHERE payment.date = ? AND payment.paymentType = ? AND amount = ?";
+		PreparedStatement preparedStatement = vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setDate(1, date);
+		if (card != null) {
+			preparedStatement.setString(2, "card");
+		} else {
+			preparedStatement.setString(2, "cash");
+		}
+		preparedStatement.setFloat(3, amount);
+		ResultSet rs = vecPaym.getPaymCtrl().getControl().getDBC().read(preparedStatement);
+		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
+		// as this function only gets called in the constructor
+		int finalValue = -1, checkValue = -1;
+		//get values from result set
+		while (rs.next()) {
+			//apply value to correct variable
+			if (finalValue == -1) {
+				finalValue = rs.getInt(1);
+			} else {
+				checkValue = rs.getInt(1);
+			}
+			//see if the check value is larger than the final value (which will be returned)
+			if (checkValue > finalValue) {
+				finalValue = checkValue;
+			}
+		}
+		return finalValue;
+	}
+
+	private Date convertDate(Integer oldFormat) throws ParseException {
+		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+		return (Date) originalFormat.parse(oldFormat.toString());
+	}
+
+	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate) throws ParseException, SQLException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+		this.date = convertDate(date);
 		this.customer = customer;
 		this.jobs = jobs;
 		this.dueDate = dueDate;
+		this.amount = calculateCost(amount, customer);
+		upload();
+		this.iD = generatedID();
 	}
 
-	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) {
-		this.amount = amount;
-		this.date = date;
+	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ParseException, SQLException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+		this.date = convertDate(date);
 		this.customer = customer;
 		this.jobs = jobs;
 		this.dueDate = dueDate;
 		this.card = card;
+		this.amount = calculateCost(amount, customer);
+		upload();
+		this.iD = generatedID();
 	}
 }

@@ -5,8 +5,8 @@ import Job.TaskForJob;
 
 public class VectorOfTasksForJob {
 	private int noOfTasks = 0;
-	public Job job;
-	public Vector<TaskForJob> taskJ = new Vector<TaskForJob>();
+	private Job job;
+	private Vector<TaskForJob> taskJ = new Vector<TaskForJob>();
 
 	public void addTask(TaskForJob task) {
 		throw new UnsupportedOperationException();
@@ -25,11 +25,15 @@ public class VectorOfTasksForJob {
 	}
 
 	public void incrementNoOfTasks() {
-		throw new UnsupportedOperationException();
+		noOfTasks++;
 	}
 
 	public void decrementNoOfTasks() {
-		throw new UnsupportedOperationException();
+		noOfTasks--;
+	}
+
+	public Vector<TaskForJob> getTaskJ() {
+		return taskJ;
 	}
 
 	public VectorOfTasksForJob() {

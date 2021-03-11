@@ -59,7 +59,12 @@ public class VectorOfAccounts {
 		return largest;
 	}
 
-	public VectorOfAccounts(Vector<Customer> customer) {
-		this.customer=customer;
+	public AccountControl getAccControl() {
+		return accControl;
+	}
+
+	public VectorOfAccounts(Vector<Customer> customer, AccountControl accountControl) {
+		this.customer = customer;
+		this.accControl = accountControl;
 	}
 }

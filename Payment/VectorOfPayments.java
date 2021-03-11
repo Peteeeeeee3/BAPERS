@@ -5,8 +5,9 @@ import java.util.Vector;
 
 public class VectorOfPayments {
 	private Customer customer;
-	public Vector<Payment> vecPaym = new Vector<Payment>();
-	public VectorOfCards vecCards;
+	private Vector<Payment> vecPaym = new Vector<Payment>();
+	private VectorOfCards vecCards;
+	private PaymentControl paymCtrl;
 
 	public void addPayment(Payment payment) {
 
@@ -42,9 +43,13 @@ public class VectorOfPayments {
 		this.customer = customer;
 	}
 
-	public VectorOfPayments(Customer customer, VectorOfCards vecCards) {
+	public PaymentControl getPaymCtrl() {
+		return paymCtrl;
+	}
+
+	public VectorOfPayments(Customer customer, VectorOfCards vecCards, PaymentControl paymCtrl) {
 		this.customer = customer;
 		this.vecCards = vecCards;
-
+		this.paymCtrl = paymCtrl;
 	}
 }
