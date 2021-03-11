@@ -6,41 +6,35 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import Control.Control;
+import Job.JobHistory;
 import Account.Customer;
+import Database.I_Database;
 
-public abstract class JobFacadeControl implements I_Job {
+
+public abstract class JobFacadeControl implements I_Job, I_Database {
 	public Vector<JobHistory> jobHist = new Vector<JobHistory>();
 	public VectorOfTasks vecTasks;
+	private VectorOfJobs vecJobs;
 	private Control control;
 
 	public void addTask(int taskID, String location, String description, float price, int duration) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		Task task=null;
-		for(int i=0; i<vecTasks.getVector().size();++i){
-			if(vecTasks.getVector().get(i).getTaskID()==taskID){
-				task=vecTasks.getVector().get(i);
+		Task task = null;
+		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
+			if (vecTasks.getVector().get(i).getTaskID() == taskID) {
+				task = vecTasks.getVector().get(i);
 				break;
 			}
-			if(task==null){
+			if (task == null) {
 				return;
 			}
 		}
-		vecTasks.addTask(new Task(taskID, task.getLocation(),task.getDescription(),task.getPrice(),task.getDuration()));
-
+		vecTasks.addTask(new Task(taskID, task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
 	}
-
-	public void removeTask(int taskID){
-		Task task=null;
-		for(int i=0; i<vecTasks.getVector().size();++i) {
-			if (vecTasks.getVector().get(i).getTaskID() == taskID) {
-				vecTasks.removeTask(taskID);
-				break;
-			}
-		}
-	}
+	public void removeTask(Task taskID){}
 
 	public void addTaskToJob(String location, String description, float price, int duration){}
 
-	public  void removeTaskFromJob(int jobID, int taskID){}
+	public void removeTaskFromJob(int jobID, int taskID){}
 
 	public void createJobHistory(Customer customer){}
 
@@ -50,12 +44,10 @@ public abstract class JobFacadeControl implements I_Job {
 
 	public Job retrieveSJob(int jobID){
 		throw new UnsupportedOperationException();
-
 	}
 
-	public TaskForJob[] retrieveMTasksJ(int jobID){
+	public  TaskForJob[] retrieveMTasksJ(int jobID){
 		throw new UnsupportedOperationException();
-
 	}
 
 	public void retrieveSTaskJ(int taskID){}
@@ -64,35 +56,27 @@ public abstract class JobFacadeControl implements I_Job {
 		throw new UnsupportedOperationException();
 	}
 
-	public JobFacadeControl() {
-		vecTasks= new VectorOfTasks(vecTasks,this);
+	public JobFacadeControl(){
+		vecJobs = new VectorOfJobs(vecJobs, this);
 	}
 
-	public void addControl(Control control) {
+	public void addControl(Control control){
 		this.control = control;
 	}
 
-
+	@Override
 	public void connectDB() throws ClassNotFoundException, SQLException {
-
 	}
 
+	@Override
+	public void disconnectDB()throws SQLException{}
 
-	public void disconnectDB() throws SQLException {
+	@Override
+	public ResultSet read(PreparedStatement sql)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {return control.getDBC().read(sql);}
 
-	}
+	@Override
+	public void write(PreparedStatement sql)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {control.getDBC().write(sql);}
 
-
-	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return control.getDBC().read(sql);
-	}
-
-
-	public void write(PreparedStatement sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		control.getDBC().write(sql);
-	}
-
-
-
+	public Control getControl(){return control;}
 
 }

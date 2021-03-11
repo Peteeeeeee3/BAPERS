@@ -63,13 +63,19 @@ public class PaymentControl implements I_Payment {
 	}
 
 	public void addPaymentVectorToCustomer(Customer customer) {
-		vVecPaym.add(new VectorOfPayments(customer, vecCard));
+		vVecPaym.add(new VectorOfPayments(customer, vecCard, this));
 	}
 
-	public PaymentControl() {
+	public VectorOfCards getVecCard() {
+		return vecCard;
+	}
+
+	public Control getControl() {
+		return control;
+	}
+
+	public PaymentControl(Control ctrl) {
 		vecCard = new VectorOfCards();
+		this.control = ctrl;
 	}
-
-
-
 }

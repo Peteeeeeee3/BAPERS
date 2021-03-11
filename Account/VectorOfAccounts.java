@@ -1,6 +1,5 @@
 package Account;
 
-import java.sql.SQLException;
 import java.util.Vector;
 import Account.Customer;
 
@@ -10,17 +9,18 @@ public class VectorOfAccounts {
 	public AccountControl accControl;
 	public Vector<Customer> customers = new Vector<Customer>();
 
-	public void addCustAccount(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void addCustAccount(Customer customer) {
 		customers.add(new Customer(customer.getCompany(),customer.getName(),customer.getAddress(),customer.getPhone()));
 		incrementNoOfCustAccounts();
 
-		//accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany()+ "has been inserted");
-		System.out.println("Data: " + customer.getCompany() + customer.getName() + customer.getAddress() + customer.getPhone() + "have been inserted");
+//		accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany()+ "has been inserted");
+//		System.out.println("Data: " + customer.getCompany() + customer.getName() + customer.getAddress() + customer.getPhone() + "have been inserted");
+
 	}
 
 
 	public void removeCustAccount(int accountNo) {
-		customers.remove(accountNo);
+		customers.remove(accountNo); 
 		decrementNoOfCustAccounts();
 	}
 
@@ -42,7 +42,6 @@ public class VectorOfAccounts {
 		}
 		return -1;
 	}
-
 
 	public void incrementNoOfCustAccounts() {
 		noOfCustAccounts++;
@@ -67,7 +66,12 @@ public class VectorOfAccounts {
 		return largest;
 	}
 
-	public VectorOfAccounts(Vector<Customer> customer) {
-		this.customers=customer;
+	public AccountControl getAccControl() {
+		return accControl;
+	}
+
+	public VectorOfAccounts(Vector<Customer> customer, AccountControl accountControl) {
+		this.customers = customer;
+		this.accControl = accountControl;
 	}
 }

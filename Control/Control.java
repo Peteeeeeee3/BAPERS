@@ -1,45 +1,31 @@
 package Control;
 
 import Account.AccountControl;
+import Account.Customer;
 import Database.DBControl;
+import Job.Job;
 import Job.JobFacadeControl;
+import Payment.I_Payment;
+import Payment.Payment;
 import Payment.PaymentControl;
+import Payment.Card;
 
 import java.sql.SQLException;
 
-public class Control implements I_Control {
+public class Control implements I_Control, I_Payment {
 
 	private String state = "";
 	private DBControl DBC;
 	private AccountControl accountControl;
-	private JobFacadeControl jobControl;
 	private PaymentControl paymentControl;
-
-	public Control() throws ClassNotFoundException, SQLException {
-		DBC = new DBControl();
-	}
-
-	public DBControl getDBC() {
-		return DBC;
-	}
-
-	public void setAccountControl(AccountControl accountControl) {
-		this.accountControl = accountControl;
-	}
-
-	public void setJobContol (JobFacadeControl jobContol){
-		this.jobControl=jobContol;
-
-	}
-
+	private JobFacadeControl jobControl;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
 		//controller setup
 		Control controller = new Control();
 		controller.accountControl = new AccountControl();
 		controller.accountControl.addControl(controller);
-		controller.jobControl.addControl(controller);
-		controller.paymentControl = new PaymentControl();
+		controller.paymentControl = new PaymentControl(controller);
 
 
 
@@ -51,14 +37,51 @@ public class Control implements I_Control {
 		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",755551315);
 
 		//Test for Create User//
+		controller.accountControl.createUser(8, "password1", "farhan", 1);
+	}
 
-		//controller.accountControl.createUser(1, "password1", "farhan", 1);
+	public Control() throws ClassNotFoundException, SQLException {
+		DBC = new DBControl();
+	}
 
-		//Test for Create Task//
-		//controller.jobControl.addTask(003,"Printer Room", "print in colour", 12, 2);
+	public DBControl getDBC() {
+		return DBC;
+	}
 
+	public AccountControl getAccountControl() {
+		return accountControl;
+	}
 
+	public void setAccountControl(AccountControl accountControl) {
+		this.accountControl = accountControl;
+	}
 
-		//controller.accountControl.createUser(8, "password1", "farhan", 1);
+	public PaymentControl getPaymentControl() {
+		return paymentControl;
+	}
+
+	@Override
+	public Payment retrievePayment(int iD) {
+		return null;
+	}
+
+	@Override
+	public Payment[] retrieveListOfPayments(Customer customer) {
+		return new Payment[0];
+	}
+
+	@Override
+	public Card[] retrieveCards(Customer customer) {
+		return new Card[0];
+	}
+
+	@Override
+	public void generateInvoice() {
+
+	}
+
+	@Override
+	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) {
+		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card);
 	}
 }
