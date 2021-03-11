@@ -4,10 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import Job.JobHistory;
-import Account.Customer;
 
 import Control.Control;
+import Job.JobHistory;
+import Account.Customer;
 import Database.I_Database;
 
 
@@ -17,25 +17,44 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 	private VectorOfJobs vecJobs;
 	private Control control;
 
-	public abstract void addTask(Task task);
+	public void addTask(int taskID, String location, String description, float price, int duration) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		Task task = null;
+		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
+			if (vecTasks.getVector().get(i).getTaskID() == taskID) {
+				task = vecTasks.getVector().get(i);
+				break;
+			}
+			if (task == null) {
+				return;
+			}
+		}
+		vecTasks.addTask(new Task(taskID, task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
+	}
+	public void removeTask(Task taskID){}
 
-	public abstract void removeTask(Task taskID);
+	public void addTaskToJob(String location, String description, float price, int duration){}
 
-	public abstract void addTaskToJob(String location, String description, float price, int duration);
+	public void removeTaskFromJob(int jobID, int taskID){}
 
-	public abstract void removeTaskFromJob(int jobID, int taskID);
+	public void createJobHistory(Customer customer){}
 
-	public abstract void createJobHistory(Customer customer);
+	public Job[] retrieveMJobs(int custID){
+		throw new UnsupportedOperationException();
+	}
 
-	public abstract Job[] retrieveMJobs(int custID);
+	public Job retrieveSJob(int jobID){
+		throw new UnsupportedOperationException();
+	}
 
-	public abstract Job retrieveSJob(int jobID);
+	public  TaskForJob[] retrieveMTasksJ(int jobID){
+		throw new UnsupportedOperationException();
+	}
 
-	public abstract TaskForJob[] retrieveMTasksJ(int jobID);
+	public void retrieveSTaskJ(int taskID){}
 
-	public abstract void retrieveSTaskJ(int taskID);
-
-	public abstract Task[] retrieveAvailableTasks();
+	public Task[] retrieveAvailableTasks(){
+		throw new UnsupportedOperationException();
+	}
 
 	public JobFacadeControl(){
 		vecJobs = new VectorOfJobs(vecJobs, this);

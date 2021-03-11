@@ -116,9 +116,9 @@ public class AccountControl implements Account.I_Account, I_Database {
 		control.getDBC().write(sql);
 	}
 
-//	public void PreparedStatement(String sql) throws SQLException {
-//		control.getDBC().PreparedStatement(sql);
-//	}
+	public void PreparedStatement(String sql) throws SQLException {
+		control.getDBC().PreparedStatement(sql);
+	}
 
 	public Control getControl() {
 		return control;

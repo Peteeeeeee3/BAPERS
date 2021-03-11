@@ -44,7 +44,7 @@ public class Task {
 		this.duration = duration;
 	}
 
-	public Task(String location, String description, float price, int duration) {
+	public Task(int taskID, String location, String description, float price, int duration) {
 		this.location=location;
 		this.description=description;
 		this.price=price;
