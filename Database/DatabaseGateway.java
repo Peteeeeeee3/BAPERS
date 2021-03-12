@@ -66,7 +66,4 @@ public class DatabaseGateway {
 	public Connection getConnection() {
 		return connection;
 	}
-
-    public void PreparedStatement(String sql) {
-    }
 }

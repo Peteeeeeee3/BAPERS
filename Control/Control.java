@@ -11,6 +11,7 @@ import Payment.PaymentControl;
 import Payment.Card;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public class Control implements I_Control, I_Payment {
 
@@ -81,7 +82,7 @@ public class Control implements I_Control, I_Payment {
 	}
 
 	@Override
-	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) {
+	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
 		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card);
 	}
 }
