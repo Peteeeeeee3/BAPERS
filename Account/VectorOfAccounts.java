@@ -20,7 +20,7 @@ public class VectorOfAccounts {
 
 
 	public void removeCustAccount(int accountNo) {
-		customers.remove(accountNo); 
+		customers.remove(accountNo);
 		decrementNoOfCustAccounts();
 	}
 

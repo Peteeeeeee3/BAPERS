@@ -73,6 +73,10 @@ public class Customer {
 		return new Payment[accountNo];
 	}
 
+	public void upload(){
+
+	}
+
 
 	public Customer(String company, String name, String address, int phone) {
 		this.company=company;
@@ -81,6 +85,6 @@ public class Customer {
 		this.phone=phone;
 		generateAccountNo();
 		listOfPayment();
-		this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard());
+		//this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard());
 	}
 }

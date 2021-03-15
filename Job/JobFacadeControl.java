@@ -30,7 +30,8 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 		}
 		vecTasks.addTask(new Task(taskID, task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
 	}
-	public void removeTask(Task taskID){}
+	public void removeTask(Task taskID){
+	}
 
 	public void addTaskToJob(String location, String description, float price, int duration){}
 
