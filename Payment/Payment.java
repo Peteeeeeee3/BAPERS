@@ -107,7 +107,7 @@ public class Payment {
 	}
 
 	private void upload() throws SQLException {
-		//upload to database (also generates ID
+		//upload to database (also generates ID)
 		String sql = "INSERT INTO payment (`date`, `paymentType`, `amount`) VALUES (?, ?, ?);";
 		PreparedStatement prepStat = vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		prepStat.setDate(1, date);
@@ -117,6 +117,19 @@ public class Payment {
 			prepStat.setString(2, "cash");
 		}
 		prepStat.setFloat(3, amount);
+		//write to DB
+		vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().write(prepStat);
+	}
+
+	private void uploadCardDetails() throws SQLException, ParseException {
+		//upload card details to database
+		String sql = "INSERT INTO card_details (`PaymentpaymentID`, `type`, `expiryDate`, `last4Dig`) VALUES (?, ?, ?, ?)";
+		PreparedStatement prepStat = vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		prepStat.setInt(1, iD);
+		prepStat.setString(2, card.getType());
+		prepStat.setDate(3, convertDate(card.getExpiryDate()));
+		prepStat.setInt(4, card.getLast4Digits());
+		vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().write(prepStat);
 	}
 
 	private int generatedID() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -174,5 +187,6 @@ public class Payment {
 		this.amount = calculateCost(amount, customer);
 		upload();
 		this.iD = generatedID();
+		uploadCardDetails();
 	}
 }

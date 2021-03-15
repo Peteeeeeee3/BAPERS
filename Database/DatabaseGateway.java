@@ -10,7 +10,7 @@ public class DatabaseGateway {
 	//connects to localhost
 	public void connectToDB() throws SQLException {
 		//Peter
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		//Hanan
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
@@ -19,10 +19,10 @@ public class DatabaseGateway {
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
 
 		//Abdullah
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
 		//Farhan
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
 
 		//Abdullah
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -66,7 +66,4 @@ public class DatabaseGateway {
 	public Connection getConnection() {
 		return connection;
 	}
-
-    public void PreparedStatement(String sql) {
-    }
 }

@@ -2,10 +2,13 @@ package Payment;
 
 import Account.Customer;
 
+import java.sql.PreparedStatement;
+
 public class Card {
 	private String type;
 	private int expiryDate;
 	private int last4Digits;
+	private Payment payment;
 
 	public String getType() {
 		return this.type;
@@ -31,7 +34,11 @@ public class Card {
 		this.last4Digits = last4Digits;
 	}
 
-	public Card(String type, int expiryDate, int last4Digits) {
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public Card(String type, int expiryDate, int last4Digits, Payment payment) {
 		this.type = type;
 		this.expiryDate = expiryDate;
 		this.last4Digits = last4Digits;

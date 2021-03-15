@@ -14,27 +14,36 @@ public class VectorOfJobs {
 	public VectorOfJobs vecJob;
 
 	public void addJob(Job job) {
-			throw new UnsupportedOperationException();
+		vector.add(new Job(job.getID() ,job.getSummary(), job.getStartTime(), job.getUrgency()));
+		incrementNoOfJobs();
 
-		}
+	}
 
 	public Job retrieveJob(int iD) {
-		throw new UnsupportedOperationException();
-
+		for(int i = 0; i < vector.size(); i++){
+			if(vector.get(i).getID() == iD){
+				return vector.get(i);
+			}
 		}
+		return null;
+	}
 
 	public int traverse(int iD) {
-		throw new UnsupportedOperationException();
-
+		for(int i = 0; i < vector.size(); i++){
+			if(vector.get(i).getID() == iD){
+				return i;
+			}
 		}
+		return -1;
+	}
 
 	public void incrementNoOfJobs() {
+		noOfJobs ++;
 	}
 
 	public void decrementNoOfJobs() {
+		noOfJobs --;
 	}
-
-
 
 	public int getNoOfJobs() {
 		return this.noOfJobs;
