@@ -28,8 +28,6 @@ public class Control implements I_Control, I_Payment {
 		controller.accountControl.addControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
 
-
-
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");
 		////Test Login End////
