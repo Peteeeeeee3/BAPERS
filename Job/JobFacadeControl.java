@@ -31,6 +31,10 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 		vecTasks.addTask(new Task(taskID, task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
 	}
 
+	public void removeTask(Task taskID){
+	}
+
+
 	public void acceptJob(int ID ,String summary, int startTime, int urgency){
 		Job job = null;
 		for (int i = 0; i < vecJobs.getVector().size(); ++i){
@@ -45,7 +49,7 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 		vecJobs.addJob(new Job(ID, summary, startTime, urgency));
 	}
 
-	public void removeTask(Task taskID){}
+
 
 	public void addTaskToJob(String location, String description, float price, int duration){}
 
