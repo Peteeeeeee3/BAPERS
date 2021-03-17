@@ -3,12 +3,12 @@ package Control;
 import Account.AccountControl;
 import Account.Customer;
 import Database.DBControl;
-import Job.Job;
-import Job.JobFacadeControl;
+import Job.*;
 import Payment.I_Payment;
 import Payment.Payment;
 import Payment.PaymentControl;
 import Payment.Card;
+import Report.ReportFacadeControl;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -20,6 +20,7 @@ public class Control implements I_Control, I_Payment {
 	private AccountControl accountControl;
 	private PaymentControl paymentControl;
 	private JobFacadeControl jobControl;
+	private ReportFacadeControl reportFacadeControl;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
 		//controller setup
@@ -27,8 +28,12 @@ public class Control implements I_Control, I_Payment {
 		controller.accountControl = new AccountControl();
 		controller.accountControl.addControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
-
-
+		controller.jobControl = new JobFacadeControl() {
+			@Override
+			public void addTask(Task task) {
+			}
+		};
+		controller.reportFacadeControl = new ReportFacadeControl(controller);
 
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");
@@ -38,7 +43,7 @@ public class Control implements I_Control, I_Payment {
 		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",755551315);
 
 		//Test for Create User//
-		controller.accountControl.createUser(8, "password1", "farhan", 1);
+		//controller.accountControl.createUser(8, "password1", "farhan", 1);
 	}
 
 	public Control() throws ClassNotFoundException, SQLException {

@@ -10,21 +10,25 @@ public class OfficeManager extends ShiftManager {
 	public AccountControl accControl;
 
 	public void editAccess(int staffID, int accessLevel, UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		int accessLevelRec = 1;
+		int accessLevelTech = 2;
+		int accessLevelSM = 3;
+		int accessLevelOM = 4;
 		for (int i = 0; i < vecUser.getVector().size(); i++ ){
 			switch (accessLevel){
 				case 1:
 					if (vecUser.getVector().get(i).getStaffID() == staffID){
-						accessLevel = accessLevel + 1;
+						accessLevel = accessLevelTech;
 						user.setAccess(accessLevel);
 					}
 				case 2:
 					if (vecUser.getVector().get(i).getStaffID() == staffID){
-						accessLevel = accessLevel + 1;
+						accessLevel = accessLevelSM;
 						user.setAccess(accessLevel);
 					}
 				case 3:
 					if (vecUser.getVector().get(i).getStaffID() == staffID){
-						accessLevel = accessLevel + 1;
+						accessLevel = accessLevelOM;
 						user.setAccess(accessLevel);
 					}
 			}
@@ -41,14 +45,14 @@ public class OfficeManager extends ShiftManager {
 		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("UPDATE staff_member SET access = ? WHERE staff_member.staffID = ?");
 		switch(access){
 			case 1:
-				editAccess(staffID, accessLevel + 1, user);
+				editAccess(staffID, accessLevel, user);
 				//accControl.write("UPDATE Staff_Member SET access = " + accessLevel + "WHERE StaffID = " + staffID);
 			case 2:
-				editAccess(staffID, accessLevel + 1, user);
+				editAccess(staffID, accessLevel, user);
 				prepStat.setInt(1, accessLevel);
 				prepStat.setInt(2, staffID);
 			case 3:
-				editAccess(staffID, accessLevel + 1, user);
+				editAccess(staffID, accessLevel, user);
 				prepStat.setInt(1, accessLevel);
 				prepStat.setInt(2, staffID);
 		}

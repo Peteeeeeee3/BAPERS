@@ -1,45 +1,60 @@
 package Report;
 
+import java.sql.PreparedStatement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class IndividualPerformanceReport extends Report {
-	private String name;
-	private int date;
-	private int startTime;
-	private int endTime;
+	private Date startDate, endDate;
 
-	public String getName() {
-		return this.name;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public int getDate() {
-		return this.date;
+	private Date convertDate(Integer oldFormat) throws ParseException {
+		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+		return originalFormat.parse(oldFormat.toString());
 	}
 
-	public void setDate(int date) {
-		this.date = date;
-	}
+	public IndividualPerformanceReport(int startDate, int endDate, Report report) throws ParseException {
+		super(report);
+		this.startDate = convertDate(startDate);
+		this.endDate = convertDate(endDate);
 
-	public int getStartTime() {
-		return this.startTime;
-	}
+		try {
+			//select all required information
+			//SQL Statement doesn't fully work, copy below to test
+			//SELECT `staff_member.name`, `completed_tasks.TasktaskID`, `completed_tasks.location`,
+			//					`completed_tasks.date`, `completed_tasks.startTime`, `task.duration` 
+			//					FROM `completed_tasks`
+			//					JOIN `staff_member` ON `staff_member.staffID` = `completed_tasks.Staff_MemberstaffID`
+			//					JOIN `task` ON `task.taskID` = `completed_tasks.TasktaskID`
+			//					WHERE 2020-12-06 <= `completed_tasks.date` < 2020-12-24;
 
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
-	}
+			String sql1 = "SELECT `staff_member.name`, `completed_tasks.TasktaskID`, `completed_tasks.location`, " +
+					"`completed_tasks.date`, `completed_tasks.startTime`, `task.duration` " +
+					"FROM `completed_tasks` " +
+					"JOIN `staff_member` ON `staff_member.staffID` = `completed_tasks.Staff_MemberstaffID` " +
+					"JOIN `task` ON `task.taskID` = `completed_tasks.TasktaskID` " +
+					"WHERE ? <= `completed_tasks.date` < ?;";
+			//create Prepared statement
+			PreparedStatement preparedStatement = RFC.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql1);
+			//apply dates
+			preparedStatement.setDate(1, (java.sql.Date) this.startDate);
+			preparedStatement.setDate(2, (java.sql.Date) this.endDate);
+			//handle result set
 
-	public int getEndTime() {
-		return this.endTime;
-	}
+			//continue from here - Peter
 
-	public void setEndTime(int endTime) {
-		this.endTime = endTime;
-	}
+			//calculate total times
 
-	public IndividualPerformanceReport(String name, int date, int startTime, int endTime, Report report) {
-		super(report.getReportID());
-		throw new UnsupportedOperationException();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
