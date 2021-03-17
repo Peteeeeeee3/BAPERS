@@ -24,6 +24,7 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 				task = vecTasks.getVector().get(i);
 				break;
 			}
+			//another condition is required here or statement can be ignored as it will always happen - Peter
 			if (task == null) {
 				return;
 			}

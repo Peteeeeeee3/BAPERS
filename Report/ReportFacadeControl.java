@@ -1,10 +1,19 @@
 package Report;
 
+import Control.Control;
+
+import java.util.Vector;
+
 public class ReportFacadeControl implements I_ReportFacade {
-	public Report report;
+	private Vector<Report> reports;
+	private Control control;
+
 
 	public void generateIndividualPerformanceReport(IndividualPerformanceReport report) {
-		throw new UnsupportedOperationException();
+		report.setRFC(this);
+//		String name, department;
+//		int taskID, startTime, timeTaken, total, totalEffort;
+//		String sql = "SELECT * FROM ";
 	}
 
 	public void generatePerformanceSummary(PerformaneSummary report) {
@@ -15,7 +24,11 @@ public class ReportFacadeControl implements I_ReportFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public ReportFacadeControl() {
-		throw new UnsupportedOperationException();
+	public Control getControl() {
+		return control;
+	}
+
+	public ReportFacadeControl(Control control) {
+		this.control = control;
 	}
 }
