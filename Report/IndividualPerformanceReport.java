@@ -28,6 +28,14 @@ public class IndividualPerformanceReport extends Report {
 
 		try {
 			//select all required information
+			//SQL Statement doesn't fully work, copy below to test
+			//SELECT `staff_member.name`, `completed_tasks.TasktaskID`, `completed_tasks.location`,
+			//					`completed_tasks.date`, `completed_tasks.startTime`, `task.duration` 
+			//					FROM `completed_tasks`
+			//					JOIN `staff_member` ON `staff_member.staffID` = `completed_tasks.Staff_MemberstaffID`
+			//					JOIN `task` ON `task.taskID` = `completed_tasks.TasktaskID`
+			//					WHERE 2020-12-06 <= `completed_tasks.date` < 2020-12-24;
+
 			String sql1 = "SELECT `staff_member.name`, `completed_tasks.TasktaskID`, `completed_tasks.location`, " +
 					"`completed_tasks.date`, `completed_tasks.startTime`, `task.duration` " +
 					"FROM `completed_tasks` " +
