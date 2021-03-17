@@ -1,5 +1,7 @@
 package Account;
 
+import java.sql.SQLException;
+
 public class ValuedCustomer extends Customer {
 	public DiscountSet discSet;
 
@@ -45,7 +47,7 @@ public class ValuedCustomer extends Customer {
 		return discSet;
 	}
 
-	public ValuedCustomer(Customer customer) {
+	public ValuedCustomer(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		super(customer.getCompany(), customer.getName(), customer.getAddress(), customer.getPhone());
 		discSet = new DiscountSet();
 	}

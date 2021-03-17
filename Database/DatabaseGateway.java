@@ -13,7 +13,7 @@ public class DatabaseGateway {
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		//Hanan
-		//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
 
 		//Tulsi
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
@@ -22,7 +22,7 @@ public class DatabaseGateway {
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
 		//Farhan
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
+		//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
 
 		//Abdullah
 		//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -56,6 +56,8 @@ public class DatabaseGateway {
 	public void write(PreparedStatement sql) throws SQLException {
 		sql.executeUpdate();
 }
+	public void PreparedStatement(String sql) {
+	}
 
 	public DatabaseGateway() throws ClassNotFoundException, SQLException {
 		//initialise JDBC driver for class
@@ -66,4 +68,6 @@ public class DatabaseGateway {
 	public Connection getConnection() {
 		return connection;
 	}
+
+
 }

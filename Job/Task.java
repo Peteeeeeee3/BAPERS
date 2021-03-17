@@ -1,5 +1,9 @@
 package Job;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Task {
 	private int taskID;
 	private String location;
@@ -43,11 +47,42 @@ public class Task {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
+	public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		String sql = "SELECT `taskID` FROM `Task` WHERE Task.duration = ? AND Task.location = ? AND Task.price = ? AND Task.taskDescription=?";
+		PreparedStatement preparedStatement = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 
-	public Task(int taskID, String location, String description, float price, int duration) {
+		ResultSet rs = vecTask.getControl().getControl().getDBC().read(preparedStatement);
+		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
+		// as this function only gets called in the constructor
+		int finalValue = -1, checkValue = -1;
+		//get values from result set
+		while (rs.next()) {
+			//apply value to correct variable
+			if (finalValue == -1) {
+				finalValue = rs.getInt(1);
+			} else {
+				checkValue = rs.getInt(1);
+			}
+			//see if the check value is larger than the final value (which will be returned)
+			if (checkValue > finalValue) {
+				finalValue = checkValue;
+			}
+		}
+		return finalValue;
+	}
+
+	public void upload() throws SQLException {
+		String sql = "INSERT INTO Task (`loaction`, `description`, `price`, `duration` ) VALUES (?, ?, ?, ?);";
+		PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		//write to DB
+		vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);
+	}
+
+	public Task (String location, String description, float price, int duration) throws SQLException {
 		this.location=location;
 		this.description=description;
 		this.price=price;
 		this.duration=duration;
+		upload();
 	}
 }

@@ -1,5 +1,8 @@
 package Account;
 import Payment.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Customer {
 	private String company;
@@ -60,32 +63,55 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	public int generateAccountNo(){
-		return accountNo=vecAcc.getCustomerID()+1;
+	public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		String sql = "SELECT `accountNo` FROM `Customer` WHERE Customer.name = ? AND Customer.company = ? AND Customer.address = ? AND phone=?";
+		PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+
+		ResultSet rs = vecAcc.getAccControl().getControl().getDBC().read(preparedStatement);
+		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
+		// as this function only gets called in the constructor
+		int finalValue = -1, checkValue = -1;
+		//get values from result set
+		while (rs.next()) {
+			//apply value to correct variable
+			if (finalValue == -1) {
+				finalValue = rs.getInt(1);
+			} else {
+				checkValue = rs.getInt(1);
+			}
+			//see if the check value is larger than the final value (which will be returned)
+			if (checkValue > finalValue) {
+				finalValue = checkValue;
+			}
+		}
+		return finalValue;
 	}
     //this is incomplete as we need to link this to a new job being added this will increase the no of payment with a customer.
-	public Payment[] listOfPayment(){
-		int paymentID= 0;
-		int i=0;
-		while(i==generateAccountNo()){
-			vecPayment.retrievePayment(i);
-		}
-		return new Payment[accountNo];
+//	public Payment[] listOfPayment(){
+//		int paymentID= 0;
+//		int i=0;
+//		while(i==generateAccountNo()){
+//			vecPayment.retrievePayment(i);
+//		}
+//		return new Payment[accountNo];
+//	}
+
+
+	public void upload() throws SQLException {
+		String sql = "INSERT INTO payment (`date`, `paymentType`, `amount`) VALUES (?, ?, ?);";
+		PreparedStatement prepStat = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		//write to DB
+		vecAcc.getAccControl().getControl().getDBC().getDBGateway().write(prepStat);
 	}
 
-	public void upload(){
 
-	}
-
-
-	public Customer(String company, String name, String address, int phone) {
+	public Customer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		this.company=company;
 		this.name=name;
 		this.address=address;
 		this.phone=phone;
-		generateAccountNo();
-		listOfPayment();
-
+		this.accountNo=generateAccountNo();
+		upload();
 		//this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard());
 
 		//this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard(), vecPayment.getPaymCtrl());
