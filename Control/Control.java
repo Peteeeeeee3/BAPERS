@@ -26,8 +26,7 @@ public class Control implements I_Control, I_Payment {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException, ParseException {
 		//controller setup
 		Control controller = new Control();
-		controller.accountControl = new AccountControl();
-		controller.accountControl.addControl(controller);
+		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
 		controller.jobControl = new JobFacadeControl() {
 			@Override

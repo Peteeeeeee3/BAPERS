@@ -19,15 +19,15 @@ public class Receptionist extends UserAccount {
 		throw new UnsupportedOperationException();
 	}
 
-	public Customer searchCustomer(int accountNo) {
-		for(int i=0; i<vecAcc.getCustomerVector().size(); ++i ){
-			if(vecAcc.getCustomerID()==accountNo){
-				accountNo=vecAcc.getCustomerID();
-				break;
-			}
-		}
-		return searchCustomer(accountNo);
-	}
+//	public Customer searchCustomer(int accountNo) {
+//		for(int i=0; i<vecAcc.getCustomerVector().size(); ++i ){
+//			if(vecAcc.getCustomerID()==accountNo){
+//				accountNo=vecAcc.getCustomerID();
+//				break;
+//			}
+//		}
+//		return searchCustomer(accountNo);
+//	}
 
 	public void assignUrgency(int jobID, int urgency) {
 		throw new UnsupportedOperationException();
