@@ -2,7 +2,6 @@ package Account;
 
 import Control.Control;
 import Database.I_Database;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +14,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public Vector<VectorOfUsers> vecVecUser;
 	public OfficeManager officeManager;
 	public Customer customer;
+	public ValuedCustomer valCustomer;
 
 	public UserAccount retrieveUser(int staffID) {
 		return vecUser.retrieveUser(staffID);
@@ -24,16 +24,16 @@ public class AccountControl implements Account.I_Account, I_Database {
 		return vecAcc.retrieveCustAccount(accountNo);
 	}
 
-	public void createCustomer(String company, String name, String address, int phone)  {
-		Customer vecCustomer =null;
-		for( int i=0; i<vecAcc.getCustomerVector().size(); i++){
-			if(vecAcc.getCustomerVector().get(i).getName()== name){
-				vecCustomer=vecAcc.getCustomerVector().get(i);
+	public void createCustomer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		Customer vecCustomer = null;
+		for (int i = 0; i < vecAcc.getCustomerVector().size(); i++) {
+			if (vecAcc.getCustomerVector().get(i).getName() == name) {
+				vecCustomer = vecAcc.getCustomerVector().get(i);
 				break;
 			}
 
 		}
-		vecAcc.addCustAccount(new Customer(company,name,address,phone));
+		vecAcc.addCustAccount(new Customer(company, name, address, phone));
 	}
 
 	public void createUser(int ID, String password, String name, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
@@ -44,17 +44,20 @@ public class AccountControl implements Account.I_Account, I_Database {
 				break;
 			}
 		}
-		if (vecU == null){
+		if (vecU == null) {
 			return;
 		}
 		vecUser.addUser(new UserAccount(ID, password, name, access));
 	}
 
 	public void updateAccess(int staffID, int newAccess) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		officeManager.editAccess(staffID,newAccess, retrieveUser(staffID));
+		officeManager.editAccess(staffID, newAccess, retrieveUser(staffID));
 	}
 
 	public void upgradeCust(int accountNo) {
+//		if(vecAcc.traverseVector(accountNo)==accountNo)
+//			customer=valCustomer.addDiscountPlan();
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -70,6 +73,14 @@ public class AccountControl implements Account.I_Account, I_Database {
 		throw new UnsupportedOperationException();
 	}
 
+	public AccountControl(Control ctrl) {
+		vecUser = new VectorOfUsers(vecUser, this);
+		vecAcc=new VectorOfAccounts(vecAcc,this );
+		this.control=ctrl;
+	}
+
+	//////// Override Methods ///////
+
 	@Override
 	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return vecUser.login(ID, password);
@@ -84,16 +95,12 @@ public class AccountControl implements Account.I_Account, I_Database {
 		throw new UnsupportedOperationException();
 	}
 
-	public AccountControl() {
-		vecUser = new VectorOfUsers(vecUser, this);
-	}
-
-	public void addControl(Control control) {
-		this.control = control;
+	public Control getControl() {
+		return control;
 	}
 
 	@Override
-	public void connectDB() throws ClassNotFoundException, SQLException {
+	public void connectDB() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
 	}
 
@@ -102,21 +109,19 @@ public class AccountControl implements Account.I_Account, I_Database {
 
 	}
 
-	public void addUserVector(UserAccount user){
-		vecVecUser.add(new VectorOfUsers(vecUser, this));
+	@Override
+	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+		return null;
 	}
 
 	@Override
-	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return control.getDBC().read(sql);
-	}
+	public void write(PreparedStatement sql) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
-	@Override
-	public void write(PreparedStatement sql) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		control.getDBC().write(sql);
-	}
-
+<<<<<<< HEAD
 	public Control getControl() {
 		return control;
+=======
+>>>>>>> e98a2144cf61f496ba15d6522e9a8192e62a577a
 	}
 }
+

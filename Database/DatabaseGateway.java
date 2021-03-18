@@ -13,14 +13,16 @@ public class DatabaseGateway {
 			//Peter
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
-			//Hanan
-			//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
+
+		   //Hanan
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
 
 			//Tulsi
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
 
 			//Abdullah
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
+
 
 			//Farhan
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
@@ -68,6 +70,8 @@ public class DatabaseGateway {
 			e.printStackTrace();
 		}
 }
+	public void PreparedStatement(String sql) {
+	}
 
 	public DatabaseGateway() {
 		try {
@@ -82,4 +86,6 @@ public class DatabaseGateway {
 	public Connection getConnection() {
 		return connection;
 	}
+
+
 }
