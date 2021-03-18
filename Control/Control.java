@@ -13,6 +13,8 @@ import Report.ReportFacadeControl;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Control implements I_Control, I_Payment {
 
@@ -54,6 +56,11 @@ public class Control implements I_Control, I_Payment {
 					ipr.getDates().get(rowsItr) + " " + ipr.getStartTimes().get(rowsItr) + " " +
 					ipr.getDurations().get(rowsItr));
 		}
+
+		for (java.util.Map.Entry<String, Integer> stringIntegerEntry : ipr.getTotalTimes().entrySet()) {
+			System.out.println(((HashMap.Entry) stringIntegerEntry).getKey() + " " + ((HashMap.Entry) stringIntegerEntry).getValue());
+		}
+		////test code end////
 	}
 
 	public Control() throws ClassNotFoundException, SQLException {

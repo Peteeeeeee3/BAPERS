@@ -6,14 +6,16 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
-import java.util.Vector;
+import java.util.*;
 
 public class IndividualPerformanceReport extends Report {
 	private int startDate, endDate;
 	private Vector<String> names = new Vector<>(), locations = new Vector<>();
-	private Vector<Integer> staffIDs = new Vector<>(), taskIDs = new Vector<>(), durations = new Vector<>(), totalTimes = new Vector<>();
+	private Vector<Integer> staffIDs = new Vector<>(), taskIDs = new Vector<>(), durations = new Vector<>();
 	private Vector<Date> dates = new Vector<>();
 	private Vector<Time> startTimes = new Vector<>();
+	private int mapSize = 0;
+	private HashMap<String, Integer> totalTimes = new HashMap<>();
 
 	public Vector<String> getNames() {
 		return names;
@@ -30,14 +32,14 @@ public class IndividualPerformanceReport extends Report {
 	public Vector<Integer> getDurations() {
 		return durations;
 	}
-	public Vector<Integer> getTotalTimes() {
-		return totalTimes;
-	}
 	public Vector<Date> getDates() {
 		return dates;
 	}
 	public Vector<Time> getStartTimes() {
 		return startTimes;
+	}
+	public HashMap<String, Integer> getTotalTimes() {
+		return totalTimes;
 	}
 	public int getStartDate() {
 		return startDate;
@@ -68,7 +70,34 @@ public class IndividualPerformanceReport extends Report {
 		}
 	}
 
-	public IndividualPerformanceReport(int startDate, int endDate, ReportFacadeControl rfc) throws ParseException {
+	private void calculateTotalTimes() {
+		HashSet<String> usedNames = new HashSet<>();
+
+		//add all of the times for the same name and check name has not yet been used
+		//add total to map once final
+
+		//loop through to check names
+		for (String name : names) {
+			int total = 0;
+			//only add if this name has not been used
+			if (!usedNames.contains(name)) {
+				//loop to add values
+				for (int innerItr = 0; innerItr < durations.size(); innerItr++) {
+					//check if its the same person
+					if (names.get(innerItr).equals(name)) {
+						//add to total
+						total += durations.get(innerItr);
+					}
+				}
+				//add pair to map
+				totalTimes.put(name, total);
+				//add name to set
+				usedNames.add(name);
+			}
+		}
+	}
+
+	public IndividualPerformanceReport(int startDate, int endDate, ReportFacadeControl rfc) {
 		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -90,9 +119,7 @@ public class IndividualPerformanceReport extends Report {
 			//handle result set
 			ResultSet rs = RFC.getControl().getDBC().getDBGateway().read(preparedStatement);
 			handleResultSet(rs);
-
-
-			//calculate total times
+			calculateTotalTimes();
 
 		} catch (Exception e) {
 			e.printStackTrace();
