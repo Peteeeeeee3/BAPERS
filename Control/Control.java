@@ -8,6 +8,7 @@ import Payment.I_Payment;
 import Payment.Payment;
 import Payment.PaymentControl;
 import Payment.Card;
+import Report.IndividualPerformanceReport;
 import Report.ReportFacadeControl;
 
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class Control implements I_Control, I_Payment {
 	private JobFacadeControl jobControl;
 	private ReportFacadeControl reportFacadeControl;
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException, ParseException {
 		//controller setup
 		Control controller = new Control();
 		controller.accountControl = new AccountControl();
@@ -44,6 +45,16 @@ public class Control implements I_Control, I_Payment {
 
 		//Test for Create User//
 		//controller.accountControl.createUser(8, "password1", "farhan", 1);
+
+		////test Individual Report (do not remove)////
+		IndividualPerformanceReport ipr = new IndividualPerformanceReport(20201206, 20201224, controller.reportFacadeControl);
+		ipr.setRFC(controller.reportFacadeControl);
+		for (int rowsItr = 0; rowsItr < ipr.getNames().size(); rowsItr++) {
+			System.out.println(ipr.getNames().get(rowsItr) + " " + ipr.getStaffIDs().get(rowsItr) + " " +
+					ipr.getTaskIDs().get(rowsItr) + " " + ipr.getLocations().get(rowsItr) + " " +
+					ipr.getDates().get(rowsItr) + " " + ipr.getStartTimes().get(rowsItr) + " " +
+					ipr.getDurations().get(rowsItr));
+		}
 	}
 
 	public Control() throws ClassNotFoundException, SQLException {

@@ -12,6 +12,6 @@ public class CustomerJobReport extends Report {
 	}
 
 	public CustomerJobReport(String customerName, Report report) {
-		super(report);
+		super();
 	}
 }

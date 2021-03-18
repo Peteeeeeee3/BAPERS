@@ -30,7 +30,7 @@ public class PerformaneSummary extends Report {
 	}
 
 	public PerformaneSummary(int date, int startDate, int endDate, Report report) {
-		super(report);
+		super();
 		throw new UnsupportedOperationException();
 	}
 }
