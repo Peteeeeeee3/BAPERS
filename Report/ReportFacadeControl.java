@@ -9,19 +9,13 @@ public class ReportFacadeControl implements I_ReportFacade {
 	private Control control;
 
 
-	public void generateIndividualPerformanceReport(IndividualPerformanceReport report) {
+	public void generateReport(Report report) {
 		report.setRFC(this);
-//		String name, department;
-//		int taskID, startTime, timeTaken, total, totalEffort;
-//		String sql = "SELECT * FROM ";
+		reports.add(report);
 	}
 
-	public void generatePerformanceSummary(PerformaneSummary report) {
-		throw new UnsupportedOperationException();
-	}
+	public void printReport() {
 
-	public void generateCustomerJobReport(CustomerJobReport report) {
-		throw new UnsupportedOperationException();
 	}
 
 	public Control getControl() {

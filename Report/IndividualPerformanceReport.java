@@ -3,8 +3,6 @@ package Report;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.*;
 
@@ -48,11 +46,7 @@ public class IndividualPerformanceReport extends Report {
 		return endDate;
 	}
 
-	private Date convertDate(Integer oldFormat) throws ParseException {
-		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
-		java.util.Date utilDate = originalFormat.parse(oldFormat.toString());
-		return new java.sql.Date(utilDate.getTime());
-	}
+
 
 	private void handleResultSet(ResultSet rs) {
 		try {
