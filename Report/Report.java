@@ -1,6 +1,9 @@
 package Report;
 
 import java.io.*;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Report {
@@ -49,11 +52,17 @@ public class Report {
 		this.RFC = RFC;
 	}
 
-	public Report(Report report) {
+	Date convertDate(Integer oldFormat) throws ParseException {
+		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+		java.util.Date utilDate = originalFormat.parse(oldFormat.toString());
+		return new java.sql.Date(utilDate.getTime());
+	}
+
+	public Report() {
 		int posCheck = 0;
 		try {
 			//select file top_ids.txt. This will contain 3 values, each being the highest ID of the appropriate Report.
-			File top_ids = new File("top_ids.txt");
+			File top_ids = new File("lib/top_ids.txt");
 			//setup scanner
 			Scanner reader = new Scanner(top_ids);
 			//create string value
@@ -76,14 +85,14 @@ public class Report {
 			//temporarily store id value
 			int temp;
 			//check for correct Report type
-			if (report instanceof CustomerJobReport) {
+			if (this instanceof CustomerJobReport) {
 				//increment the value of the ID
 				temp = Integer.parseInt(string_id[0]);
 				temp++;
 				string_id[0] = String.valueOf(temp);
 				//assign ID
 				reportID = temp;
-			} else if (report instanceof IndividualPerformanceReport) {
+			} else if (this instanceof IndividualPerformanceReport) {
 				//increment the value of the ID
 				temp = Integer.parseInt(string_id[1]);
 				temp++;

@@ -77,7 +77,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 
 	public AccountControl(Control ctrl) {
 		vecUser = new VectorOfUsers(vecUser, this);
-		vecAcc=new VectorOfAccounts(vecAcc,this );
+		vecAcc=new VectorOfAccounts(this);
 		this.control=ctrl;
 	}
 
@@ -118,7 +118,7 @@ public class AccountControl implements Account.I_Account, I_Database {
 
 	@Override
 	public void write(PreparedStatement sql) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-
 	}
+
 }
 

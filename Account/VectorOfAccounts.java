@@ -8,7 +8,6 @@ public class VectorOfAccounts {
 	private int noOfCustAccounts = 0;
 	public Receptionist staff;
 	public AccountControl accControl;
-	public VectorOfAccounts vecAcc;
 	public Vector<Customer> customers= new Vector<Customer>();
 
 	public void addCustAccount(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
@@ -19,7 +18,6 @@ public class VectorOfAccounts {
 //		System.out.println("Data: " + customer.getCompany() + customer.getName() + customer.getAddress() + customer.getPhone() + "have been inserted");
 
 	}
-
 
 	public void removeCustAccount(int accountNo) {
 		customers.remove(accountNo);
@@ -57,13 +55,11 @@ public class VectorOfAccounts {
 		return customers;
 	}
 
-
 	public AccountControl getAccControl() {
 		return accControl;
 	}
 
-	public VectorOfAccounts(VectorOfAccounts vecAcc, AccountControl accountControl) {
-		this.vecAcc=vecAcc;
+	public VectorOfAccounts(AccountControl accountControl) {
 		this.accControl = accountControl;
 	}
 }

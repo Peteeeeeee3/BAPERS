@@ -95,13 +95,14 @@ public class VectorOfUsers {
 		//ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + ID + " AND staff_member.password = '" + password + "';");
 		prepStat.setInt(1, ID);
 		prepStat.setString(2, password);
-		System.out.println(prepStat.toString());
+		//System.out.println(prepStat.toString());
 		ResultSet rs = accControl.read(prepStat);
 		int access = -1;
+		//handle result set
 		while (rs.next()) {
 			access = rs.getInt(1);
 		}
-		System.out.println(access + " " + ID + " " + password);
+		//System.out.println(access + " " + ID + " " + password);
 		switch (access) {
 			case 1:
 				return true;

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Receptionist extends UserAccount {
+
     public VectorOfAccounts vecAcc;
     public AccountControl accControl;
     public Customer customer;
@@ -14,7 +15,7 @@ public class Receptionist extends UserAccount {
     public Job job;
 
 
-    public void acceptJob( Job job) throws SQLException {
+    public void acceptJob(Job job) throws SQLException {
         vecJob.addJob(job);
         //Database Version//
         String sql = "INSERT INTO Job (`jobID`, `summary`, `startTime`, `urgency`) VALUES (?, ?, ?, ?)";
@@ -38,8 +39,6 @@ public class Receptionist extends UserAccount {
         preparedStatement.setInt(4, customer.getPhone());
 
 
-
-
     }
 
     public void assignTask(int jobID, int taskID) {
@@ -47,9 +46,9 @@ public class Receptionist extends UserAccount {
     }
 
     public Customer searchCustomer(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        for(int i=0; i<vecAcc.getCustomerVector().size(); ++i ){
-            if(customer.generateAccountNo()==accountNo){
-                accountNo=customer.generateAccountNo();
+        for (int i = 0; i < vecAcc.getCustomerVector().size(); ++i) {
+            if (customer.generateAccountNo() == accountNo) {
+                accountNo = customer.generateAccountNo();
                 break;
             }
         }
