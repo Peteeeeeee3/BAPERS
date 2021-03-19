@@ -33,9 +33,9 @@ public class Control implements I_Control, I_Payment {
 		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
 		controller.jobControl = new JobFacadeControl() {
-			@Override
-			public void addTask(Task task) {
-			}
+//			@Override
+//			public void addTask(Task task) {
+//			}
 		};
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 

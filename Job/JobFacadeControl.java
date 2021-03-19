@@ -17,7 +17,7 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 	private VectorOfJobs vecJobs;
 	private Control control;
 
-	public void addTask(int taskID, String location, String description, float price, int duration) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void addTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		Task task = null;
 		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
 			if (vecTasks.getVector().get(i).getTaskID() == taskID) {
