@@ -2,11 +2,13 @@ package Job;
 
 import Account.Customer;
 
+import java.sql.SQLException;
+
 public interface I_Job {
 
 	public void addTask(Task task);
 
-	public void removeTask(Task taskID);
+	public void removeTask(Task taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
 	public void addTaskToJob(String location, String description, float price, int duration);
 

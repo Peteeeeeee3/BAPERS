@@ -23,7 +23,6 @@ public class VectorOfTasks {
 	public void removeTask(int taskID) {
 		tasks.remove(taskID);
 		decrementNoOfTasks();
-		throw new UnsupportedOperationException();
 	}
 
 	public int traverse(int taskID) {

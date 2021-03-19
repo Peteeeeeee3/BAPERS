@@ -25,6 +25,7 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 				break;
 			}
 			//another condition is required here or statement can be ignored as it will always happen - Peter
+			// this would return the error pop up message.
 			if (task == null) {
 				return;
 			}
@@ -32,7 +33,13 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 		vecTasks.addTask(new Task(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
 	}
 
-	public void removeTask(Task taskID){
+	public void removeTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		for(int i=0; i<vecTasks.getVector().size(); ++i){
+			if(vecTasks.getVector().get(i).generateAccountNo()==taskID){
+				vecTasks.removeTask(taskID);
+			}
+
+		}
 	}
 
 

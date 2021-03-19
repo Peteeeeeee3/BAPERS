@@ -1,5 +1,7 @@
 package Job;
 
+import java.sql.SQLException;
+
 public class TaskForJob extends Task {
 	private int posInVec;
 	private boolean isDelayed = false;
@@ -46,7 +48,7 @@ public class TaskForJob extends Task {
 		this.isComplete = isComplete;
 	}
 
-	public TaskForJob(Task task) {
+	public TaskForJob(Task task) throws SQLException {
 		super(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration());
 		throw new UnsupportedOperationException();
 	}
