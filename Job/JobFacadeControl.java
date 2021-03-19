@@ -11,7 +11,7 @@ import Account.Customer;
 import Database.I_Database;
 
 
-public abstract class JobFacadeControl implements I_Job, I_Database {
+public class JobFacadeControl implements I_Job, I_Database {
 	public Vector<JobHistory> jobHist = new Vector<JobHistory>();
 	public VectorOfTasks vecTasks;
 	private VectorOfJobs vecJobs;
@@ -59,7 +59,9 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 
 
 
-	public void addTaskToJob(String location, String description, float price, int duration){}
+	public void addTaskToJob(int jobID, int taskID){
+
+	}
 
 	public void removeTaskFromJob(int jobID, int taskID){}
 

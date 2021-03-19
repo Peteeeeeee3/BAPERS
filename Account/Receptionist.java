@@ -1,7 +1,6 @@
 package Account;
 
-import Job.Job;
-import Job.VectorOfJobs;
+import Job.*;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,7 +11,10 @@ public class Receptionist extends UserAccount {
     public AccountControl accControl;
     public Customer customer;
     public VectorOfJobs vecJob;
+    public VectorOfTasks vecTask;
     public Job job;
+    public Task task;
+    public JobFacadeControl jfc;
 
 
     public void acceptJob(Job job) throws SQLException {
@@ -41,8 +43,16 @@ public class Receptionist extends UserAccount {
 
     }
 
-    public void assignTask(int jobID, int taskID) {
-        throw new UnsupportedOperationException();
+    public void assignTask(int jobID, int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        for(int i=0 ; i<vecJob.getVector().size(); ++i ){
+            if(job.generateJobNo()==jobID)
+                for(int j=0; i<vecTask.getVector().size(); ++j){
+                    if(task.generateAccountNo()==taskID){
+                        jfc.addTaskToJob(jobID,taskID);
+                    }
+                }
+        }
+
     }
 
     public Customer searchCustomer(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
@@ -56,6 +66,7 @@ public class Receptionist extends UserAccount {
     }
 
     public void assignUrgency(int jobID, int urgency) {
+
         throw new UnsupportedOperationException();
     }
 

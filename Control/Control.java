@@ -32,11 +32,8 @@ public class Control implements I_Control, I_Payment {
 		Control controller = new Control();
 		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
-		controller.jobControl = new JobFacadeControl() {
-//			@Override
-//			public void addTask(Task task) {
-//			}
-		};
+		controller.jobControl = new JobFacadeControl();
+
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 
 		////Test Login Start (do not remove)////
