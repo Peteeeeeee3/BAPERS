@@ -101,6 +101,7 @@ public class CustomerJobReport extends Report {
 
     public CustomerJobReport(String customerName, int date, ReportFacadeControl rfc) {
         super();
+        this.customerName = customerName;
         dateOfReport = date;
 		RFC = rfc;
         custID = getID(customerName);
