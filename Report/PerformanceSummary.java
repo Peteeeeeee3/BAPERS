@@ -24,9 +24,6 @@ public class PerformanceSummary extends Report {
     public int getEndDate() {
         return this.endDate;
     }
-    public void setEndDate(int endDate) {
-        this.endDate = endDate;
-    }
 	public Vector<Vector<Vector<Integer>>> getDays() {
 		return days;
 	}
