@@ -11,13 +11,13 @@ import Account.Customer;
 import Database.I_Database;
 
 
-public abstract class JobFacadeControl implements I_Job, I_Database {
+public class JobFacadeControl implements I_Job, I_Database {
 	public Vector<JobHistory> jobHist = new Vector<JobHistory>();
 	public VectorOfTasks vecTasks;
 	private VectorOfJobs vecJobs;
 	private Control control;
 
-	public void addTask(int taskID, String location, String description, float price, int duration) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void addTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		Task task = null;
 		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
 			if (vecTasks.getVector().get(i).getTaskID() == taskID) {
@@ -25,6 +25,7 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 				break;
 			}
 			//another condition is required here or statement can be ignored as it will always happen - Peter
+			// this would return the error pop up message.
 			if (task == null) {
 				return;
 			}
@@ -32,7 +33,13 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 		vecTasks.addTask(new Task(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
 	}
 
-	public void removeTask(Task taskID){
+	public void removeTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		for(int i=0; i<vecTasks.getVector().size(); ++i){
+			if(vecTasks.getVector().get(i).generateAccountNo()==taskID){
+				vecTasks.removeTask(taskID);
+			}
+
+		}
 	}
 
 
@@ -52,7 +59,9 @@ public abstract class JobFacadeControl implements I_Job, I_Database {
 
 
 
-	public void addTaskToJob(String location, String description, float price, int duration){}
+	public void addTaskToJob(int jobID, int taskID){
+
+	}
 
 	public void removeTaskFromJob(int jobID, int taskID){}
 

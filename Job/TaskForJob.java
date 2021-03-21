@@ -1,5 +1,6 @@
 package Job;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class TaskForJob extends Task {
@@ -46,6 +47,12 @@ public class TaskForJob extends Task {
 
 	public void setIsComplete(boolean isComplete) {
 		this.isComplete = isComplete;
+	}
+	public void upload() throws SQLException {
+		String sql = "INSERT INTO Task_of_Job (`TasktaskID`, `status`, `JobjobNo` ) VALUES (?, ?, ? );";
+		PreparedStatement prepStat = vecTaskJ.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		//write to DB
+		vecTaskJ.getControl().getControl().getDBC().getDBGateway().write(prepStat);
 	}
 
 	public TaskForJob(Task task) throws SQLException {

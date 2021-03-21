@@ -86,23 +86,7 @@ public class Customer {
 		}
 		return finalValue;
 	}
-    //this is incomplete as we need to link this to a new job being added this will increase the no of payment with a customer.
-//	public Payment[] listOfPayment(){
-//		int paymentID= 0;
-//		int i=0;
-//		while(i==generateAccountNo()){
-//			vecPayment.retrievePayment(i);
-//		}
-//		return new Payment[accountNo];
-//	}
 
-
-	public void upload() throws SQLException {
-		String sql = "INSERT INTO payment (`date`, `paymentType`, `amount`) VALUES (?, ?, ?);";
-		PreparedStatement prepStat = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		//write to DB
-		vecAcc.getAccControl().getControl().getDBC().getDBGateway().write(prepStat);
-	}
 
 
 	public Customer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
@@ -111,10 +95,5 @@ public class Customer {
 		this.address=address;
 		this.phone=phone;
 		this.accountNo=generateAccountNo();
-		upload();
-		//this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard());
-
-		//this.vecPayment = new VectorOfPayments(this, vecAcc.getAccControl().getControl().getPaymentControl().getVecCard(), vecPayment.getPaymCtrl());
-
 	}
 }

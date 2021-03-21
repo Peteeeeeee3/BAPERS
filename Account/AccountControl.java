@@ -15,6 +15,8 @@ public class AccountControl implements Account.I_Account, I_Database {
 	public OfficeManager officeManager;
 	public Customer customer;
 	public ValuedCustomer valCustomer;
+	public DiscountSet discountSet;
+	public Discount discount;
 
 	public UserAccount retrieveUser(int staffID) {
 		return vecUser.retrieveUser(staffID);
@@ -55,14 +57,14 @@ public class AccountControl implements Account.I_Account, I_Database {
 	}
 
 	public void upgradeCust(int accountNo) {
-//		if(vecAcc.traverseVector(accountNo)==accountNo)
-//			customer=valCustomer.addDiscountPlan();
-
-		throw new UnsupportedOperationException();
+		if(customer.getAccountNo()==accountNo){
+			customer=valCustomer;
+		}
 	}
 
 	public void downgradeCust(int accountNo) {
-		throw new UnsupportedOperationException();
+		if(customer.getAccountNo()==accountNo)
+			discountSet.removeDiscount(discount);
 	}
 
 	public void editDiscount(int accountNo) {
