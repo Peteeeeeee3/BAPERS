@@ -56,8 +56,8 @@ public class OfficeManager extends ShiftManager {
 		throw new UnsupportedOperationException();
 	}
 
-	public void upgradeCustomer(int customerID, String discountType) {
-		throw new UnsupportedOperationException();
+	public void upgradeCustomer(int customerID) {
+		accControl.upgradeCust(customerID);
 	}
 
 	public void defineBands(int accountNo) {
@@ -65,7 +65,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void downgradeCust(int custID) {
-		throw new UnsupportedOperationException();
+		accControl.downgradeCust(custID);
 	}
 
 	public void defineFlatDiscount(int custID, float rate) {
@@ -85,7 +85,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void removeUser(UserAccount user) {
-		throw new UnsupportedOperationException();
+		;
 	}
 
 	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
