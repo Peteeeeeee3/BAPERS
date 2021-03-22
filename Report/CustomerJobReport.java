@@ -87,6 +87,7 @@ public class CustomerJobReport extends Report {
 	private void handleResultSet(ResultSet rs) {
     	try {
 			while (rs.next()) {
+				//System.out.println(rs.getInt(1) + " " + rs.getFloat(2) + " " + rs.getInt(3) + " " + rs.getString(4) + " " + rs.getInt(5) + " " + rs.getInt(6) + " " + rs.getString(7));
 				infoVec.add(new ReportTask(rs.getInt(1), rs.getFloat(2), rs.getInt(3),
 						rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7)));
 				startTimes.add(rs.getInt(8));

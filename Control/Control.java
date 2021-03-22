@@ -79,10 +79,14 @@ public class Control implements I_Control, I_Payment {
 //		}
 		////test code end////
 
-        ////Performance Summary print Test////
+        ////Performance Summary print test////
+        //controller.printerGateway.print(new CustomerJobReport("Kiandra Markus", 20210321, controller.reportFacadeControl));
+		//controller.printerGateway.print(new CustomerJobReport("Mark Sailor", 20210321, controller.reportFacadeControl));
+        ////test code end////
 
-        controller.printerGateway.print(new Report());
-        controller.printerGateway.print(new CustomerJobReport("Kiandra Markus", 20210321, controller.reportFacadeControl));
+		////Individual Performance Report print test////
+		controller.printerGateway.print(new IndividualPerformanceReport(20000101, 20220101, controller.reportFacadeControl));
+		////test code end////
 	}
 
 	public Control() throws ClassNotFoundException, SQLException {
