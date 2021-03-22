@@ -1,5 +1,7 @@
 package Job;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Job {
@@ -12,10 +14,9 @@ public class Job {
 	private int urgency = 24;
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
+	public VectorOfJobs vecJob;
 
-	public void assignID() {
-		throw new UnsupportedOperationException();
-	}
+
 
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();
@@ -87,6 +88,29 @@ public class Job {
 
 	public VectorOfTasksForJob getVecTaskJ() {
 		return vecTaskJ;
+	}
+	public int generateJobNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		String sql = "SELECT `jobNumber` FROM `Job` WHERE Job.deadline = ? AND Job.priority = ? AND Job.price = ? AND Job.specialInstruction = ?";
+		PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+
+		ResultSet rs = vecJob.getControl().getControl().getDBC().read(preparedStatement);
+		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
+		// as this function only gets called in the constructor
+		int finalValue = -1, checkValue = -1;
+		//get values from result set
+		while (rs.next()) {
+			//apply value to correct variable
+			if (finalValue == -1) {
+				finalValue = rs.getInt(1);
+			} else {
+				checkValue = rs.getInt(1);
+			}
+			//see if the check value is larger than the final value (which will be returned)
+			if (checkValue > finalValue) {
+				finalValue = checkValue;
+			}
+		}
+		return finalValue;
 	}
 
 	private void upload() throws SQLException{

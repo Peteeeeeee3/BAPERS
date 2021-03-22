@@ -87,7 +87,7 @@ public class OfficeManager extends ShiftManager {
 		accControl.createUser(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess());
 
 		//Database Version//
-		String sql = "INSERT INTO staff_member (`staffid`, `password`, `name`, `access`) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Staff_Member (`staffid`, `password`, `name`, `access`) VALUES (?, ?, ?, ?)";
 		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		preparedStatement.setInt(1, user.getStaffID());
 		preparedStatement.setString(2, user.getPassword());

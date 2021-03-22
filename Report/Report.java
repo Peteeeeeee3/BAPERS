@@ -1,6 +1,9 @@
 package Report;
 
 import java.io.*;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Report {
@@ -47,6 +50,12 @@ public class Report {
 
 	public void setRFC(ReportFacadeControl RFC) {
 		this.RFC = RFC;
+	}
+
+	Date convertDate(Integer oldFormat) throws ParseException {
+		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+		java.util.Date utilDate = originalFormat.parse(oldFormat.toString());
+		return new java.sql.Date(utilDate.getTime());
 	}
 
 	public Report() {

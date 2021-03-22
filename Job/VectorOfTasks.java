@@ -15,7 +15,6 @@ public class VectorOfTasks {
 		tasks.add(new Task(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
 		incrementNoOfTasks();
 
-		//jfc.write("INSET INTO Task_Table" + "(taskID, location, desrciption, price, duration" + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + ")");
 		System.out.println("Data: " + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + "have been inserted");
 
 	}
@@ -23,16 +22,15 @@ public class VectorOfTasks {
 	public void removeTask(int taskID) {
 		tasks.remove(taskID);
 		decrementNoOfTasks();
-		throw new UnsupportedOperationException();
 	}
 
-	public int traverse(int taskID) {
+	public Task traverse(int taskID) {
 		for (int i = 0; i < tasks.size(); ++i) {
 			if (tasks.get(i).getTaskID() == taskID) {
-				return i;
+				return tasks.get(i);
 			}
 		}
-		return -1;
+		return null;
 
 	}
 

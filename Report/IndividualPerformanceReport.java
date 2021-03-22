@@ -2,19 +2,14 @@ package Report;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.util.*;
 
 public class IndividualPerformanceReport extends Report {
 	private int startDate, endDate;
 	private Vector<String> names = new Vector<>(), locations = new Vector<>();
 	private Vector<Integer> staffIDs = new Vector<>(), taskIDs = new Vector<>(), durations = new Vector<>();
-	private Vector<Date> dates = new Vector<>();
-	private Vector<Time> startTimes = new Vector<>();
-	private int mapSize = 0;
+	private Vector<Integer> dates = new Vector<>();
+	private Vector<Integer> startTimes = new Vector<>();
 	private HashMap<String, Integer> totalTimes = new HashMap<>();
 
 	public Vector<String> getNames() {
@@ -32,10 +27,10 @@ public class IndividualPerformanceReport extends Report {
 	public Vector<Integer> getDurations() {
 		return durations;
 	}
-	public Vector<Date> getDates() {
+	public Vector<Integer> getDates() {
 		return dates;
 	}
-	public Vector<Time> getStartTimes() {
+	public Vector<Integer> getStartTimes() {
 		return startTimes;
 	}
 	public HashMap<String, Integer> getTotalTimes() {
@@ -48,11 +43,7 @@ public class IndividualPerformanceReport extends Report {
 		return endDate;
 	}
 
-	private Date convertDate(Integer oldFormat) throws ParseException {
-		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
-		java.util.Date utilDate = originalFormat.parse(oldFormat.toString());
-		return new java.sql.Date(utilDate.getTime());
-	}
+
 
 	private void handleResultSet(ResultSet rs) {
 		try {
@@ -61,12 +52,16 @@ public class IndividualPerformanceReport extends Report {
 				staffIDs.add(rs.getInt(2));
 				taskIDs.add(rs.getInt(3));
 				locations.add(rs.getString(4));
-				dates.add(rs.getDate(5));
-				startTimes.add(rs.getTime(6));
+				dates.add(rs.getInt(5));
+				startTimes.add(rs.getInt(6));
 				durations.add(rs.getInt(7));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		//sort the tasks into the correct order
+		for (int i = 0; i < names.size(); i++) {
+
 		}
 	}
 
@@ -110,12 +105,15 @@ public class IndividualPerformanceReport extends Report {
 					"FROM completed_tasks " +
 					"JOIN staff_member ON staff_member.staffID = completed_tasks.Staff_MemberstaffID " +
 					"JOIN task ON task.taskID = completed_tasks.TasktaskID " +
-					"WHERE completed_tasks.date >= ? AND completed_tasks.date <= ?";
+					"WHERE completed_tasks.date >= ? AND completed_tasks.date <= ? " +
+					"ORDER BY staff_member.name ASC";
 			//create Prepared statement
 			PreparedStatement preparedStatement = RFC.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql1);
 			//apply dates
-			preparedStatement.setDate(1, convertDate(this.startDate));
-			preparedStatement.setDate(2, convertDate(this.endDate));
+//			preparedStatement.setDate(1, convertDate(this.startDate));
+//			preparedStatement.setDate(2, convertDate(this.endDate));
+			preparedStatement.setInt(1, startDate);
+			preparedStatement.setInt(2, endDate);
 			//handle result set
 			ResultSet rs = RFC.getControl().getDBC().getDBGateway().read(preparedStatement);
 			handleResultSet(rs);
