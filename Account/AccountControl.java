@@ -52,8 +52,8 @@ public class AccountControl implements Account.I_Account, I_Database {
 		vecUser.addUser(new UserAccount(ID, password, name, access));
 	}
 
-	public void updateAccess(int staffID, int newAccess) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		officeManager.editAccess(staffID, newAccess, retrieveUser(staffID));
+	public void updateAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		officeManager.editAccess(staffID, retrieveUser(staffID));
 	}
 
 	public void upgradeCust(int accountNo) {
