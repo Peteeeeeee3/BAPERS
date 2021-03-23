@@ -10,7 +10,7 @@ public interface I_Job {
 
 	public void removeTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
-	public void addTaskToJob(int jobID, int taskID);
+	public void addTaskToJob(int jobID, int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
 	public void removeTaskFromJob(int jobID, int taskID);
 

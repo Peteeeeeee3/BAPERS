@@ -113,9 +113,6 @@ public class Job {
 		return finalValue;
 	}
 
-	private void upload() throws SQLException{
-
-	}
 
 	public Job(int ID, String summary, int startTime, int urgency) {
 		this.iD = ID;

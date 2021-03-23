@@ -7,7 +7,7 @@ import Job.TaskForJob;
 public class VectorOfTasksForJob {
 	private int noOfTasks = 0;
 	private Job job;
-	public TaskForJob tfj;
+	public TaskForJob taskForJob;
 	public JobFacadeControl jfc;
 	private Vector<TaskForJob> taskJ = new Vector<TaskForJob>();
 
@@ -41,7 +41,7 @@ public class VectorOfTasksForJob {
 		noOfTasks--;
 	}
 
-	public Vector<TaskForJob> getTaskJ() {
+	public Vector<TaskForJob> getVector() {
 		return taskJ;
 	}
 
@@ -50,7 +50,9 @@ public class VectorOfTasksForJob {
 		return jfc;
 	}
 
-	public VectorOfTasksForJob() {
+	public VectorOfTasksForJob(TaskForJob TaskForJob, JobFacadeControl jfc) {
+		this.taskForJob=TaskForJob;
+		this.jfc=jfc;
 		throw new UnsupportedOperationException();
 	}
 
