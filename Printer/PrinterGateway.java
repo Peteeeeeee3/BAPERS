@@ -8,7 +8,9 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.mysql.cj.xdevapi.Table;
 
+import javax.swing.*;
 import java.awt.print.PrinterJob;
 import java.io.FileOutputStream;
 import java.sql.Date;
@@ -16,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Vector;
 
 public class PrinterGateway {
 
@@ -261,8 +264,64 @@ public class PrinterGateway {
 		}
 	}
 
+	private void prt_psr(PerformanceSummary report, String file_name) {
+		try {
+			Document doc = new Document();
+			PdfWriter.getInstance(doc, new FileOutputStream(file_name));
+			doc.open();
+			String title = "Summary Performance Report";
+			String period = "Period: ";
+			String yearS = Integer.toString(report.getStartDate()).substring(0, 4);
+			String monthS = Integer.toString(report.getStartDate()).substring(4, 6);
+			String dayS = Integer.toString(report.getStartDate()).substring(6, 8);
+			String yearE = Integer.toString(report.getEndDate()).substring(0, 4);
+			String monthE = Integer.toString(report.getEndDate()).substring(4, 6);
+			String dayE = Integer.toString(report.getEndDate()).substring(6, 8);
+			period += yearS + "/" + monthS + "/" + dayS + " - " + yearE + "/" + monthE + "/" + dayE;
+			String _break = " ";
+			String shift1 = "Day Shift 1 (5 am - 2:30 pm)";
+			Paragraph p_title = new Paragraph(new Phrase(title, FontFactory.getFont(FontFactory.defaultEncoding, 20.0f))),
+					p_period = new Paragraph(period), p_break = new Paragraph(_break), p_shift1 = new Paragraph(shift1);
+			p_title.setIndentationLeft(130);
+			p_period.setIndentationLeft(180);
+			p_shift1.setIndentationLeft(180);
+
+			doc.add(p_title);
+			doc.add(p_period);
+			doc.add(p_break);
+			doc.add(p_shift1);
+
+			//shift one table
+			PdfPTable shift1_table = new PdfPTable(5);
+			PdfPCell new_cell = new PdfPCell(new Phrase("Date"));
+			shift1_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Copy Room"));
+			shift1_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Development"));
+			shift1_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Finishing"));
+			shift1_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Packing"));
+			shift1_table.addCell(new_cell);
+
+			//shift 1
+			for (SummaryInfo si : report.getInfo_vec()) {
+				new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+				shift1_table.addCell(new_cell);
+			}
+			doc.add(shift1_table);
+
+			doc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void print(Report report) {
 		//set file name
+		/////////////////////////////
+		//replace with JFileChooser//
+		/////////////////////////////
 		String file_name = "C:\\Users\\Peter\\Documents\\School\\UNI\\Team Project\\Code\\reports\\";
 		//get today's date and format it
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -282,6 +341,8 @@ public class PrinterGateway {
 		if (report instanceof PerformanceSummary) {
 			file_name += "PerformanceSummary " + ((PerformanceSummary) report).getStartDate() + " " + ((PerformanceSummary) report).getEndDate() + " " +
 					report.getReportID() + ".pdf";
+			//call printing function
+			prt_psr((PerformanceSummary) report, file_name);
 		}
 //		System.out.println("Report print complete!");
 	}
