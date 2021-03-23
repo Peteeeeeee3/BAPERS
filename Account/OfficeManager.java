@@ -9,28 +9,20 @@ public class OfficeManager extends ShiftManager {
 	private VectorOfUsers vecUser;
 	public AccountControl accControl;
 
-	public void editAccess(int staffID, int accessLevel, UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void editAccess(int staffID, UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		int accessLevelRec = 1;
 		int accessLevelTech = 2;
 		int accessLevelSM = 3;
 		int accessLevelOM = 4;
 		for (int i = 0; i < vecUser.getVector().size(); i++ ){
-			switch (accessLevel){
-				case 1:
-					if (vecUser.getVector().get(i).getStaffID() == staffID){
-						accessLevel = accessLevelTech;
-						user.setAccess(accessLevel);
-					}
-				case 2:
-					if (vecUser.getVector().get(i).getStaffID() == staffID){
-						accessLevel = accessLevelSM;
-						user.setAccess(accessLevel);
-					}
-				case 3:
-					if (vecUser.getVector().get(i).getStaffID() == staffID){
-						accessLevel = accessLevelOM;
-						user.setAccess(accessLevel);
-					}
+			if (user.getStaffID() == staffID && user.getAccess() == accessLevelRec){
+				user.setAccess(accessLevelTech);
+			}
+			if (user.getStaffID() == staffID && user.getAccess() == accessLevelTech){
+				user.setAccess(accessLevelSM);
+			}
+			if (user.getStaffID() == staffID && user.getAccess() == accessLevelSM){
+				user.setAccess(accessLevelOM);
 			}
 		}
 
@@ -38,24 +30,21 @@ public class OfficeManager extends ShiftManager {
 		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT access FROM staff_member WHERE staff_member.staffID = ?");
 		preparedStatement.setInt(1, staffID);
 		ResultSet rs = accControl.read(preparedStatement);
-		int access = -1;
-		while (rs.next()){
-			access = rs.getInt(1);
-		}
+
 		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("UPDATE staff_member SET access = ? WHERE staff_member.staffID = ?");
-		switch(access){
-			case 1:
-				editAccess(staffID, accessLevel, user);
-				//accControl.write("UPDATE Staff_Member SET access = " + accessLevel + "WHERE StaffID = " + staffID);
-			case 2:
-				editAccess(staffID, accessLevel, user);
-				prepStat.setInt(1, accessLevel);
-				prepStat.setInt(2, staffID);
-			case 3:
-				editAccess(staffID, accessLevel, user);
-				prepStat.setInt(1, accessLevel);
-				prepStat.setInt(2, staffID);
+		if (user.getStaffID() == staffID && user.getAccess() == accessLevelRec){
+			prepStat.setInt(1, staffID);
+			prepStat.setInt(2, accessLevelTech);
 		}
+		if (user.getStaffID() == staffID && user.getAccess() == accessLevelTech){
+			prepStat.setInt(1, staffID);
+			prepStat.setInt(2, accessLevelSM);
+		}
+		if (user.getStaffID() == staffID && user.getAccess() == accessLevelSM){
+			prepStat.setInt(1, staffID);
+			prepStat.setInt(2, accessLevelOM);
+		}
+		vecUser.getAccControl().getControl().getDBC().write(preparedStatement);
 	}
 
 
@@ -67,8 +56,8 @@ public class OfficeManager extends ShiftManager {
 		throw new UnsupportedOperationException();
 	}
 
-	public void upgradeCustomer(int customerID, String discountType) {
-		throw new UnsupportedOperationException();
+	public void upgradeCustomer(int customerID) {
+		accControl.upgradeCust(customerID);
 	}
 
 	public void defineBands(int accountNo) {
@@ -76,7 +65,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void downgradeCust(int custID) {
-		throw new UnsupportedOperationException();
+		accControl.downgradeCust(custID);
 	}
 
 	public void defineFlatDiscount(int custID, float rate) {
@@ -84,7 +73,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void createUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		vecUser.addUser(user);
+		accControl.createUser(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess());
 
 		//Database Version//
 		String sql = "INSERT INTO Staff_Member (`staffid`, `password`, `name`, `access`) VALUES (?, ?, ?, ?)";
@@ -96,12 +85,12 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void removeUser(UserAccount user) {
-		throw new UnsupportedOperationException();
+		;
 	}
 
 	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		super(user);
 		createUser(user);
-		editAccess(user.getStaffID(), user.getAccess(), user);
+		editAccess(user.getStaffID(), user);
 	}
 }
