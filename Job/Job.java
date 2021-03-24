@@ -16,8 +16,6 @@ public class Job {
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
 
-
-
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();
 	}

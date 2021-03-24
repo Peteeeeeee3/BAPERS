@@ -89,7 +89,7 @@ public class Control implements I_Control, I_Payment {
 		////test code end////
 
 		////Performance Summary report print test////
-		controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
+		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
 	}
 
