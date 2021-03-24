@@ -3,17 +3,13 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-import java.security.Guard;
-=======
->>>>>>> 0f2ab72144e6cdf1daf62d38aaae1561599c63bc
 
 
 public class Login extends JPanel {
-    private JTextField usernameField;
-    private JPasswordField passwordField;
     private JButton loginButton;
     private JPanel panelMain;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
     private GUIControl guiControl;
 
     public Login(GUIControl guiControl, JFrame frame) {
@@ -37,11 +33,8 @@ public class Login extends JPanel {
 //                char[] pw = passwordField.getPassword();
 //                getGuiControl().getController().login(id, new String(pw));
             }
-        });
+       });
     }
-
-    public Login() {}
-
     public GUIControl getGuiControl() {
         return guiControl;
     }

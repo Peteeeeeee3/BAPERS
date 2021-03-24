@@ -168,6 +168,10 @@ public class Payment {
 		return (Date) originalFormat.parse(oldFormat.toString());
 	}
 
+	public void delayedPayment(){
+
+	}
+
 	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate) throws ParseException, SQLException, IllegalAccessException, ClassNotFoundException, InstantiationException {
 		this.date = convertDate(date);
 		this.customer = customer;
