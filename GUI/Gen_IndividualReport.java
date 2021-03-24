@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
-public class Gen_IndividualReport {
+public class Gen_IndividualReport extends Form {
     private JButton backButton;
     private JTextField staffIDTextField;
     private JTextField mmDdYyyyTextField;
@@ -10,6 +10,10 @@ public class Gen_IndividualReport {
     private JButton generateButton;
 
     public JPanel panelMain;
+
+    public Gen_IndividualReport(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args){
 //        JFrame frame = new JFrame("Gen_IndividualReport");

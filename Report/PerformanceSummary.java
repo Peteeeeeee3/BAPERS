@@ -73,12 +73,11 @@ public class PerformanceSummary extends Report {
 
                         while (rs.next()) {
                             info_vec.add(new SummaryInfo(location, rs.getInt(1), shift, date));
+                            System.out.println(rs.getInt(1));
                         }
                     }
                 }
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

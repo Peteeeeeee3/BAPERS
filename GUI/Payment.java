@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
-public class Payment {
+public class Payment extends Form {
     private JTextArea amountDueTextArea;
     private JTextField jobIDTextField;
     private JButton cancelButton;
@@ -10,6 +10,10 @@ public class Payment {
     private JButton cardButton;
 
     public JPanel panelMain;
+
+    public Payment(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args){
 //        JFrame frame = new JFrame("Payment");

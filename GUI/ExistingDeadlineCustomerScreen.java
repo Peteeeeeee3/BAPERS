@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ExistingDeadlineCustomerScreen {
+public class ExistingDeadlineCustomerScreen extends Form {
     private JTextField deadlineTextField;
     private JButton addTaskButton;
     private JTable numberOfJobs;
@@ -13,7 +13,8 @@ public class ExistingDeadlineCustomerScreen {
     private JButton confirmButton;
     private JPanel existingCustomerPanel;
 
-    public ExistingDeadlineCustomerScreen() {
+    public ExistingDeadlineCustomerScreen(GUIControl guiControl) {
+        super(guiControl);
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

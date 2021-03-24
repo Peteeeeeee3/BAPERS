@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
-public class CreateCustomerScreen {
+public class CreateCustomerScreen extends Form {
     private JPanel createCustomerPanel;
     private JTextField emailField;
     private JTextField companyField;
@@ -11,6 +11,10 @@ public class CreateCustomerScreen {
     private JButton confirmButton;
     private JButton cancelButton;
     private JTextField nameField;
+
+    public CreateCustomerScreen(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args) {
 //        JFrame frame = new JFrame("Create Customer Screen");

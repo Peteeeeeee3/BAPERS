@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
-public class CardPaymentScreen {
+public class CardPaymentScreen extends Form {
     private JButton cardTypeButton;
     private JButton expiryDateButton;
     private JButton last4DigitsButton;
@@ -10,6 +10,10 @@ public class CardPaymentScreen {
     private JButton confirmButton;
     private JButton cancelButton;
     private JPanel cardPaymentPanel;
+
+    public CardPaymentScreen(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args) {
 //        JFrame frame = new JFrame("Payment Screen");

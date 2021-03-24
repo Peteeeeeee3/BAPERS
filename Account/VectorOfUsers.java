@@ -102,7 +102,7 @@ public class VectorOfUsers {
 		while (rs.next()) {
 			access = rs.getInt(1);
 		}
-		//System.out.println(access + " " + ID + " " + password);
+		System.out.println(access + " " + ID + " " + password);
 		switch (access) {
 			case 1:
 				return true;

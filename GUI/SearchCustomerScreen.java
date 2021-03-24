@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
-public class SearchCustomerScreen {
+public class SearchCustomerScreen extends Form {
     public JPanel searchCustomerPanel;
     public JButton Search;
     public JTextField searchBar;
@@ -11,6 +11,10 @@ public class SearchCustomerScreen {
     public JButton nextButton;
     public JButton searchButton;
     public JScrollBar scrollBar;
+
+    public SearchCustomerScreen(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 
 //    public static void main(String[] args) {

@@ -2,11 +2,15 @@ package GUI;
 
 import javax.swing.*;
 
-public class AddTaskScreen {
+public class AddTaskScreen extends Form {
     private JPanel addTaskPanel;
     private JTable taskDescription;
     private JButton cancelButton;
     private JButton confirmButton;
+
+    public AddTaskScreen(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args) {
 //        JFrame frame = new JFrame("Add Tasks");

@@ -1,15 +1,18 @@
 package GUI;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class CustomerJobsReport {
+public class CustomerJobsReport extends Form {
     private JButton backButton;
     private JTextField textField1;
     private JButton goButton;
     private JTable table1;
     private JButton nextButton;
     public JPanel panelMain;
+
+    public CustomerJobsReport(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 
 //    public static void main(String[] args){

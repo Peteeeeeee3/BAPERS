@@ -2,13 +2,17 @@ package GUI;
 
 import javax.swing.*;
 
-public class HomePage {
+public class HomePage extends Form {
     private JTextPane welcomeMessageTextPane;
     private JButton newJobButton;
     private JButton paymentButton;
     private JButton viewJobButton;
     private JButton logoutButton;
     public JPanel panelMain;
+
+    public HomePage(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args){
 //        JFrame frame = new JFrame("HomePage");

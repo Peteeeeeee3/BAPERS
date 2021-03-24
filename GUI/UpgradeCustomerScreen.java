@@ -2,9 +2,10 @@ package GUI;
 
 import javax.swing.*;
 
-public class UpgradeCustomerScreen extends SearchCustomerScreen{
+public class UpgradeCustomerScreen extends Form {
 
-    public UpgradeCustomerScreen(){
+    public UpgradeCustomerScreen(GUIControl guiControl){
+        super(guiControl);
 
     }
 //
