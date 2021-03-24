@@ -16,6 +16,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 	public VectorOfTasks vecTasks;
 	private VectorOfJobs vecJobs;
 	private Control control;
+	public VectorOfTasksForJob tfj;
 
 	public void addTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		Task task = null;
@@ -51,7 +52,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 				break;
 			}
 			if (job == null){
-				return;
+				return; // the error pop up message
 			}
 		}
 		vecJobs.addJob(new Job(ID, summary, startTime, urgency));
@@ -59,7 +60,19 @@ public class JobFacadeControl implements I_Job, I_Database {
 
 
 
-	public void addTaskToJob(int jobID, int taskID){
+	public void addTaskToJob(int jobID, int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		TaskForJob taskForJob ;
+		for (int i=0; i<vecJobs.getVector().size(); ++i){
+			if(vecJobs.getVector().get(i).getID()==jobID){
+				for(int j=0; j<vecTasks.getVector().size(); ++j){
+					if(vecTasks.getVector().get(i).getTaskID()==taskID){
+						addTask(taskID);
+						break;
+					}
+				}
+
+			}
+		}
 
 	}
 

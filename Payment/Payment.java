@@ -89,13 +89,13 @@ public class Payment {
 				//loop through jobs
 				for (int jobVecItr = 0; jobVecItr < jobs.length; jobVecItr++) {
 					//cycle through each job's tasks
-					for (int taskVecitr = 0; jobVecItr < jobs[jobVecItr].vecTaskJ.getTaskJ().size(); taskVecitr++) {
+					for (int taskVecitr = 0; jobVecItr < jobs[jobVecItr].vecTaskJ.getVector().size(); taskVecitr++) {
 						//check whether tasks of the jobs are contained in that of the discounts
 						for (int discountTasksItr = 0; discountTasksItr < ((ValuedCustomer) customer).getDiscSet().getDiscounts().size(); discountTasksItr++) {
 							//compare ID of task part of the job to those in the discount set
-							if (jobs[jobVecItr].getVecTaskJ().getTaskJ().get(taskVecitr).getTaskID() ==
+							if (jobs[jobVecItr].getVecTaskJ().getVector().get(taskVecitr).getTaskID() ==
 									((TaskDiscount)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(discountTasksItr)).getTaskID()) {
-								totalDisc += jobs[jobVecItr].getVecTaskJ().getTaskJ().get(taskVecitr).getPrice() * (1 - ((TaskDiscount)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(discountTasksItr)).getRate());
+								totalDisc += jobs[jobVecItr].getVecTaskJ().getVector().get(taskVecitr).getPrice() * (1 - ((TaskDiscount)((ValuedCustomer) customer).getDiscSet().getDiscounts().get(discountTasksItr)).getRate());
 							}
 						}
 					}

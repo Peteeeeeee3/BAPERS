@@ -23,7 +23,6 @@ public class VectorOfUsers {
 
 	public void addUser(UserAccount user) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getName(), user.getAccess()));
-		//Not sure if we want to use the one above or the one below. Thinking of having a different addUser for createUser
 		//vector.add(user);
 		incrementNoOfUsers();
 

@@ -11,7 +11,6 @@ public class Customer {
 	private String address;
 	private int phone;
 	private VectorOfAccounts vecAcc;
-	public VectorOfPayments vecPayment;
 	public Payment payment;
 
 

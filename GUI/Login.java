@@ -3,7 +3,10 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.security.Guard;
+=======
+>>>>>>> 0f2ab72144e6cdf1daf62d38aaae1561599c63bc
 
 
 public class Login extends JPanel {
@@ -46,4 +49,13 @@ public class Login extends JPanel {
 //    public static void main(String[] args) {
 //
 //    }
+
+    public Login() {
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
 }

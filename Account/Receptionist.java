@@ -65,17 +65,42 @@ public class Receptionist extends UserAccount {
         return searchCustomer(accountNo);
     }
 
-    public void assignUrgency(int jobID, int urgency) {
+    public void assignUrgency(int jobID, int urgency) throws SQLException {
+        for(int i=0; i< vecJob.getVector().size(); ++i) {
+            if (vecJob.getVector().get(i).getID() == jobID) {
+                job.setUrgency(urgency);
+                break;
+            }
+        }
+        String sql = "INSERT INTO Job (`urgency`) VALUES (?)";
+        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, job.getUrgency());
 
-        throw new UnsupportedOperationException();
     }
 
-    public void recordDeadline(int deadline) {
-        throw new UnsupportedOperationException();
+    public void recordDeadline(int jobID, int deadline) throws SQLException {
+        for(int i=0; i<vecJob.getVector().size(); ++i){
+            if(vecJob.getVector().get(i).getID()==jobID){
+                job.setEndTime(deadline);
+            }
+        }
+        String sql = "INSERT INTO Job (`deadline`) VALUES (?)";
+        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, job.getEndTime());
+
     }
 
-    public void recordSpecialInstruction(String instructions) {
-        throw new UnsupportedOperationException();
+    public void recordSpecialInstruction(int taskID, String instructions) throws SQLException {
+        for(int i=0; i<vecTask.getVector().size(); ++i){
+            if(vecTask.getVector().get(i).getTaskID()==taskID){
+                task.setDescription(instructions);
+            }
+        }
+
+        String sql = "INSERT INTO Task (`description`) VALUES (?)";
+        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+        preparedStatement.setString(1, task.getDescription());
+
     }
 
     public Receptionist(UserAccount user) {
