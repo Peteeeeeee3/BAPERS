@@ -47,8 +47,8 @@ public class ValuedCustomer extends Customer {
 		return discSet;
 	}
 
-	public ValuedCustomer(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		super(customer.getCompany(), customer.getName(), customer.getAddress(), customer.getPhone());
+	public ValuedCustomer(Customer customer, VectorOfAccounts vectorOfAccounts) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		super(customer.getCompany(), customer.getName(), customer.getAddress(), customer.getPhone(), vectorOfAccounts);
 		discSet = new DiscountSet();
 	}
 }

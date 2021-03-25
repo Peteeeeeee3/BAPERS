@@ -10,8 +10,8 @@ public class VectorOfAccounts {
 	public AccountControl accControl;
 	public Vector<Customer> customers= new Vector<Customer>();
 
-	public void addCustAccount(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		customers.add(new Customer(customer.getCompany(),customer.getName(),customer.getAddress(),customer.getPhone()));
+	public void addCustAccount(Customer customer) {
+		customers.add(customer);
 		incrementNoOfCustAccounts();
 
 //		accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany()+ "has been inserted");
@@ -29,7 +29,6 @@ public class VectorOfAccounts {
 			if(customers.get(i).getAccountNo()==accountNo){
 				return customers.get(i);
 			}
-
 		}
 		return null;
 	}

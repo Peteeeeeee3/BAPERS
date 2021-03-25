@@ -53,7 +53,7 @@ public class Control implements I_Control, I_Payment {
 		////Test Login End////
 
 		//Test for Creat Customer//
-		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",755551315);
+		//controller.accountControl.createCustomer("BMW","Marko Hentel","76 Baker Road",759372845);
 
 		//Test for Create User//
 		//controller.accountControl.createUser(8, "password1", "farhan", 1);

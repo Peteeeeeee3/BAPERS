@@ -17,7 +17,7 @@ public class Job {
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
     
-    DatabaseGateway db = new DatabaseGateway()
+    DatabaseGateway db = new DatabaseGateway();
 
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();

@@ -15,7 +15,7 @@ public class Task {
 	private int duration;
 	public VectorOfTasks vecTask;
     
-    DatabaseGateway db = new DatabaseGateway()
+    DatabaseGateway db = new DatabaseGateway();
 
 	public int getTaskID() {
 		return this.taskID;
@@ -144,7 +144,7 @@ public class Task {
 				System.out.println(duration);
 			}
 
-			taskID = currentTaskID;
+			//taskID = currentTaskID;
 
 		}
 
@@ -154,21 +154,21 @@ public class Task {
 	}
 
 	public void editTask(String taskDescription, String location, double price, int duration) {
-		try {
-			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID =" + currentTaskID;
-			PreparedStatement stmt = db.getConnection().prepareStatement(query);
-			stmt.setString(1, taskDescription);
-			stmt.setString(2, location);
-			stmt.setDouble(3, price);
-			stmt.setInt(4, duration);
-
-			stmt.executeUpdate();
-			stmt.close();
-		}
-
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID =" + currentTaskID;
+//			PreparedStatement stmt = db.getConnection().prepareStatement(query);
+//			stmt.setString(1, taskDescription);
+//			stmt.setString(2, location);
+//			stmt.setDouble(3, price);
+//			stmt.setInt(4, duration);
+//
+//			stmt.executeUpdate();
+//			stmt.close();
+//		}
+//
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public void deleteTask(int taskID){

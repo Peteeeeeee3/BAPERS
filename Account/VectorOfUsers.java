@@ -7,7 +7,6 @@ import java.util.Vector;
 
 public class VectorOfUsers {
 	private UserAccount user;
-	public VectorOfUsers vecUser;
 	private int noOfUsers = 0;
 	public AccountControl accControl;
 	public Vector<UserAccount> vector = new Vector<UserAccount>();
@@ -80,22 +79,18 @@ public class VectorOfUsers {
 
 	//returns true if matching data is found and false if none is found
 	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-		////local data version////
-//		for (int i = 0; i < vector.size(); i++) {
-//			if (vector.get(i).getStaffID() == ID && vector.get(i).getPassword() == password) {
-//				return true;
-//			}
-//		}
-//		return false;
-
-		////database version////
+		//Query database
 		String sql = "SELECT access FROM staff_member WHERE staff_member.staffID = ? AND staff_member.password = ?";
 		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		//ResultSet rs = accControl.read("SELECT access FROM staff_member WHERE staff_member.staffID = " + ID + " AND staff_member.password = '" + password + "';");
 		prepStat.setInt(1, ID);
 		prepStat.setString(2, password);
 		//System.out.println(prepStat.toString());
+		//ResultSet rs = prepStat.executeQuery();
 		ResultSet rs = accControl.read(prepStat);
+		if (rs == null) {
+			return false;
+		}
 		int access = -1;
 		//handle result set
 		while (rs.next()) {
@@ -119,8 +114,7 @@ public class VectorOfUsers {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfUsers(VectorOfUsers vecUser, AccountControl accountControl) {
-		this.vecUser = vecUser;
+	public VectorOfUsers(AccountControl accountControl) {
 		this.accControl = accountControl;
 	}
 
