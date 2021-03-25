@@ -10,45 +10,40 @@ public class Login extends JPanel {
     private JPanel panelMain;
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private GUIControl guiControl;
+    public GUIControl guiControl;
 
     public Login(GUIControl guiControl, JFrame frame) {
-        //initialize
-        this.guiControl = guiControl;
         //JFrame frame = new JFrame("Login");
         //stuff I just copied from the main function that was in this class, worked no problem
-        frame.setContentPane(new Login().panelMain);
+        frame.setContentPane(new Login(guiControl).panelMain);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
 
-
-//
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            //this would handle the button press. commented it out but did not be the cause of the issue, but it occurred when i implemented this
-            public void actionPerformed(ActionEvent e) {
-//                int id = Integer.parseInt(usernameField.getText());
-//                char[] pw = passwordField.getPassword();
-//                getGuiControl().getController().login(id, new String(pw));
-            }
-       });
-    }
-    public GUIControl getGuiControl() {
-        return guiControl;
     }
 
-//    public static void main(String[] args) {
-//
-//    }
+    public Login(GUIControl guiControl) {
 
-    public Login() {
+        this.guiControl = guiControl;
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int id = Integer.parseInt(usernameField.getText());
+                char[] pw = passwordField.getPassword();
+                getGuiControl().getController().login(id, new String(pw));
+                if (guiControl.getController().getAccountControl().vecUser.getLargestID() == id) {
+                    guiControl.closeCurrentFrame();
+                    guiControl.useHomepage(guiControl);
+                } else {
+                    JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
+                }
             }
         });
+    }
+
+    public GUIControl getGuiControl() {
+        return guiControl;
     }
 }

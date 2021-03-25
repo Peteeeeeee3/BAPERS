@@ -2,6 +2,7 @@ package Payment;
 
 import Account.*;
 import Job.Job;
+import Job.VectorOfJobs;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Vector;
 
 public class Payment {
 	private int iD;
@@ -19,6 +21,9 @@ public class Payment {
 	private int dueDate;
 	private VectorOfPayments vecPaym;
 	private Card card;
+	private Job job;
+	private VectorOfJobs vecJob;
+
 
 	public int getiD() {
 		return iD;
@@ -168,9 +173,12 @@ public class Payment {
 		return (Date) originalFormat.parse(oldFormat.toString());
 	}
 
-	public void delayedPayment(){
+	public void delayedPayment(int paymentID, int jobID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		// Check if the payment ID exists and if there is an associated JOB ID.
 
+		//Database Version//
 	}
+
 
 	public Payment(float amount, int date, Customer customer, Job[] jobs, int dueDate) throws ParseException, SQLException, IllegalAccessException, ClassNotFoundException, InstantiationException {
 		this.date = convertDate(date);

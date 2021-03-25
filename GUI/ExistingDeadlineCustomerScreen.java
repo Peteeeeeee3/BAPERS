@@ -3,8 +3,9 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-public class ExistingDeadlineCustomerScreen extends Form {
+public class ExistingDeadlineCustomerScreen extends JPanel {
     private JTextField deadlineTextField;
     private JButton addTaskButton;
     private JTable numberOfJobs;
@@ -12,23 +13,50 @@ public class ExistingDeadlineCustomerScreen extends Form {
     private JButton cancelButton;
     private JButton confirmButton;
     private JPanel existingCustomerPanel;
+    public GUIControl guiControl;
+
+    public ExistingDeadlineCustomerScreen(GUIControl guiControl, JFrame frame) {
+        this.guiControl = guiControl;
+        frame.setContentPane(new ExistingDeadlineCustomerScreen(guiControl).existingCustomerPanel);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500,300);
+        frame.setVisible(true);
+    }
 
     public ExistingDeadlineCustomerScreen(GUIControl guiControl) {
-        super(guiControl);
+        this.guiControl = guiControl;
+
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(existingCustomerPanel, "Confirmed");
+                guiControl.closeCurrentFrame();
+                guiControl.useAddTaskScreen(guiControl);
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useExistingDeadlineCustomerScreen(guiControl);
+            }
+        });
+
+        addTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int deadline = Integer.parseInt(deadlineTextField.getText());
+                try {
+                    guiControl.getController().getJobControl().addTask(deadline);
+                } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException classNotFoundException) {
+                    classNotFoundException.printStackTrace();
+                }
             }
         });
     }
-
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame("Customers");
-//        frame.setContentPane(new ExistingDeadlineCustomerScreen().existingCustomerPanel);
-//        frame.setLocationRelativeTo(null);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(500,300);
-//        frame.setVisible(true);
-//    }
+    public GUIControl getGuiControl() {
+        return guiControl;
+    }
 }

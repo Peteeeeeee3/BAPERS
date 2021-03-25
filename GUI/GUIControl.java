@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class GUIControl extends JFrame {
 	private Control controller;
-	private Stack<JFrame> viewingOrder;
+	private Stack<JFrame> viewingOrder = new Stack<>();
 	private JPanel current;
 	private JFrame masterFrame;
 
@@ -41,8 +41,63 @@ public class GUIControl extends JFrame {
 	}
 
 	//sets changes the current screen to login
-	public void useLogin(JFrame current) {
-		new Login(this, current);
+	public void useLogin(JFrame login) {
+		new Login(this, login);
 		setMasterFrame(this);
+		viewingOrder.push(login);
 	}
+
+	public void useHomepage(JFrame homePage){
+		new HomePage(this, homePage);
+		setMasterFrame(this);
+		viewingOrder.push(homePage);
+	}
+
+	public void useSearchCustomerScreen(JFrame searchCustomerScreen){
+		new SearchCustomerScreen(this, searchCustomerScreen);
+		setMasterFrame(this);
+		viewingOrder.push(searchCustomerScreen);
+	}
+
+	public void usePaymentScreen(JFrame paymentScreen){
+		new PaymentScreen(this, paymentScreen);
+		setMasterFrame(this);
+		viewingOrder.push(paymentScreen);
+	}
+
+	public void useCreateCustomerScreen(JFrame cCustomerScreen){
+		new CreateCustomerScreen(this, cCustomerScreen);
+		setMasterFrame(this);
+		viewingOrder.push(cCustomerScreen);
+	}
+
+	public void useExistingDeadlineCustomerScreen(JFrame edlCustScreen){
+		new ExistingDeadlineCustomerScreen(this, edlCustScreen);
+		setMasterFrame(this);
+		viewingOrder.push(edlCustScreen);
+	}
+
+	public void useAddTaskScreen(JFrame addTask){
+		new AddTaskScreen(this, addTask);
+		setMasterFrame(this);
+		viewingOrder.push(addTask);
+	}
+
+	public void useCardPaymentScreen(JFrame cardPayment){
+		new CardPaymentScreen(this, cardPayment);
+		setMasterFrame(this);
+		viewingOrder.push(cardPayment);
+	}
+
+	public void useCashPaymentScreen(JFrame cashPayment){
+		new CashPaymentScreen(this, cashPayment);
+		setMasterFrame(this);
+		viewingOrder.push(cashPayment);
+	}
+
+	public void closeCurrentFrame(){
+		viewingOrder.pop().dispose();
+	}
+
+
 }

@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminScreen extends Form {
     private JButton createUserButton;
@@ -14,6 +16,12 @@ public class AdminScreen extends Form {
 
     public AdminScreen(GUIControl guiControl) {
         super(guiControl);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
 //    public static void main(String[] args) {

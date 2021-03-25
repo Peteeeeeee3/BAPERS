@@ -9,7 +9,7 @@ import java.util.Vector;
 
 public class AccountControl implements Account.I_Account, I_Database {
 	public VectorOfAccounts vecAcc;
-	private VectorOfUsers vecUser;
+	public VectorOfUsers vecUser;
 	private Control control;
 	public Vector<VectorOfUsers> vecVecUser;
 	public OfficeManager officeManager;

@@ -127,6 +127,10 @@ public class Control implements I_Control, I_Payment {
 		return paymentControl;
 	}
 
+	public void setJobControl(AccountControl accountControl){this.accountControl = accountControl;}
+
+	public JobFacadeControl getJobControl(){ return jobControl; }
+
 	public boolean login(int id, String password) {
 		try {
 			return accountControl.login(id, new String(password));
