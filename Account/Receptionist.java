@@ -20,26 +20,43 @@ public class Receptionist extends UserAccount {
     public void acceptJob(Job job) throws SQLException {
         vecJob.addJob(job);
         //Database Version//
-        String sql = "INSERT INTO Job (`jobID`, `summary`, `startTime`, `urgency`) VALUES (?, ?, ?, ?)";
-        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-        preparedStatement.setInt(1, job.getID());
-        preparedStatement.setString(2, job.getSummary());
-        preparedStatement.setInt(3, job.getStartTime());
-        preparedStatement.setInt(4, job.getUrgency());
-
-
+        try {
+            String sql = "INSERT INTO Job (`jobID`, `summary`, `startTime`, `urgency`) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, job.getID());
+            preparedStatement.setString(2, job.getSummary());
+            preparedStatement.setInt(3, job.getStartTime());
+            preparedStatement.setInt(4, job.getUrgency());
+            try{
+                vecJob.getControl().getControl().getDBC().getDBGateway().write(preparedStatement);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void createCustomer(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         vecAcc.addCustAccount(customer);
         //Database Version//
-        String sql = "INSERT INTO Customer (`company`, `name`, `address`, `phone`) VALUES (?, ?, ?, ?)";
-        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-        preparedStatement.setString(1, customer.getCompany());
-        preparedStatement.setString(2, customer.getName());
-        preparedStatement.setString(3, customer.getAddress());
-        preparedStatement.setInt(4, customer.getPhone());
+        try {
+            String sql = "INSERT INTO Customer (`company`, `name`, `address`, `phone`) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, customer.getCompany());
+            preparedStatement.setString(2, customer.getName());
+            preparedStatement.setString(3, customer.getAddress());
+            preparedStatement.setInt(4, customer.getPhone());
 
+            try{
+                vecAcc.getAccControl().getControl().getDBC().getDBGateway().write(preparedStatement);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -55,14 +72,29 @@ public class Receptionist extends UserAccount {
 
     }
 
-    public Customer searchCustomer(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public void searchCustomer(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         for (int i = 0; i < vecAcc.getCustomerVector().size(); ++i) {
             if (customer.generateAccountNo() == accountNo) {
                 accountNo = customer.generateAccountNo();
                 break;
             }
         }
-        return searchCustomer(accountNo);
+        try {
+
+            String sql = "SELECT `*` FROM Customer Values (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, customer.getAccountNo());
+            preparedStatement.setString(2, customer.getCompany());
+            preparedStatement.setString(3, customer.getName());
+            preparedStatement.setString(4, customer.getAddress());
+            preparedStatement.setInt(5, customer.getPhone());
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+
     }
 
     public void assignUrgency(int jobID, int urgency) throws SQLException {
@@ -71,11 +103,20 @@ public class Receptionist extends UserAccount {
                 job.setUrgency(urgency);
                 break;
             }
-        }
-        String sql = "INSERT INTO Job (`urgency`) VALUES (?)";
-        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-        preparedStatement.setInt(1, job.getUrgency());
+        }try {
+            String sql = "INSERT INTO Job (`urgency`) VALUES (?)";
+            PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, job.getUrgency());
 
+            try{
+                vecJob.getControl().getControl().getDBC().getDBGateway().write(preparedStatement);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void recordDeadline(int jobID, int deadline) throws SQLException {
@@ -84,9 +125,19 @@ public class Receptionist extends UserAccount {
                 job.setEndTime(deadline);
             }
         }
-        String sql = "INSERT INTO Job (`deadline`) VALUES (?)";
-        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-        preparedStatement.setInt(1, job.getEndTime());
+        try {
+            String sql = "INSERT INTO Job (`deadline`) VALUES (?)";
+            PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, job.getEndTime());
+            try {
+                vecJob.getControl().getControl().getDBC().getDBGateway().write(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -96,11 +147,19 @@ public class Receptionist extends UserAccount {
                 task.setDescription(instructions);
             }
         }
+        try {
+            String sql = "INSERT INTO Task (`description`) VALUES (?)";
+            PreparedStatement preparedStatement = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, task.getDescription());
 
-        String sql = "INSERT INTO Task (`description`) VALUES (?)";
-        PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-        preparedStatement.setString(1, task.getDescription());
-
+            try{
+                vecTask.getControl().getControl().getDBC().getDBGateway().write(preparedStatement);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public Receptionist(UserAccount user) {

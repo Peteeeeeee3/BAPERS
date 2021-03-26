@@ -1,9 +1,16 @@
 package Account;
 
+import Job.Job;
+import Job.VectorOfJobs;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ValuedCustomer extends Customer {
 	public DiscountSet discSet;
+	public VectorOfJobs vecJob;
+	public Job job;
 
 	public void addDiscountPlan(String type, float[] rates, int[] tasks, float[] ranges) {
 		//check type
@@ -39,8 +46,8 @@ public class ValuedCustomer extends Customer {
 		}
 	}
 
-	public void alertManager() {
-		throw new UnsupportedOperationException();
+	public void alertManager() throws SQLException {
+
 	}
 
 	public DiscountSet getDiscSet() {

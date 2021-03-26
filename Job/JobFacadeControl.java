@@ -102,9 +102,6 @@ public class JobFacadeControl implements I_Job, I_Database {
 		vecJobs = new VectorOfJobs(vecJobs, this);
 	}
 
-	public void addControl(Control control){
-		this.control = control;
-	}
 
 	@Override
 	public void connectDB() throws ClassNotFoundException, SQLException {

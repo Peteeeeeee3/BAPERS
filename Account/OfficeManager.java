@@ -85,7 +85,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void removeUser(UserAccount user) {
-		;
+
 	}
 
 	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
