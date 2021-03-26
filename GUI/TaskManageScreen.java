@@ -2,12 +2,16 @@ package GUI;
 
 import javax.swing.*;
 
-public class TaskManageScreen {
+public class TaskManageScreen extends Form {
     private JPanel taskManagePanel;
     private JButton startTaskButton;
     private JButton updateTaskButton;
     private JButton viewJobButton;
     private JButton backButton;
+
+    public TaskManageScreen(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args) {
 //        JFrame frame = new JFrame("Manage Tasks");

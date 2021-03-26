@@ -3,6 +3,7 @@ package Control;
 import Account.AccountControl;
 import Account.Customer;
 import Database.DBControl;
+import GUI.GUIControl;
 import Job.*;
 import Payment.I_Payment;
 import Payment.Payment;
@@ -13,6 +14,7 @@ import Report.IndividualPerformanceReport;
 import Report.PerformanceSummary;
 import Report.*;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -21,13 +23,14 @@ import java.util.Map;
 
 public class Control implements I_Control, I_Payment {
 
-	private String state = "";
+	private int access, userID;
 	private DBControl DBC;
 	private AccountControl accountControl;
 	private PaymentControl paymentControl;
 	private JobFacadeControl jobControl;
 	private ReportFacadeControl reportFacadeControl;
 	private PrinterGateway printerGateway;
+	private GUIControl guiControl;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException, ParseException {
 		//controller setup
@@ -35,16 +38,22 @@ public class Control implements I_Control, I_Payment {
 		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
 		controller.jobControl = new JobFacadeControl();
-
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
+		//make a window
+		JFrame window = new JFrame();
+		// set this to a GUIControl
+		controller.guiControl = new GUIControl(controller, window);
+		//make it be the login screen
+		controller.guiControl.useLogin(window);
+		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");
 		////Test Login End////
 
 		//Test for Creat Customer//
-		//controller.accountControl.createCustomer("Oxford","Hanan","32 oxford street",755551315);
+		//controller.accountControl.createCustomer("BMW","Marko Hentel","76 Baker Road",759372845);
 
 		//Test for Create User//
 		//controller.accountControl.createUser(8, "password1", "farhan", 1);
@@ -89,9 +98,14 @@ public class Control implements I_Control, I_Payment {
 		////test code end////
 
 		////Performance Summary report print test////
-		controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
+
+		//controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
+
+		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
 	}
+
+
 
 	public Control() throws ClassNotFoundException, SQLException {
 		DBC = new DBControl();
@@ -111,6 +125,19 @@ public class Control implements I_Control, I_Payment {
 
 	public PaymentControl getPaymentControl() {
 		return paymentControl;
+	}
+
+	public void setJobControl(AccountControl accountControl){this.accountControl = accountControl;}
+
+	public JobFacadeControl getJobControl(){ return jobControl; }
+
+	public boolean login(int id, String password) {
+		try {
+			return accountControl.login(id, new String(password));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override

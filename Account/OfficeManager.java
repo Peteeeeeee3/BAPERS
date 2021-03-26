@@ -8,6 +8,11 @@ public class OfficeManager extends ShiftManager {
 
 	private VectorOfUsers vecUser;
 	public AccountControl accControl;
+	private VectorOfAccounts vecAcc;
+	public Discount disc;
+	public DiscountBand discB;
+	public Customer cust;
+	public ValuedCustomer valCust;
 
 	public void editAccess(int staffID, UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		int accessLevelRec = 1;
@@ -56,20 +61,54 @@ public class OfficeManager extends ShiftManager {
 		throw new UnsupportedOperationException();
 	}
 
-	public void upgradeCustomer(int customerID) {
+	public void upgradeCustomer(int customerID) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		accControl.upgradeCust(customerID);
+
+		//Database Update//
+		String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, 1);
+		preparedStatement.setInt(2, cust.getAccountNo());
+		accControl.getControl().getDBC().write(preparedStatement);
+
 	}
 
-	public void defineBands(int accountNo) {
-		throw new UnsupportedOperationException();
+	public void defineBands(int accountNo, float maxrange, float minrange) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		float difference = 0;
+		for(int i = 0; i < vecAcc.getCustomerVector().size(); ++i){
+			if (vecAcc.getCustomerVector().get(i).getAccountNo() == accountNo){
+				discB.setRange_max(maxrange);
+				discB.setRange_min(minrange);
+			}
+			difference = discB.getRange_max() - discB.getRange_min();
+		}
+		String sql = "INSERT INTO Discount_Band (`volume`) VALUES (?)";
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, (int) difference);
+		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
-	public void downgradeCust(int custID) {
+	public void downgradeCust(int custID) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		accControl.downgradeCust(custID);
+
+		//DatabaseUpdate//
+		String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, 0);
+		preparedStatement.setInt(2, cust.getAccountNo());
+		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
-	public void defineFlatDiscount(int custID, float rate) {
-		throw new UnsupportedOperationException();
+	public void defineFlatDiscount(int custID, float rate) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		for(int i = 0; i < vecAcc.getCustomerVector().size(); ++ i){
+			if (vecAcc.getCustomerVector().get(i).getAccountNo() == custID){
+				disc.setDiscountRate(rate);
+			}
+		}
+		String sql = "INSERT INTO Flat_Discount (`rate`) VALUES (?)";
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setFloat(1, disc.getDiscountRate());
+		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
 	public void createUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
@@ -82,9 +121,21 @@ public class OfficeManager extends ShiftManager {
 		preparedStatement.setString(2, user.getPassword());
 		preparedStatement.setString(3, user.getName());
 		preparedStatement.setInt(4, user.getAccess());
+		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
-	public void removeUser(UserAccount user) {
+
+
+	public void removeUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		vecUser.removeUser(user.getStaffID());
+
+		String sql = "DELETE FROM Staff_Member (`staffid`, `password`, `name`, `access`) WHERE (?, ?, ?, ?)";
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, user.getStaffID());
+		preparedStatement.setString(2, user.getPassword());
+		preparedStatement.setString(3, user.getName());
+		preparedStatement.setInt(4, user.getAccess());
+		accControl.getControl().getDBC().write(preparedStatement);
 
 	}
 

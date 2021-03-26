@@ -1,8 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AdminScreen {
+public class AdminScreen extends Form {
     private JButton createUserButton;
     private JPanel adminPanel;
     private JButton removeUserButton;
@@ -11,6 +13,16 @@ public class AdminScreen {
     private JButton backupSystemButton;
     private JButton restoreSystemButton;
     private JButton configureScheduleButton;
+
+    public AdminScreen(GUIControl guiControl) {
+        super(guiControl);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
 
 //    public static void main(String[] args) {
 //        JFrame frame = new JFrame("Admin Screen");

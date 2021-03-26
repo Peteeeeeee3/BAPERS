@@ -8,33 +8,9 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="80a4f" class="javax.swing.JButton" binding="cardTypeButton" default-binding="true">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Card Type"/>
-        </properties>
-      </component>
-      <component id="5642b" class="javax.swing.JButton" binding="expiryDateButton" default-binding="true">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Expiry Date"/>
-        </properties>
-      </component>
-      <component id="aed41" class="javax.swing.JButton" binding="last4DigitsButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Last 4 Digits"/>
-        </properties>
-      </component>
       <component id="1940c" class="javax.swing.JCheckBox" binding="paidCheckBox" default-binding="true">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Paid"/>
@@ -61,6 +37,36 @@
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="225a4" class="javax.swing.JTextField" binding="Last4Digits">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Last 4 Digits:"/>
+        </properties>
+      </component>
+      <component id="85aa0" class="javax.swing.JTextField" binding="ExpiryDate">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Expiry Date"/>
+        </properties>
+      </component>
+      <component id="5fb9" class="javax.swing.JTextField" binding="CardType">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Card Type:"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

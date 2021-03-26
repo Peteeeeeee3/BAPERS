@@ -11,7 +11,7 @@ public class DatabaseGateway {
 	public void connectToDB() {
 		try {
 			//Peter
-			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		    //Hanan
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
@@ -33,6 +33,9 @@ public class DatabaseGateway {
 
 			//Rashidul
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+
+			connection.setAutoCommit(false);
+			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -56,20 +59,26 @@ public class DatabaseGateway {
 	}
 
 	//handles reading from database. Call this function if reading is required.
-	public ResultSet read(PreparedStatement sql) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return sql.executeQuery();
+	public ResultSet read(PreparedStatement sql) {
+		try {
+			ResultSet rs = sql.executeQuery();
+			connection.commit();
+			return rs;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	//handles writing to database. Call this function if writing is required.
 	public void write(PreparedStatement sql) {
 		try {
 			sql.executeUpdate();
+			connection.commit();
 		} catch (SQLException e ) {
 			e.printStackTrace();
 		}
 }
-	public void PreparedStatement(String sql) {
-	}
 
 	public DatabaseGateway() {
 		try {

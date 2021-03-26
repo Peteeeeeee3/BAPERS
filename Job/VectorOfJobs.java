@@ -28,13 +28,13 @@ public class VectorOfJobs {
 		return null;
 	}
 
-	public Job traverse(int iD) {
-		for(int i = 0; i < vector.size(); i++){
-			if(vector.get(i).getID() == iD){
-				return vector.get(i);
+	public int traverse(int iD) {
+		for (int i = 0; i < vector.size(); i++) {
+			if (vector.get(i).getID() == iD) {
+				return i;
 			}
 		}
-		return null;
+		return -1;
 	}
 
 	public void incrementNoOfJobs() {

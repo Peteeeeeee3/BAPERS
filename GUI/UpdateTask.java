@@ -2,11 +2,15 @@ package GUI;
 
 import javax.swing.*;
 
-public class UpdateTask {
+public class UpdateTask extends Form {
     private JButton backButton;
     private JTable JButton;
 
     public JPanel panelMain;
+
+    public UpdateTask(GUIControl guiControl) {
+        super(guiControl);
+    }
 
 //    public static void main(String[] args){
 //        JFrame frame = new JFrame("UpdateTask");

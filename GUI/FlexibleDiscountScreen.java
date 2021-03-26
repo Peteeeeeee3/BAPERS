@@ -1,8 +1,9 @@
 package GUI;
 
-public class FlexibleDiscountScreen extends VariableDiscountScreen{
+public class FlexibleDiscountScreen extends Form {
 
-    public FlexibleDiscountScreen(){
+    public FlexibleDiscountScreen(GUIControl guiControl){
+        super(guiControl);
 
     }
 }

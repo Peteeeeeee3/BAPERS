@@ -1,5 +1,6 @@
 package Job;
 
+import Database.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,8 +16,8 @@ public class Job {
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
-
-
+    
+    DatabaseGateway db = new DatabaseGateway();
 
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();
@@ -89,6 +90,7 @@ public class Job {
 	public VectorOfTasksForJob getVecTaskJ() {
 		return vecTaskJ;
 	}
+    
 	public int generateJobNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		String sql = "SELECT `jobNumber` FROM `Job` WHERE Job.deadline = ? AND Job.priority = ? AND Job.price = ? AND Job.specialInstruction = ?";
 		PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -120,4 +122,41 @@ public class Job {
 		this.startTime = startTime;
 		this.urgency = urgency;
 	}
+    
+    
+    public void viewJob(int jobID){
+        
+		try {
+
+			String find = "SELECT * FROM Job WHERE jobNumber=" + jobID;
+			PreparedStatement stmt = db.getConnection().prepareStatement(find);
+			ResultSet result = stmt.executeQuery(find);
+
+			while (result.next()){
+				int CustomerAccountNum  = result.getInt(2);
+				System.out.println(CustomerAccountNum);
+
+				int PaymentpaymentID = result.getInt(3);
+				System.out.println(PaymentpaymentID);
+
+				String deadline = result.getString(4);
+				System.out.println(deadline);
+
+				int priority = result.getInt(5);
+				System.out.println(priority);
+
+				String specialInstructions = result.getString(6);
+				System.out.println(specialInstructions);
+
+				double price = result.getDouble(7);
+				System.out.println(price);
+			}
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+      
+    
 }

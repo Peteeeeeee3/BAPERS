@@ -3,6 +3,7 @@ package Account;
 import Job.*;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Receptionist extends UserAccount {
@@ -61,11 +62,11 @@ public class Receptionist extends UserAccount {
     }
 
     public void assignTask(int jobID, int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        for(int i=0 ; i<vecJob.getVector().size(); ++i ){
-            if(job.generateJobNo()==jobID)
-                for(int j=0; i<vecTask.getVector().size(); ++j){
-                    if(task.generateAccountNo()==taskID){
-                        jfc.addTaskToJob(jobID,taskID);
+        for (int i = 0; i < vecJob.getVector().size(); ++i) {
+            if (job.generateJobNo() == jobID)
+                for (int j = 0; i < vecTask.getVector().size(); ++j) {
+                    if (task.generateAccountNo() == taskID) {
+                        jfc.addTaskToJob(jobID, taskID);
                     }
                 }
         }
@@ -79,23 +80,29 @@ public class Receptionist extends UserAccount {
                 break;
             }
         }
-        try {
 
-            String sql = "SELECT `*` FROM Customer Values (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, customer.getAccountNo());
-            preparedStatement.setString(2, customer.getCompany());
-            preparedStatement.setString(3, customer.getName());
-            preparedStatement.setString(4, customer.getAddress());
-            preparedStatement.setInt(5, customer.getPhone());
-
-
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-
+        
+        //Database version might need fixing//
+        //String sql = "SELECT *" + "FROM customer" + "WHERE accountNo = ?";
+        //try {
+        //    PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+        //    ResultSet rs;
+        //    rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
+        //    preparedStatement.setInt(1, customer.getAccountNo());
+        //    while (rs.next()) {
+        //        int accountno = rs.getInt("accountNo");
+        //        String name = rs.getString("name");
+        //        String company = rs.getString("company");
+        //        int phone = rs.getInt("phone");
+        //        String address = rs.getString("address");
+        //        int valued = rs.getInt("valued");
+        //    }
+        //} catch (Exception e){
+        //    e.printStackTrace();
+        //}
 
     }
+
 
     public void assignUrgency(int jobID, int urgency) throws SQLException {
         for(int i=0; i< vecJob.getVector().size(); ++i) {
