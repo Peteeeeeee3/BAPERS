@@ -245,6 +245,12 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(editAccessScreen);
 	}
 
+	public void useDBConnectionScreen(JFrame dbConnectScreen){
+		new DBConnectionScreen(this, dbConnectScreen);
+		setMasterFrame(this);
+		viewingOrder.push(dbConnectScreen);
+	}
+
 	public void closeCurrentFrame(){
 		viewingOrder.pop().dispose();
 	}

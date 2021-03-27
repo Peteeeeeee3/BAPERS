@@ -34,21 +34,17 @@ public class CreateUserScreen extends JPanel {
                 String name = nameTextField.getText();
                 char[] pw = passwordTextField.getPassword();
                 int access = Integer.parseInt(accessTextField.getText());
-                try {
-                    guiControl.getController().getAccountControl().createUser(id, new String(pw), name, access);
-                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                    classNotFoundException.printStackTrace();
-                }
+                getGuiControl().getController().getAccountControl().createUser(id, new String(pw), name, access);
                 JOptionPane.showMessageDialog(addUserButton, "User has been successfully added");
                 guiControl.closeCurrentFrame();
-                guiControl.openPreviousFrame();
+                guiControl.useAdminScreen(guiControl);
             }
         });
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.openPreviousFrame();
+                guiControl.useAdminScreen(guiControl);
             }
         });
     }

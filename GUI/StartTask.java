@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StartTask extends JPanel {
     private JButton backButton;
@@ -16,9 +18,19 @@ public class StartTask extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
+
     }
 
-    public StartTask(GUIControl guiControl){this.guiControl = guiControl;}
+    public StartTask(GUIControl guiControl){
+        this.guiControl = guiControl;
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getGuiControl().openPreviousFrame();
+                //getGuiControl().closeCurrentFrame();
+            }
+        });
+    }
 
     public GUIControl getGuiControl() {
         return guiControl;

@@ -36,21 +36,23 @@ public class Login extends JPanel {
                 int id = Integer.parseInt(usernameField.getText());
                 char[] pw = passwordField.getPassword();
                 getGuiControl().getController().login(id, new String(pw));
-                if (guiControl.getController().getAccountControl().userAccount.getAccess() == 1) {
-                    guiControl.closeCurrentFrame();
-                    guiControl.useHomepage(guiControl);
-                } else if (guiControl.getController().getAccountControl().userAccount.getAccess() == 4){
-                    guiControl.closeCurrentFrame();
-                    guiControl.useOMHomePage(guiControl);
-                } else if(guiControl.getController().getAccountControl().userAccount.getAccess() == 3) {
-                    guiControl.closeCurrentFrame();
-                    guiControl.useSMHomePage(guiControl);
-                } else if(guiControl.getController().getAccountControl().userAccount.getAccess() == 2){
-                    guiControl.closeCurrentFrame();
-                    guiControl.useTechHomePage(guiControl);
-                } else {
-                    JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
-                }
+                getGuiControl().closeCurrentFrame();
+                getGuiControl().useOMHomePage(guiControl);
+                //if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 1) {
+                //    getGuiControl().closeCurrentFrame();
+                //    getGuiControl().useHomepage(guiControl);
+                //} else if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 4){
+                //    getGuiControl().closeCurrentFrame();
+                //    getGuiControl().useOMHomePage(guiControl);
+                //} else if(getGuiControl().getController().getAccountControl().userAccount.getAccess() == 3) {
+                //    getGuiControl().closeCurrentFrame();
+                //    getGuiControl().useSMHomePage(guiControl);
+                //} else if(getGuiControl().getController().getAccountControl().userAccount.getAccess() == 2){
+                  //  getGuiControl().closeCurrentFrame();
+                    //getGuiControl().useTechHomePage(guiControl);
+                //} else {
+                  //  JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
+                //}
             }
         });
     }

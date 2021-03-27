@@ -9,7 +9,7 @@ public class VectorOfUsers {
 	private UserAccount user;
 	private int noOfUsers = 0;
 	public AccountControl accControl;
-	public Vector<UserAccount> vector = new Vector<UserAccount>();
+	public Vector<UserAccount> users = new Vector<UserAccount>();
 
 
 	public void incrementNoOfUsers() {
@@ -20,28 +20,27 @@ public class VectorOfUsers {
 		noOfUsers--;
 	}
 
-	public void addUser(UserAccount user) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-		vector.add(new UserAccount(getLargestID() + 1, user.getPassword(), user.getName(), user.getAccess()));
-		//vector.add(user);
+	public void addUser(UserAccount user) {
+		users.add(user);
 		incrementNoOfUsers();
 
 		//accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
-		System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
+		//System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
 
 
 
 	public void removeUser(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		vector.remove(staffID);
+		users.remove(staffID);
 		decrementNoOfUsers();
 
 		//accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
 	}
 
 	public UserAccount retrieveUser(int staffID) {
-		for (int i = 0; i < vector.size(); i++) {
-			if (vector.get(i).getStaffID() == staffID) {
-				return vector.get(i);
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getStaffID() == staffID) {
+				return users.get(i);
 			}
 		}
 		return null;
@@ -52,8 +51,8 @@ public class VectorOfUsers {
 	}
 
 	public int traverse(int staffID) {
-		for (int i = 0; i < vector.size(); i++) {
-			if (vector.get(i).getStaffID() == staffID) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getStaffID() == staffID) {
 				return i;
 			}
 		}
@@ -64,9 +63,9 @@ public class VectorOfUsers {
 		//retrieves the largest ID in the vector
 		//used to generate staffID
 		int i = 0, largest = 0;
-		while (i < vector.size()) {
-			if (vector.get(i).getStaffID() > largest) {
-				largest = vector.get(i).getStaffID();
+		while (i < users.size()) {
+			if (users.get(i).getStaffID() > largest) {
+				largest = users.get(i).getStaffID();
 			}
 			++i;
 		}
@@ -74,7 +73,7 @@ public class VectorOfUsers {
 	}
 
 	public Vector<UserAccount> getVector() {
-		return vector;
+		return users;
 	}
 
 	//returns true if matching data is found and false if none is found

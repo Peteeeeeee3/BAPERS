@@ -32,7 +32,7 @@ public class AdminScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.openPreviousFrame();
+                guiControl.useOMHomePage(guiControl);
             }
         });
         createUserButton.addActionListener(new ActionListener() {

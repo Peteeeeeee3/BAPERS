@@ -113,7 +113,7 @@ public class OfficeManager extends ShiftManager {
 	}
 
 	public void createUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		accControl.createUser(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess());
+		vecUser.addUser(user);
 
 		//Database Version//
 		String sql = "INSERT INTO Staff_Member (`staffid`, `password`, `name`, `access`) VALUES (?, ?, ?, ?)";

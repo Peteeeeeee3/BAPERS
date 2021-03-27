@@ -74,7 +74,7 @@ public class OMHomePage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useViewTaskScreen(guiControl);
+                guiControl.openPreviousFrame();
             }
         });
     }

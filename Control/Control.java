@@ -127,7 +127,7 @@ public class Control implements I_Control, I_Payment {
 		return paymentControl;
 	}
 
-	public void setJobControl(AccountControl accountControl){this.accountControl = accountControl;}
+	public void setJobControl(JobFacadeControl jobControl){this.jobControl = jobControl;}
 
 	public JobFacadeControl getJobControl(){ return jobControl; }
 
@@ -138,6 +138,14 @@ public class Control implements I_Control, I_Payment {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public void viewTasks(int id){
+		try{
+			jobControl.getTask().viewTask(id);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override

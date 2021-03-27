@@ -39,18 +39,13 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecAcc.addCustAccount(new Customer(company, name, address, phone, this.vecAcc));
     }
 
-    public void createUser(int ID, String password, String name, int access) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        UserAccount vecU = null;
+    public void createUser(int ID, String password, String name, int access) {
         for (int i = 0; i < vecUser.getVector().size(); i++) {
             if (vecUser.getVector().get(i).getStaffID() == ID) {
-                vecU = vecUser.getVector().get(i);
                 break;
             }
         }
-        if (vecU == null) {
-            return;
-        }
-        vecUser.addUser(new UserAccount(ID, password, name, access));
+        vecUser.addUser(new UserAccount(ID, password, name, access, this.vecUser));
     }
 
     public void updateAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
