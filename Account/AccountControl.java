@@ -9,12 +9,14 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 public class AccountControl implements Account.I_Account, I_Database {
-    
+
     public VectorOfAccounts vecAcc;
-    private VectorOfUsers vecUser;
+    public VectorOfUsers vecUser;
     private Control control;
     public Vector<VectorOfUsers> vecVecUser;
     public OfficeManager officeManager;
+    public Receptionist receptionist;
+    public UserAccount userAccount;
     public Customer customer;
     public ValuedCustomer valCustomer;
     public DiscountSet discountSet;
@@ -52,7 +54,7 @@ public class AccountControl implements Account.I_Account, I_Database {
     }
 
     public void updateAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        officeManager.editAccess(staffID, retrieveUser(staffID));
+        officeManager.editAccess(staffID);
     }
 
     public void upgradeCust(int accountNo) {

@@ -1,5 +1,8 @@
 package GUI;
 
+import Account.UserAccount;
+import Account.VectorOfUsers;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,9 +36,18 @@ public class Login extends JPanel {
                 int id = Integer.parseInt(usernameField.getText());
                 char[] pw = passwordField.getPassword();
                 getGuiControl().getController().login(id, new String(pw));
-                if (guiControl.getController().getAccountControl().vecUser.getLargestID() == id) {
+                if (guiControl.getController().getAccountControl().userAccount.getAccess() == 1) {
                     guiControl.closeCurrentFrame();
                     guiControl.useHomepage(guiControl);
+                } else if (guiControl.getController().getAccountControl().userAccount.getAccess() == 4){
+                    guiControl.closeCurrentFrame();
+                    guiControl.useOMHomePage(guiControl);
+                } else if(guiControl.getController().getAccountControl().userAccount.getAccess() == 3) {
+                    guiControl.closeCurrentFrame();
+                    guiControl.useSMHomePage(guiControl);
+                } else if(guiControl.getController().getAccountControl().userAccount.getAccess() == 2){
+                    guiControl.closeCurrentFrame();
+                    guiControl.useTechHomePage(guiControl);
                 } else {
                     JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
                 }

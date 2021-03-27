@@ -1,9 +1,17 @@
 package GUI;
 
-public class FlexibleDiscountScreen extends Form {
+import javax.swing.*;
 
-    public FlexibleDiscountScreen(GUIControl guiControl){
-        super(guiControl);
+public class FlexibleDiscountScreen extends JPanel {
+    public GUIControl guiControl;
 
+    public FlexibleDiscountScreen(GUIControl guiControl, JFrame frame){
+        this.guiControl = guiControl;
+    }
+
+    public FlexibleDiscountScreen(GUIControl guiControl){this.guiControl = guiControl;}
+
+    public GUIControl getGuiControl() {
+        return guiControl;
     }
 }

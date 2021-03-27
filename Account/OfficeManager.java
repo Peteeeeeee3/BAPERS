@@ -13,8 +13,9 @@ public class OfficeManager extends ShiftManager {
 	public DiscountBand discB;
 	public Customer cust;
 	public ValuedCustomer valCust;
+	public UserAccount user;
 
-	public void editAccess(int staffID, UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void editAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		int accessLevelRec = 1;
 		int accessLevelTech = 2;
 		int accessLevelSM = 3;
@@ -139,6 +140,6 @@ public class OfficeManager extends ShiftManager {
 	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		super(user);
 		createUser(user);
-		editAccess(user.getStaffID(), user);
+		editAccess(user.getStaffID());
 	}
 }

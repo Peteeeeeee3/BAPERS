@@ -4,45 +4,40 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomePage extends JPanel {
-    private JTextPane welcomeTextPane;
-    private JButton newJobButton;
-    private JButton paymentButton;
+public class TechHomePage extends JPanel{
+    private JButton startTaskButton;
+    private JPanel techHomePagePanel;
+    private JButton updateTaskButton;
     private JButton viewJobButton;
     private JButton logoutButton;
-    public JPanel panelMain;
+    private JTextPane WELCOMETextPane;
     public GUIControl guiControl;
 
-    public HomePage(GUIControl guiControl, JFrame frame) {
-        //Initialise//
+    public TechHomePage(GUIControl guiControl, JFrame frame){
         this.guiControl = guiControl;
-        frame.setContentPane(new HomePage(guiControl).panelMain);
+        frame.setContentPane(new TechHomePage(guiControl).techHomePagePanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 300);
+        frame.setSize(500,300);
         frame.setVisible(true);
-
     }
 
-    public HomePage(GUIControl guiControl){
+    public TechHomePage(GUIControl guiControl){
         this.guiControl = guiControl;
-
-        newJobButton.addActionListener(new ActionListener() {
+        startTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useSearchCustomerScreen(guiControl);
+                guiControl.useStartTaskScreen(guiControl);
             }
         });
-
-        paymentButton.addActionListener(new ActionListener() {
+        updateTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.usePaymentScreen(guiControl);
+                guiControl.useUpdateTaskScreen(guiControl);
             }
         });
-
         viewJobButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,10 +48,9 @@ public class HomePage extends JPanel {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
+
             }
         });
-
     }
 
     public GUIControl getGuiControl() {

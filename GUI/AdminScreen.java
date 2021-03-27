@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AdminScreen extends Form {
+public class AdminScreen extends JPanel {
     private JButton createUserButton;
     private JPanel adminPanel;
     private JButton removeUserButton;
@@ -13,10 +13,63 @@ public class AdminScreen extends Form {
     private JButton backupSystemButton;
     private JButton restoreSystemButton;
     private JButton configureScheduleButton;
+    public GUIControl guiControl;
+
+    public AdminScreen(GUIControl guiControl, JFrame frame) {
+        this.guiControl = guiControl;
+        frame.setContentPane(new AdminScreen(guiControl).adminPanel);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500,300);
+        frame.setVisible(true);
+
+    }
 
     public AdminScreen(GUIControl guiControl) {
-        super(guiControl);
+        this.guiControl = guiControl;
+
         backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
+            }
+        });
+        createUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useCreateUserScreen(guiControl);
+            }
+        });
+        removeUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useRemoveUserScreen(guiControl);
+            }
+        });
+        editAccessButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useEditAccessScreen(guiControl);
+            }
+        });
+        configureScheduleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useConfigScheduleScreen(guiControl);
+            }
+        });
+        restoreSystemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        backupSystemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -24,12 +77,7 @@ public class AdminScreen extends Form {
         });
     }
 
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame("Admin Screen");
-//        frame.setContentPane(new AdminScreen().adminPanel);
-//        frame.setLocationRelativeTo(null);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(500,300);
-//        frame.setVisible(true);
-//    }
+    public GUIControl getGuiControl() {
+        return guiControl;
+    }
 }

@@ -1,5 +1,7 @@
 package GUI;
 
+import Account.Customer;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -7,6 +9,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class SearchCustomerScreen extends JPanel {
     public JPanel searchCustomerPanel;
@@ -19,6 +22,8 @@ public class SearchCustomerScreen extends JPanel {
     public JScrollBar scrollBar;
     public GUIControl guiControl;
     public DefaultTableModel datatable;
+    public Customer customer;
+    int flag = 0;
 
     public SearchCustomerScreen(GUIControl guiControl, JFrame frame) {
         //Initialise//
@@ -39,20 +44,31 @@ public class SearchCustomerScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
             }
         });
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if(flag == 0){
+                    guiControl.closeCurrentFrame();
+                    guiControl.useCreateCustomerScreen(guiControl);
+                } else {
+                    guiControl.useExistingDeadlineCustomerScreen(guiControl);
+                }
             }
         });
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchBar.getText());
-                getGuiControl().getController().getAccountControl().retrieveCustomer(id);
+                try {
+                    getGuiControl().getController().getAccountControl().receptionist.searchCustomer(id);
+                    flag = 1;
+                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
+                    classNotFoundException.printStackTrace();
+                }
                 guiControl.useCreateCustomerScreen(guiControl);
             }
         });

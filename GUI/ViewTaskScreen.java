@@ -4,44 +4,43 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GenerateReport extends JPanel {
+public class ViewTaskScreen extends JPanel{
+    private JTable table1;
     private JButton backButton;
-    private JButton individualReportButton;
-    private JButton peformanceSummaryReportButton;
-    private JButton customerJobsReportButton;
-    public JPanel panelMain;
+    private JButton removeButton;
+    private JButton addButton;
+    private JPanel viewTaskPanel;
     public GUIControl guiControl;
 
-    public GenerateReport(GUIControl guiControl, JFrame frame) {
+    public ViewTaskScreen(GUIControl guiControl, JFrame frame){
         this.guiControl = guiControl;
-        frame.setContentPane(new GenerateReport(guiControl).panelMain);
+        frame.setContentPane(new ViewTaskScreen(guiControl).viewTaskPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
 
-    public GenerateReport(GUIControl guiControl){
+    public ViewTaskScreen(GUIControl guiControl){
         this.guiControl = guiControl;
-        individualReportButton.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useGenIndividReportScreen(guiControl);
+                guiControl.openPreviousFrame();
             }
         });
-        peformanceSummaryReportButton.addActionListener(new ActionListener() {
+        removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
-                guiControl.useGenIndividReportScreen(guiControl);
+                //guiControl.getController().getJobControl().removeTask();
             }
         });
-        customerJobsReportButton.addActionListener(new ActionListener() {
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useCustJobReport(guiControl);
+                guiControl.useAddNewTaskScreen(guiControl);
             }
         });
     }
@@ -49,6 +48,4 @@ public class GenerateReport extends JPanel {
     public GUIControl getGuiControl() {
         return guiControl;
     }
-
-
 }

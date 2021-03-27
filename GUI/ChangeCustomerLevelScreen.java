@@ -1,24 +1,62 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ChangeCustomerLevelScreen extends Form {
+public class ChangeCustomerLevelScreen extends JPanel {
     private JButton upgradeCustomerButton;
     private JPanel configureCustomerPanel;
     private JButton downgradeCustomerButton;
     private JButton createCustomerButton;
     private JButton backButton;
+    public GUIControl guiControl;
 
-    public ChangeCustomerLevelScreen(GUIControl guiControl) {
-        super(guiControl);
+    public ChangeCustomerLevelScreen(GUIControl guiControl, JFrame frame) {
+        this.guiControl = guiControl;
+        frame.setContentPane(new ChangeCustomerLevelScreen(guiControl).configureCustomerPanel);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500,300);
+        frame.setVisible(true);
+
     }
 
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame("Change Customer Levels");
-//        frame.setContentPane(new ChangeCustomerLevelScreen().configureCustomerPanel);
-//        frame.setLocationRelativeTo(null);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(500,300);
-//        frame.setVisible(true);
-//    }
+    public ChangeCustomerLevelScreen(GUIControl guiControl){
+        this.guiControl = guiControl;
+        upgradeCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useUpgradeCustScreen(guiControl);
+            }
+        });
+        downgradeCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useDowngradeCustScreen(guiControl);
+            }
+        });
+        createCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useCreateCustomerScreen(guiControl);
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
+            }
+        });
+    }
+
+    public GUIControl getGuiControl() {
+        return guiControl;
+    }
+
+
 }

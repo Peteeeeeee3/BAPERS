@@ -95,9 +95,161 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(cashPayment);
 	}
 
+	public void useOMHomePage(JFrame omHomePageScreen){
+		new OMHomePage(this, omHomePageScreen);
+		setMasterFrame(this);
+		viewingOrder.push(omHomePageScreen);
+	}
+
+	public void useSMHomePage(JFrame smHomePageScreen){
+		new SMHomePage(this, smHomePageScreen);
+		setMasterFrame(this);
+		viewingOrder.push(smHomePageScreen);
+	}
+
+	public void useTechHomePage(JFrame techHomePageScreen){
+		new TechHomePage(this, techHomePageScreen);
+		setMasterFrame(this);
+		viewingOrder.push(techHomePageScreen);
+	}
+
+	public void useAdminScreen(JFrame adminScreen){
+		new AdminScreen(this, adminScreen);
+		setMasterFrame(this);
+		viewingOrder.push(adminScreen);
+	}
+
+	public void useChangeCustLvlScrn(JFrame changeCustLvl){
+		new ChangeCustomerLevelScreen(this, changeCustLvl);
+		setMasterFrame(this);
+		viewingOrder.push(changeCustLvl);
+	}
+
+	public void useConfigScheduleScreen(JFrame configSched){
+		new ConfigureScheduleScreen(this, configSched);
+		setMasterFrame(this);
+		viewingOrder.push(configSched);
+	}
+
+	public void useCustJobReport(JFrame custJobRep){
+		new CustomerJobsReport(this, custJobRep);
+		setMasterFrame(this);
+		viewingOrder.push(custJobRep);
+	}
+
+	public void useDowngradeCustScreen(JFrame downgradeCust){
+		new DowngradeCustomerScreen(this, downgradeCust);
+		setMasterFrame(this);
+		viewingOrder.push(downgradeCust);
+	}
+
+	public void useFixedDiscountScreen(JFrame fixedDisc){
+		new FixedDiscountScreen(this, fixedDisc);
+		setMasterFrame(this);
+		viewingOrder.push(fixedDisc);
+	}
+
+	public void useFlexibleDiscScreen(JFrame flexibleDisc){
+		new FixedDiscountScreen(this, flexibleDisc);
+		setMasterFrame(this);
+		viewingOrder.push(flexibleDisc);
+	}
+
+	public void useGenerateReportScreen(JFrame genReport){
+		new GenerateReport(this, genReport);
+		setMasterFrame(this);
+		viewingOrder.push(genReport);
+	}
+
+	public void useGenIndividReportScreen(JFrame genIndividReport){
+		new Gen_IndividualReport(this, genIndividReport);
+		setMasterFrame(this);
+		viewingOrder.push(genIndividReport);
+	}
+
+	public void useReportsScreen(JFrame selectReports){
+		new ReportsScreen(this, selectReports);
+		setMasterFrame(this);
+		viewingOrder.push(selectReports);
+	}
+
+	public void useSelectDiscountScreen(JFrame selectDiscountScreen){
+		new SelectDiscountScreen(this, selectDiscountScreen);
+		setMasterFrame(this);
+		viewingOrder.push(selectDiscountScreen);
+	}
+
+	public void useStartTaskScreen(JFrame startTaskScreen){
+		new StartTask(this, startTaskScreen);
+		setMasterFrame(this);
+		viewingOrder.push(startTaskScreen);
+	}
+
+	public void useTaskManageScreen(JFrame taskManageScreen){
+		new TaskManageScreen(this, taskManageScreen);
+		setMasterFrame(this);
+		viewingOrder.push(taskManageScreen);
+	}
+
+	public void useUpdateTaskScreen(JFrame updateTaskScreen){
+		new UpdateTask(this, updateTaskScreen);
+		setMasterFrame(this);
+		viewingOrder.push(updateTaskScreen);
+	}
+
+	public void useUpgradeCustScreen(JFrame upgradeCustScreen){
+		new UpgradeCustomerScreen(this, upgradeCustScreen);
+		setMasterFrame(this);
+		viewingOrder.push(upgradeCustScreen);
+	}
+
+	public void useVariableDiscScreen(JFrame variableDiscScreen){
+		new VariableDiscountScreen(this, variableDiscScreen);
+		setMasterFrame(this);
+		viewingOrder.push(variableDiscScreen);
+	}
+
+	public void useViewTaskScreen(JFrame viewTaskScreen){
+		new ViewTaskScreen(this, viewTaskScreen);
+		setMasterFrame(this);
+		viewingOrder.push(viewTaskScreen);
+	}
+
+	public void useViewJobScreen(JFrame viewJobScreen){
+		new ViewJobScreen(this, viewJobScreen);
+		setMasterFrame(this);
+		viewingOrder.push(viewJobScreen);
+	}
+
+	public void useAddNewTaskScreen(JFrame addNewTaskScreen){
+		new AddNewTaskScreen(this, addNewTaskScreen);
+		setMasterFrame(this);
+		viewingOrder.push(addNewTaskScreen);
+	}
+
+	public void useCreateUserScreen(JFrame createUser){
+		new CreateUserScreen(this, createUser);
+		setMasterFrame(this);
+		viewingOrder.push(createUser);
+	}
+
+	public void useRemoveUserScreen(JFrame removeUserScreen){
+		new RemoveUserScreen(this, removeUserScreen);
+		setMasterFrame(this);
+		viewingOrder.push(removeUserScreen);
+	}
+
+	public void useEditAccessScreen(JFrame editAccessScreen){
+		new EditAccessScreen(this, editAccessScreen);
+		setMasterFrame(this);
+		viewingOrder.push(editAccessScreen);
+	}
+
 	public void closeCurrentFrame(){
 		viewingOrder.pop().dispose();
 	}
+
+	public void openPreviousFrame(){viewingOrder.peek().setVisible(true);}
 
 
 }

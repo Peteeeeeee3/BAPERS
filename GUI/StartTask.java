@@ -2,22 +2,26 @@ package GUI;
 
 import javax.swing.*;
 
-public class StartTask extends Form {
+public class StartTask extends JPanel {
     private JButton backButton;
-    private JTable JButton;
+    private JTable JTable;
+    public GUIControl guiControl;
 
     public JPanel panelMain;
 
-    public StartTask(GUIControl guiControl) {
-        super(guiControl);
+    public StartTask(GUIControl guiControl, JFrame frame) {
+        this.guiControl = guiControl;
+        frame.setContentPane(new StartTask(guiControl).panelMain);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 300);
+        frame.setVisible(true);
     }
 
-//    public static void main(String[] args){
-//        JFrame frame = new JFrame("StartTask");
-//        frame.setContentPane(new StartTask().panelMain);
-//        frame.setLocationRelativeTo(null);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(500, 300);
-//        frame.setVisible(true);
-//    }
+    public StartTask(GUIControl guiControl){this.guiControl = guiControl;}
+
+    public GUIControl getGuiControl() {
+        return guiControl;
+    }
+
 }
