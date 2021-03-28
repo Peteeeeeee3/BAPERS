@@ -38,7 +38,7 @@ public class Receptionist extends UserAccount {
         }
     }
 
-    public void createCustomer(Customer customer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public void createCustomer(Customer customer) {
         vecAcc.addCustAccount(customer);
         //Database Version//
         try {
@@ -81,25 +81,24 @@ public class Receptionist extends UserAccount {
             }
         }
 
-        
         //Database version might need fixing//
-        //String sql = "SELECT *" + "FROM customer" + "WHERE accountNo = ?";
-        //try {
-        //    PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-        //    ResultSet rs;
-        //    rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
-        //    preparedStatement.setInt(1, customer.getAccountNo());
-        //    while (rs.next()) {
-        //        int accountno = rs.getInt("accountNo");
-        //        String name = rs.getString("name");
-        //        String company = rs.getString("company");
-        //        int phone = rs.getInt("phone");
-        //        String address = rs.getString("address");
-        //        int valued = rs.getInt("valued");
-        //    }
-        //} catch (Exception e){
-        //    e.printStackTrace();
-        //}
+        String sql = "SELECT *" + "FROM customer" + "WHERE accountNo = ?";
+        try {
+            PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            ResultSet rs;
+            rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
+            preparedStatement.setInt(1, customer.getAccountNo());
+            while (rs.next()) {
+                int accountno = rs.getInt("accountNo");
+                String name = rs.getString("name");
+                String company = rs.getString("company");
+                int phone = rs.getInt("phone");
+                String address = rs.getString("address");
+                int valued = rs.getInt("valued");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

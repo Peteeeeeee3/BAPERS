@@ -104,6 +104,7 @@ public class Customer {
         this.address = address;
         this.phone = phone;
         this.vecAcc = vecAcc;
+        // i implemented this in Receptionist for when she creates a customer.
         String sql = "INSERT INTO `customer`(`name`, `company`, `phone`, `address`) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
             this.accountNo = generateAccountNo();
