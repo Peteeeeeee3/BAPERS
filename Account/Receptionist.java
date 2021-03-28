@@ -167,9 +167,8 @@ public class Receptionist extends UserAccount {
             e.printStackTrace();
         }
     }
-
-    //public Receptionist(UserAccount user) {
-      //  super(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess());
-      //  throw new UnsupportedOperationException();
-   // }
+    public Receptionist(UserAccount user) {
+        super(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess(), user.getVecUser());
+        throw new UnsupportedOperationException();
+    }
 }
