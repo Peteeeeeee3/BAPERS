@@ -17,6 +17,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 	private VectorOfJobs vecJobs;
 	private Control control;
 	public VectorOfTasksForJob tfj;
+	public Task task;
 
 	public void addTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		Task task = null;
@@ -102,6 +103,8 @@ public class JobFacadeControl implements I_Job, I_Database {
 		vecJobs = new VectorOfJobs(vecJobs, this);
 	}
 
+
+	public Task getTask(){return task;}
 
 	@Override
 	public void connectDB() throws ClassNotFoundException, SQLException {

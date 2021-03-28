@@ -77,7 +77,7 @@ public class Task {
 	}
 
 	public void upload() throws SQLException {
-		String sql = "INSERT INTO Task (`loaction`, `description`, `price`, `duration` ) VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO Task (`location`, `description`, `price`, `duration` ) VALUES (?, ?, ?, ?);";
 		PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		//write to DB
 		vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);

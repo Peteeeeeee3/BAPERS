@@ -37,11 +37,7 @@ public class CreateCustomerScreen extends JPanel {
                 String address= addressField.getText();
                 String company = companyField.getText();
                 String email = emailField.getText();
-                try {
-                    getGuiControl().getController().getAccountControl().createCustomer(company,name,address,phone);
-                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                    classNotFoundException.printStackTrace();
-                }
+                getGuiControl().getController().getAccountControl().createCustomer(company,name,address,phone);
                 guiControl.closeCurrentFrame();
                 guiControl.useExistingDeadlineCustomerScreen(guiControl);
             }

@@ -4,20 +4,21 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AdminScreen extends JPanel {
-    private JButton createUserButton;
-    private JPanel adminPanel;
-    private JButton removeUserButton;
-    private JButton editAccessButton;
-    private JButton backButton;
-    private JButton backupSystemButton;
-    private JButton restoreSystemButton;
-    private JButton configureScheduleButton;
+public class OMHomePage extends JPanel {
+    private JButton jobsButton;
+    private JButton paymentButton;
+    private JButton reportsButton;
+    private JButton customerButton;
+    private JButton adminButton;
+    private JButton tasksButton;
+    private JButton logoutButton;
+    private JTextPane WELCOMETextPane;
+    private JPanel omHomePage;
     public GUIControl guiControl;
 
-    public AdminScreen(GUIControl guiControl, JFrame frame) {
+    public OMHomePage(GUIControl guiControl, JFrame frame){
         this.guiControl = guiControl;
-        frame.setContentPane(new AdminScreen(guiControl).adminPanel);
+        frame.setContentPane(new OMHomePage(guiControl).omHomePage);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
@@ -25,58 +26,58 @@ public class AdminScreen extends JPanel {
 
     }
 
-    public AdminScreen(GUIControl guiControl) {
+    public OMHomePage(GUIControl guiControl){
         this.guiControl = guiControl;
-
-        backButton.addActionListener(new ActionListener() {
+        jobsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useOMHomePage(guiControl);
+                guiControl.useTaskManageScreen(guiControl);
             }
         });
-        createUserButton.addActionListener(new ActionListener() {
+        paymentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useCreateUserScreen(guiControl);
+                guiControl.usePaymentScreen(guiControl);
             }
         });
-        removeUserButton.addActionListener(new ActionListener() {
+        reportsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useRemoveUserScreen(guiControl);
+                guiControl.useReportsScreen(guiControl);
             }
         });
-        editAccessButton.addActionListener(new ActionListener() {
+        customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useEditAccessScreen(guiControl);
+                guiControl.useChangeCustLvlScrn(guiControl);
             }
         });
-        configureScheduleButton.addActionListener(new ActionListener() {
+        adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useConfigScheduleScreen(guiControl);
+                guiControl.useAdminScreen(guiControl);
             }
         });
-        restoreSystemButton.addActionListener(new ActionListener() {
+        tasksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                guiControl.closeCurrentFrame();
+                guiControl.useViewTaskScreen(guiControl);
             }
         });
-        backupSystemButton.addActionListener(new ActionListener() {
+        logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
             }
         });
     }
-
     public GUIControl getGuiControl() {
         return guiControl;
     }
