@@ -13,7 +13,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     public VectorOfAccounts vecAcc;
     public VectorOfUsers vecUser;
     private Control control;
-    public Vector<VectorOfUsers> vecVecUser;
     public OfficeManager officeManager;
     public Receptionist receptionist;
     public UserAccount userAccount;

@@ -125,6 +125,8 @@ public class OfficeManager extends ShiftManager {
 		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
+
+
 	public void removeUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		vecUser.removeUser(user.getStaffID());
 
@@ -135,6 +137,7 @@ public class OfficeManager extends ShiftManager {
 		preparedStatement.setString(3, user.getName());
 		preparedStatement.setInt(4, user.getAccess());
 		accControl.getControl().getDBC().write(preparedStatement);
+
 	}
 
 	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {

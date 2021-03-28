@@ -103,9 +103,6 @@ public class JobFacadeControl implements I_Job, I_Database {
 		vecJobs = new VectorOfJobs(vecJobs, this);
 	}
 
-	public void addControl(Control control){
-		this.control = control;
-	}
 
 	public Task getTask(){return task;}
 
