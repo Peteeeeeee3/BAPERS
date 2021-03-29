@@ -76,10 +76,12 @@ public class SearchCustomerScreen extends JPanel {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Address");
         defaultTableModel.addColumn("Valued");
-
-        System.out.println(customer);
-
-        defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress()});
+        if(customer.getAccountNo() != 0) {
+            flag = 0;
+        } else {
+            flag = 1;
+        }
+        defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 
     public GUIControl getGuiControl() {
