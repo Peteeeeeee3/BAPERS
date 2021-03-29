@@ -46,7 +46,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecUser.addUser(new UserAccount(ID, password, name, access, this.vecUser));
     }
 
-    public void updateAccess(int id, int newAccess){getOfficeManager().editAccess(id, newAccess);}
+    public void updateAccess(int id, int newAccess){officeManager.editAccess(id, newAccess);}
 
     public void upgradeCust(int accountNo) {
         if (customer.getAccountNo() == accountNo) {
@@ -67,12 +67,12 @@ public class AccountControl implements Account.I_Account, I_Database {
         throw new UnsupportedOperationException();
     }
 
+
     public AccountControl(Control ctrl) {
         this.vecUser = new VectorOfUsers(this);
         this.vecAcc = new VectorOfAccounts(this);
         this.control = ctrl;
     }
-
 
     //////// Override Methods ///////
 
@@ -84,10 +84,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     @Override
     public void logout() {
 
-    }
-
-    public void updateAccess(int staffID, Object newAccess) {
-        throw new UnsupportedOperationException();
     }
 
     public Control getControl() {

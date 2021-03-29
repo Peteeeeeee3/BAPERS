@@ -56,6 +56,11 @@ public class Task {
 		String sql = "SELECT `taskID` FROM `Task` WHERE Task.duration = ? AND Task.location = ? AND Task.price = ? AND Task.taskDescription=?";
 		PreparedStatement preparedStatement = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 
+		preparedStatement.setInt(1, duration);
+		preparedStatement.setString(2, location);
+		preparedStatement.setFloat(3, price);
+		preparedStatement.setString(4, description);
+
 		ResultSet rs = vecTask.getControl().getControl().getDBC().read(preparedStatement);
 		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
 		// as this function only gets called in the constructor
@@ -76,8 +81,8 @@ public class Task {
 		return finalValue;
 	}
 
-	public void upload() throws SQLException {
-		String sql = "INSERT INTO Task (`location`, `description`, `price`, `duration` ) VALUES (?, ?, ?, ?);";
+	public void upload(){
+		String sql = "INSERT INTO Task (`location`, `taskDescription`, `price`, `duration`) VALUES (?,?,?,?)";
 		try(PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)){
 			this.taskID = generateAccountNo();
 			prepStat.setString(1, location);
@@ -90,11 +95,12 @@ public class Task {
 		}
 	}
 
-	public Task (String location, String description, float price, int duration) throws SQLException {
+	public Task (String location, String description, float price, int duration, VectorOfTasks vecTask) {
 		this.location=location;
 		this.description=description;
 		this.price=price;
 		this.duration=duration;
+		this.vecTask = vecTask;
 		upload();
 	}
 
@@ -104,7 +110,7 @@ public class Task {
 		// these parameters will be applied through the gui
 
 		try {
-			String insert = "INSERT INTO Task(taskDescription, location, price, duration)" + "VALUES(?, ?, ?, ?)";
+			String insert = "INSERT INTO Task(`taskDescription`, `location`, price, duration)" + "VALUES(?, ?, ?, ?)";
 			// sql insert statement created
 			// parameters are defined before due to autoincrement taking up the first position. so its defined to start from taskDescripton which is the second position in the table
 

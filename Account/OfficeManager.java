@@ -89,17 +89,19 @@ public class OfficeManager extends ShiftManager {
 		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
-	public void createUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void createUser(UserAccount user) {
 		vecUser.addUser(user);
-
 		//Database Version//
 		String sql = "INSERT INTO Staff_Member (`staffid`, `password`, `name`, `access`) VALUES (?, ?, ?, ?)";
-		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		preparedStatement.setInt(1, user.getStaffID());
-		preparedStatement.setString(2, user.getPassword());
-		preparedStatement.setString(3, user.getName());
-		preparedStatement.setInt(4, user.getAccess());
-		accControl.getControl().getDBC().write(preparedStatement);
+		try(PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)){
+			preparedStatement.setInt(1, user.getStaffID());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setString(3, user.getName());
+			preparedStatement.setInt(4, user.getAccess());
+			accControl.getControl().getDBC().write(preparedStatement);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 
@@ -117,7 +119,7 @@ public class OfficeManager extends ShiftManager {
 
 	}
 
-	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public OfficeManager(UserAccount user) {
 		super(user);
 		createUser(user);
 		editAccess(user.getStaffID(), user.getAccess());

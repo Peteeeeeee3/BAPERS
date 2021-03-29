@@ -17,7 +17,6 @@ public class Receptionist extends UserAccount {
     public Task task;
     public JobFacadeControl jfc;
 
-
     public void acceptJob(Job job) throws SQLException {
         vecJob.addJob(job);
         //Database Version//

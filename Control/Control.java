@@ -2,6 +2,7 @@ package Control;
 
 import Account.AccountControl;
 import Account.Customer;
+import Account.OfficeManager;
 import Database.DBControl;
 import GUI.GUIControl;
 import Job.*;
@@ -37,7 +38,7 @@ public class Control implements I_Control, I_Payment {
 		Control controller = new Control();
 		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
-		controller.jobControl = new JobFacadeControl();
+		controller.jobControl = new JobFacadeControl(controller);
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
 		//make a window
@@ -138,6 +139,15 @@ public class Control implements I_Control, I_Payment {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public OfficeManager editAccess(int id, int access){
+		try{
+			accountControl.updateAccess(id, access);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void viewTasks(int id){

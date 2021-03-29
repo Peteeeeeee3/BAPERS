@@ -3,7 +3,7 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+
 
 public class EditAccessScreen extends JPanel {
     private JTextField textField1;
@@ -45,7 +45,7 @@ public class EditAccessScreen extends JPanel {
                 int id = Integer.parseInt(textField1.getText());
                 int nAccessLevel = Integer.parseInt(newAccessLevel.getText());
                 if (flag == 1){
-                    getGuiControl().getController().getAccountControl().getOfficeManager().editAccess(id, nAccessLevel);
+                    getGuiControl().getController().editAccess(id, nAccessLevel);
                     JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
                 } else {
                     JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");
