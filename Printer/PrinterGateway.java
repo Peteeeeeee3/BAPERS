@@ -439,10 +439,10 @@ public class PrinterGateway {
 
 			//shift summary
 			doc.add(new Paragraph(" "));
-			String dateS = Integer.toString(report.getStartDate()).substring(1, 4) + "/" +
+			String dateS = Integer.toString(report.getStartDate()).substring(0, 4) + "/" +
 					Integer.toString(report.getStartDate()).substring(4, 6) + "/" +
 					Integer.toString(report.getStartDate()).substring(6, 8);
-			String dateE = Integer.toString(report.getEndDate()).substring(1, 4) + "/" +
+			String dateE = Integer.toString(report.getEndDate()).substring(0, 4) + "/" +
 					Integer.toString(report.getEndDate()).substring(4, 6) + "/" +
 					Integer.toString(report.getEndDate()).substring(6, 8);
 			String shiftSummary = "For Period (" + dateS + " - " + dateE + ")";

@@ -47,7 +47,7 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useAddNewTaskScreen(window);
+		//controller.guiControl.useAddNewTaskScreen(window);
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
@@ -101,7 +101,7 @@ public class Control implements I_Control, I_Payment {
 
 		////Performance Summary report print test////
 
-		controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
+		//controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
 
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
