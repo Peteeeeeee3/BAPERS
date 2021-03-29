@@ -28,8 +28,7 @@ public class OfficeManager extends ShiftManager {
 			e.printStackTrace();
 		}
 	}
-
-
+	
 	public void backupSystem() {
 		throw new UnsupportedOperationException();
 	}
@@ -68,22 +67,9 @@ public class OfficeManager extends ShiftManager {
 		}
 	}
 
-	public void removeUser(int id) {
-		vecUser.removeUser(id);
-
-		String sql = "DELETE FROM Staff_Member (`staffid`, `password`, `name`, `access`) WHERE `staffid = ?`";
-		try(PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
-			preparedStatement.setInt(1, id);
-			accControl.getControl().getDBC().write(preparedStatement);
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-
 	public OfficeManager(UserAccount user) {
 		super(user);
 		createUser(user);
 		editAccess(user.getStaffID(), user.getAccess());
-
 	}
 }

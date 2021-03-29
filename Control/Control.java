@@ -43,6 +43,7 @@ public class Control implements I_Control, I_Payment {
 		controller.printerGateway = new PrinterGateway();
 		//make a window
 
+
 		JFrame window = new JFrame();
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);

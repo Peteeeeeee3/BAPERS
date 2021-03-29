@@ -27,7 +27,6 @@ public class VectorOfUsers {
 		//System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
 
-
 	public void removeUser(int id) {
 		try {
 			String sql = "DELETE FROM Staff_Member (staffid, password, name, access) WHERE staffid = ?";
