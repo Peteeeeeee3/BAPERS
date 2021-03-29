@@ -1,7 +1,6 @@
 package Account;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OfficeManager extends ShiftManager {
@@ -15,42 +14,20 @@ public class OfficeManager extends ShiftManager {
 	public ValuedCustomer valCust;
 	public UserAccount user;
 
-	public void editAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		int accessLevelRec = 1;
-		int accessLevelTech = 2;
-		int accessLevelSM = 3;
-		int accessLevelOM = 4;
+	public void editAccess(int staffID, int newAccessLevel) {
 		for (int i = 0; i < vecUser.getVector().size(); i++ ){
-			if (user.getStaffID() == staffID && user.getAccess() == accessLevelRec){
-				user.setAccess(accessLevelTech);
-			}
-			if (user.getStaffID() == staffID && user.getAccess() == accessLevelTech){
-				user.setAccess(accessLevelSM);
-			}
-			if (user.getStaffID() == staffID && user.getAccess() == accessLevelSM){
-				user.setAccess(accessLevelOM);
+			if (user.getStaffID() == staffID){
+				user.setAccess(newAccessLevel);
 			}
 		}
-
 		//Database//
-		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT access FROM staff_member WHERE staff_member.staffID = ?");
-		preparedStatement.setInt(1, staffID);
-		ResultSet rs = accControl.read(preparedStatement);
-
-		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("UPDATE staff_member SET access = ? WHERE staff_member.staffID = ?");
-		if (user.getStaffID() == staffID && user.getAccess() == accessLevelRec){
+		try(PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement("UPDATE Staff_Member SET access = ? WHERE Staff_Member.staffID = ?")) {
 			prepStat.setInt(1, staffID);
-			prepStat.setInt(2, accessLevelTech);
+			prepStat.setInt(2, newAccessLevel);
+			accControl.getControl().getDBC().write(prepStat);
+		} catch (Exception e){
+			e.printStackTrace();
 		}
-		if (user.getStaffID() == staffID && user.getAccess() == accessLevelTech){
-			prepStat.setInt(1, staffID);
-			prepStat.setInt(2, accessLevelSM);
-		}
-		if (user.getStaffID() == staffID && user.getAccess() == accessLevelSM){
-			prepStat.setInt(1, staffID);
-			prepStat.setInt(2, accessLevelOM);
-		}
-		vecUser.getAccControl().getControl().getDBC().write(preparedStatement);
 	}
 
 
@@ -143,6 +120,6 @@ public class OfficeManager extends ShiftManager {
 	public OfficeManager(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		super(user);
 		createUser(user);
-		editAccess(user.getStaffID());
+		editAccess(user.getStaffID(), user.getAccess());
 	}
 }

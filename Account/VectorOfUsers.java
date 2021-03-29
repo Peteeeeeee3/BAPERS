@@ -11,7 +11,6 @@ public class VectorOfUsers {
 	public AccountControl accControl;
 	public Vector<UserAccount> users = new Vector<UserAccount>();
 
-
 	public void incrementNoOfUsers() {
 		noOfUsers++;
 	}
@@ -27,8 +26,6 @@ public class VectorOfUsers {
 		//accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
 		//System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
-
-
 
 	public void removeUser(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		users.remove(staffID);

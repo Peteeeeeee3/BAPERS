@@ -43,7 +43,7 @@ public class DowngradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(textField1.getText());
                 if(flag == 1){
                     try {
-                        guiControl.getController().getAccountControl().officeManager.upgradeCustomer(id);
+                        guiControl.getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
                         JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded");
                     } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();

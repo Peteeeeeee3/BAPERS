@@ -12,10 +12,9 @@ public class VectorOfTasks {
 	private int noOfTasks = 0;
 
 	public void addTask(Task task) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		tasks.add(new Task(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration()));
+		tasks.add(task);
 		incrementNoOfTasks();
-
-		System.out.println("Data: " + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + "have been inserted");
+		//System.out.println("Data: " + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + "have been inserted");
 
 	}
 

@@ -78,9 +78,16 @@ public class Task {
 
 	public void upload() throws SQLException {
 		String sql = "INSERT INTO Task (`location`, `description`, `price`, `duration` ) VALUES (?, ?, ?, ?);";
-		PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		//write to DB
-		vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);
+		try(PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)){
+			this.taskID = generateAccountNo();
+			prepStat.setString(1, location);
+			prepStat.setString(2, description);
+			prepStat.setFloat(3, price);
+			prepStat.setInt(4, duration);
+			vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	public Task (String location, String description, float price, int duration) throws SQLException {
@@ -90,10 +97,7 @@ public class Task {
 		this.duration=duration;
 		upload();
 	}
-    
-    
-    
-    
+
     public void insertTask(String taskDescription, String location, double price, int duration)
 	{
 

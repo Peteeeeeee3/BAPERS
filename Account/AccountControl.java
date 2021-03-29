@@ -6,7 +6,6 @@ import Database.I_Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 
 public class AccountControl implements Account.I_Account, I_Database {
 
@@ -47,9 +46,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecUser.addUser(new UserAccount(ID, password, name, access, this.vecUser));
     }
 
-    public void updateAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        officeManager.editAccess(staffID);
-    }
+    public void updateAccess(int id, int newAccess){getOfficeManager().editAccess(id, newAccess);}
 
     public void upgradeCust(int accountNo) {
         if (customer.getAccountNo() == accountNo) {
@@ -76,6 +73,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         this.control = ctrl;
     }
 
+
     //////// Override Methods ///////
 
     @Override
@@ -95,6 +93,8 @@ public class AccountControl implements Account.I_Account, I_Database {
     public Control getControl() {
         return control;
     }
+
+    public OfficeManager getOfficeManager(){return officeManager;}
 
     @Override
     public void connectDB() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {

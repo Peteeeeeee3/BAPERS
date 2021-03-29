@@ -48,11 +48,11 @@ public class ExistingDeadlineCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int deadline = Integer.parseInt(deadlineTextField.getText());
-                try {
-                    guiControl.getController().getJobControl().addTask(deadline);
-                } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException classNotFoundException) {
-                    classNotFoundException.printStackTrace();
-                }
+                //try {
+                    //guiControl.getController().getJobControl().addTask(deadline);
+                //} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException classNotFoundException) {
+                //    classNotFoundException.printStackTrace();
+                //}
             }
         });
     }
