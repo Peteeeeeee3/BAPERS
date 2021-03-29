@@ -24,7 +24,6 @@ public class ViewTaskScreen extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
-
     }
 
     public ViewTaskScreen(GUIControl guiControl){

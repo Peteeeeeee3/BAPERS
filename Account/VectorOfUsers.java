@@ -117,7 +117,7 @@ public class VectorOfUsers {
 			}
 		}
 		try {
-			String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID == ?;";
+			String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID = ?;";
 			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, access);
 			preparedStatement.setInt(2, id);

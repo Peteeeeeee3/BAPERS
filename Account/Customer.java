@@ -35,7 +35,7 @@ public class Customer {
     }
 
     public int getAccountNo() {
-        return this.accountNo;
+        return accountNo;
     }
 
     public void setAccountNo(int accountNo) {
@@ -65,6 +65,8 @@ public class Customer {
     public void setPhone(int phone) {
         this.phone = phone;
     }
+
+    public int getValued(){ return valued;}
 
     public VectorOfAccounts getVecAcc() {
         return vecAcc;

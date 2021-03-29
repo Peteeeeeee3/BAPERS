@@ -21,7 +21,7 @@ public class SearchCustomerScreen extends JPanel {
     public JButton searchButton;
     public JScrollBar scrollBar;
     public GUIControl guiControl;
-    public DefaultTableModel datatable;
+    DefaultTableModel defaultTableModel;
     public Customer customer;
     int flag = 0;
 
@@ -34,9 +34,6 @@ public class SearchCustomerScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
-        JScrollPane scrollPane = new JScrollPane(customerTable);
-        frame.getContentPane().add(scrollPane);
-
     }
 
     public SearchCustomerScreen(GUIControl guiControl) {
@@ -63,19 +60,26 @@ public class SearchCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchBar.getText());
-                try {
-                    getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
-                    flag = 1;
-                } catch (Exception classNotFoundException) {
-                    classNotFoundException.printStackTrace();
-                }
-                guiControl.useCreateCustomerScreen(guiControl);
+                customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
+                fetchData();
+                //guiControl.useCreateCustomerScreen(guiControl);
             }
         });
     }
 
-    public void displayJTable(int id){
+    public void fetchData(){
+        defaultTableModel = new DefaultTableModel();
+        customerTable.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Account No");
+        defaultTableModel.addColumn("Name");
+        defaultTableModel.addColumn("Company");
+        defaultTableModel.addColumn("Phone");
+        defaultTableModel.addColumn("Address");
+        defaultTableModel.addColumn("Valued");
 
+        System.out.println(customer);
+
+        defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress()});
     }
 
     public GUIControl getGuiControl() {

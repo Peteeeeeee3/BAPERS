@@ -28,7 +28,7 @@ public class OfficeManager extends ShiftManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void backupSystem() {
 		throw new UnsupportedOperationException();
 	}
