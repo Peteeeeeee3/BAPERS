@@ -30,7 +30,11 @@ public class RemoveUserScreen extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 if (flag == 1){
-                    getGuiControl().getController().getAccountControl().removeUser(id);
+                    try {
+                        guiControl.getController().getAccountControl().vecUser.removeUser(id);
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
                     JOptionPane.showMessageDialog(confirmButton, "User has been removed");
                 } else {
                     JOptionPane.showMessageDialog(confirmButton, "Please tick the remove check box");

@@ -8,7 +8,6 @@ public class OfficeManager extends ShiftManager {
 	private VectorOfUsers vecUser;
 	public AccountControl accControl;
 	private VectorOfAccounts vecAcc;
-	public Discount disc;
 	public DiscountBand discB;
 	public Customer cust;
 	public ValuedCustomer valCust;
@@ -39,22 +38,10 @@ public class OfficeManager extends ShiftManager {
 		throw new UnsupportedOperationException();
 	}
 
-	public void upgradeCustomer(int customerID) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		accControl.upgradeCust(customerID);
-
-		//Database Update//
-		String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
-		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		preparedStatement.setInt(1, 1);
-		preparedStatement.setInt(2, cust.getAccountNo());
-		accControl.getControl().getDBC().write(preparedStatement);
-
-	}
-
 	public void defineBands(int accountNo, float maxrange, float minrange) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		float difference = 0;
-		for(int i = 0; i < vecAcc.getCustomerVector().size(); ++i){
-			if (vecAcc.getCustomerVector().get(i).getAccountNo() == accountNo){
+		for (int i = 0; i < vecAcc.getCustomerVector().size(); ++i) {
+			if (vecAcc.getCustomerVector().get(i).getAccountNo() == accountNo) {
 				discB.setRange_max(maxrange);
 				discB.setRange_min(minrange);
 			}
@@ -63,29 +50,6 @@ public class OfficeManager extends ShiftManager {
 		String sql = "INSERT INTO Discount_Band (`volume`) VALUES (?)";
 		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		preparedStatement.setInt(1, (int) difference);
-		accControl.getControl().getDBC().write(preparedStatement);
-	}
-
-	public void downgradeCust(int custID) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		accControl.downgradeCust(custID);
-
-		//DatabaseUpdate//
-		String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
-		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		preparedStatement.setInt(1, 0);
-		preparedStatement.setInt(2, cust.getAccountNo());
-		accControl.getControl().getDBC().write(preparedStatement);
-	}
-
-	public void defineFlatDiscount(int custID, float rate) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		for(int i = 0; i < vecAcc.getCustomerVector().size(); ++ i){
-			if (vecAcc.getCustomerVector().get(i).getAccountNo() == custID){
-				disc.setDiscountRate(rate);
-			}
-		}
-		String sql = "INSERT INTO Flat_Discount (`rate`) VALUES (?)";
-		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		preparedStatement.setFloat(1, disc.getDiscountRate());
 		accControl.getControl().getDBC().write(preparedStatement);
 	}
 
@@ -119,7 +83,7 @@ public class OfficeManager extends ShiftManager {
 	public OfficeManager(UserAccount user) {
 		super(user);
 		createUser(user);
-		removeUser(user.getStaffID());
-		editAccess(user.getStaffID(), user.getAccess( ));
+		editAccess(user.getStaffID(), user.getAccess());
+
 	}
 }

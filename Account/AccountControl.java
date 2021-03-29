@@ -12,7 +12,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     public VectorOfAccounts vecAcc;
     public VectorOfUsers vecUser;
     private Control control;
-    public Customer customer;
     public ValuedCustomer valCustomer;
     public DiscountSet discountSet;
     public Discount discount;
@@ -57,14 +56,10 @@ public class AccountControl implements Account.I_Account, I_Database {
     }
 
     public void upgradeCust(int accountNo) {
-        if (customer.getAccountNo() == accountNo) {
-            customer = valCustomer;
-        }
+        vecAcc.upgradeCustomer(accountNo);
     }
 
     public void downgradeCust(int accountNo) {
-        if (customer.getAccountNo() == accountNo)
-            discountSet.removeDiscount(discount);
     }
 
     public void editDiscount(int accountNo) {

@@ -29,12 +29,12 @@ public class DowngradeCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
-                //try {
-                    //guiControl.getController().getAccountControl().receptionist.searchCustomer(id);
-                    //flag = 1;
-                //} catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                //    classNotFoundException.printStackTrace();
-                //}
+                try {
+                    guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
+                    flag = 1;
+                } catch (Exception classNotFoundException) {
+                    classNotFoundException.printStackTrace();
+                }
             }
         });
         downgradeButton.addActionListener(new ActionListener() {
@@ -42,12 +42,12 @@ public class DowngradeCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 if(flag == 1){
-                    //try {
-                    //    guiControl.getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
-                    //    JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded");
-                    //} catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
-                    //    throwables.printStackTrace();
-                    //}
+                    try {
+                        guiControl.getController().getAccountControl().vecAcc.downgradeCust(id);
+                        JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded");
+                    } catch (Exception throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
             }
         });

@@ -47,7 +47,7 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useViewTaskScreen(window);
+		controller.guiControl.useAddNewTaskScreen(window);
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
@@ -140,12 +140,13 @@ public class Control implements I_Control, I_Payment {
 		return false;
 	}
 
-	public void editAccess(int id, int access){
+	public OfficeManager editAccess(int id, int access){
 		try{
 			accountControl.updateAccess(id, access);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public void viewTasks(int id){
@@ -188,5 +189,4 @@ public class Control implements I_Control, I_Payment {
 	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
 		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card);
 	}
-
 }

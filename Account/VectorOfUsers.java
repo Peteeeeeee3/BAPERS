@@ -27,15 +27,14 @@ public class VectorOfUsers {
 		//System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
 
-	public void removeUser(int id){
-		users.remove(id);
-		decrementNoOfUsers();
 
-		String sql = "DELETE FROM Staff_Member (`staffid`, `password`, `name`, `access`) WHERE `staffid = ?`";
-		try(PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
+	public void removeUser(int id) {
+		try {
+			String sql = "DELETE FROM Staff_Member (staffid, password, name, access) WHERE staffid = ?";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			accControl.getControl().getDBC().write(preparedStatement);
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -119,7 +118,7 @@ public class VectorOfUsers {
 			}
 		}
 		try {
-			String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID = ?;";
+			String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID == ?;";
 			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, access);
 			preparedStatement.setInt(2, id);

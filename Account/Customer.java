@@ -13,7 +13,9 @@ public class Customer {
     private String address;
     private int phone;
     private VectorOfAccounts vecAcc;
+    private int valued;
     public Payment payment;
+    private DiscountSet discountSet;
 
 
     public void addJob() {
@@ -68,6 +70,14 @@ public class Customer {
         return vecAcc;
     }
 
+    public DiscountSet getDiscountSet() {
+        return discountSet;
+    }
+
+    public void setDiscountSet(DiscountSet discountSet) {
+        this.discountSet = discountSet;
+    }
+
     public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         String sql = "SELECT `accountNo` FROM `Customer` WHERE Customer.name = ? AND Customer.company = ? AND Customer.address = ? AND phone=?";
         PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -118,5 +128,15 @@ public class Customer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Customer(String company, String name, String address, int phone, VectorOfAccounts vecAcc, int accountNo, int valued)  {
+        this.company = company;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.vecAcc = vecAcc;
+        this.accountNo = accountNo;
+        this.valued = valued;
     }
 }

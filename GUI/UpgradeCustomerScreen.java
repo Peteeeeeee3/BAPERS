@@ -1,5 +1,7 @@
 package GUI;
 
+import Account.Customer;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,12 +33,15 @@ public class UpgradeCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchTextField.getText());
-                //try {
-                //    guiControl.getController().getAccountControl().receptionist.searchCustomer(id);
-                //    flag = 1;
-                //} catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                //    classNotFoundException.printStackTrace();
-                //}
+                try {
+                    Customer cust = guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
+                    if (cust == null) {
+                        //enter handling code here
+                    }
+                    flag = 1;
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
             }
         });
         backButton.addActionListener(new ActionListener() {
@@ -51,13 +56,13 @@ public class UpgradeCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchTextField.getText());
                 if (flag == 1){
-                    //try {
-                    //    getGuiControl().getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
-                    //} catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
-                    //    throwables.printStackTrace();
-                    //}
-                    //guiControl.closeCurrentFrame();
-                    //guiControl.useSelectDiscountScreen(guiControl);
+                    try {
+                        getGuiControl().getController().getAccountControl().upgradeCust(id);
+                    } catch (Exception throwables) {
+                        throwables.printStackTrace();
+                    }
+                    guiControl.closeCurrentFrame();
+                    guiControl.useSelectDiscountScreen(guiControl);
                 }
             }
         });

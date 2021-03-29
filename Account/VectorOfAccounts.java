@@ -1,6 +1,7 @@
 package Account;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import Account.Customer;
@@ -61,5 +62,70 @@ public class VectorOfAccounts {
 
 	public VectorOfAccounts(AccountControl accountControl) {
 		this.accControl = accountControl;
+	}
+
+	public Customer searchCustomer(int id) {
+		//Database version might need fixing//
+		int accountno = 0, phone = 0, valued = 0;
+		String name = "", company = "", address = "";
+
+		String sql = "SELECT *" + " FROM customer" + " WHERE accountNo = ?";
+		try {
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			ResultSet rs;
+			preparedStatement.setInt(1, id);
+			rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
+			while (rs.next()) {
+				accountno = rs.getInt("accountNo");
+				name = rs.getString("name");
+				company = rs.getString("company");
+				phone = rs.getInt("phone");
+				address = rs.getString("address");
+				valued = rs.getInt("valued");
+			}
+			if (company.equals("") || name.equals("") || address.equals("") || phone == 0 || accountno == 0 || valued == 0) {
+				return new Customer(company, name, address, phone, this, accountno, valued);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void upgradeCustomer(int customerID) {
+		try {
+			//Database Update//
+			String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, 1);
+			preparedStatement.setInt(2, customerID);
+			accControl.getControl().getDBC().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void downgradeCust(int custID) {
+		try {
+			//Database Update//
+			String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, 0);
+			preparedStatement.setInt(2, custID);
+			accControl.getControl().getDBC().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void defineFlatDiscount(int custID, float rate) {
+		try {
+			String sql = "INSERT INTO Flat_Discount (`rate`) VALUES (?)";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			preparedStatement.setFloat(1, rate);
+			accControl.getControl().getDBC().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
