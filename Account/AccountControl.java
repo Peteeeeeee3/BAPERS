@@ -42,7 +42,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         }
         vecUser.addUser(new UserAccount(password, name, access, this.vecUser));
     }
-
+    
     public void removeUser(int id){
         for (int i = 0; i < vecUser.getVector().size(); i++){
             if (vecUser.getVector().get(i).getStaffID() == id){
@@ -52,12 +52,7 @@ public class AccountControl implements Account.I_Account, I_Database {
     }
 
     public void updateAccess(int id, int newAccess){
-        System.out.println(this.officeManager);
-        officeManager.editAccess(id, newAccess);
-
-    public void updateAccess(int id, int newAccess){
         vecUser.editAccess(id, newAccess);
-
     }
 
     public void upgradeCust(int accountNo) {

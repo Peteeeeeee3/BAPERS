@@ -48,7 +48,6 @@ public class Control implements I_Control, I_Payment {
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
 		controller.guiControl.useAddNewTaskScreen(window);
-
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
