@@ -1,5 +1,4 @@
 package GUI;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +10,7 @@ public class EditAccessScreen extends JPanel {
     private JCheckBox editAccessCheckBox;
     private JButton confirmButton;
     private JButton backButton;
-    private JTextField newAccessLevel;
+    private JTextField accessLevel;
     public GUIControl guiControl;
     int flag = 0;
 
@@ -43,9 +42,9 @@ public class EditAccessScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
-                int nAccessLevel = Integer.parseInt(newAccessLevel.getText());
+                int nAccessLevel = Integer.parseInt(accessLevel.getText());
                 if (flag == 1){
-                    getGuiControl().getController().editAccess(id, nAccessLevel);
+                    getGuiControl().getController().getAccountControl().updateAccess(id, nAccessLevel);
                     JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
                 } else {
                     JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");
