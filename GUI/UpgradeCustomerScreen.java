@@ -31,12 +31,12 @@ public class UpgradeCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchTextField.getText());
-                try {
-                    guiControl.getController().getAccountControl().receptionist.searchCustomer(id);
-                    flag = 1;
-                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                    classNotFoundException.printStackTrace();
-                }
+                //try {
+                //    guiControl.getController().getAccountControl().receptionist.searchCustomer(id);
+                //    flag = 1;
+                //} catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
+                //    classNotFoundException.printStackTrace();
+                //}
             }
         });
         backButton.addActionListener(new ActionListener() {
@@ -51,13 +51,13 @@ public class UpgradeCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchTextField.getText());
                 if (flag == 1){
-                    try {
-                        getGuiControl().getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
-                    } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
-                        throwables.printStackTrace();
-                    }
-                    guiControl.closeCurrentFrame();
-                    guiControl.useSelectDiscountScreen(guiControl);
+                    //try {
+                    //    getGuiControl().getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
+                    //} catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                    //    throwables.printStackTrace();
+                    //}
+                    //guiControl.closeCurrentFrame();
+                    //guiControl.useSelectDiscountScreen(guiControl);
                 }
             }
         });

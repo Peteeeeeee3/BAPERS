@@ -44,7 +44,7 @@ public class EditAccessScreen extends JPanel {
                 int id = Integer.parseInt(textField1.getText());
                 int nAccessLevel = Integer.parseInt(accessLevel.getText());
                 if (flag == 1){
-                    getGuiControl().getController().editAccess(id, nAccessLevel);
+                    getGuiControl().getController().getAccountControl().updateAccess(id, nAccessLevel);
                     JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
                 } else {
                     JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");

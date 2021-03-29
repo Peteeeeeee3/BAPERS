@@ -33,12 +33,12 @@ public class FixedDiscountScreen extends JPanel {
                 if(amountField.getText().isEmpty()){
                     JOptionPane.showMessageDialog(confirmButton, "Please enter an amount.");
                 } else {
-                    try {
-                        getGuiControl().getController().getAccountControl().getOfficeManager().defineFlatDiscount(id, amount);
-                    } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
-                        throwables.printStackTrace();
-                    }
-                    JOptionPane.showMessageDialog(confirmButton, "Confirmed");
+                    //try {
+                    //    getGuiControl().getController().getAccountControl().getOfficeManager().defineFlatDiscount(id, amount);
+                    //} catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                    //    throwables.printStackTrace();
+                    //}
+                    //JOptionPane.showMessageDialog(confirmButton, "Confirmed");
                 }
             }
         });

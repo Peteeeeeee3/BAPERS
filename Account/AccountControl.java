@@ -42,7 +42,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         }
         vecUser.addUser(new UserAccount(password, name, access, this.vecUser));
     }
-    
+
     public void removeUser(int id){
         for (int i = 0; i < vecUser.getVector().size(); i++){
             if (vecUser.getVector().get(i).getStaffID() == id){
