@@ -52,7 +52,12 @@ public class DowngradeCustomerScreen extends JPanel {
                     try {
                         getGuiControl().getController().getAccountControl().vecAcc.downgradeCust(id);
                         fetchData();
-                        JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded. Click search again to see result.");
+                        if (customer.getValued() == 1){
+                            JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded. Click search again to see result.");
+                        } else {
+                            JOptionPane.showMessageDialog(downgradeButton, "Customer cannot be downgraded any further.");
+                        }
+
                     } catch (Exception throwables) {
                         throwables.printStackTrace();
                     }
@@ -77,11 +82,6 @@ public class DowngradeCustomerScreen extends JPanel {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Address");
         defaultTableModel.addColumn("Valued");
-        if(customer.getAccountNo() != 0) {
-            flag = 0;
-        } else {
-            flag = 1;
-        }
         defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 

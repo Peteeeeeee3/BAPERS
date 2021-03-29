@@ -58,7 +58,7 @@ public class ViewTaskScreen extends JPanel{
 
     public void FetchData(){
         defaultTableModel = new DefaultTableModel();
-        table1 = new JTable(defaultTableModel);
+        table1.setModel(defaultTableModel);
         defaultTableModel.addColumn("Task ID");
         defaultTableModel.addColumn("Task Description");
         defaultTableModel.addColumn("Location");
