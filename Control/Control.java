@@ -43,12 +43,12 @@ public class Control implements I_Control, I_Payment {
 		controller.printerGateway = new PrinterGateway();
 		//make a window
 
-//		JFrame window = new JFrame();
-//		// set this to a GUIControl
-//		controller.guiControl = new GUIControl(controller, window);
-//		//make it be the login screen
-//		controller.guiControl.useAddNewTaskScreen(window);
-//		window.setVisible(true);
+		JFrame window = new JFrame();
+		// set this to a GUIControl
+		controller.guiControl = new GUIControl(controller, window);
+		//make it be the login screen
+		controller.guiControl.useAddNewTaskScreen(window);
+		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");
