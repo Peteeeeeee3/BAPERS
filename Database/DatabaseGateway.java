@@ -76,7 +76,15 @@ public class DatabaseGateway {
 			sql.executeUpdate();
 			connection.commit();
 		} catch (SQLException e ) {
-			e.printStackTrace();
+			//e.printStackTrace();
+
+			System.err.println("Message: " + e.getMessage());
+
+			Throwable t = e.getCause();
+			while (t != null) {
+				System.out.println("Cause: " + t);
+				t = t.getCause();
+			}
 		}
 }
 

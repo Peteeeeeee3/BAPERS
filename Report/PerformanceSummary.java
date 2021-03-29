@@ -8,6 +8,7 @@ public class PerformanceSummary extends Report {
     private int startDate;
     private int endDate;
     private Vector<SummaryInfo> info_vec = new Vector<SummaryInfo>();
+    private HashMap<Integer, Integer> date_hoursMap = new HashMap<>();
 
     public int getDate() {
         return this.date;

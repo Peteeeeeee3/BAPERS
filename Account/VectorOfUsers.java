@@ -93,16 +93,7 @@ public class VectorOfUsers {
 			access = rs.getInt(1);
 		}
 		System.out.println(access + " " + ID + " " + password);
-		switch (access) {
-			case 1:
-				return true;
-			case 2:
-				return true;
-			case 3:
-				return true;
-			case 4:
-				return true;
-		}
+		accControl.setAccess(access);
 		return false;
 	}
 

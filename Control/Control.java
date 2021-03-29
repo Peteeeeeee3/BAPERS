@@ -41,12 +41,12 @@ public class Control implements I_Control, I_Payment {
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
 		//make a window
-		JFrame window = new JFrame();
-		// set this to a GUIControl
-		controller.guiControl = new GUIControl(controller, window);
-		//make it be the login screen
-		controller.guiControl.useAddNewTaskScreen(window);
-		window.setVisible(true);
+//		JFrame window = new JFrame();
+//		// set this to a GUIControl
+//		controller.guiControl = new GUIControl(controller, window);
+//		//make it be the login screen
+//		controller.guiControl.useAddNewTaskScreen(window);
+//		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");
@@ -99,7 +99,7 @@ public class Control implements I_Control, I_Payment {
 
 		////Performance Summary report print test////
 
-		//controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
+		controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
 
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
@@ -146,6 +146,14 @@ public class Control implements I_Control, I_Payment {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	public int getAccess() {
+		return access;
+	}
+
+	public void setAccess(int access) {
+		this.access = access;
 	}
 
 	@Override

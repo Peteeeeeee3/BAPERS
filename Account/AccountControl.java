@@ -125,5 +125,8 @@ public class AccountControl implements Account.I_Account, I_Database {
         }
     }
 
+    void setAccess(int access) {
+        control.setAccess(access);
+    }
 }
 
