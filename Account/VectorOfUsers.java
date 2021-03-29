@@ -109,7 +109,18 @@ public class VectorOfUsers {
 		for (UserAccount ua : users) {
 			if (ua.getStaffID() == id) {
 				ua.setAccess(access);
+				break;
 			}
+		}
+		try {
+			String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID == ?;";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, access);
+			preparedStatement.setInt(2, id);
+
+			accControl.getControl().getDBC().getDBGateway().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
