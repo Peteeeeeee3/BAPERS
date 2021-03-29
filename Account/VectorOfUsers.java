@@ -8,18 +8,18 @@ import java.util.Vector;
 public class VectorOfUsers {
 	private UserAccount user;
 	private int noOfUsers = 0;
-	public AccountControl accControl;
-	public Vector<UserAccount> users = new Vector<UserAccount>();
+	private AccountControl accControl;
+	private Vector<UserAccount> users = new Vector<UserAccount>();
 
-	public void incrementNoOfUsers() {
+	private void incrementNoOfUsers() {
 		noOfUsers++;
 	}
 
-	public void decrementNoOfUsers() {
+	private void decrementNoOfUsers() {
 		noOfUsers--;
 	}
 
-	public void addUser(UserAccount user) {
+	void addUser(UserAccount user) {
 		users.add(user);
 		incrementNoOfUsers();
 
@@ -33,7 +33,7 @@ public class VectorOfUsers {
 
 	}
 
-	public UserAccount retrieveUser(int staffID) {
+	UserAccount retrieveUser(int staffID) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getStaffID() == staffID) {
 				return users.get(i);
@@ -42,7 +42,7 @@ public class VectorOfUsers {
 		return null;
 	}
 
-	public AccountControl getAccControl() {
+	AccountControl getAccControl() {
 		return accControl;
 	}
 
@@ -73,7 +73,7 @@ public class VectorOfUsers {
 	}
 
 	//returns true if matching data is found and false if none is found
-	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+	boolean login(int ID, String password) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 		//Query database
 		String sql = "SELECT access FROM staff_member WHERE staff_member.staffID = ? AND staff_member.password = ?";
 		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -92,16 +92,7 @@ public class VectorOfUsers {
 			access = rs.getInt(1);
 		}
 		System.out.println(access + " " + ID + " " + password);
-		switch (access) {
-			case 1:
-				return true;
-			case 2:
-				return true;
-			case 3:
-				return true;
-			case 4:
-				return true;
-		}
+		accControl.setAccess(access);
 		return false;
 	}
 
@@ -109,8 +100,26 @@ public class VectorOfUsers {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfUsers(AccountControl accountControl) {
+	VectorOfUsers(AccountControl accountControl) {
 		this.accControl = accountControl;
 	}
 
+	void editAccess(int id, int access) {
+		for (UserAccount ua : users) {
+			if (ua.getStaffID() == id) {
+				ua.setAccess(access);
+				break;
+			}
+		}
+		try {
+			String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID == ?;";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, access);
+			preparedStatement.setInt(2, id);
+
+			accControl.getControl().getDBC().getDBGateway().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

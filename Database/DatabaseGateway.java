@@ -11,7 +11,7 @@ public class DatabaseGateway {
 	public void connectToDB() {
 		try {
 			//Peter
-			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		    //Hanan
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
@@ -23,7 +23,7 @@ public class DatabaseGateway {
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
 			//Farhan
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
+			//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
 
 			//Abdullah
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -76,7 +76,15 @@ public class DatabaseGateway {
 			sql.executeUpdate();
 			connection.commit();
 		} catch (SQLException e ) {
-			e.printStackTrace();
+			//e.printStackTrace();
+
+			System.err.println("Message: " + e.getMessage());
+
+			Throwable t = e.getCause();
+			while (t != null) {
+				System.out.println("Cause: " + t);
+				t = t.getCause();
+			}
 		}
 }
 
