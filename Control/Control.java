@@ -47,7 +47,7 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useEditAccessScreen(window);
+		controller.guiControl.useViewTaskScreen(window);
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
@@ -106,8 +106,6 @@ public class Control implements I_Control, I_Payment {
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
 	}
-
-
 
 	public Control() throws ClassNotFoundException, SQLException {
 		DBC = new DBControl();

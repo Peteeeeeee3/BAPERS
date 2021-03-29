@@ -49,6 +49,7 @@ public class AccountControl implements Account.I_Account, I_Database {
                 break;
             }
         }
+        vecUser.removeUser(id);
     }
 
     public void updateAccess(int id, int newAccess){

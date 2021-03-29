@@ -67,9 +67,8 @@ public class ViewTaskScreen extends JPanel{
         defaultTableModel.addColumn("Duration");
 
         int id = Integer.parseInt(textField1.getText());
-        getGuiControl().getController().viewTasks(id);
+        getGuiControl().getController().getJobControl().viewTask(id);
         defaultTableModel.addRow(new Object[]{2,3,4,5});
-        
     }
 
     public GUIControl getGuiControl() {

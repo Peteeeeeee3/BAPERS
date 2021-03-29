@@ -135,10 +135,9 @@ public class Task {
 
 	}
 
-	public void viewTask(int taskID ){
+	public void viewTask(int taskID){
 
 		try {
-
 			String find = "SELECT * FROM Task WHERE taskID=" + taskID;
 			PreparedStatement stmt = db.getConnection().prepareStatement(find);
 			ResultSet result = stmt.executeQuery(find);

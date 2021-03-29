@@ -104,17 +104,12 @@ public class OfficeManager extends ShiftManager {
 		}
 	}
 
+	public void removeUser(int id) {
+		vecUser.removeUser(id);
 
-
-	public void removeUser(UserAccount user) {
-		vecUser.removeUser(user);
-
-		String sql = "DELETE FROM Staff_Member (`staffid`, `password`, `name`, `access`) WHERE (?, ?, ?, ?)";
+		String sql = "DELETE FROM Staff_Member (`staffid`, `password`, `name`, `access`) WHERE `staffid = ?`";
 		try(PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
-			preparedStatement.setInt(1, user.getStaffID());
-			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.setString(3, user.getName());
-			preparedStatement.setInt(4, user.getAccess());
+			preparedStatement.setInt(1, id);
 			accControl.getControl().getDBC().write(preparedStatement);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -124,6 +119,7 @@ public class OfficeManager extends ShiftManager {
 	public OfficeManager(UserAccount user) {
 		super(user);
 		createUser(user);
+		removeUser(user.getStaffID());
 		editAccess(user.getStaffID(), user.getAccess( ));
 	}
 }
