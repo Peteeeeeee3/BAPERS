@@ -46,7 +46,19 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecUser.addUser(new UserAccount(password, name, access, this.vecUser));
     }
 
-    public void updateAccess(int id, int newAccess){officeManager.editAccess(id, newAccess);}
+    public void removeUser(int id){
+        for (int i = 0; i < vecUser.getVector().size(); i++){
+            if (vecUser.getVector().get(i).getStaffID() == id){
+                break;
+            }
+        }
+        vecUser.removeUser(new UserAccount(userAccount.getPassword(), userAccount.getName(), userAccount.getAccess(), this.vecUser));
+    }
+
+    public void updateAccess(int id, int newAccess){
+        System.out.println(this.officeManager);
+        officeManager.editAccess(id, newAccess);
+    }
 
     public void upgradeCust(int accountNo) {
         if (customer.getAccountNo() == accountNo) {
@@ -67,7 +79,6 @@ public class AccountControl implements Account.I_Account, I_Database {
         throw new UnsupportedOperationException();
     }
 
-
     public AccountControl(Control ctrl) {
         this.vecUser = new VectorOfUsers(this);
         this.vecAcc = new VectorOfAccounts(this);
@@ -75,7 +86,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     }
 
     //////// Override Methods ///////
-
     @Override
     public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         return vecUser.login(ID, password);

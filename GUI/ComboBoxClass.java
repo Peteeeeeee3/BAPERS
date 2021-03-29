@@ -1,10 +1,10 @@
 package GUI;
 
-public class ConfigureScheduleComboBox {
+public class ComboBoxClass {
     private String key;
     private String value;
 
-    public ConfigureScheduleComboBox(String key, String value){
+    public ComboBoxClass(String key, String value){
         this.key = key;
         this.value = value;
     }

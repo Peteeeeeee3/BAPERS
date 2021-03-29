@@ -106,17 +106,19 @@ public class OfficeManager extends ShiftManager {
 
 
 
-	public void removeUser(UserAccount user) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		vecUser.removeUser(user.getStaffID());
+	public void removeUser(UserAccount user) {
+		vecUser.removeUser(user);
 
 		String sql = "DELETE FROM Staff_Member (`staffid`, `password`, `name`, `access`) WHERE (?, ?, ?, ?)";
-		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		preparedStatement.setInt(1, user.getStaffID());
-		preparedStatement.setString(2, user.getPassword());
-		preparedStatement.setString(3, user.getName());
-		preparedStatement.setInt(4, user.getAccess());
-		accControl.getControl().getDBC().write(preparedStatement);
-
+		try(PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
+			preparedStatement.setInt(1, user.getStaffID());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setString(3, user.getName());
+			preparedStatement.setInt(4, user.getAccess());
+			accControl.getControl().getDBC().write(preparedStatement);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	public OfficeManager(UserAccount user) {
