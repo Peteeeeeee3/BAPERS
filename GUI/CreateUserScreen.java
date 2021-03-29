@@ -30,11 +30,10 @@ public class CreateUserScreen extends JPanel {
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id = Integer.parseInt(userIDTextField.getText());
                 String name = nameTextField.getText();
                 char[] pw = passwordTextField.getPassword();
                 int access = Integer.parseInt(accessTextField.getText());
-                getGuiControl().getController().getAccountControl().createUser(id, new String(pw), name, access);
+                getGuiControl().getController().getAccountControl().createUser(new String(pw), name, access);
                 JOptionPane.showMessageDialog(addUserButton, "User has been successfully added");
                 guiControl.closeCurrentFrame();
                 guiControl.useAdminScreen(guiControl);
