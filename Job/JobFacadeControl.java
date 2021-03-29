@@ -54,7 +54,9 @@ public class JobFacadeControl implements I_Job, I_Database {
 		vecJobs.addJob(new Job(ID, summary, startTime, urgency));
 	}
 
-
+	public void viewTask(int taskID){
+		vecTasks.viewTask(taskID);
+	}
 
 	public void addTaskToJob(int jobID, int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		TaskForJob taskForJob ;
@@ -69,7 +71,6 @@ public class JobFacadeControl implements I_Job, I_Database {
 
 			}
 		}
-
 	}
 
 	public void removeTaskFromJob(int jobID, int taskID){}
@@ -99,7 +100,6 @@ public class JobFacadeControl implements I_Job, I_Database {
 		this.vecTasks = new VectorOfTasks(this);
 		vecJobs = new VectorOfJobs(vecJobs, this);
 	}
-
 
 	public Task getTask(){return task;}
 

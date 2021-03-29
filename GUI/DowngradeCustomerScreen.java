@@ -1,6 +1,9 @@
 package GUI;
 
+import Account.Customer;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -12,11 +15,14 @@ public class DowngradeCustomerScreen extends JPanel {
     private JTable table1;
     private JButton backButton;
     private JButton downgradeButton;
+    private JPanel downgradeCustPanel;
+    DefaultTableModel defaultTableModel;
+    public Customer customer;
     int flag = 0;
 
     public DowngradeCustomerScreen(GUIControl guiControl, JFrame frame){
         this.guiControl = guiControl;
-        frame.setContentPane(new SearchCustomerScreen(guiControl).searchCustomerPanel);
+        frame.setContentPane(new DowngradeCustomerScreen(guiControl).downgradeCustPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
@@ -30,7 +36,8 @@ public class DowngradeCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 try {
-                    guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
+                    customer = guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
+                    fetchData();
                     flag = 1;
                 } catch (Exception classNotFoundException) {
                     classNotFoundException.printStackTrace();
@@ -43,8 +50,14 @@ public class DowngradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(textField1.getText());
                 if(flag == 1){
                     try {
-                        guiControl.getController().getAccountControl().vecAcc.downgradeCust(id);
-                        JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded");
+                        getGuiControl().getController().getAccountControl().vecAcc.downgradeCust(id);
+                        fetchData();
+                        if (customer.getValued() == 1){
+                            JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded. Click search again to see result.");
+                        } else {
+                            JOptionPane.showMessageDialog(downgradeButton, "Customer cannot be downgraded any further.");
+                        }
+
                     } catch (Exception throwables) {
                         throwables.printStackTrace();
                     }
@@ -58,6 +71,18 @@ public class DowngradeCustomerScreen extends JPanel {
                 guiControl.openPreviousFrame();
             }
         });
+    }
+
+    public void fetchData(){
+        defaultTableModel = new DefaultTableModel();
+        table1.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Account No");
+        defaultTableModel.addColumn("Name");
+        defaultTableModel.addColumn("Company");
+        defaultTableModel.addColumn("Phone");
+        defaultTableModel.addColumn("Address");
+        defaultTableModel.addColumn("Valued");
+        defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 
     public GUIControl getGuiControl() {

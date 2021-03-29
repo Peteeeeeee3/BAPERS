@@ -24,7 +24,6 @@ public class ViewTaskScreen extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
-
     }
 
     public ViewTaskScreen(GUIControl guiControl){
@@ -59,7 +58,7 @@ public class ViewTaskScreen extends JPanel{
 
     public void FetchData(){
         defaultTableModel = new DefaultTableModel();
-        table1 = new JTable(defaultTableModel);
+        table1.setModel(defaultTableModel);
         defaultTableModel.addColumn("Task ID");
         defaultTableModel.addColumn("Task Description");
         defaultTableModel.addColumn("Location");
@@ -67,9 +66,8 @@ public class ViewTaskScreen extends JPanel{
         defaultTableModel.addColumn("Duration");
 
         int id = Integer.parseInt(textField1.getText());
-        getGuiControl().getController().viewTasks(id);
+        getGuiControl().getController().getJobControl().viewTask(id);
         defaultTableModel.addRow(new Object[]{2,3,4,5});
-        
     }
 
     public GUIControl getGuiControl() {

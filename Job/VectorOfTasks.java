@@ -1,6 +1,8 @@
 
 package Job;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import Job.Task;
@@ -46,6 +48,26 @@ public class VectorOfTasks {
 		return this.noOfTasks;
 	}
 
+	public void viewTask(int taskID){
+
+		String find = "SELECT * FROM Task WHERE taskID=" + taskID;
+		try (PreparedStatement preparedStatement = jfc.getControl().getDBC().getDBGateway().getConnection().prepareStatement(find)){
+			preparedStatement.setInt(1,taskID);
+			ResultSet rs = jfc.getControl().getDBC().read(preparedStatement);
+			while (rs.next()){
+				String description = rs.getString(2);
+				System.out.println(description);
+				String location = rs.getString(3);
+				System.out.println(location);
+				double price = rs.getInt(4);
+				System.out.println(price);
+				int duration = rs.getInt(5);
+				System.out.println(duration);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public Vector<Task> getVector() {
 		return this.tasks;
