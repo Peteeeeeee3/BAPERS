@@ -12,9 +12,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     public VectorOfAccounts vecAcc;
     public VectorOfUsers vecUser;
     private Control control;
-    public OfficeManager officeManager;
-    public Receptionist receptionist;
-    public UserAccount userAccount;
     public Customer customer;
     public ValuedCustomer valCustomer;
     public DiscountSet discountSet;
@@ -46,7 +43,9 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecUser.addUser(new UserAccount(password, name, access, this.vecUser));
     }
 
-    public void updateAccess(int id, int newAccess){officeManager.editAccess(id, newAccess);}
+    public void updateAccess(int id, int newAccess){
+        vecUser.editAccess(id, newAccess);
+    }
 
     public void upgradeCust(int accountNo) {
         if (customer.getAccountNo() == accountNo) {
@@ -89,8 +88,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     public Control getControl() {
         return control;
     }
-
-    public OfficeManager getOfficeManager(){return officeManager;}
 
     @Override
     public void connectDB() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {

@@ -122,6 +122,6 @@ public class OfficeManager extends ShiftManager {
 	public OfficeManager(UserAccount user) {
 		super(user);
 		createUser(user);
-		editAccess(user.getStaffID(), user.getAccess());
+		editAccess(user.getStaffID(), user.getAccess( ));
 	}
 }

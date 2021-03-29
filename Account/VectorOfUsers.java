@@ -8,18 +8,18 @@ import java.util.Vector;
 public class VectorOfUsers {
 	private UserAccount user;
 	private int noOfUsers = 0;
-	public AccountControl accControl;
-	public Vector<UserAccount> users = new Vector<UserAccount>();
+	private AccountControl accControl;
+	private Vector<UserAccount> users = new Vector<UserAccount>();
 
-	public void incrementNoOfUsers() {
+	private void incrementNoOfUsers() {
 		noOfUsers++;
 	}
 
-	public void decrementNoOfUsers() {
+	private void decrementNoOfUsers() {
 		noOfUsers--;
 	}
 
-	public void addUser(UserAccount user) {
+	void addUser(UserAccount user) {
 		users.add(user);
 		incrementNoOfUsers();
 
@@ -34,7 +34,7 @@ public class VectorOfUsers {
 		//accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
 	}
 
-	public UserAccount retrieveUser(int staffID) {
+	UserAccount retrieveUser(int staffID) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getStaffID() == staffID) {
 				return users.get(i);
@@ -43,7 +43,7 @@ public class VectorOfUsers {
 		return null;
 	}
 
-	public AccountControl getAccControl() {
+	AccountControl getAccControl() {
 		return accControl;
 	}
 
@@ -74,7 +74,7 @@ public class VectorOfUsers {
 	}
 
 	//returns true if matching data is found and false if none is found
-	public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+	boolean login(int ID, String password) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 		//Query database
 		String sql = "SELECT access FROM staff_member WHERE staff_member.staffID = ? AND staff_member.password = ?";
 		PreparedStatement prepStat = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -101,8 +101,15 @@ public class VectorOfUsers {
 		throw new UnsupportedOperationException();
 	}
 
-	public VectorOfUsers(AccountControl accountControl) {
+	VectorOfUsers(AccountControl accountControl) {
 		this.accControl = accountControl;
 	}
 
+	void editAccess(int id, int access) {
+		for (UserAccount ua : users) {
+			if (ua.getStaffID() == id) {
+				ua.setAccess(access);
+			}
+		}
+	}
 }
