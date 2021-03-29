@@ -20,7 +20,6 @@ public class JobFacadeControl implements I_Job, I_Database {
 	public Task task;
 
 	public void addTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		Task task = null;
 		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
 			if (vecTasks.getVector().get(i).getTaskID() == taskID) {
 				task = vecTasks.getVector().get(i);

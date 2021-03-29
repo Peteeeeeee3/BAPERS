@@ -11,6 +11,7 @@ public class EditAccessScreen extends JPanel {
     private JCheckBox editAccessCheckBox;
     private JButton confirmButton;
     private JButton backButton;
+    private JTextField newAccessLevel;
     public GUIControl guiControl;
     int flag = 0;
 
@@ -34,20 +35,17 @@ public class EditAccessScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
-                guiControl.openPreviousFrame();
+                getGuiControl().closeCurrentFrame();
+                getGuiControl().openPreviousFrame();
             }
         });
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
+                int nAccessLevel = Integer.parseInt(newAccessLevel.getText());
                 if (flag == 1){
-                    try {
-                        guiControl.getController().getAccountControl().updateAccess(id);
-                    } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                        classNotFoundException.printStackTrace();
-                    }
+                    getGuiControl().getController().getAccountControl().getOfficeManager().editAccess(id, nAccessLevel);
                     JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
                 } else {
                     JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");

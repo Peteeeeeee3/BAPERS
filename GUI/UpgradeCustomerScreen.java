@@ -52,7 +52,7 @@ public class UpgradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(searchTextField.getText());
                 if (flag == 1){
                     try {
-                        guiControl.getController().getAccountControl().officeManager.upgradeCustomer(id);
+                        getGuiControl().getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
                     } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
                     }
