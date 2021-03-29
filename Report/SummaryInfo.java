@@ -15,6 +15,9 @@ public class SummaryInfo {
     public String getLocation() {
         return location;
     }
+    public int getDate() {
+        return date;
+    }
 
     public SummaryInfo(String location, int value, int shift, int date) {
         this.location = location;

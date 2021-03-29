@@ -1,5 +1,7 @@
 package GUI;
 
+import Account.Customer;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,10 +34,13 @@ public class UpgradeCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchTextField.getText());
                 try {
-                    guiControl.getController().getAccountControl().receptionist.searchCustomer(id);
+                    Customer cust = guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
+                    if (cust == null) {
+                        //enter handling code here
+                    }
                     flag = 1;
-                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                    classNotFoundException.printStackTrace();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
                 }
             }
         });
@@ -52,8 +57,8 @@ public class UpgradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(searchTextField.getText());
                 if (flag == 1){
                     try {
-                        getGuiControl().getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
-                    } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                        getGuiControl().getController().getAccountControl().upgradeCust(id);
+                    } catch (Exception throwables) {
                         throwables.printStackTrace();
                     }
                     guiControl.closeCurrentFrame();

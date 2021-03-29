@@ -64,9 +64,9 @@ public class SearchCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchBar.getText());
                 try {
-                    getGuiControl().getController().getAccountControl().receptionist.searchCustomer(id);
+                    getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
                     flag = 1;
-                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
+                } catch (Exception classNotFoundException) {
                     classNotFoundException.printStackTrace();
                 }
                 guiControl.useCreateCustomerScreen(guiControl);

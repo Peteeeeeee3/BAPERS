@@ -305,9 +305,18 @@ public class PrinterGateway {
 			shift1_table.addCell(new_cell);
 
 			//shift 1
+			int datePos = 0;
 			for (SummaryInfo si : report.getInfo_vec()) {
-				new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
-				shift1_table.addCell(new_cell);
+				if (datePos % 5 == 0) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getDate())));
+					shift1_table.addCell(new_cell);
+					datePos++;
+				}
+				if (si.getShift() == 1) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift1_table.addCell(new_cell);
+					datePos++;
+				}
 			}
 			doc.add(shift1_table);
 

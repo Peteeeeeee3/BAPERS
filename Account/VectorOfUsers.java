@@ -27,11 +27,15 @@ public class VectorOfUsers {
 		//System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
 		}
 
-	public void removeUser(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		users.remove(staffID);
-		decrementNoOfUsers();
-
-		//accControl.write("DELETE FROM Staff_Member WHERE staffID =" + staffID + ";");
+	public void removeUser(int id) {
+		try {
+			String sql = "DELETE FROM Staff_Member (staffid, password, name, access) WHERE staffid = ?";
+			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			accControl.getControl().getDBC().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	UserAccount retrieveUser(int staffID) {

@@ -32,8 +32,8 @@ public class RemoveUserScreen extends JPanel{
                 if (flag == 1){
                     try {
                         guiControl.getController().getAccountControl().vecUser.removeUser(id);
-                    } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                        classNotFoundException.printStackTrace();
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
                     }
                     JOptionPane.showMessageDialog(confirmButton, "User has been removed");
                 } else {

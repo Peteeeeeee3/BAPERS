@@ -30,9 +30,9 @@ public class DowngradeCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 try {
-                    guiControl.getController().getAccountControl().receptionist.searchCustomer(id);
+                    guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
                     flag = 1;
-                } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
+                } catch (Exception classNotFoundException) {
                     classNotFoundException.printStackTrace();
                 }
             }
@@ -43,9 +43,9 @@ public class DowngradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(textField1.getText());
                 if(flag == 1){
                     try {
-                        guiControl.getController().getAccountControl().getOfficeManager().upgradeCustomer(id);
+                        guiControl.getController().getAccountControl().vecAcc.downgradeCust(id);
                         JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded");
-                    } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                    } catch (Exception throwables) {
                         throwables.printStackTrace();
                     }
                 }
