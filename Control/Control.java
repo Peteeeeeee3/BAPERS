@@ -2,6 +2,7 @@ package Control;
 
 import Account.AccountControl;
 import Account.Customer;
+import Account.OfficeManager;
 import Database.DBControl;
 import GUI.GUIControl;
 import Job.*;
@@ -37,16 +38,17 @@ public class Control implements I_Control, I_Payment {
 		Control controller = new Control();
 		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
-		controller.jobControl = new JobFacadeControl();
+		controller.jobControl = new JobFacadeControl(controller);
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
 		//make a window
-//		JFrame window = new JFrame();
-//		// set this to a GUIControl
-//		controller.guiControl = new GUIControl(controller, window);
-//		//make it be the login screen
-//		controller.guiControl.useAddNewTaskScreen(window);
-//		window.setVisible(true);
+
+		JFrame window = new JFrame();
+		// set this to a GUIControl
+		controller.guiControl = new GUIControl(controller, window);
+		//make it be the login screen
+		controller.guiControl.useAddNewTaskScreen(window);
+		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");
@@ -138,6 +140,15 @@ public class Control implements I_Control, I_Payment {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public OfficeManager editAccess(int id, int access){
+		try{
+			accountControl.updateAccess(id, access);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void viewTasks(int id){

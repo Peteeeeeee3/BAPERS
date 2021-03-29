@@ -98,6 +98,8 @@ public class Customer {
     }
 
 
+
+
     public Customer(String company, String name, String address, int phone, VectorOfAccounts vecAcc) {
         this.company = company;
         this.name = name;

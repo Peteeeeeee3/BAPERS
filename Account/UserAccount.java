@@ -11,6 +11,7 @@ public class UserAccount {
 	private String name;
 	private VectorOfUsers vecUser;
 
+
 	public int getStaffID() {
 		return this.staffID;
 	}
@@ -70,23 +71,24 @@ public class UserAccount {
 		return finalValue;
 	}
 
-	public UserAccount(int id, String password, String name, int access, VectorOfUsers vecUser) {
-		this.password = password;
-		this.access = access;
-		this.staffID = id;
-		this.name = name;
-		this.vecUser = vecUser;
-
-		String sql = "INSERT INTO `Staff_Member`(`staffid`, `password`, `name`, `access`) VALUES (?, ?, ?, ?)";
+	public void upload(){
+		String sql = "INSERT INTO `Staff_Member`(`password`, `name`, `access`) VALUES (?, ?, ?)";
 		try (PreparedStatement preparedStatement = vecUser.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
 			this.staffID = generateAccountNo();
-			preparedStatement.setInt(1, id);
-			preparedStatement.setString(2, password);
-			preparedStatement.setString(3, name);
-			preparedStatement.setInt(4, access);
+			preparedStatement.setString(1, password);
+			preparedStatement.setString(2, name);
+			preparedStatement.setInt(3, access);
 			vecUser.getAccControl().getControl().getDBC().write(preparedStatement);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public UserAccount(String password, String name, int access, VectorOfUsers vecUser) {
+		this.password = password;
+		this.access = access;
+		this.name = name;
+		this.vecUser = vecUser;
+		upload();
 	}
 }

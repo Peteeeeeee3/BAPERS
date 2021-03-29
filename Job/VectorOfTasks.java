@@ -11,7 +11,7 @@ public class VectorOfTasks {
 	public Vector<Task> tasks = new Vector<Task>();
 	private int noOfTasks = 0;
 
-	public void addTask(Task task) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public void addTask(Task task) {
 		tasks.add(task);
 		incrementNoOfTasks();
 		//System.out.println("Data: " + task.getTaskID() + task.getLocation() + task.getDescription() + task.getPrice() + task.getDuration() + "have been inserted");
@@ -55,8 +55,7 @@ public class VectorOfTasks {
 		return jfc;
 	}
 
-	public VectorOfTasks(VectorOfTasks task, JobFacadeControl jfc) {
-		this.task = task;
+	public VectorOfTasks(JobFacadeControl jfc) {
 		this.jfc = jfc;
 	}
 

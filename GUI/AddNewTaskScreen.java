@@ -39,11 +39,7 @@ public class AddNewTaskScreen extends JPanel {
                 if(descriptionTextField.getText().isEmpty()){
                     JOptionPane.showMessageDialog(confirmButton, "Please fill out all fields");
                 } else {
-                    try {
-                        getGuiControl().getController().getJobControl().addTask(durat);
-                    } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    getGuiControl().getController().getJobControl().addTask(desc, loc, p, durat);
                     JOptionPane.showMessageDialog(confirmButton, "The follow tasks have been added");
                 }
             }

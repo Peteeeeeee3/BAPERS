@@ -37,16 +37,16 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecAcc.addCustAccount(new Customer(company, name, address, phone, this.vecAcc));
     }
 
-    public void createUser(int ID, String password, String name, int access) {
+    public void createUser(String password, String name, int access) {
         for (int i = 0; i < vecUser.getVector().size(); i++) {
-            if (vecUser.getVector().get(i).getStaffID() == ID) {
+            if (vecUser.getVector().get(i).getName().equals(name)) {
                 break;
             }
         }
-        vecUser.addUser(new UserAccount(ID, password, name, access, this.vecUser));
+        vecUser.addUser(new UserAccount(password, name, access, this.vecUser));
     }
 
-    public void updateAccess(int id, int newAccess){getOfficeManager().editAccess(id, newAccess);}
+    public void updateAccess(int id, int newAccess){officeManager.editAccess(id, newAccess);}
 
     public void upgradeCust(int accountNo) {
         if (customer.getAccountNo() == accountNo) {
@@ -67,12 +67,12 @@ public class AccountControl implements Account.I_Account, I_Database {
         throw new UnsupportedOperationException();
     }
 
+
     public AccountControl(Control ctrl) {
         this.vecUser = new VectorOfUsers(this);
         this.vecAcc = new VectorOfAccounts(this);
         this.control = ctrl;
     }
-
 
     //////// Override Methods ///////
 
@@ -84,10 +84,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     @Override
     public void logout() {
 
-    }
-
-    public void updateAccess(int staffID, Object newAccess) {
-        throw new UnsupportedOperationException();
     }
 
     public Control getControl() {
