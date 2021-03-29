@@ -55,7 +55,11 @@ public class UpgradeCustomerScreen extends JPanel {
                 if (flag == 1){
                     getGuiControl().getController().getAccountControl().upgradeCust(id);
                     fetchData();
-                    JOptionPane.showMessageDialog(upgradeButton, "Customer has been upgraded. Click search again to see result.");
+                    if (customer.getValued() == 0){
+                        JOptionPane.showMessageDialog(upgradeButton, "Customer has been upgraded. Click search again to see result.");
+                    } else {
+                        JOptionPane.showMessageDialog(upgradeButton, "This customer is already a valued customer. Cannot upgrade further.");
+                    }
                 }
             }
         });
