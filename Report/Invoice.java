@@ -45,7 +45,7 @@ public class Invoice extends Report {
 
     private void setDate() {
         LocalDate localDate = LocalDate.now();
-        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyyMMdd");
         String text = localDate.format(formatter);
         this.date = text;
     }
@@ -54,8 +54,7 @@ public class Invoice extends Report {
         String year = Integer.toString(completedDate).substring(0, 4);
         String month = Integer.toString(completedDate).substring(4, 6);
         String day = Integer.toString(completedDate).substring(6, 8);
-        String date = year + "/" + month + "/" + day;
-        this.completedDate = date;
+        this.completedDate = year + "/" + month + "/" + day;
     }
 
     public Invoice(String name, String company, String address, int accountNo, int jobNo, long phone, int completedDate, Job job, float discount) {

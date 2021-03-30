@@ -103,7 +103,11 @@ public class Control implements I_Control, I_Payment {
 		////Performance Summary report print test////
 
 		//controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
-
+//		controller.getAccountControl().createCustomer("Microsoft", "Mark Alexander", "1 Lukas Street, FS8 62H", 989767656);
+//		Job job = new Job(2, "A", 1400, 24, controller.accountControl.vecAcc.customers.get(0).getJobs());
+//		job.vecTaskJ.addTask(new TaskForJob(new Task("Copy Room", "Hi", 5.99f, 5, controller.getJobControl().vecTasks)));
+//		job.vecTaskJ.addTask(new TaskForJob(new Task("Copy Room", "Bye", 5.99f, 5, controller.getJobControl().vecTasks)));
+//      controller.printerGateway.print(new Invoice("Julie Jolly", "No Company", "Everywhere Road 27", 2, 1, 1456634535, 20210320, job, 0.4f));
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
 	}

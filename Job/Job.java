@@ -1,9 +1,6 @@
 package Job;
 
-import Account.Customer;
 import Database.*;
-import Payment.Payment;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,20 +8,15 @@ import java.util.ArrayList;
 
 public class Job {
 	private int iD;
-	private double price;
-	private String status;
+	private int price;
 	private String summary;
-	private int startDate;
+	private String status;
 	private int startTime;
 	private int endTime;
 	private int urgency = 24;
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
-	private int customerAccNo;
-	private int paymentID;
-    
-    DatabaseGateway db = new DatabaseGateway();
 
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();
@@ -39,10 +31,11 @@ public class Job {
 		ArrayList<String> statusArray = new ArrayList<>();
 		ArrayList<String> statusCompleteArray = new ArrayList<>();
 
+
 		try {
 
 			String find = "SELECT status FROM task_of_job WHERE" + jobID;
-			PreparedStatement stmt = vecTaskJ.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
+			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
 			ResultSet result = stmt.executeQuery(find);
 
 			while (result.next()) {
@@ -91,7 +84,7 @@ public class Job {
 		return this.iD;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 
@@ -156,16 +149,10 @@ public class Job {
 		this.isPaid = isPaid;
 	}
 
-	public int getCustomerAccNo(){return customerAccNo;}
-
-	public int getPaymentID(){return paymentID;}
-
-	public int getStartDate(){return startDate;
-	}
 	public VectorOfTasksForJob getVecTaskJ() {
 		return vecTaskJ;
 	}
-    
+
 	public int generateJobNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		String sql = "SELECT `jobNumber` FROM `Job` WHERE Job.deadline = ? AND Job.priority = ? AND Job.price = ? AND Job.specialInstruction = ?";
 		PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -191,18 +178,15 @@ public class Job {
 	}
 
 
-	public Job(int ID, int custAccNo, int paymentid, String summary, int startTime, int urgency, int startDate, double price, String status, VectorOfJobs vecJob) {
+	public Job(int ID, String summary, int startTime, int urgency, VectorOfJobs vecJob) {
 		this.iD = ID;
 		this.summary = summary;
 		this.startTime = startTime;
 		this.urgency = urgency;
-		this.status = status;
-		this.price = price;
-		this.startDate = startDate;
-		this.customerAccNo = custAccNo;
-		this.paymentID = paymentid;
+		this.vecTaskJ = new VectorOfTasksForJob();
 		this.vecJob = vecJob;
 	}
+
 
 	public void viewJob (int jobID) throws SQLException {
 
@@ -210,16 +194,11 @@ public class Job {
 
 		try {
 
-			String find = "SELECT * FROM Job WHERE jobNumber= ?" + jobID;
+			String find = "SELECT * FROM Job WHERE jobNumber=" + jobID;
 			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
-			ResultSet result;
-			stmt.setInt(1, jobID);
-			result = vecJob.getControl().getControl().getDBC().read(stmt);
+			ResultSet result = stmt.executeQuery(find);
 
 			while (result.next()) {
-
-				int id = result.getInt(1);
-
 
 				int CustomerAccountNum = result.getInt(2);
 				System.out.println(CustomerAccountNum);
@@ -250,6 +229,7 @@ public class Job {
 			e.printStackTrace();
 		}
 	}
+
 
 	public void updateAllJobs() throws SQLException {
 		try {

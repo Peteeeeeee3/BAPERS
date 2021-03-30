@@ -14,11 +14,10 @@ import Database.I_Database;
 public class JobFacadeControl implements I_Job, I_Database {
 	public Vector<JobHistory> jobHist = new Vector<JobHistory>();
 	public VectorOfTasks vecTasks;
-	public VectorOfJobs vecJobs;
+	private VectorOfJobs vecJobs;
 	private Control control;
 	public VectorOfTasksForJob tfj;
 	public Task task;
-	public Job job;
 
 	public void addTask(String description, String location, float price, int duration){
 		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
@@ -40,14 +39,19 @@ public class JobFacadeControl implements I_Job, I_Database {
 		}
 	}
 
+
 	public void acceptJob(int ID ,String summary, int startTime, int urgency){
+		Job job = null;
 		for (int i = 0; i < vecJobs.getVector().size(); ++i){
 			if (vecJobs.getVector().get(i).getID() == ID){
 				job = vecJobs.getVector().get(i);
 				break;
 			}
+			if (job == null){
+				return; // the error pop up message
+			}
 		}
-		//vecJobs.addJob(new Job(ID, summary, startTime, urgency));
+		vecJobs.addJob(new Job(ID, summary, startTime, urgency, vecJobs));
 	}
 
 	public void viewTask(int taskID){
@@ -94,12 +98,10 @@ public class JobFacadeControl implements I_Job, I_Database {
 	public JobFacadeControl(Control ctrl){
 		this.control = ctrl;
 		this.vecTasks = new VectorOfTasks(this);
-		this.vecJobs = new VectorOfJobs(this);
+		vecJobs = new VectorOfJobs(this);
 	}
 
 	public Task getTask(){return task;}
-
-	public Job getJob(){return job;}
 
 	@Override
 	public void connectDB() throws ClassNotFoundException, SQLException {
