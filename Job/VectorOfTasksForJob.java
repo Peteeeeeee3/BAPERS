@@ -16,8 +16,8 @@ public class VectorOfTasksForJob {
 		incrementNoOfTasks();
 	}
 
-	public TaskForJob retrieveTask() {
-		throw new UnsupportedOperationException();
+	public TaskForJob retrieveTask(int i) {
+		return taskJ.get(i);
 	}
 
 	public TaskForJob traverse(int taskID) {

@@ -83,6 +83,7 @@ public class VectorOfAccounts {
 				address = rs.getString("address");
 				valued = rs.getInt("valued");
 			}
+
 			if (company.equals("") && name.equals("") && address.equals("") && phone == 0 && accountno == 0 && valued == 0) {
 				//return null;
 			} else {

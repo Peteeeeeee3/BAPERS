@@ -1,13 +1,11 @@
 package Printer;
 
 import Report.*;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.Pfm2afm;
 import com.mysql.cj.xdevapi.Table;
 
 import javax.swing.*;
@@ -290,6 +288,8 @@ public class PrinterGateway {
 			doc.add(p_period);
 			doc.add(p_break);
 			doc.add(p_shift1);
+			doc.add(new Paragraph(" "));
+
 
 			//shift one table
 			PdfPTable shift1_table = new PdfPTable(5);
@@ -308,11 +308,26 @@ public class PrinterGateway {
 			int datePos = 0;
 			for (SummaryInfo si : report.getInfo_vec()) {
 				if (datePos % 5 == 0) {
-					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getDate())));
+					int date = si.getDate();
+					String dateStr = Integer.toString(date).substring(0, 4) + "/" + Integer.toString(date).substring(4, 6) + "/" +
+							Integer.toString(date).substring(6, 8);
+					new_cell = new PdfPCell(new Phrase(dateStr));
 					shift1_table.addCell(new_cell);
 					datePos++;
 				}
-				if (si.getShift() == 1) {
+				if (si.getShift() == 1 && si.getLocation().equals("Copy Room")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift1_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Development")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift1_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Finishing")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift1_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Packing")) {
 					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
 					shift1_table.addCell(new_cell);
 					datePos++;
@@ -320,7 +335,277 @@ public class PrinterGateway {
 			}
 			doc.add(shift1_table);
 
+			//shift two table
+			doc.add(new Paragraph(" "));
+			String shift2 = "Day Shift 2 (2:30 pm - 10 pm)";
+			Paragraph p_shift2 = new Paragraph(shift2);
+			p_shift2.setIndentationLeft(180);
+			doc.add(p_shift2);
+			doc.add(new Paragraph(" "));
+
+			PdfPTable shift2_table = new PdfPTable(5);
+			new_cell = new PdfPCell(new Phrase("Date"));
+			shift2_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Copy Room"));
+			shift2_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Development"));
+			shift2_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Finishing"));
+			shift2_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Packing"));
+			shift2_table.addCell(new_cell);
+
+			//shift 2
+			datePos = 0;
+			for (SummaryInfo si : report.getInfo_vec()) {
+				if (datePos % 5 == 0) {
+					int date = si.getDate();
+					String dateStr = Integer.toString(date).substring(0, 4) + "/" + Integer.toString(date).substring(4, 6) + "/" +
+							Integer.toString(date).substring(6, 8);
+					new_cell = new PdfPCell(new Phrase(dateStr));
+					shift2_table.addCell(new_cell);
+					datePos++;
+				}
+				if (si.getShift() == 1 && si.getLocation().equals("Copy Room")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift2_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Development")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift2_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Finishing")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift2_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Packing")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift2_table.addCell(new_cell);
+					datePos++;
+				}
+			}
+			doc.add(shift2_table);
+
+			//shift three table
+			doc.add(new Paragraph(" "));
+			String shift3 = "Night Shift (10 pm - 5 am)";
+			Paragraph p_shift3 = new Paragraph(shift3);
+			p_shift3.setIndentationLeft(180);
+			doc.add(p_shift3);
+			doc.add(new Paragraph(" "));
+
+			PdfPTable shift3_table = new PdfPTable(5);
+			new_cell = new PdfPCell(new Phrase("Date"));
+			shift3_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Copy Room"));
+			shift3_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Development"));
+			shift3_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Finishing"));
+			shift3_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Packing"));
+			shift3_table.addCell(new_cell);
+
+			//shift 3
+			datePos = 0;
+			for (SummaryInfo si : report.getInfo_vec()) {
+				if (datePos % 5 == 0) {
+					int date = si.getDate();
+					String dateStr = Integer.toString(date).substring(0, 4) + "/" + Integer.toString(date).substring(4, 6) + "/" +
+							Integer.toString(date).substring(6, 8);
+					new_cell = new PdfPCell(new Phrase(dateStr));
+					shift3_table.addCell(new_cell);
+					datePos++;
+				}
+				if (si.getShift() == 1 && si.getLocation().equals("Copy Room")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift3_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Development")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift3_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Finishing")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift3_table.addCell(new_cell);
+					datePos++;
+				} else if (si.getShift() == 1 && si.getLocation().equals("Packing")) {
+					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
+					shift3_table.addCell(new_cell);
+					datePos++;
+				}
+			}
+			doc.add(shift3_table);
+
+			//shift summary
+			doc.add(new Paragraph(" "));
+			String dateS = Integer.toString(report.getStartDate()).substring(0, 4) + "/" +
+					Integer.toString(report.getStartDate()).substring(4, 6) + "/" +
+					Integer.toString(report.getStartDate()).substring(6, 8);
+			String dateE = Integer.toString(report.getEndDate()).substring(0, 4) + "/" +
+					Integer.toString(report.getEndDate()).substring(4, 6) + "/" +
+					Integer.toString(report.getEndDate()).substring(6, 8);
+			String shiftSummary = "For Period (" + dateS + " - " + dateE + ")";
+			Paragraph p_shiftSummary = new Paragraph(shiftSummary);
+			p_shiftSummary.setIndentationLeft(180);
+			doc.add(p_shiftSummary);
+			doc.add(new Paragraph(" "));
+
+			PdfPTable shiftSum_table = new PdfPTable(5);
+			new_cell = new PdfPCell(new Phrase("Date"));
+			shiftSum_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Copy Room"));
+			shiftSum_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Development"));
+			shiftSum_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Finishing"));
+			shiftSum_table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Packing"));
+			shiftSum_table.addCell(new_cell);
+
+			//shift totals
+			datePos = 0;
+			int columnItr = 0;
+			for (SummaryInfo si : report.getInfo_vec()) {
+				if (datePos % 5 == 0 && columnItr == 1) {
+					new_cell = new PdfPCell(new Phrase("Day Shift 1"));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					columnItr++;
+				} else if (datePos % 5 == 0 && columnItr == 2) {
+					new_cell = new PdfPCell(new Phrase("Day Shift 2"));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					columnItr++;
+				} else if (datePos % 5 == 0 && columnItr == 3) {
+					new_cell = new PdfPCell(new Phrase("Night Shift"));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					columnItr++;
+				} else if (datePos % 5 == 0 && columnItr == 4) {
+					new_cell = new PdfPCell(new Phrase("Total"));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					columnItr++;
+				}
+
+				int total = 0;
+				if (datePos % 5 == 1) {
+					for (SummaryInfo si2 : report.getInfo_vec()) {
+						if (si.getLocation().equals("Copy Room")) {
+							total += si2.getValue();
+						}
+					}
+					new_cell = new PdfPCell(new Phrase(total));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					if (datePos == 0) {
+						columnItr++;
+					}
+				} else if (datePos % 5 == 2) {
+					for (SummaryInfo si2 : report.getInfo_vec()) {
+						if (si.getLocation().equals("Development")) {
+							total += si2.getValue();
+						}
+					}
+					new_cell = new PdfPCell(new Phrase(total));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					if (datePos == 0) {
+						columnItr++;
+					}
+				} else if (datePos % 5 == 3) {
+					for (SummaryInfo si2 : report.getInfo_vec()) {
+						if (si.getLocation().equals("Finishing")) {
+							total += si2.getValue();
+						}
+					}
+					new_cell = new PdfPCell(new Phrase(total));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					if (datePos == 0) {
+						columnItr++;
+					}
+				} else if (datePos % 5 == 4) {
+					for (SummaryInfo si2 : report.getInfo_vec()) {
+						if (si.getLocation().equals("Packing")) {
+							total += si2.getValue();
+						}
+					}
+					new_cell = new PdfPCell(new Phrase(total));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					if (datePos == 0) {
+						columnItr++;
+					}
+				}
+				datePos++;
+			}
+			doc.add(shiftSum_table);
+
 			doc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void ptr_inv(Invoice report, String file_name) {
+		try {
+			Document doc = new Document();
+			PdfWriter.getInstance(doc, new FileOutputStream(file_name));
+			doc.open();
+
+			String title = "Invoice " + report.getReportID() + " / " + report.getDate();
+			String custname = "Customer Name: " + report.getCompany();
+			String accNo = "Account Number: " + report.getAccountNo();
+			String contact = "Contact Name: " + report.getName();
+			String address = "Address: " + report.getAddress();
+			String phone = "Phone: " + report.getPhone();
+			String JNCD = "Job Number: " + report.getJobNo() + "                    " + "Completed: " + report.getCompletedDate();
+
+			Paragraph p_title = new Paragraph(new Phrase(title, FontFactory.getFont(FontFactory.defaultEncoding, 20.0f))), p_custname = new Paragraph(custname), p_accNo = new Paragraph(accNo),
+					p_contact = new Paragraph(contact), p_address = new Paragraph(address), p_phone = new Paragraph(phone), p_JNCD = new Paragraph(JNCD);
+
+			p_title.setIndentationLeft(130);
+			doc.add(p_title);
+			doc.add(new Paragraph(new Phrase(" ")));
+			doc.add(new Paragraph(new Phrase("Account: " + report.getAccountNo())));
+			doc.add(new Paragraph(new Phrase(" ")));
+			doc.add(new Paragraph(new Phrase(" ")));
+			doc.add(p_custname);
+			doc.add(p_accNo);
+			doc.add(p_contact);
+			doc.add(p_address);
+			doc.add(p_phone);
+			doc.add(p_JNCD);
+			doc.add(new Paragraph(new Phrase(" ")));
+			doc.add(new Paragraph(new Phrase("Description of work:")));
+			PdfPTable table = new PdfPTable(2);
+
+			PdfPCell new_cell = new PdfPCell(new Phrase("Task IDs"));
+			table.addCell(new_cell);
+			new_cell = new PdfPCell(new Phrase("Price (£)"));
+			table.addCell(new_cell);
+
+			float total = 0;
+			for (int i = 0; i < report.getJob().getVecTaskJ().getNoOfTasks(); i++) {
+				new_cell = new PdfPCell(new Phrase(i + 1));
+				table.addCell(new_cell);
+				float temp = report.getJob().getVecTaskJ().retrieveTask(i).getPrice();
+				new_cell = new PdfPCell(new Phrase(Float.toString(temp)));
+				total += temp;
+				table.addCell(new_cell);
+			}
+
+			table.addCell(new Phrase("Sub-Total"));
+			table.addCell(new Phrase(Float.toString(total)));
+			table.addCell(new Phrase("Discount agreed:"));
+			table.addCell(new Phrase(Float.toString(report.getDiscount())));
+			table.addCell(new Phrase(" "));
+			table.addCell(new Phrase(Float.toString(total * (1 - report.getDiscount()))));
+			table.addCell(new Phrase("Total payable (VAT at 20%)"));
+			table.addCell(new Phrase(Float.toString((total * (1 - report.getDiscount())) * 0.8f)));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -353,7 +638,11 @@ public class PrinterGateway {
 			//call printing function
 			prt_psr((PerformanceSummary) report, file_name);
 		}
-//		System.out.println("Report print complete!");
+		if (report instanceof Invoice) {
+			file_name += "Invoice " + ((Invoice) report).getDate() + " " + ((Invoice) report).getAccountNo() + " " + ((Invoice) report).getJobNo() + " " +
+					".pdf";
+			ptr_inv((Invoice) report, file_name);
+		}
 	}
 
 	public void cancelPrint() {
