@@ -35,7 +35,7 @@ public class TaskManageScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useUpdateTaskScreen(guiControl);
+                guiControl.useUpdateJobScreen(guiControl);
             }
         });
         viewJobButton.addActionListener(new ActionListener() {

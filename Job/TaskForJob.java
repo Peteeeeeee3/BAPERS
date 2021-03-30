@@ -4,14 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import Database.*;
 
-
 public class TaskForJob extends Task {
 	private int posInVec;
 	private boolean isDelayed = false;
 	private boolean isComplete = false;
 	public VectorOfTasksForJob vecTaskJ;
-    
-    
 
 	public void updateTask() {
 		throw new UnsupportedOperationException();
@@ -52,16 +49,23 @@ public class TaskForJob extends Task {
 	public void setIsComplete(boolean isComplete) {
 		this.isComplete = isComplete;
 	}
-	public void upload() throws SQLException {
-		String sql = "INSERT INTO Task_of_Job (`TasktaskID`, `status`, `JobjobNo` ) VALUES (?, ?, ? );";
-		PreparedStatement prepStat = vecTaskJ.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		//write to DB
-		vecTaskJ.getControl().getControl().getDBC().getDBGateway().write(prepStat);
-	}
+
+	//public void upload() {
+	//	String sql = "INSERT INTO Task_of_Job (`TasktaskID`, `status`, `JobjobNo` ) VALUES (?, ?, ? );";
+	//		try(PreparedStatement prepStat = vecTaskJ.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)){
+	//			prepStat.setString(1, Tasktas);
+	//			prepStat.setString(2, description);
+	//			prepStat.setFloat(3, price);
+	//			prepStat.setInt(4, duration);
+	//			vecTaskJ.getControl().getControl().getDBC().getDBGateway().write(prepStat);
+	//		} catch (Exception e){
+	//			e.printStackTrace();
+	//		}
+	//}
+
 
 	public TaskForJob(Task task) throws SQLException {
-		super(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration());
-		throw new UnsupportedOperationException();
+		super(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration(), task.vecTask);
 	}
     
     public void completeTask(int tasktaskID, int jobjobID, int staffMemberstaffID, double startTime, double timeOfCompletion, String date ) throws SQLException {

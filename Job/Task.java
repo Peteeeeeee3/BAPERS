@@ -17,6 +17,8 @@ public class Task {
     
     DatabaseGateway db = new DatabaseGateway();
 
+    public int currentTaskID;
+
 	public int getTaskID() {
 		return this.taskID;
 	}
@@ -56,6 +58,11 @@ public class Task {
 		String sql = "SELECT `taskID` FROM `Task` WHERE Task.duration = ? AND Task.location = ? AND Task.price = ? AND Task.taskDescription=?";
 		PreparedStatement preparedStatement = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 
+		preparedStatement.setInt(1, duration);
+		preparedStatement.setString(2, location);
+		preparedStatement.setFloat(3, price);
+		preparedStatement.setString(4, description);
+
 		ResultSet rs = vecTask.getControl().getControl().getDBC().read(preparedStatement);
 		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
 		// as this function only gets called in the constructor
@@ -76,36 +83,50 @@ public class Task {
 		return finalValue;
 	}
 
-	public void upload() throws SQLException {
-		String sql = "INSERT INTO Task (`location`, `description`, `price`, `duration` ) VALUES (?, ?, ?, ?);";
-		PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-		//write to DB
-		vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);
+	public void upload(){
+		String sql = "INSERT INTO Task (`location`, `taskDescription`, `price`, `duration`) VALUES (?,?,?,?)";
+		try(PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)){
+			this.taskID = generateAccountNo();
+			prepStat.setString(1, location);
+			prepStat.setString(2, description);
+			prepStat.setDouble(3, price);
+			prepStat.setInt(4, duration);
+			vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);
+
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
-	public Task (String location, String description, float price, int duration) throws SQLException {
+	public Task (String location, String description, float price, int duration, VectorOfTasks vecTask) {
 		this.location=location;
 		this.description=description;
 		this.price=price;
 		this.duration=duration;
+		this.vecTask = vecTask;
 		upload();
 	}
-    
-    
-    
-    
+
+	public Task(int id, String description, String location, float price, int duration){
+		this.taskID = id;
+		this.location = location;
+		this.description = description;
+		this.price = price;
+		this.duration = duration;
+	}
+
     public void insertTask(String taskDescription, String location, double price, int duration)
 	{
 
 		// these parameters will be applied through the gui
 
 		try {
-			String insert = "INSERT INTO Task(taskDescription, location, price, duration)" + "VALUES(?, ?, ?, ?)";
+			String insert = "INSERT INTO Task(`taskDescription`, `location`, price, duration)" + "VALUES(?, ?, ?, ?)";
 			// sql insert statement created
 			// parameters are defined before due to autoincrement taking up the first position. so its defined to start from taskDescripton which is the second position in the table
 
 
-			PreparedStatement stmt = db.getConnection().prepareStatement(insert);
+			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(insert);
 			// prepared statement created through the database gateway
 
 
@@ -125,56 +146,28 @@ public class Task {
 
 	}
 
-	public void viewTask(int taskID ){
-
+	public void editTask(String taskDescription, String location, double price, int duration) {
 		try {
+			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID = ?";
+			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(query);
+			stmt.setString(1, taskDescription);
+			stmt.setString(2, location);
+		    stmt.setDouble(3, price);
+			stmt.setInt(4, duration);
 
-			String find = "SELECT * FROM Task WHERE taskID=" + taskID;
-			PreparedStatement stmt = db.getConnection().prepareStatement(find);
-			ResultSet result = stmt.executeQuery(find);
-
-			while (result.next()){
-				String description = result.getString(2);
-				System.out.println(description);
-				String location = result.getString(3);
-				System.out.println(location);
-				double price = result.getInt(4);
-				System.out.println(price);
-				int duration = result.getInt(5);
-				System.out.println(duration);
-			}
-
-			//taskID = currentTaskID;
-
+     		stmt.executeUpdate();
+			stmt.close();
 		}
 
-		catch (Exception e) {
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void editTask(String taskDescription, String location, double price, int duration) {
-//		try {
-//			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID =" + currentTaskID;
-//			PreparedStatement stmt = db.getConnection().prepareStatement(query);
-//			stmt.setString(1, taskDescription);
-//			stmt.setString(2, location);
-//			stmt.setDouble(3, price);
-//			stmt.setInt(4, duration);
-//
-//			stmt.executeUpdate();
-//			stmt.close();
-//		}
-//
-//		catch (SQLException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	public void deleteTask(int taskID){
 		try{
 
-			PreparedStatement stmt = db.getConnection().prepareStatement("DELETE FROM Task WHERE taskID =" + taskID);
+			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("DELETE FROM Task WHERE taskID = ?");
 			stmt.executeUpdate();
 			stmt.close();
 		}
@@ -184,6 +177,5 @@ public class Task {
 		}
 
 	}
-
 
 }

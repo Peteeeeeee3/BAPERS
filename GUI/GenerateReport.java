@@ -50,5 +50,4 @@ public class GenerateReport extends JPanel {
         return guiControl;
     }
 
-
 }

@@ -7,8 +7,6 @@ import Job.TaskForJob;
 public class VectorOfTasksForJob {
 	private int noOfTasks = 0;
 	private Job job;
-	public TaskForJob taskForJob;
-	public JobFacadeControl jfc;
 	private Vector<TaskForJob> taskJ = new Vector<TaskForJob>();
 
 	public void addTask(TaskForJob task) throws SQLException {
@@ -16,8 +14,8 @@ public class VectorOfTasksForJob {
 		incrementNoOfTasks();
 	}
 
-	public TaskForJob retrieveTask() {
-		throw new UnsupportedOperationException();
+	public TaskForJob retrieveTask(int i) {
+		return taskJ.get(i);
 	}
 
 	public TaskForJob traverse(int taskID) {
@@ -45,14 +43,7 @@ public class VectorOfTasksForJob {
 		return taskJ;
 	}
 
-
-	public JobFacadeControl getControl() {
-		return jfc;
-	}
-
-	public VectorOfTasksForJob(TaskForJob TaskForJob, JobFacadeControl jfc) {
-		this.taskForJob=TaskForJob;
-		this.jfc=jfc;
+	public VectorOfTasksForJob() {
 		throw new UnsupportedOperationException();
 	}
 

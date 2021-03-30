@@ -10,7 +10,7 @@ public interface I_Account {
 
 	public void createCustomer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
-	public void updateAccess(int staffID, Object newAccess);
+	public void updateAccess(int staffID, int newAccess);
 
 	public void upgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 

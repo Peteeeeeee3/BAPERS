@@ -191,8 +191,8 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(taskManageScreen);
 	}
 
-	public void useUpdateTaskScreen(JFrame updateTaskScreen){
-		new UpdateTask(this, updateTaskScreen);
+	public void useUpdateJobScreen(JFrame updateTaskScreen){
+		new UpdateJobScreen(this, updateTaskScreen);
 		setMasterFrame(this);
 		viewingOrder.push(updateTaskScreen);
 	}
@@ -257,5 +257,7 @@ public class GUIControl extends JFrame {
 
 	public void openPreviousFrame(){viewingOrder.peek().setVisible(true);}
 
-
+	public int getAccess() {
+		return controller.getAccess();
+	}
 }

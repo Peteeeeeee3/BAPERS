@@ -11,7 +11,6 @@ public class CashPaymentScreen extends JPanel {
     private JButton confirmButton;
     private JButton cancelButton;
     public GUIControl guiControl;
-
     int flag = 0;
 
     public CashPaymentScreen(GUIControl guiControl, JFrame frame) {

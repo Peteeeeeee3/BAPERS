@@ -1,8 +1,11 @@
 package GUI;
 
+import Account.UserAccount;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RemoveUserScreen extends JPanel{
@@ -12,6 +15,7 @@ public class RemoveUserScreen extends JPanel{
     private JButton backButton;
     private JButton confirmButton;
     public GUIControl guiControl;
+    public UserAccount userAccount;
     int flag = 0;
 
     public RemoveUserScreen(GUIControl guiControl, JFrame frame){
@@ -29,16 +33,21 @@ public class RemoveUserScreen extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
-                if (flag == 1){
-                    try {
-                        guiControl.getController().getAccountControl().vecUser.removeUser(id);
-                    } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException classNotFoundException) {
-                        classNotFoundException.printStackTrace();
+                try {
+                    if (!getGuiControl().getController().getAccountControl().vecUser.checkId(id)){
+                        JOptionPane.showMessageDialog(confirmButton,"This user does not exist");
+                    } else {
+                        if (flag == 1){
+                            getGuiControl().getController().getAccountControl().vecUser.removeUser(id);
+                            JOptionPane.showMessageDialog(confirmButton, "User has been removed");
+                        } else {
+                            JOptionPane.showMessageDialog(confirmButton, "Please tick the remove check box");
+                        }
                     }
-                    JOptionPane.showMessageDialog(confirmButton, "User has been removed");
-                } else {
-                    JOptionPane.showMessageDialog(confirmButton, "Please tick the remove check box");
+                } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                    throwables.printStackTrace();
                 }
+
             }
         });
         backButton.addActionListener(new ActionListener() {

@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ReportsScreen extends JPanel {
     private JButton configureScheduleButton;
@@ -18,7 +20,18 @@ public class ReportsScreen extends JPanel {
             frame.setVisible(true);
     }
 
-    public ReportsScreen(GUIControl guiControl){this.guiControl = guiControl;}
+
+
+    public ReportsScreen(GUIControl guiControl){
+        this.guiControl = guiControl;
+        generateReportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useGenerateReportScreen(guiControl);
+            }
+        });
+    }
 
     public GUIControl getGuiControl() {
         return guiControl;

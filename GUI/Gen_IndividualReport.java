@@ -8,13 +8,14 @@ public class Gen_IndividualReport extends JPanel {
     private JTextField mmDdYyyyTextField;
     private JTextField mmDdYyyyTextField1;
     private JButton generateButton;
+    private JPanel individualReportsPanel;
     public GUIControl guiControl;
 
     public JPanel panelMain;
 
     public Gen_IndividualReport(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
-        frame.setContentPane(new Gen_IndividualReport(guiControl).panelMain);
+        frame.setContentPane(new Gen_IndividualReport(guiControl).individualReportsPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);

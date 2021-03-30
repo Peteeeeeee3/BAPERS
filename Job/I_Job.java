@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public interface I_Job {
 
-	public void addTask(int taskID)throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
+	public void addTask(String location, String description, float price, int duration) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException;
 
 	public void removeTask(int taskID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 

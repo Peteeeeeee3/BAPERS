@@ -6,17 +6,12 @@ import Database.I_Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 
 public class AccountControl implements Account.I_Account, I_Database {
 
     public VectorOfAccounts vecAcc;
     public VectorOfUsers vecUser;
     private Control control;
-    public OfficeManager officeManager;
-    public Receptionist receptionist;
-    public UserAccount userAccount;
-    public Customer customer;
     public ValuedCustomer valCustomer;
     public DiscountSet discountSet;
     public Discount discount;
@@ -38,25 +33,33 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecAcc.addCustAccount(new Customer(company, name, address, phone, this.vecAcc));
     }
 
-    public void createUser(int ID, String password, String name, int access) {
+    public void createUser(String password, String name, int access) {
         for (int i = 0; i < vecUser.getVector().size(); i++) {
-            if (vecUser.getVector().get(i).getStaffID() == ID) {
+            if (vecUser.getVector().get(i).getName().equals(name)) {
                 break;
             }
         }
-        vecUser.addUser(new UserAccount(ID, password, name, access, this.vecUser));
+        vecUser.addUser(new UserAccount(password, name, access, this.vecUser));
     }
 
-    public void updateAccess(int staffID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        officeManager.editAccess(staffID);
+    public void removeUser(int id){
+        for (int i = 0; i < vecUser.getVector().size(); i++){
+            if (vecUser.getVector().get(i).getStaffID() == id){
+                break;
+            }
+        }
+        vecUser.removeUser(id);
     }
 
-    public void upgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-       officeManager.upgradeCustomer(accountNo);
+    public void updateAccess(int id, int newAccess){
+        vecUser.editAccess(id, newAccess);
     }
 
-    public void downgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        officeManager.downgradeCust(accountNo);
+    public void upgradeCust(int accountNo) {
+        vecAcc.upgradeCustomer(accountNo);
+    }
+
+    public void downgradeCust(int accountNo) {
     }
 
     public void editDiscount(int accountNo) {
@@ -74,7 +77,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     }
 
     //////// Override Methods ///////
-
     @Override
     public boolean login(int ID, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         return vecUser.login(ID, password);
@@ -83,10 +85,6 @@ public class AccountControl implements Account.I_Account, I_Database {
     @Override
     public void logout() {
 
-    }
-
-    public void updateAccess(int staffID, Object newAccess) {
-        throw new UnsupportedOperationException();
     }
 
     public Control getControl() {
@@ -122,5 +120,8 @@ public class AccountControl implements Account.I_Account, I_Database {
         }
     }
 
+    void setAccess(int access) {
+        control.setAccess(access);
+    }
 }
 

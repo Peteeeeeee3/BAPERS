@@ -17,7 +17,6 @@ public class Receptionist extends UserAccount {
     public Task task;
     public JobFacadeControl jfc;
 
-
     public void acceptJob(Job job) throws SQLException {
         vecJob.addJob(job);
         //Database Version//
@@ -82,12 +81,12 @@ public class Receptionist extends UserAccount {
         }
 
         //Database version might need fixing//
-        String sql = "SELECT *" + "FROM customer" + "WHERE accountNo = ?";
+        String sql = "SELECT *" + " FROM customer" + " WHERE accountNo = ?";
         try {
             PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
             ResultSet rs;
-            rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
             preparedStatement.setInt(1, customer.getAccountNo());
+            rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
             while (rs.next()) {
                 int accountno = rs.getInt("accountNo");
                 String name = rs.getString("name");
@@ -167,9 +166,9 @@ public class Receptionist extends UserAccount {
             e.printStackTrace();
         }
     }
-
     public Receptionist(UserAccount user) {
-        super(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess(),user.getVecUser());
+        super(user.getPassword(), user.getName(), user.getAccess(),user.getVecUser());
+
         throw new UnsupportedOperationException();
     }
 }

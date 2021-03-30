@@ -3,6 +3,7 @@ package Payment;
 import Account.*;
 import Job.Job;
 import Job.VectorOfJobs;
+import Report.Invoice;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -23,6 +24,7 @@ public class Payment {
 	private Card card;
 	private Job job;
 	private VectorOfJobs vecJob;
+	private Invoice invoice;
 
 
 	public int getiD() {
@@ -67,6 +69,14 @@ public class Payment {
 
 	public Card getCard() {
 		return card;
+	}
+
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
 
 	private float calculateCost(float amount, Customer customer) {

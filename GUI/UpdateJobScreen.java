@@ -4,58 +4,48 @@ import Job.Job;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class ViewJobScreen extends JPanel {
-    private JPanel viewJobPanel;
-    private JTable jobTable;
+public class UpdateJobScreen extends JPanel {
     private JButton backButton;
-    private JTextField jobIDTextField;
-    private JButton searchButton;
+    private JTable table;
     public GUIControl guiControl;
-    DefaultTableModel defaultTableModel;
+    public JPanel panelMain;
+    private JButton showButton;
     public Job job;
-    private JScrollPane scrollPane;
+    DefaultTableModel defaultTableModel;
 
-    public ViewJobScreen(GUIControl guiControl, JFrame frame){
+    public UpdateJobScreen(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
-        frame.setContentPane(new ViewJobScreen(guiControl).viewJobPanel);
+        frame.setContentPane(new UpdateJobScreen(guiControl).panelMain);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500,300);
+        frame.setSize(500, 300);
         frame.setVisible(true);
 
     }
 
-    public ViewJobScreen(GUIControl guiControl){
+    public UpdateJobScreen(GUIControl guiControl){
         this.guiControl = guiControl;
-        backButton.addActionListener(new ActionListener() {
+
+        showButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
-                guiControl.openPreviousFrame();
-            }
-        });
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int id = Integer.parseInt(jobIDTextField.getText());
-                job = getGuiControl().getController().getJobControl().vecJobs.viewJob(id);
-                if (job.getID() == 0){
-                    JOptionPane.showMessageDialog(searchButton, "This job does not exist.");
-                } else {
-                    fetchData();
+                try {
+                    job = getGuiControl().getController().getJobControl().vecJobs.viewActiveJobs();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
+                fetchData();
             }
         });
     }
 
     public void fetchData(){
         defaultTableModel = new DefaultTableModel();
-        jobTable.setModel(defaultTableModel);
+        table.setModel(defaultTableModel);
         defaultTableModel.addColumn("Job Number");
         defaultTableModel.addColumn("Customer Account No");
         defaultTableModel.addColumn("Payment ID");
@@ -72,4 +62,6 @@ public class ViewJobScreen extends JPanel {
     public GUIControl getGuiControl() {
         return guiControl;
     }
+
+
 }

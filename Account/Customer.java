@@ -1,5 +1,6 @@
 package Account;
 
+import Job.*;
 import Payment.*;
 
 import java.sql.PreparedStatement;
@@ -13,7 +14,10 @@ public class Customer {
     private String address;
     private int phone;
     private VectorOfAccounts vecAcc;
+    private int valued;
     public Payment payment;
+    private DiscountSet discountSet;
+    private VectorOfJobs jobs = new VectorOfJobs(vecAcc.getAccControl().getControl().getJobControl());
 
 
     public void addJob() {
@@ -33,7 +37,7 @@ public class Customer {
     }
 
     public int getAccountNo() {
-        return this.accountNo;
+        return accountNo;
     }
 
     public void setAccountNo(int accountNo) {
@@ -64,8 +68,22 @@ public class Customer {
         this.phone = phone;
     }
 
+    public int getValued(){ return valued;}
+
     public VectorOfAccounts getVecAcc() {
         return vecAcc;
+    }
+
+    public DiscountSet getDiscountSet() {
+        return discountSet;
+    }
+
+    public void setDiscountSet(DiscountSet discountSet) {
+        this.discountSet = discountSet;
+    }
+
+    public VectorOfJobs getJobs() {
+        return jobs;
     }
 
     public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -97,7 +115,6 @@ public class Customer {
         return finalValue;
     }
 
-
     public Customer(String company, String name, String address, int phone, VectorOfAccounts vecAcc) {
         this.company = company;
         this.name = name;
@@ -116,5 +133,15 @@ public class Customer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Customer(String company, String name, String address, int phone, VectorOfAccounts vecAcc, int accountNo, int valued)  {
+        this.company = company;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.vecAcc = vecAcc;
+        this.accountNo = accountNo;
+        this.valued = valued;
     }
 }

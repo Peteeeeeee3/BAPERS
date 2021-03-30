@@ -34,8 +34,8 @@ public class FixedDiscountScreen extends JPanel {
                     JOptionPane.showMessageDialog(confirmButton, "Please enter an amount.");
                 } else {
                     try {
-                        guiControl.getController().getAccountControl().officeManager.defineFlatDiscount(id, amount);
-                    } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                        getGuiControl().getController().getAccountControl().vecAcc.defineFlatDiscount(id, amount);
+                    } catch (Exception throwables) {
                         throwables.printStackTrace();
                     }
                     JOptionPane.showMessageDialog(confirmButton, "Confirmed");

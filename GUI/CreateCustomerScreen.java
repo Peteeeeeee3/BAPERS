@@ -14,6 +14,7 @@ public class CreateCustomerScreen extends JPanel {
     private JButton confirmButton;
     private JButton cancelButton;
     private JTextField nameField;
+    private JTextField valued;
     public GUIControl guiControl;
 
     public CreateCustomerScreen(GUIControl guiControl, JFrame frame) {

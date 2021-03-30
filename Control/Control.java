@@ -2,7 +2,7 @@ package Control;
 
 import Account.AccountControl;
 import Account.Customer;
-import Account.ValuedCustomer;
+import Account.OfficeManager;
 import Database.DBControl;
 import GUI.GUIControl;
 import Job.*;
@@ -32,22 +32,23 @@ public class Control implements I_Control, I_Payment {
 	private ReportFacadeControl reportFacadeControl;
 	private PrinterGateway printerGateway;
 	private GUIControl guiControl;
-	private ValuedCustomer valcus;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException, ParseException {
 		//controller setup
 		Control controller = new Control();
 		controller.accountControl = new AccountControl(controller);
 		controller.paymentControl = new PaymentControl(controller);
-		controller.jobControl = new JobFacadeControl();
+		controller.jobControl = new JobFacadeControl(controller);
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
 		//make a window
+
 		JFrame window = new JFrame();
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useLogin(window);
+		controller.guiControl.useUpdateJobScreen(window);
+
 		window.setVisible(true);
 
 
@@ -104,9 +105,14 @@ public class Control implements I_Control, I_Payment {
 		////Performance Summary report print test////
 
 		//controller.printerGateway.print(new PerformanceSummary(20210301, 20210320, controller.reportFacadeControl));
-
+//		controller.getAccountControl().createCustomer("Microsoft", "Mark Alexander", "1 Lukas Street, FS8 62H", 989767656);
+//		Job job = new Job(2, "A", 1400, 24, controller.accountControl.vecAcc.customers.get(0).getJobs());
+//		job.vecTaskJ.addTask(new TaskForJob(new Task("Copy Room", "Hi", 5.99f, 5, controller.getJobControl().vecTasks)));
+//		job.vecTaskJ.addTask(new TaskForJob(new Task("Copy Room", "Bye", 5.99f, 5, controller.getJobControl().vecTasks)));
+//      controller.printerGateway.print(new Invoice("Julie Jolly", "No Company", "Everywhere Road 27", 2, 1, 1456634535, 20210320, job, 0.4f));
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
+		//controller.getDBC().getDBGateway().dbBackup("root", "", "bapers_v4");
 	}
 
 
@@ -144,12 +150,21 @@ public class Control implements I_Control, I_Payment {
 		return false;
 	}
 
-	public void viewTasks(int id){
+	public OfficeManager editAccess(int id, int access){
 		try{
-			jobControl.getTask().viewTask(id);
+			accountControl.updateAccess(id, access);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	public int getAccess() {
+		return access;
+	}
+
+	public void setAccess(int access) {
+		this.access = access;
 	}
 
 	@Override
