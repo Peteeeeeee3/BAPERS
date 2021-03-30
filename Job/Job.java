@@ -1,6 +1,9 @@
 package Job;
 
+import Account.Customer;
 import Database.*;
+import Payment.Payment;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,15 +11,18 @@ import java.util.ArrayList;
 
 public class Job {
 	private int iD;
-	private int price;
-	private String summary;
+	private double price;
 	private String status;
+	private String summary;
+	private int startDate;
 	private int startTime;
 	private int endTime;
 	private int urgency = 24;
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
+	private int customerAccNo;
+	private int paymentID;
     
     DatabaseGateway db = new DatabaseGateway();
 
@@ -32,7 +38,6 @@ public class Job {
 
 		ArrayList<String> statusArray = new ArrayList<>();
 		ArrayList<String> statusCompleteArray = new ArrayList<>();
-
 
 		try {
 
@@ -86,7 +91,7 @@ public class Job {
 		return this.iD;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return this.price;
 	}
 
@@ -151,6 +156,12 @@ public class Job {
 		this.isPaid = isPaid;
 	}
 
+	public int getCustomerAccNo(){return customerAccNo;}
+
+	public int getPaymentID(){return paymentID;}
+
+	public int getStartDate(){return startDate;
+	}
 	public VectorOfTasksForJob getVecTaskJ() {
 		return vecTaskJ;
 	}
@@ -180,13 +191,18 @@ public class Job {
 	}
 
 
-	public Job(int ID, String summary, int startTime, int urgency) {
+	public Job(int ID, int custAccNo, int paymentid, String summary, int startTime, int urgency, int startDate, double price, String status, VectorOfJobs vecJob) {
 		this.iD = ID;
 		this.summary = summary;
 		this.startTime = startTime;
 		this.urgency = urgency;
+		this.status = status;
+		this.price = price;
+		this.startDate = startDate;
+		this.customerAccNo = custAccNo;
+		this.paymentID = paymentid;
+		this.vecJob = vecJob;
 	}
-
 
 	public void viewJob (int jobID) throws SQLException {
 
@@ -194,11 +210,16 @@ public class Job {
 
 		try {
 
-			String find = "SELECT * FROM Job WHERE jobNumber=" + jobID;
-			PreparedStatement stmt = db.getConnection().prepareStatement(find);
-			ResultSet result = stmt.executeQuery(find);
+			String find = "SELECT * FROM Job WHERE jobNumber= ?" + jobID;
+			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
+			ResultSet result;
+			stmt.setInt(1, jobID);
+			result = vecJob.getControl().getControl().getDBC().read(stmt);
 
 			while (result.next()) {
+
+				int id = result.getInt(1);
+
 
 				int CustomerAccountNum = result.getInt(2);
 				System.out.println(CustomerAccountNum);
@@ -229,7 +250,6 @@ public class Job {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void updateAllJobs() throws SQLException {
 		try {
