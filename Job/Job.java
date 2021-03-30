@@ -152,7 +152,7 @@ public class Job {
 	public VectorOfTasksForJob getVecTaskJ() {
 		return vecTaskJ;
 	}
-    
+
 	public int generateJobNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		String sql = "SELECT `jobNumber` FROM `Job` WHERE Job.deadline = ? AND Job.priority = ? AND Job.price = ? AND Job.specialInstruction = ?";
 		PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);

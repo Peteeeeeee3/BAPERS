@@ -4,14 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import Database.*;
 
-
 public class TaskForJob extends Task {
 	private int posInVec;
 	private boolean isDelayed = false;
 	private boolean isComplete = false;
 	public VectorOfTasksForJob vecTaskJ;
-    
-    
 
 	public void updateTask() {
 		throw new UnsupportedOperationException();
