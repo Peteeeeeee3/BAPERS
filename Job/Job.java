@@ -321,7 +321,6 @@ public class Job {
 	public void setZero(int statusID){
 		statusID = 0;
 	}
-      
     
 }
 
