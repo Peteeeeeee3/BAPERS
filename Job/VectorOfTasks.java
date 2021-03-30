@@ -48,25 +48,31 @@ public class VectorOfTasks {
 		return this.noOfTasks;
 	}
 
-	public void viewTask(int taskID){
+	public Task viewTask(int taskID){
 
-		String find = "SELECT * FROM Task WHERE taskID=" + taskID;
+		String location = "", description = "";
+		int duration = 0, id = 0;
+		float price = 0;
+
+		String find = "SELECT * FROM Task WHERE taskID = ?";
 		try (PreparedStatement preparedStatement = jfc.getControl().getDBC().getDBGateway().getConnection().prepareStatement(find)){
 			preparedStatement.setInt(1,taskID);
 			ResultSet rs = jfc.getControl().getDBC().read(preparedStatement);
 			while (rs.next()){
-				String description = rs.getString(2);
+				id = rs.getInt(1);
+				description = rs.getString("taskDescription");
 				System.out.println(description);
-				String location = rs.getString(3);
+				location = rs.getString("location");
 				System.out.println(location);
-				double price = rs.getInt(4);
+				price = rs.getInt("price");
 				System.out.println(price);
-				int duration = rs.getInt(5);
+				duration = rs.getInt("duration");
 				System.out.println(duration);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return new Task(id, description, location, price, duration);
 	}
 
 	public Vector<Task> getVector() {

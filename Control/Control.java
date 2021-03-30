@@ -47,8 +47,8 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useViewJobScreen(window);
-		
+		controller.guiControl.useViewTaskScreen(window);
+
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
@@ -154,14 +154,6 @@ public class Control implements I_Control, I_Payment {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	public void viewTasks(int id){
-		try{
-			jobControl.getTask().viewTask(id);
-		} catch (Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	public int getAccess() {
