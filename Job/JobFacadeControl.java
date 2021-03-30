@@ -14,7 +14,7 @@ import Database.I_Database;
 public class JobFacadeControl implements I_Job, I_Database {
 	public Vector<JobHistory> jobHist = new Vector<JobHistory>();
 	public VectorOfTasks vecTasks;
-	private VectorOfJobs vecJobs;
+	public VectorOfJobs vecJobs;
 	private Control control;
 	public VectorOfTasksForJob tfj;
 	public Task task;
