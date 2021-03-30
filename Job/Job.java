@@ -17,8 +17,6 @@ public class Job {
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
-    
-    DatabaseGateway db = new DatabaseGateway();
 
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();
@@ -37,7 +35,7 @@ public class Job {
 		try {
 
 			String find = "SELECT status FROM task_of_job WHERE" + jobID;
-			PreparedStatement stmt = vecTaskJ.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
+			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
 			ResultSet result = stmt.executeQuery(find);
 
 			while (result.next()) {
@@ -180,11 +178,13 @@ public class Job {
 	}
 
 
-	public Job(int ID, String summary, int startTime, int urgency) {
+	public Job(int ID, String summary, int startTime, int urgency, VectorOfJobs vecJob) {
 		this.iD = ID;
 		this.summary = summary;
 		this.startTime = startTime;
 		this.urgency = urgency;
+		this.vecTaskJ = new VectorOfTasksForJob();
+		this.vecJob = vecJob;
 	}
 
 
@@ -195,7 +195,7 @@ public class Job {
 		try {
 
 			String find = "SELECT * FROM Job WHERE jobNumber=" + jobID;
-			PreparedStatement stmt = db.getConnection().prepareStatement(find);
+			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
 			ResultSet result = stmt.executeQuery(find);
 
 			while (result.next()) {

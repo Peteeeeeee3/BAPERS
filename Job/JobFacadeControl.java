@@ -51,7 +51,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 				return; // the error pop up message
 			}
 		}
-		vecJobs.addJob(new Job(ID, summary, startTime, urgency));
+		vecJobs.addJob(new Job(ID, summary, startTime, urgency, vecJobs));
 	}
 
 	public void viewTask(int taskID){
@@ -98,7 +98,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 	public JobFacadeControl(Control ctrl){
 		this.control = ctrl;
 		this.vecTasks = new VectorOfTasks(this);
-		vecJobs = new VectorOfJobs(vecJobs, this);
+		vecJobs = new VectorOfJobs(this);
 	}
 
 	public Task getTask(){return task;}

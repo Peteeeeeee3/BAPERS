@@ -11,10 +11,10 @@ public class VectorOfJobs {
 	public JobHistory jHist;
 	public Vector<Job> vector = new Vector<Job>();
 	public JobFacadeControl jobControl;
-	public VectorOfJobs vecJob;
+	//public VectorOfJobs vecJob;
 
 	public void addJob(Job job) {
-		vector.add(new Job(job.getID() ,job.getSummary(), job.getStartTime(), job.getUrgency()));
+		vector.add(new Job(job.getID() ,job.getSummary(), job.getStartTime(), job.getUrgency(), this));
 		incrementNoOfJobs();
 
 	}
@@ -57,8 +57,7 @@ public class VectorOfJobs {
 		return vector;
 	}
 
-	public VectorOfJobs(VectorOfJobs vecJob, JobFacadeControl jobControl) {
-		this.vecJob = vecJob;
+	public VectorOfJobs(JobFacadeControl jobControl) {
 		this.jobControl = jobControl;
 	}
 }

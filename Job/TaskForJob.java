@@ -69,7 +69,6 @@ public class TaskForJob extends Task {
 
 	public TaskForJob(Task task) throws SQLException {
 		super(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration(), task.vecTask);
-		throw new UnsupportedOperationException();
 	}
     
     public void completeTask(int tasktaskID, int jobjobID, int staffMemberstaffID, double startTime, double timeOfCompletion, String date ) throws SQLException {

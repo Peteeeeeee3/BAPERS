@@ -51,7 +51,7 @@ public class ValuedCustomer extends Customer {
 	}
 
 	//this maybe need to be changed.
-	public void alertManager() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+	public void alertManager() {
 		String status = null;
 		int customerAccount=0;
 		Integer paymentID=0;
@@ -81,7 +81,7 @@ public class ValuedCustomer extends Customer {
 					}
 				}
 			}
-		}catch(SQLException e){
+		}catch(SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e){
 			e.printStackTrace();
 		}
 

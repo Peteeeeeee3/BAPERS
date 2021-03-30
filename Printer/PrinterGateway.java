@@ -586,6 +586,7 @@ public class PrinterGateway {
 			table.addCell(new_cell);
 			new_cell = new PdfPCell(new Phrase("Price (£)"));
 			table.addCell(new_cell);
+			table.setHeaderRows(1);
 
 			float total = 0;
 			for (int i = 0; i < report.getJob().getVecTaskJ().getNoOfTasks(); i++) {
@@ -605,6 +606,8 @@ public class PrinterGateway {
 			table.addCell(new Phrase(Float.toString(total * (1 - report.getDiscount()))));
 			table.addCell(new Phrase("Total payable (VAT at 20%)"));
 			table.addCell(new Phrase(Float.toString((total * (1 - report.getDiscount())) * 0.8f)));
+
+			doc.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -639,8 +642,7 @@ public class PrinterGateway {
 			prt_psr((PerformanceSummary) report, file_name);
 		}
 		if (report instanceof Invoice) {
-			file_name += "Invoice " + ((Invoice) report).getDate() + " " + ((Invoice) report).getAccountNo() + " " + ((Invoice) report).getJobNo() + " " +
-					".pdf";
+			file_name += "Invoice " + ((Invoice) report).getDate() + " " + ((Invoice) report).getAccountNo() + " " + ((Invoice) report).getJobNo() + ".pdf";
 			ptr_inv((Invoice) report, file_name);
 		}
 	}

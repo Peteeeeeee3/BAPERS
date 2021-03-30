@@ -1,5 +1,6 @@
 package Account;
 
+import Job.*;
 import Payment.*;
 
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ public class Customer {
     private int valued;
     public Payment payment;
     private DiscountSet discountSet;
+    private VectorOfJobs jobs = new VectorOfJobs(vecAcc.getAccControl().getControl().getJobControl());
 
 
     public void addJob() {
@@ -78,6 +80,10 @@ public class Customer {
 
     public void setDiscountSet(DiscountSet discountSet) {
         this.discountSet = discountSet;
+    }
+
+    public VectorOfJobs getJobs() {
+        return jobs;
     }
 
     public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
