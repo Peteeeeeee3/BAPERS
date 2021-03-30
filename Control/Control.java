@@ -47,7 +47,7 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useViewJobScreen(window);
+		//controller.guiControl.useViewJobScreen(window);
 
 		window.setVisible(true);
 
@@ -110,6 +110,7 @@ public class Control implements I_Control, I_Payment {
 //      controller.printerGateway.print(new Invoice("Julie Jolly", "No Company", "Everywhere Road 27", 2, 1, 1456634535, 20210320, job, 0.4f));
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
+		//controller.getDBC().getDBGateway().dbBackup("root", "", "bapers_v4");
 	}
 
 
