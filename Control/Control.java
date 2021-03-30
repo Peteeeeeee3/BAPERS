@@ -47,7 +47,7 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useViewJobScreen(window);
+		controller.guiControl.useViewTaskScreen(window);
 
 		window.setVisible(true);
 

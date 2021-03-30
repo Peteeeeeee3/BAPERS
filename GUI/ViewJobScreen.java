@@ -44,7 +44,11 @@ public class ViewJobScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(jobIDTextField.getText());
                 job = getGuiControl().getController().getJobControl().vecJobs.viewJob(id);
-                fetchData();
+                if (job.getID() == 0){
+                    JOptionPane.showMessageDialog(searchButton, "This job does not exist.");
+                } else {
+                    fetchData();
+                }
             }
         });
     }

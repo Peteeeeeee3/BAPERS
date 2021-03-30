@@ -148,7 +148,7 @@ public class Task {
 
 	public void editTask(String taskDescription, String location, double price, int duration) {
 		try {
-			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID =" + currentTaskID;
+			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID = ?";
 			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(query);
 			stmt.setString(1, taskDescription);
 			stmt.setString(2, location);
@@ -167,7 +167,7 @@ public class Task {
 	public void deleteTask(int taskID){
 		try{
 
-			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("DELETE FROM Task WHERE taskID =" + taskID);
+			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("DELETE FROM Task WHERE taskID = ?");
 			stmt.executeUpdate();
 			stmt.close();
 		}

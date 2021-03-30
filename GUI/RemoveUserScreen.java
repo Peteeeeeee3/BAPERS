@@ -1,5 +1,7 @@
 package GUI;
 
+import Account.UserAccount;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,7 @@ public class RemoveUserScreen extends JPanel{
     private JButton backButton;
     private JButton confirmButton;
     public GUIControl guiControl;
+    public UserAccount userAccount;
     int flag = 0;
 
     public RemoveUserScreen(GUIControl guiControl, JFrame frame){
