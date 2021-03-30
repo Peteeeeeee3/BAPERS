@@ -29,7 +29,7 @@ public class VectorOfUsers {
 
     public void removeUser(int id) {
         try {
-            String sql = "DELETE FROM Staff_Member (staffid, password, name, access) WHERE staffid = ?";
+            String sql = "DELETE FROM Staff_Member (Staffid, password, name, access) WHERE Staffid = ?";
             PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, id);
             accControl.getControl().getDBC().write(preparedStatement);

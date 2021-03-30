@@ -19,8 +19,6 @@ public class Task {
 
     public int currentTaskID;
 
-
-
 	public int getTaskID() {
 		return this.taskID;
 	}
@@ -91,7 +89,7 @@ public class Task {
 			this.taskID = generateAccountNo();
 			prepStat.setString(1, location);
 			prepStat.setString(2, description);
-			prepStat.setFloat(3, price);
+			prepStat.setDouble(3, price);
 			prepStat.setInt(4, duration);
 			vecTask.getControl().getControl().getDBC().getDBGateway().write(prepStat);
 
@@ -107,6 +105,14 @@ public class Task {
 		this.duration=duration;
 		this.vecTask = vecTask;
 		upload();
+	}
+
+	public Task(int id, String description, String location, float price, int duration){
+		this.taskID = id;
+		this.location = location;
+		this.description = description;
+		this.price = price;
+		this.duration = duration;
 	}
 
     public void insertTask(String taskDescription, String location, double price, int duration)
@@ -140,33 +146,6 @@ public class Task {
 
 	}
 
-	public void viewTask(int taskID){
-
-		try {
-			String find = "SELECT * FROM Task WHERE taskID=" + taskID;
-			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
-			ResultSet result = stmt.executeQuery(find);
-
-			while (result.next()){
-				String description = result.getString(2);
-				System.out.println(description);
-				String location = result.getString(3);
-				System.out.println(location);
-				double price = result.getInt(4);
-				System.out.println(price);
-				int duration = result.getInt(5);
-				System.out.println(duration);
-			}
-
-			taskID = currentTaskID;
-
-		}
-
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void editTask(String taskDescription, String location, double price, int duration) {
 		try {
 			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID =" + currentTaskID;
@@ -183,8 +162,6 @@ public class Task {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	public void deleteTask(int taskID){
@@ -200,6 +177,5 @@ public class Task {
 		}
 
 	}
-
 
 }

@@ -2,6 +2,8 @@ package Database;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 
 public class DatabaseGateway {
@@ -11,7 +13,7 @@ public class DatabaseGateway {
 	public void connectToDB() {
 		try {
 			//Peter
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
 		    //Hanan
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
@@ -23,9 +25,7 @@ public class DatabaseGateway {
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
 			//Farhan
-
-			//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject2", "root", "");
-
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject2", "root", "");
 
 			//Abdullah
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -48,6 +48,58 @@ public class DatabaseGateway {
 		try {
 			connection.close();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void dbBackup(String dbUser, String dbPass, String dbName)
+	{
+		String savePath = "dbBackup.sql";
+		String executeCmd = ("C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqldump -u " + dbUser + " -p" + dbPass + "  --databases " + dbName + " -r " + savePath);
+		try {
+			Process p = Runtime.getRuntime().exec(executeCmd);
+			int processComplete = p.waitFor();
+			if (processComplete == 0)
+			{
+				System.out.println("Backup Created Success");
+			}else{
+				System.out.println("Backup Unsuccessful");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public boolean checkBackup()
+	{
+		String backupName = null;
+		// change to directory of where backup should be
+		String directory = ("C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin");
+		File f = new File(directory);
+		for(File x : f.listFiles())
+		{
+			if(x.getName().contains(".sql"))
+			{
+				backupName = x.getName();
+				break;
+			}else{}
+		}
+		return true;
+	}
+	public void restoreDB(String dbName, String dbUserName, String dbPassword, String source)
+	{
+		String[] executeCmd = new String[]{"C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysql", "--user=" + dbUserName, "--password=" + dbPassword, dbName,"-e", " source "+source};
+		Process runtimeProcess;
+		try
+		{
+			runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+			int processComplete = runtimeProcess.waitFor();
+			if(processComplete == 0)
+			{
+				System.out.println("Backup restored Successfully");
+			}else{
+				System.out.println("Failed Backup");
+			}
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}

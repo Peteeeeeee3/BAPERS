@@ -1,5 +1,7 @@
 package GUI;
 
+import Job.Task;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,7 @@ public class ViewTaskScreen extends JPanel{
     public GUIControl guiControl;
     DefaultTableModel defaultTableModel;
     int flag = 0;
+    public Task task;
 
     public ViewTaskScreen(GUIControl guiControl, JFrame frame){
         this.guiControl = guiControl;
@@ -51,6 +54,8 @@ public class ViewTaskScreen extends JPanel{
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int id = Integer.parseInt(textField1.getText());
+                task = getGuiControl().getController().getJobControl().vecTasks.viewTask(id);
                 FetchData();
             }
         });
@@ -65,9 +70,7 @@ public class ViewTaskScreen extends JPanel{
         defaultTableModel.addColumn("Price");
         defaultTableModel.addColumn("Duration");
 
-        int id = Integer.parseInt(textField1.getText());
-        getGuiControl().getController().getJobControl().viewTask(id);
-        defaultTableModel.addRow(new Object[]{2,3,4,5});
+        defaultTableModel.addRow(new Object[]{task.getTaskID() ,task.getDescription(), task.getLocation(), task.getPrice(), task.getDuration()});
     }
 
     public GUIControl getGuiControl() {
