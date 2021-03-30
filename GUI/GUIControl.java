@@ -257,5 +257,7 @@ public class GUIControl extends JFrame {
 
 	public void openPreviousFrame(){viewingOrder.peek().setVisible(true);}
 
-
+	public int getAccess() {
+		return controller.getAccess();
+	}
 }
