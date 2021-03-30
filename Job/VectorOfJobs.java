@@ -82,6 +82,7 @@ public class VectorOfJobs {
 
 				status= result.getString("status");
 				System.out.println(status);
+
 			}
 
 		} catch (Exception e) {
@@ -91,17 +92,16 @@ public class VectorOfJobs {
 	}
 
 	public Job viewActiveJobs() throws SQLException {
-
 		int JobNumber = 0, CustomerAccountNum = 0, PaymentpaymentID = 0, startTime = 0, startDate = 0, priority = 0;
 		String specialInstructions = "", status = "";
 		double price = 0;
 
 		try {
-
-			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement
-					("SELECT FROM job WHERE status='in progress'");
-
-			ResultSet result = stmt.executeQuery();
+			String sql = "SELECT * FROM job WHERE status = ?";
+			PreparedStatement stmt = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+			ResultSet result;
+			stmt.setString(1, "in progress");
+			result = jobControl.getControl().getDBC().read(stmt);
 
 			while (result.next()) {
 
@@ -133,9 +133,7 @@ public class VectorOfJobs {
 				System.out.println(status);
 
 			}
-		}
-
-		catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new Job(JobNumber, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status);

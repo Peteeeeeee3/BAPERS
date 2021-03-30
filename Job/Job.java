@@ -276,7 +276,7 @@ public class Job {
 		try {
 
 			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement
-					("SELECT FROM job WHERE status='in progress'");
+					("SELECT FROM job WHERE status = 'in progress'");
 
 			ResultSet result = stmt.executeQuery();
 
