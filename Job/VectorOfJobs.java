@@ -1,5 +1,7 @@
 package Job;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Vector;
 
 import Account.AccountControl;
@@ -11,7 +13,7 @@ public class VectorOfJobs {
 	public JobHistory jHist;
 	public Vector<Job> vector = new Vector<Job>();
 	public JobFacadeControl jobControl;
-	//public VectorOfJobs vecJob;
+	public VectorOfJobs vecJob;
 
 	public void addJob(Job job) {
 		vector.add(new Job(job.getID() ,job.getSummary(), job.getStartTime(), job.getUrgency(), this));
@@ -35,6 +37,56 @@ public class VectorOfJobs {
 			}
 		}
 		return -1;
+	}
+
+	public Job viewJob (int jobID){
+		int id = 0, CustomerAccountNum = 0, PaymentpaymentID = 0, startTime = 0, startDate = 0, priority = 0;
+		String specialInstructions = "", status = "";
+		double price = 0;
+
+		//updateStatus(jobID);
+
+		try {
+
+			String find = "SELECT * FROM Job WHERE jobNumber= ?";
+			PreparedStatement stmt = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
+			ResultSet result;
+			stmt.setInt(1, jobID);
+			result = jobControl.getControl().getDBC().read(stmt);
+
+			while (result.next()) {
+
+				id = result.getInt("jobNumber");
+
+				CustomerAccountNum = result.getInt("CustomeraccountNo");
+				System.out.println(CustomerAccountNum);
+
+				PaymentpaymentID = result.getInt("PaymentpaymentID");
+				System.out.println(PaymentpaymentID);
+
+				startTime= result.getInt("startTime");
+				System.out.println(startTime);
+
+				startDate= result.getInt("startDate");
+				System.out.println(startDate);
+
+				priority = result.getInt("priority");
+				System.out.println(priority);
+
+				specialInstructions = result.getString("specialInstructions");
+				System.out.println(specialInstructions);
+
+				price = result.getDouble("price");
+				System.out.println(price);
+
+				status= result.getString("status");
+				System.out.println(status);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new Job(id, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status);
 	}
 
 	public void incrementNoOfJobs() {

@@ -62,7 +62,7 @@ public class ViewJobScreen extends JPanel {
         defaultTableModel.addColumn("Price");
         defaultTableModel.addColumn("Status");
 
-        defaultTableModel.addRow(new Object[]{job.getID(), job.getCustomerAccNo(), job.getPaymentID(), job.getStartTime(), job.getStartDate(), job.getUrgency(), job.getSummary(), job.getPrice(), job.getSummary()});
+        defaultTableModel.addRow(new Object[]{job.getID(), job.getCustomerid(), job.getPaymentid(), job.getStartTime(), job.getStartDate(), job.getUrgency(), job.getSummary(), job.getPrice(), job.getStatus()});
     }
 
     public GUIControl getGuiControl() {

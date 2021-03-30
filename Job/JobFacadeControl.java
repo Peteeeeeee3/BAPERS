@@ -39,7 +39,6 @@ public class JobFacadeControl implements I_Job, I_Database {
 		}
 	}
 
-
 	public void acceptJob(int ID ,String summary, int startTime, int urgency){
 		Job job = null;
 		for (int i = 0; i < vecJobs.getVector().size(); ++i){

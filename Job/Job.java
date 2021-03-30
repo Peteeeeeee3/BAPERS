@@ -8,12 +8,15 @@ import java.util.ArrayList;
 
 public class Job {
 	private int iD;
-	private int price;
+	private double price;
 	private String summary;
 	private String status;
 	private int startTime;
 	private int endTime;
-	private int urgency = 24;
+	private int urgency;
+	private int customerid;
+	private int paymentid;
+	public int startDate;
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
@@ -84,13 +87,19 @@ public class Job {
 		return this.iD;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return this.price;
 	}
 
 	public String getSummary() {
 		return this.summary;
 	}
+
+	public int getCustomerid(){return customerid;}
+
+	public int getPaymentid(){return paymentid;}
+
+	public int getStartDate(){return startDate;}
 
 	public void setSummary(String summary) {
 		this.summary = summary;
@@ -185,6 +194,18 @@ public class Job {
 		this.urgency = urgency;
 		this.vecTaskJ = new VectorOfTasksForJob();
 		this.vecJob = vecJob;
+	}
+
+	public Job(int ID, int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status){
+		this.iD = ID;
+		this.customerid = customerno;
+		this.paymentid = paymentid;
+		this.startTime = startTime;
+		this.urgency = urgency;
+		this.summary = summary;
+		this.price = price;
+		this.status = status;
+		this.startDate = startDate;
 	}
 
 
@@ -300,7 +321,6 @@ public class Job {
 	public void setZero(int statusID){
 		statusID = 0;
 	}
-      
     
 }
 
