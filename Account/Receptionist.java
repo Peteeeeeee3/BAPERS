@@ -169,7 +169,7 @@ public class Receptionist extends UserAccount {
     }
 
     public Receptionist(UserAccount user) {
-        super(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess());
+        super(user.getStaffID(), user.getPassword(), user.getName(), user.getAccess(),user.getVecUser());
         throw new UnsupportedOperationException();
     }
 }

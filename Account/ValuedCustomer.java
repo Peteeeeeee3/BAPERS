@@ -1,9 +1,11 @@
 package Account;
+import java.awt.*;
 import java.sql.ResultSet;
 import java.util.*;
 import Job.Job;
 import Job.VectorOfJobs;
 
+import javax.swing.*;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ public class ValuedCustomer extends Customer {
 	public VectorOfAccounts vecAcc;
 	public Job job;
 	public Customer customer;
+	JFrame frame =new JFrame();
 
 	public void addDiscountPlan(String type, float[] rates, int[] tasks, float[] ranges) {
 		//check type
@@ -52,38 +55,42 @@ public class ValuedCustomer extends Customer {
 
 	//this maybe need to be changed.
 	public void alertManager() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		String status = null;
-		int customerAccount=0;
-		Integer paymentID=0;
-		int month=0;
-		int monthCustomerAccount=0;
-		// code to read if job status, customer accountNO and paymentid
-		try {
-			PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT `status`, `CustomeraccountNo`, `PaymentpaymentID` FROM job WHERE VALUES status=? AND CustomeraccountNo=?AND Paymentpayment=?");
-			preparedStatement.setString(1, status);
-			preparedStatement.setInt(2, customerAccount);
-			preparedStatement.setInt(3, paymentID);
-			ResultSet rj = vecJob.getControl().getControl().getDBC().read(preparedStatement);
-
-			//reads month and customer
-			PreparedStatement preStm = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT `month`, `CustomeraccountNo` FROM job WHERE VALUES `month = ?` AND `CustomeraccountNo`=?  ");
-			preStm.setInt(1, month);
-			preStm.setInt(2, monthCustomerAccount);
-			ResultSet rm = vecJob.getControl().getControl().getDBC().read(preparedStatement);
-
-			//goes through all the month within month_spend data and checkes if customer in job and month_spend is the same if so it then checks if it has a paymentid, if not then it should alert manager.
-			for (int i = 0; i < rm.getFetchSize(); ++i) {
-				month = month + 1;
-				if (customerAccount == monthCustomerAccount) {
-					if (paymentID == null) {
-						// return a pop up alert on the office managers page. Not sure if i'm missing something.
-
-					}
-				}
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
+//		String status = null;
+//		int customerAccount=0;
+//		Integer paymentID=0;
+//		int month=0;
+//		int monthCustomerAccount=0;
+//		// code to read if job status, customer accountNO and paymentid
+//		try {
+//			PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT `status`, `CustomeraccountNo`, `PaymentpaymentID` FROM job WHERE VALUES status=? AND CustomeraccountNo=?AND Paymentpayment=?");
+//			preparedStatement.setString(1, status);
+//			preparedStatement.setInt(2, customerAccount);
+//			preparedStatement.setInt(3, paymentID);
+//			ResultSet rj = vecJob.getControl().getControl().getDBC().read(preparedStatement);
+//
+//			//reads month and customer
+//			PreparedStatement preStm = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("SELECT `month`, `CustomeraccountNo` FROM job WHERE VALUES `month = ?` AND `CustomeraccountNo`=?  ");
+//			preStm.setInt(1, month);
+//			preStm.setInt(2, monthCustomerAccount);
+//			ResultSet rm = vecJob.getControl().getControl().getDBC().read(preparedStatement);
+//
+//			//goes through all the month within month_spend data and checkes if customer in job and month_spend is the same if so it then checks if it has a paymentid, if not then it should alert manager.
+//			for (int i = 0; i < rm.getFetchSize(); ++i) {
+//				month = month + 1;
+//				if (customerAccount == monthCustomerAccount) {
+//					if (paymentID == null) {
+//						// return a pop up alert on the office managers page. Not sure if i'm missing something.
+//						// message should be displayed with the account number of the late payment
+//						rm.getCharacterStream(monthCustomerAccount);
+//						frame.setBackground(Color.white);
+//						JOptionPane.showMessageDialog(frame, (monthCustomerAccount)+" Has not yet payed");
+//
+//					}
+//				}
+//			}
+//		}catch(SQLException e){
+//			e.printStackTrace();
+//		}
 
 	}
 

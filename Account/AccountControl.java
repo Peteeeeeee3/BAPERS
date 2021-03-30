@@ -51,15 +51,12 @@ public class AccountControl implements Account.I_Account, I_Database {
         officeManager.editAccess(staffID);
     }
 
-    public void upgradeCust(int accountNo) {
-        if (customer.getAccountNo() == accountNo) {
-            customer = valCustomer;
-        }
+    public void upgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+       officeManager.upgradeCustomer(accountNo);
     }
 
-    public void downgradeCust(int accountNo) {
-        if (customer.getAccountNo() == accountNo)
-            discountSet.removeDiscount(discount);
+    public void downgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        officeManager.downgradeCust(accountNo);
     }
 
     public void editDiscount(int accountNo) {

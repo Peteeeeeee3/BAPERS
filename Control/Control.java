@@ -2,6 +2,7 @@ package Control;
 
 import Account.AccountControl;
 import Account.Customer;
+import Account.ValuedCustomer;
 import Database.DBControl;
 import GUI.GUIControl;
 import Job.*;
@@ -31,6 +32,7 @@ public class Control implements I_Control, I_Payment {
 	private ReportFacadeControl reportFacadeControl;
 	private PrinterGateway printerGateway;
 	private GUIControl guiControl;
+	private ValuedCustomer valcus;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException, ParseException {
 		//controller setup
@@ -47,6 +49,8 @@ public class Control implements I_Control, I_Payment {
 		//make it be the login screen
 		controller.guiControl.useLogin(window);
 		window.setVisible(true);
+
+
 
 		////Test Login Start (do not remove)////
 		//controller.accountControl.login(6, "password6");

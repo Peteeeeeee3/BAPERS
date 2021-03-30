@@ -38,21 +38,21 @@ public class Login extends JPanel {
                 getGuiControl().getController().login(id, new String(pw));
                 getGuiControl().closeCurrentFrame();
                 getGuiControl().useOMHomePage(guiControl);
-                //if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 1) {
-                //    getGuiControl().closeCurrentFrame();
-                //    getGuiControl().useHomepage(guiControl);
-                //} else if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 4){
-                //    getGuiControl().closeCurrentFrame();
-                //    getGuiControl().useOMHomePage(guiControl);
-                //} else if(getGuiControl().getController().getAccountControl().userAccount.getAccess() == 3) {
-                //    getGuiControl().closeCurrentFrame();
-                //    getGuiControl().useSMHomePage(guiControl);
-                //} else if(getGuiControl().getController().getAccountControl().userAccount.getAccess() == 2){
-                  //  getGuiControl().closeCurrentFrame();
-                    //getGuiControl().useTechHomePage(guiControl);
-                //} else {
-                  //  JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
-                //}
+                if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 1) {
+                    getGuiControl().closeCurrentFrame();
+                    getGuiControl().useHomepage(guiControl);
+                } else if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 4){
+                    getGuiControl().closeCurrentFrame();
+                    getGuiControl().useOMHomePage(guiControl);
+                } else if(getGuiControl().getController().getAccountControl().userAccount.getAccess() == 3) {
+                    getGuiControl().closeCurrentFrame();
+                    getGuiControl().useSMHomePage(guiControl);
+                } else if(getGuiControl().getController().getAccountControl().userAccount.getAccess() == 2){
+                    getGuiControl().closeCurrentFrame();
+                    getGuiControl().useTechHomePage(guiControl);
+                } else {
+                    JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
+                }
             }
         });
     }
