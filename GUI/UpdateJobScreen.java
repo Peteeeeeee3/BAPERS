@@ -2,23 +2,27 @@ package GUI;
 
 import javax.swing.*;
 
-public class UpdateTask extends JPanel {
+public class UpdateJobScreen extends JPanel {
     private JButton backButton;
     private JTable JButton;
     public GUIControl guiControl;
 
     public JPanel panelMain;
+    private JButton showButton;
 
-    public UpdateTask(GUIControl guiControl, JFrame frame) {
+    public UpdateJobScreen(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
-        frame.setContentPane(new UpdateTask(guiControl).panelMain);
+        frame.setContentPane(new UpdateJobScreen(guiControl).panelMain);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
 
-    public UpdateTask(GUIControl guiControl){this.guiControl = guiControl;}
+    public UpdateJobScreen(GUIControl guiControl){
+        this.guiControl = guiControl;
+
+    }
 
     public GUIControl getGuiControl() {
         return guiControl;

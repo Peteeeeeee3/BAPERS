@@ -2,6 +2,7 @@ package Job;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import Account.AccountControl;
@@ -87,6 +88,57 @@ public class VectorOfJobs {
 			e.printStackTrace();
 		}
 		return new Job(id, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status);
+	}
+
+	public Job viewActiveJobs() throws SQLException {
+
+		int JobNumber = 0, CustomerAccountNum = 0, PaymentpaymentID = 0, startTime = 0, startDate = 0, priority = 0;
+		String specialInstructions = "", status = "";
+		double price = 0;
+
+		try {
+
+			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement
+					("SELECT FROM job WHERE status='in progress'");
+
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+
+				JobNumber = result.getInt(1);
+				System.out.println(JobNumber);
+
+				CustomerAccountNum = result.getInt(2);
+				System.out.println(CustomerAccountNum);
+
+				PaymentpaymentID = result.getInt(3);
+				System.out.println(PaymentpaymentID);
+
+				startTime = result.getInt(4);
+				System.out.println(startTime);
+
+				startDate = result.getInt(5);
+				System.out.println(startDate);
+
+				priority = result.getInt(6);
+				System.out.println(priority);
+
+				specialInstructions = result.getString(7);
+				System.out.println(specialInstructions);
+
+				price = result.getDouble(8);
+				System.out.println(price);
+
+				status = result.getString(9);
+				System.out.println(status);
+
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new Job(JobNumber, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status);
 	}
 
 	public void incrementNoOfJobs() {

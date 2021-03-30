@@ -27,6 +27,7 @@ public class ReportsScreen extends JPanel {
         generateReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
                 guiControl.useGenerateReportScreen(guiControl);
             }
         });
