@@ -75,6 +75,18 @@ public class VectorOfTasks {
 		return new Task(id, description, location, price, duration);
 	}
 
+	public void deleteTask(int taskID){
+		try{
+			PreparedStatement stmt = jfc.getControl().getDBC().getDBGateway().getConnection().prepareStatement("DELETE FROM task WHERE taskID = ?");
+			stmt.setInt(1, taskID);
+			jfc.getControl().getDBC().getDBGateway().write(stmt);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public Vector<Task> getVector() {
 		return this.tasks;
 	}

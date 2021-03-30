@@ -29,7 +29,7 @@ public class VectorOfUsers {
 
     public void removeUser(int id) {
         try {
-            String sql = "DELETE FROM Staff_Member (staffID, password, name, access) WHERE staffID = ?";
+            String sql = "DELETE FROM staff_member WHERE staffID = ?";
             PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, id);
             accControl.getControl().getDBC().write(preparedStatement);
@@ -100,6 +100,8 @@ public class VectorOfUsers {
         accControl.setAccess(access);
         return true;
     }
+
+    public UserAccount getUser(){return user;}
 
     public void logout() {
         throw new UnsupportedOperationException();

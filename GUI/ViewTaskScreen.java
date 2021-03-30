@@ -41,7 +41,15 @@ public class ViewTaskScreen extends JPanel{
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //guiControl.getController().getJobControl().removeTask();
+                int id = Integer.parseInt(textField1.getText());
+                task = getGuiControl().getController().getJobControl().vecTasks.viewTask(id);
+                if (task.getTaskID() == 0){
+                    JOptionPane.showMessageDialog(removeButton, "This task does not exist.");
+                } else {
+                    FetchData();
+                    getGuiControl().getController().getJobControl().vecTasks.deleteTask(id);
+                    JOptionPane.showMessageDialog(removeButton, "Task has been removed");
+                }
             }
         });
         addButton.addActionListener(new ActionListener() {
@@ -56,7 +64,11 @@ public class ViewTaskScreen extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 task = getGuiControl().getController().getJobControl().vecTasks.viewTask(id);
-                FetchData();
+                if(task.getTaskID() == 0){
+                    JOptionPane.showMessageDialog(searchButton,"This task does not exist.");
+                } else {
+                    FetchData();
+                }
             }
         });
     }
