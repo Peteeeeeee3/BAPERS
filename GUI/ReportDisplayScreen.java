@@ -105,8 +105,7 @@ public class ReportDisplayScreen {
                 name = ((IndividualPerformanceReport) report).getNames().get(namesItr);
                 previousName = name;
             }
-        } else if
-        (report instanceof CustomerJobReport) {
+        } else if (report instanceof CustomerJobReport) {
             table.setModel(defaultTableModel);
             defaultTableModel.addColumn("Job");
             defaultTableModel.addColumn("Price, GBP");
@@ -117,10 +116,24 @@ public class ReportDisplayScreen {
             defaultTableModel.addColumn("Completed by");
 
             for (ReportTask rt : ((CustomerJobReport) report).getInfoVec()) {
-                defaultTableModel.addRow(new Object[]{rt.getJob(), rt.getPrice(), rt.getTask(), rt.getDepartment(), rt.getStartTime(), rt.getTimeTaken(), rt.getCompletedBy()});
+                int startTime = rt.getStartTime();
+                String s_startTime = "";
+
+                if (startTime == 0) {
+                    s_startTime = "Not yet started";
+                } else if (startTime >= 10000) {
+                    s_startTime = "0" + Integer.toString(startTime).substring(0, 1) + ":" + Integer.toString(startTime).substring(1, 3);
+                } else if (startTime >= 1000) {
+                    s_startTime = Integer.toString(startTime).substring(0, 2) + ":" + Integer.toString(startTime).substring(2, 4);
+                } else if (startTime >= 10) {
+                    s_startTime = "00:" + Integer.toString(startTime).substring(0, 2);
+                } else if (startTime >= 1) {
+                    s_startTime = "00:0" + Integer.toString(startTime).substring(0, 2);
+                }
+
+                defaultTableModel.addRow(new Object[]{rt.getJob(), rt.getPrice(), rt.getTask(), rt.getDepartment(), s_startTime, rt.getTimeTaken(), rt.getCompletedBy()});
             }
-        } else if
-        (report instanceof PerformanceSummary) {
+        } else if (report instanceof PerformanceSummary) {
             table.setModel(defaultTableModel);
         }
 

@@ -12,7 +12,7 @@ public class Customer {
     private int accountNo;
     private String name;
     private String address;
-    private int phone;
+    private long phone;
     private VectorOfAccounts vecAcc;
     private int valued;
     public Payment payment;
@@ -60,7 +60,7 @@ public class Customer {
         this.address = address;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return this.phone;
     }
 
@@ -115,7 +115,7 @@ public class Customer {
         return finalValue;
     }
 
-    public Customer(String company, String name, String address, int phone, VectorOfAccounts vecAcc) {
+    public Customer(String company, String name, String address, long phone, VectorOfAccounts vecAcc) {
         this.company = company;
         this.name = name;
         this.address = address;
@@ -135,7 +135,7 @@ public class Customer {
         }
     }
 
-    public Customer(String company, String name, String address, int phone, VectorOfAccounts vecAcc, int accountNo, int valued)  {
+    public Customer(String company, String name, String address, long phone, VectorOfAccounts vecAcc, int accountNo, int valued)  {
         this.company = company;
         this.name = name;
         this.address = address;
