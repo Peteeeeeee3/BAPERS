@@ -1,6 +1,7 @@
 package GUI;
 
 import Control.Control;
+import Report.Report;
 
 import javax.swing.*;
 import java.util.Stack;
@@ -249,6 +250,12 @@ public class GUIControl extends JFrame {
 		new DBConnectionScreen(this, dbConnectScreen);
 		setMasterFrame(this);
 		viewingOrder.push(dbConnectScreen);
+	}
+
+	public void useReportDisplayScreen(JFrame reportDisplayScreen, Report report) {
+		new ReportDisplayScreen(this, reportDisplayScreen, report);
+		setMasterFrame(this);
+		viewingOrder.push(reportDisplayScreen);
 	}
 
 	public void closeCurrentFrame(){

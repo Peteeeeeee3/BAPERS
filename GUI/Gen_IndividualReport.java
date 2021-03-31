@@ -1,12 +1,16 @@
 package GUI;
 
+import Report.Report;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import Report.*;
 
 public class Gen_IndividualReport extends JPanel {
     private JButton backButton;
-    private JTextField staffIDTextField;
-    private JTextField mmDdYyyyTextField;
-    private JTextField mmDdYyyyTextField1;
+    private JTextField startDateField;
+    private JTextField endDateField;
     private JButton generateButton;
     private JPanel individualReportsPanel;
     public GUIControl guiControl;
@@ -22,11 +26,18 @@ public class Gen_IndividualReport extends JPanel {
         frame.setVisible(true);
     }
 
-    public Gen_IndividualReport(GUIControl guiControl){this.guiControl = guiControl;}
+    public Gen_IndividualReport(GUIControl guiControl){
+        this.guiControl = guiControl;
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.useReportDisplayScreen(guiControl, new IndividualPerformanceReport(Integer.parseInt(startDateField.getText()), Integer.parseInt(endDateField.getText()), guiControl.getController().getReportFacadeControl()));
+            }
+        });
+    }
 
     public GUIControl getGuiControl() {
         return guiControl;
     }
-
 
 }
