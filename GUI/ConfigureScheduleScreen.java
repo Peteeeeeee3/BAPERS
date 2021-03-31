@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Configure schedule needs to be worked on
 public class ConfigureScheduleScreen extends JPanel {
     private JPanel configureSchedulePanel;
     private JComboBox dropdownList;

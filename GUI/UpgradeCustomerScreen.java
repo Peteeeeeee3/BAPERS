@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//The way this is coded is exactly the same to how downgrade customer was coded. Fully commented there
 public class UpgradeCustomerScreen extends JPanel {
     public GUIControl guiControl;
     public JTextField searchTextField;

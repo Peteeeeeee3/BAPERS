@@ -32,18 +32,25 @@ public class RemoveUserScreen extends JPanel{
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Getting value from textfield
                 int id = Integer.parseInt(textField1.getText());
                 try {
+                    //This if statement calls a function which checks if the ID is present in the database or not
                     if (!getGuiControl().getController().getAccountControl().vecUser.checkId(id)){
+                        //If it isnt, this error message is shown
                         JOptionPane.showMessageDialog(confirmButton,"This user does not exist");
                     } else {
+                        //Else if the flag is set to 1 after clicking the check box
                         if (flag == 1){
+                            //Call remove user method
                             getGuiControl().getController().getAccountControl().vecUser.removeUser(id);
                             JOptionPane.showMessageDialog(confirmButton, "User has been removed");
                         } else {
+                            //If checkbox hasnt been clicked, this error message will show
                             JOptionPane.showMessageDialog(confirmButton, "Please tick the remove check box");
                         }
                     }
+                    //Catch expressions here for the vecUser.checkID method.
                 } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
@@ -58,6 +65,7 @@ public class RemoveUserScreen extends JPanel{
         });
         checkBox1.addActionListener(new ActionListener() {
             @Override
+            //Sets flag to 1 when checkbox clicked
             public void actionPerformed(ActionEvent e) {
                 flag = 1;
             }

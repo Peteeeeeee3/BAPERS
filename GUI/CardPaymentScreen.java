@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import Payment.Payment;
 import Payment.Card;
 
-
+//Card Payment needs work. Currently doesnt work so please do change up where needed. Can delete whole functions from here
 public class CardPaymentScreen extends JPanel {
     private JCheckBox paidCheckBox;
     private JButton confirmButton;

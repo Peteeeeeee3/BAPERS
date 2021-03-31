@@ -14,9 +14,9 @@ public class CreateCustomerScreen extends JPanel {
     private JButton confirmButton;
     private JButton cancelButton;
     private JTextField nameField;
-    private JTextField valued;
     public GUIControl guiControl;
 
+    //Where the screen is constructed and displayed
     public CreateCustomerScreen(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
         frame.setContentPane(new CreateCustomerScreen(guiControl).createCustomerPanel);
@@ -27,17 +27,20 @@ public class CreateCustomerScreen extends JPanel {
 
     }
 
+    //Where button functions are called
     public CreateCustomerScreen(GUIControl guiControl) {
         this.guiControl = guiControl;
 
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Getting the inputs from the fields
                 String name = nameField.getText();
                 int phone = Integer.parseInt(phoneField.getText());
                 String address= addressField.getText();
                 String company = companyField.getText();
                 String email = emailField.getText();
+                //Calling the method from the accountControl
                 getGuiControl().getController().getAccountControl().createCustomer(company,name,address,phone);
                 guiControl.closeCurrentFrame();
                 guiControl.useExistingDeadlineCustomerScreen(guiControl);
