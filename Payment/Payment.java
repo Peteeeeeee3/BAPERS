@@ -147,7 +147,7 @@ public class Payment {
 		vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().write(prepStat);
 	}
 
-	private int generatedID() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+	public int generatedID() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		//retrieves payment with highest ID with matching values
 		String sql = "SELECT `paymentID` FROM `payment` WHERE payment.date = ? AND payment.paymentType = ? AND amount = ?";
 		PreparedStatement preparedStatement = vecPaym.getPaymCtrl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);

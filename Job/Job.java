@@ -1,6 +1,9 @@
 package Job;
 
+import Account.Customer;
 import Database.*;
+import Payment.Payment;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +23,8 @@ public class Job {
 	private boolean isPaid = false;
 	public VectorOfTasksForJob vecTaskJ;
 	public VectorOfJobs vecJob;
+	public Customer customer;
+	public Payment payment;
 
 	public int calculatePrice() {
 		throw new UnsupportedOperationException();
@@ -123,7 +128,6 @@ public class Job {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public int getStartTime() {
@@ -163,8 +167,17 @@ public class Job {
 	}
 
 	public int generateJobNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-		String sql = "SELECT `jobNumber` FROM `Job` WHERE Job.deadline = ? AND Job.priority = ? AND Job.price = ? AND Job.specialInstruction = ?";
+		String sql = "SELECT `jobNumber` FROM `job` WHERE `startTime` = ? AND `startDate` = ? AND `priority` = ? AND `specialInstructions` = ? AND `price` = ? AND `status` = ? AND `CustomeraccountNo` = ? AND `PaymentpaymentID` = ?";
 		PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+
+		preparedStatement.setInt(1, startTime);
+		preparedStatement.setInt(2, startDate);
+		preparedStatement.setInt(3, urgency);
+		preparedStatement.setString(4, summary);
+		preparedStatement.setDouble(5, price);
+		preparedStatement.setString(6, status);
+		preparedStatement.setInt(7, customerid);
+		preparedStatement.setInt(8, paymentid);
 
 		ResultSet rs = vecJob.getControl().getControl().getDBC().read(preparedStatement);
 		//Find the largest ID, this indicates this is the newest object and hence belongs to this one
@@ -186,14 +199,35 @@ public class Job {
 		return finalValue;
 	}
 
+	public void upload(){
+		String sql = "INSERT INTO `job`(`CustomeraccountNo`,`PaymentpaymentID`,`startTime`, `startDate`, `priority`, `specialInstructions`, `price`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		try (PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
+			this.iD = generateJobNo();
+			preparedStatement.setInt(1, customerid);
+			preparedStatement.setInt(2, paymentid);
+			preparedStatement.setInt(3, startTime);
+			preparedStatement.setInt(4, startDate);
+			preparedStatement.setInt(5, urgency);
+			preparedStatement.setString(6, summary);
+			preparedStatement.setDouble(7, price);
+			preparedStatement.setString(8, status);
+			vecJob.getControl().getControl().getDBC().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	public Job(int ID, String summary, int startTime, int urgency, VectorOfJobs vecJob) {
-		this.iD = ID;
+	public Job(int customerno, int paymentno, int startTime, int startDate, int urgency, String summary, double price, String status, VectorOfJobs vecJob) {
 		this.summary = summary;
 		this.startTime = startTime;
 		this.urgency = urgency;
-		this.vecTaskJ = new VectorOfTasksForJob();
 		this.vecJob = vecJob;
+		this.startDate = startDate;
+		this.price = price;
+		this.status = status;
+		this.customerid = customerno;
+		this.paymentid = paymentno;
+		upload();
 	}
 
 	public Job(int ID, int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status){

@@ -47,7 +47,11 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
+<<<<<<< HEAD
 		//controller.guiControl.useUpdateJobScreen(window);
+=======
+		controller.guiControl.useLogin(window);
+>>>>>>> a073ab6bc7a423310676984a1899a335b6ec5d69
 
 		window.setVisible(true);
 
@@ -159,12 +163,20 @@ public class Control implements I_Control, I_Payment {
 		return null;
 	}
 
+	public ReportFacadeControl getReportFacadeControl() {
+		return reportFacadeControl;
+	}
+
 	public int getAccess() {
 		return access;
 	}
 
 	public void setAccess(int access) {
 		this.access = access;
+	}
+
+	public PrinterGateway getPrinterGateway() {
+		return printerGateway;
 	}
 
 	@Override
