@@ -35,7 +35,6 @@ public class SearchCustomerScreen extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
 
-
     }
 
     public SearchCustomerScreen(GUIControl guiControl) {
@@ -61,25 +60,20 @@ public class SearchCustomerScreen extends JPanel {
                 try {
                     if(!getGuiControl().getController().getAccountControl().vecAcc.checkId(id)){
                         JOptionPane.showMessageDialog(searchButton, "Customer does not exist. Please create.");
-                        flag = 1;
                     } else {
                         customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
+                        fetchData();
                     }
                 } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwable) {
                     throwable.printStackTrace();
                 }
-                fetchData();
             }
         });
         createCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (flag == 1){
                     guiControl.closeCurrentFrame();
                     getGuiControl().useCreateCustomerScreen(guiControl);
-                } else {
-                    JOptionPane.showMessageDialog(createCustomerButton, "Customer already exists. Cant create a new one.");
-                }
             }
         });
     }
@@ -93,7 +87,6 @@ public class SearchCustomerScreen extends JPanel {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Address");
         defaultTableModel.addColumn("Valued");
-
         defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 
