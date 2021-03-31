@@ -47,7 +47,6 @@ public class ReportDisplayScreen {
 
     public ReportDisplayScreen(GUIControl guiControl, Report report) {
         this.guiControl = guiControl;
-        String text = "";
 
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         if (report instanceof IndividualPerformanceReport) {
@@ -133,16 +132,12 @@ public class ReportDisplayScreen {
 
                 defaultTableModel.addRow(new Object[]{rt.getJob(), rt.getPrice(), rt.getTask(), rt.getDepartment(), s_startTime, rt.getTimeTaken(), rt.getCompletedBy()});
             }
-        } else if (report instanceof PerformanceSummary) {
-            table.setModel(defaultTableModel);
         }
 
         //print button
         printButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(report);
-                System.out.println(guiControl);
                 guiControl.getController().getPrinterGateway().print(report);
             }
         });

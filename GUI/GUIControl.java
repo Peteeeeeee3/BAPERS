@@ -258,6 +258,19 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(reportDisplayScreen);
 	}
 
+	public void useSummaryReportDisplay(JFrame summaryReportDisplay, Report report) {
+		new SummaryReportDisplay(this, summaryReportDisplay, report);
+		setMasterFrame(this);
+		viewingOrder.push(summaryReportDisplay);
+	}
+
+	public void useGenPerformanceSummary(JFrame genPerformanceSummary) {
+		new Gen_SummaryReport(this, genPerformanceSummary);
+		setMasterFrame(this);
+		viewingOrder.push(genPerformanceSummary);
+	}
+
+
 	public void closeCurrentFrame(){
 		viewingOrder.pop().dispose();
 	}

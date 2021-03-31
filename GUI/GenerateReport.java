@@ -34,7 +34,7 @@ public class GenerateReport extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useGenIndividReportScreen(guiControl);
+                guiControl.useGenPerformanceSummary(guiControl);
             }
         });
         customerJobsReportButton.addActionListener(new ActionListener() {

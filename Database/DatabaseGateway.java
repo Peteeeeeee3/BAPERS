@@ -2,8 +2,10 @@ package Database;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.Objects;
 
@@ -15,7 +17,7 @@ public class DatabaseGateway {
     public void connectToDB() {
         try {
             //Peter
-            //connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
             //Hanan
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
@@ -54,17 +56,31 @@ public class DatabaseGateway {
         }
     }
 
-    public void dbBackup(String dbUser, String dbPass, String dbName) {
-        String savePath = "dbBackup.sql";
-        String executeCmd = ("C:\\xampp\\mysql\\bin\\mysqldump -u " + dbUser + " -p" + dbPass + "  --databases " + dbName + " -r " + savePath);
+    public void dbBackup() {
         try {
-            Process p = Runtime.getRuntime().exec(executeCmd);
-            int processComplete = p.waitFor();
-            if (processComplete == 0) {
-                System.out.println("Backup Created Success");
-            } else {
-                System.out.println("Backup Unsuccessful");
+            Process process = Runtime.getRuntime().exec("C:\\Users\\Peter\\Documents\\School\\UNI\\Team Project\\Code\\test.bat"); //replce with location of your .sh file
+
+            StringBuilder output = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+
+            //System.out.println(output);
+            String line;
+            while ((line = reader.readLine()) != null) {
+
+                output.append(line + "\n");
             }
+
+            int exitVal = process.waitFor();
+            if (exitVal == 0) {
+                System.out.println("success");
+                System.out.println(output);
+                System.exit(0);
+            } else {
+                System.out.println("not working");
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,15 +143,15 @@ public class DatabaseGateway {
             sql.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
 
-            System.err.println("Message: " + e.getMessage());
-
-            Throwable t = e.getCause();
-            while (t != null) {
-                System.out.println("Cause: " + t);
-                t = t.getCause();
-            }
+//            System.err.println("Message: " + e.getMessage());
+//
+//            Throwable t = e.getCause();
+//            while (t != null) {
+//                System.out.println("Cause: " + t);
+//                t = t.getCause();
+//            }
         }
     }
 
@@ -148,6 +164,7 @@ public class DatabaseGateway {
         }
         connectToDB();
     }
+
     public Connection getConnection() {
         return connection;
     }
