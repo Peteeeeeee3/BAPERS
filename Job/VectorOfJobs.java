@@ -17,7 +17,7 @@ public class VectorOfJobs {
 	public VectorOfJobs vecJob;
 
 	public void addJob(Job job) {
-		vector.add(new Job(job.getID() ,job.getSummary(), job.getStartTime(), job.getUrgency(), this));
+		vector.add(job);
 		incrementNoOfJobs();
 
 	}
