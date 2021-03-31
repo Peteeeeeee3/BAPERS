@@ -65,8 +65,8 @@ public class SearchCustomerScreen extends JPanel {
                     } else {
                         customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
                     }
-                } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwable) {
+                    throwable.printStackTrace();
                 }
                 fetchData();
             }

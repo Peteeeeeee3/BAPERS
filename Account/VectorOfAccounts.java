@@ -66,7 +66,8 @@ public class VectorOfAccounts {
 
 	public Customer searchCustomer(int id) {
 		//Database version might need fixing//
-		int accountno = 0, phone = 0, valued = 0;
+		int accountno = 0, valued = 0;
+		long phone = 0;
 		String name = "", company = "", address = "";
 
 		String sql = "SELECT *" + " FROM customer" + " WHERE accountNo = ?";
@@ -79,7 +80,7 @@ public class VectorOfAccounts {
 				accountno = rs.getInt("accountNo");
 				name = rs.getString("name");
 				company = rs.getString("company");
-				phone = rs.getInt("phone");
+				phone = rs.getLong("phone");
 				address = rs.getString("address");
 				valued = rs.getInt("valued");
 			}

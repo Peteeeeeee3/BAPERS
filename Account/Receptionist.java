@@ -46,7 +46,7 @@ public class Receptionist extends UserAccount {
             preparedStatement.setString(1, customer.getCompany());
             preparedStatement.setString(2, customer.getName());
             preparedStatement.setString(3, customer.getAddress());
-            preparedStatement.setInt(4, customer.getPhone());
+            preparedStatement.setLong(4, customer.getPhone());
 
             try{
                 vecAcc.getAccControl().getControl().getDBC().getDBGateway().write(preparedStatement);
