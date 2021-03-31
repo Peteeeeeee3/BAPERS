@@ -35,7 +35,6 @@ public class SearchCustomerScreen extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
 
-
     }
 
     public SearchCustomerScreen(GUIControl guiControl) {
@@ -57,34 +56,35 @@ public class SearchCustomerScreen extends JPanel {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets the value from textfield
                 int id = Integer.parseInt(searchBar.getText());
                 try {
+                    //This if statement checks if the id is already in the database or not
                     if(!getGuiControl().getController().getAccountControl().vecAcc.checkId(id)){
+                        //If it isnt then this message will be shown
                         JOptionPane.showMessageDialog(searchButton, "Customer does not exist. Please create.");
-                        flag = 1;
                     } else {
+                        //Assign customer object to search Customer
                         customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
+                        //Calling the fetchData() method from below to create and pull the table from the database
+                        fetchData();
                     }
                 } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwable) {
                     throwable.printStackTrace();
                 }
-                fetchData();
             }
         });
         createCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (flag == 1){
                     guiControl.closeCurrentFrame();
                     getGuiControl().useCreateCustomerScreen(guiControl);
-                } else {
-                    JOptionPane.showMessageDialog(createCustomerButton, "Customer already exists. Cant create a new one.");
-                }
             }
         });
     }
 
     public void fetchData(){
+        //This sets and shows the column names for the tables
         defaultTableModel = new DefaultTableModel();
         customerTable.setModel(defaultTableModel);
         defaultTableModel.addColumn("Account No");
@@ -93,7 +93,7 @@ public class SearchCustomerScreen extends JPanel {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Address");
         defaultTableModel.addColumn("Valued");
-
+        //This adds the rows from the database
         defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 

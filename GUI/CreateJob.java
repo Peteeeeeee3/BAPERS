@@ -20,6 +20,7 @@ public class CreateJob extends JPanel {
     private JTextField paymentID;
     public GUIControl guiControl;
 
+    //Where the screen is created
     public CreateJob(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
         frame.setContentPane(new CreateJob(guiControl).existingCustomerPanel);
@@ -35,6 +36,7 @@ public class CreateJob extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Getting the values from the text fields
                 int sTime = Integer.parseInt(startTime.getText());
                 int sDate = Integer.parseInt(startDate.getText());
                 int prio = Integer.parseInt(priority.getText());
@@ -43,6 +45,7 @@ public class CreateJob extends JPanel {
                 int payID = Integer.parseInt(paymentID.getText());
                 String instruction = instruct.getText();
                 String stat = status.getText();
+                //Calling it from the Job control
                 getGuiControl().getController().getJobControl().acceptJob(custID, payID, sTime, sDate, prio, instruction, pric, stat);
             }
         });

@@ -34,10 +34,14 @@ public class DowngradeCustomerScreen extends JPanel {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets value from the textfield
                 int id = Integer.parseInt(textField1.getText());
                 try {
+                    //Searches for the customer
                     customer = guiControl.getController().getAccountControl().vecAcc.searchCustomer(id);
+                    //Displays the data
                     fetchData();
+                    //Sets flag to 1
                     flag = 1;
                 } catch (Exception classNotFoundException) {
                     classNotFoundException.printStackTrace();
@@ -50,11 +54,15 @@ public class DowngradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(textField1.getText());
                 if(flag == 1){
                     try {
-                        getGuiControl().getController().getAccountControl().vecAcc.downgradeCust(id);
-                        fetchData();
+                        //Checks if the customer has a valued = 1
                         if (customer.getValued() == 1){
+                            //if yes then run method
+                            getGuiControl().getController().getAccountControl().vecAcc.downgradeCust(id);
+                            fetchData();
+                            //Shows this message
                             JOptionPane.showMessageDialog(downgradeButton, "Customer has been downgraded. Click search again to see result.");
                         } else {
+                            //Show this message
                             JOptionPane.showMessageDialog(downgradeButton, "Customer cannot be downgraded any further.");
                         }
 

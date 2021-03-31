@@ -47,10 +47,14 @@ public class Control implements I_Control, I_Payment {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
+<<<<<<< HEAD
 
 		controller.guiControl.useUpdateJobScreen(window);
 
 		controller.guiControl.useLogin(window);
+=======
+		controller.guiControl.useHomepage(window);
+>>>>>>> bf0ebdce3ca239fc22ff1f462a5c720ef8001096
 
 
 		window.setVisible(true);
