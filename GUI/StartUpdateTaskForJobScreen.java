@@ -67,12 +67,14 @@ public class StartUpdateTaskForJobScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int column = 0;
+                int columnCompare = 1;
                 int row = table.getSelectedRow();
                 int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+                int valueJob = Integer.parseInt(table.getModel().getValueAt(row, columnCompare).toString());
                 Object item = comboBox1.getSelectedItem();
                 assert item != null;
                 String status = ((ComboItem)item).getValue();
-                getGuiControl().getController().getJobControl().vecTaskForJob.setStatus(status, value);
+                getGuiControl().getController().getJobControl().vecTaskForJob.setStatus(status, value, valueJob);
             }
         });
     }

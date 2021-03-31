@@ -38,13 +38,14 @@ public class VectorOfTasksForJob {
 		return rs.next();
 	}
 
-	public void setStatus(String status, int TasktaskID) {  //this method is called by updateTask but can also be called manually. It updates the job status in the database.
+	public void setStatus(String status, int TasktaskID, int jobNo) {  //this method is called by updateTask but can also be called manually. It updates the job status in the database.
 
 		try {
-			String sql = "UPDATE task_of_job SET status = ? WHERE TasktaskID = ?";
+			String sql = "UPDATE task_of_job SET status = ? WHERE TasktaskID = ? AND JobjobNumber = ?";
 			PreparedStatement stmt = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 			stmt.setString(1, status);
 			stmt.setInt(2, TasktaskID);
+			stmt.setInt(3, jobNo);
 			jobControl.getControl().getDBC().write(stmt);
 		}
 		catch (Exception e) {
