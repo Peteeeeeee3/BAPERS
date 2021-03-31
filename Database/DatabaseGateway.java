@@ -27,7 +27,11 @@ public class DatabaseGateway {
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
             //Farhan
+<<<<<<< HEAD
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject2", "root", "");
+=======
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/tp4", "root", "");
+>>>>>>> 59f7b8f7f37695f19feed76ca334e9252adda50a
 
             //Abdullah
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");

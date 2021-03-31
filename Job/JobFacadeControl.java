@@ -18,6 +18,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 	private Control control;
 	public VectorOfTasksForJob tfj;
 	public Task task;
+	public VectorOfTasksForJob vecTaskForJob;
 
 	public void addTask(String description, String location, float price, int duration){
 		for (int i = 0; i < vecTasks.getVector().size(); ++i) {
@@ -40,14 +41,11 @@ public class JobFacadeControl implements I_Job, I_Database {
 	}
 
 	public void acceptJob(int ID ,String summary, int startTime, int urgency){
-		Job job = null;
+
 		for (int i = 0; i < vecJobs.getVector().size(); ++i){
 			if (vecJobs.getVector().get(i).getID() == ID){
-				job = vecJobs.getVector().get(i);
+				vecJobs.getVector().get(i);
 				break;
-			}
-			if (job == null){
-				return; // the error pop up message
 			}
 		}
 		vecJobs.addJob(new Job(ID, summary, startTime, urgency, vecJobs));
@@ -98,6 +96,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 		this.control = ctrl;
 		this.vecTasks = new VectorOfTasks(this);
 		vecJobs = new VectorOfJobs(this);
+		vecTaskForJob = new VectorOfTasksForJob(this);
 	}
 
 	public Task getTask(){return task;}

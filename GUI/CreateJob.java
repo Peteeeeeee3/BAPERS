@@ -3,9 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
-public class ExistingDeadlineCustomerScreen extends JPanel {
+public class CreateJob extends JPanel {
     private JTextField deadlineTextField;
     private JButton addTaskButton;
     private JTable numberOfJobs;
@@ -15,16 +14,16 @@ public class ExistingDeadlineCustomerScreen extends JPanel {
     private JPanel existingCustomerPanel;
     public GUIControl guiControl;
 
-    public ExistingDeadlineCustomerScreen(GUIControl guiControl, JFrame frame) {
+    public CreateJob(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
-        frame.setContentPane(new ExistingDeadlineCustomerScreen(guiControl).existingCustomerPanel);
+        frame.setContentPane(new CreateJob(guiControl).existingCustomerPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
     }
 
-    public ExistingDeadlineCustomerScreen(GUIControl guiControl) {
+    public CreateJob(GUIControl guiControl) {
         this.guiControl = guiControl;
 
         confirmButton.addActionListener(new ActionListener() {

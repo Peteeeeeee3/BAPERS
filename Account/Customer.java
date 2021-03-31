@@ -17,7 +17,7 @@ public class Customer {
     private int valued;
     public Payment payment;
     private DiscountSet discountSet;
-    private VectorOfJobs jobs = new VectorOfJobs(vecAcc.getAccControl().getControl().getJobControl());
+    //private VectorOfJobs jobs = new VectorOfJobs(vecAcc.getAccControl().getControl().getJobControl());
 
 
     public void addJob() {
@@ -82,9 +82,9 @@ public class Customer {
         this.discountSet = discountSet;
     }
 
-    public VectorOfJobs getJobs() {
-        return jobs;
-    }
+    //public VectorOfJobs getJobs() {
+    //    return jobs;
+    //}
 
     public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         String sql = "SELECT `accountNo` FROM `Customer` WHERE Customer.name = ? AND Customer.company = ? AND Customer.address = ? AND phone=?";
