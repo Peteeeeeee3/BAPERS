@@ -19,7 +19,7 @@ public class SearchCustomerScreen extends JPanel {
     public JButton backButton;
     public JButton nextButton;
     public JButton searchButton;
-    public JScrollBar scrollBar;
+    private JButton createCustomerButton;
     public GUIControl guiControl;
     DefaultTableModel defaultTableModel;
     public Customer customer;
@@ -34,6 +34,8 @@ public class SearchCustomerScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
+
+
     }
 
     public SearchCustomerScreen(GUIControl guiControl) {
@@ -48,21 +50,36 @@ public class SearchCustomerScreen extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(flag == 0){
                     guiControl.closeCurrentFrame();
-                    guiControl.useCreateCustomerScreen(guiControl);
-                } else {
                     guiControl.useExistingDeadlineCustomerScreen(guiControl);
-                }
             }
         });
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(searchBar.getText());
-                customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
+                try {
+                    if(!getGuiControl().getController().getAccountControl().vecAcc.checkId(id)){
+                        JOptionPane.showMessageDialog(searchButton, "Customer does not exist. Please create.");
+                        flag = 1;
+                    } else {
+                        customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
+                    }
+                } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
+                    throwables.printStackTrace();
+                }
                 fetchData();
-                //guiControl.useCreateCustomerScreen(guiControl);
+            }
+        });
+        createCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (flag == 1){
+                    guiControl.closeCurrentFrame();
+                    getGuiControl().useCreateCustomerScreen(guiControl);
+                } else {
+                    JOptionPane.showMessageDialog(createCustomerButton, "Customer already exists. Cant create a new one.");
+                }
             }
         });
     }
@@ -76,11 +93,7 @@ public class SearchCustomerScreen extends JPanel {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Address");
         defaultTableModel.addColumn("Valued");
-        if(customer.getAccountNo() != 0) {
-            flag = 0;
-        } else {
-            flag = 1;
-        }
+
         defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 

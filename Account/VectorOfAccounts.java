@@ -92,7 +92,7 @@ public class VectorOfAccounts {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		return null;
+		return new Customer(company, name, address, phone, this, accountno, valued);
 	}
 
 	public void upgradeCustomer(int customerID) {
@@ -130,5 +130,12 @@ public class VectorOfAccounts {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean checkId(int id) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		String sql = "SELECT accountNo FROM customer WHERE accountNo = ?";
+		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		ResultSet rs = accControl.read(preparedStatement);
+		return rs.next();
 	}
 }

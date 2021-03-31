@@ -72,7 +72,7 @@ public class GUIControl extends JFrame {
 	}
 
 	public void useExistingDeadlineCustomerScreen(JFrame edlCustScreen){
-		new ExistingDeadlineCustomerScreen(this, edlCustScreen);
+		new CreateJob(this, edlCustScreen);
 		setMasterFrame(this);
 		viewingOrder.push(edlCustScreen);
 	}
@@ -180,7 +180,7 @@ public class GUIControl extends JFrame {
 	}
 
 	public void useStartTaskScreen(JFrame startTaskScreen){
-		new StartTask(this, startTaskScreen);
+		new StartUpdateTaskForJobScreen(this, startTaskScreen);
 		setMasterFrame(this);
 		viewingOrder.push(startTaskScreen);
 	}
@@ -191,10 +191,10 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(taskManageScreen);
 	}
 
-	public void useUpdateJobScreen(JFrame updateTaskScreen){
-		new UpdateJobScreen(this, updateTaskScreen);
+	public void useUpdateJobScreen(JFrame updateJobScreen){
+		new UpdateJobScreen(this, updateJobScreen);
 		setMasterFrame(this);
-		viewingOrder.push(updateTaskScreen);
+		viewingOrder.push(updateJobScreen);
 	}
 
 	public void useUpgradeCustScreen(JFrame upgradeCustScreen){

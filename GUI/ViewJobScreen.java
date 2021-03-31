@@ -15,6 +15,7 @@ public class ViewJobScreen extends JPanel {
     private JButton backButton;
     private JTextField jobIDTextField;
     private JButton searchButton;
+    private JButton updateJobButton;
     public GUIControl guiControl;
     DefaultTableModel defaultTableModel;
     public Job job;
@@ -27,7 +28,6 @@ public class ViewJobScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
-
     }
 
     public ViewJobScreen(GUIControl guiControl){

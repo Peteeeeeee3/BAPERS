@@ -1,7 +1,5 @@
 package GUI;
 
-import Job.Job;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -10,47 +8,51 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdateJobScreen extends JPanel {
+public class StartUpdateTaskForJobScreen extends JPanel {
     private JButton backButton;
     private JTable table;
-    public GUIControl guiControl;
-    public JPanel panelMain;
-    private JButton showButton;
-    private JButton updateJobButton;
+    private JPanel startTaskPanel;
     private JTextField textField1;
+    private JButton showButton;
     private JComboBox comboBox1;
-    public Job job;
+    private JButton updateStatusButton;
+    public GUIControl guiControl;
     DefaultTableModel defaultTableModel;
-    int flag = 0;
 
-    public UpdateJobScreen(GUIControl guiControl, JFrame frame) {
+    public JPanel panelMain;
+
+    public StartUpdateTaskForJobScreen(GUIControl guiControl, JFrame frame) {
         this.guiControl = guiControl;
-        frame.setContentPane(new UpdateJobScreen(guiControl).panelMain);
+        frame.setContentPane(new StartUpdateTaskForJobScreen(guiControl).startTaskPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
+
     }
 
-    public UpdateJobScreen(GUIControl guiControl){
+    public StartUpdateTaskForJobScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         comboBox1.addItem(new ComboItem("Pending", "pending"));
         comboBox1.addItem(new ComboItem("In Progress", "in progress"));
         comboBox1.addItem(new ComboItem("Completed", "completed"));
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getGuiControl().openPreviousFrame();
+                //getGuiControl().closeCurrentFrame();
+            }
+        });
         showButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String status = textField1.getText();
-                if(status.equals("pending") || status.equals("in progress") || status.equals("completed")){
+                if (status.equals("pending") || status.equals("in progress") || status.equals("completed")){
                     try {
-                        if (!getGuiControl().getController().getJobControl().vecJobs.checkStatus(status)){
-                            JOptionPane.showMessageDialog(showButton, "No jobs with entered status");
+                        if (!getGuiControl().getController().getJobControl().vecTaskForJob.checkStatus(status)){
+                            JOptionPane.showMessageDialog(showButton, "No tasks with entered status");
                         } else {
-                            try {
-                                viewActiveJobs(status);
-                            } catch (SQLException throwables) {
-                                throwables.printStackTrace();
-                            }
+                            viewTasksForJob(status);
                         }
                     } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
@@ -60,7 +62,8 @@ public class UpdateJobScreen extends JPanel {
                 }
             }
         });
-        updateJobButton.addActionListener(new ActionListener() {
+
+        updateStatusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int column = 0;
@@ -69,7 +72,7 @@ public class UpdateJobScreen extends JPanel {
                 Object item = comboBox1.getSelectedItem();
                 assert item != null;
                 String status = ((ComboItem)item).getValue();
-                getGuiControl().getController().getJobControl().vecJobs.setStatus(status, value);
+                getGuiControl().getController().getJobControl().vecTaskForJob.setStatus(status, value);
             }
         });
     }
@@ -77,26 +80,20 @@ public class UpdateJobScreen extends JPanel {
     public void initialiseTable(){
         defaultTableModel = new DefaultTableModel();
         table.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Task ID");
         defaultTableModel.addColumn("Job Number");
-        defaultTableModel.addColumn("Customer Account No");
-        defaultTableModel.addColumn("Payment ID");
         defaultTableModel.addColumn("Start Time");
-        defaultTableModel.addColumn("Start Date");
-        defaultTableModel.addColumn("Priority");
-        defaultTableModel.addColumn("Special Instructions");
-        defaultTableModel.addColumn("Price");
+        defaultTableModel.addColumn("Duration");
         defaultTableModel.addColumn("Status");
     }
 
-    public void viewActiveJobs(String status) throws SQLException {
-        int JobNumber = 0, CustomerAccountNum = 0, PaymentpaymentID = 0, startTime = 0, startDate = 0, priority = 0;
-        String specialInstructions = "";
-        double price = 0;
+    public void viewTasksForJob(String status) {
+        int TasktaskID = 0, JobjobNumber = 0, startTime = 0, duration = 0;
 
         initialiseTable();
 
         try {
-            String sql = "SELECT * FROM job WHERE status = ?";
+            String sql = "SELECT * FROM task_of_job WHERE status = ?";
             PreparedStatement stmt = getGuiControl().getController().getDBC().getDBGateway().getConnection().prepareStatement(sql);
             ResultSet result;
             stmt.setString(1, status);
@@ -104,33 +101,17 @@ public class UpdateJobScreen extends JPanel {
 
             while (result.next()) {
 
-                JobNumber = result.getInt(1);
-                System.out.println(JobNumber);
+                TasktaskID = result.getInt(1);
 
-                CustomerAccountNum = result.getInt(2);
-                System.out.println(CustomerAccountNum);
+                JobjobNumber = result.getInt(2);
 
-                PaymentpaymentID = result.getInt(3);
-                System.out.println(PaymentpaymentID);
+                startTime = result.getInt(3);
 
-                startTime = result.getInt(4);
-                System.out.println(startTime);
+                duration = result.getInt(4);
 
-                startDate = result.getInt(5);
-                System.out.println(startDate);
-
-                priority = result.getInt(6);
-                System.out.println(priority);
-
-                specialInstructions = result.getString(7);
-                System.out.println(specialInstructions);
-
-                price = result.getDouble(8);
-                System.out.println(price);
-
-                status = result.getString(9);
+                status = result.getString(5);
                 System.out.println(status);
-                defaultTableModel.addRow(new Object[]{JobNumber, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status});
+                defaultTableModel.addRow(new Object[]{TasktaskID, JobjobNumber, startTime, duration, status});
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,4 +121,5 @@ public class UpdateJobScreen extends JPanel {
     public GUIControl getGuiControl() {
         return guiControl;
     }
+
 }

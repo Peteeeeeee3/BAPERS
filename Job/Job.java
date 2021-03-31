@@ -185,14 +185,32 @@ public class Job {
 		return finalValue;
 	}
 
+	public void upload(){
+		String sql = "INSERT INTO `job`(`CustomeraccountNo`, `PaymentpaymentID`, `startTime`, `startDate`, `priority`, `specialInstructions`, `price`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try (PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
+			this.iD = generateJobNo();
+			preparedStatement.setInt(1, customerid);
+			preparedStatement.setInt(2, paymentid);
+			preparedStatement.setInt(3, startTime);
+			preparedStatement.setInt(4, startDate);
+			preparedStatement.setInt(5, urgency);
+			preparedStatement.setString(6, summary);
+			preparedStatement.setDouble(7, price);
+			preparedStatement.setString(8, status);
+			vecJob.getControl().getControl().getDBC().write(preparedStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public Job(int ID, String summary, int startTime, int urgency, VectorOfJobs vecJob) {
 		this.iD = ID;
 		this.summary = summary;
 		this.startTime = startTime;
 		this.urgency = urgency;
-		this.vecTaskJ = new VectorOfTasksForJob();
+		this.vecTaskJ = new VectorOfTasksForJob(getVecTaskJ().jobControl);
 		this.vecJob = vecJob;
+		upload();
 	}
 
 	public Job(int ID, int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status){
