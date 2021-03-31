@@ -28,6 +28,7 @@ public class EditAccessScreen extends JPanel {
         editAccessCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //If the check box is pressed a variable called flag gets updated to 1
                 flag = 1;
             }
         });
@@ -41,12 +42,17 @@ public class EditAccessScreen extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Getting the values from the text fields
                 int id = Integer.parseInt(textField1.getText());
                 int nAccessLevel = Integer.parseInt(accessLevel.getText());
+                //If the flag is 1
                 if (flag == 1){
+                    //Then the method gets called
                     getGuiControl().getController().getAccountControl().updateAccess(id, nAccessLevel);
+                    //And the popup shows this
                     JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
                 } else {
+                    //If flag is still 0, this message will pop up
                     JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");
                 }
             }

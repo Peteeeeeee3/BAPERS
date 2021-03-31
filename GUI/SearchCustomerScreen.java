@@ -56,12 +56,17 @@ public class SearchCustomerScreen extends JPanel {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets the value from textfield
                 int id = Integer.parseInt(searchBar.getText());
                 try {
+                    //This if statement checks if the id is already in the database or not
                     if(!getGuiControl().getController().getAccountControl().vecAcc.checkId(id)){
+                        //If it isnt then this message will be shown
                         JOptionPane.showMessageDialog(searchButton, "Customer does not exist. Please create.");
                     } else {
+                        //Assign customer object to search Customer
                         customer = getGuiControl().getController().getAccountControl().vecAcc.searchCustomer(id);
+                        //Calling the fetchData() method from below to create and pull the table from the database
                         fetchData();
                     }
                 } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwable) {
@@ -79,6 +84,7 @@ public class SearchCustomerScreen extends JPanel {
     }
 
     public void fetchData(){
+        //This sets and shows the column names for the tables
         defaultTableModel = new DefaultTableModel();
         customerTable.setModel(defaultTableModel);
         defaultTableModel.addColumn("Account No");
@@ -87,6 +93,7 @@ public class SearchCustomerScreen extends JPanel {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Address");
         defaultTableModel.addColumn("Valued");
+        //This adds the rows from the database
         defaultTableModel.addRow(new Object[]{customer.getAccountNo(), customer.getName(), customer.getCompany(), customer.getPhone(), customer.getAddress(), customer.getValued()});
     }
 

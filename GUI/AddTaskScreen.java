@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
+//This is where AddTaskToJob should be going
 public class AddTaskScreen extends JPanel {
     private JPanel addTaskPanel;
     private JTable taskDescription;

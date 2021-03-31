@@ -47,9 +47,12 @@ public class StartUpdateTaskForJobScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String status = textField1.getText();
+                //Checks whats entered in the textfield
                 if (status.equals("pending") || status.equals("in progress") || status.equals("completed")){
                     try {
+                        //Checks if job with this status is in the database or not
                         if (!getGuiControl().getController().getJobControl().vecTaskForJob.checkStatus(status)){
+                            //If not this message pops up
                             JOptionPane.showMessageDialog(showButton, "No tasks with entered status");
                         } else {
                             viewTasksForJob(status);
@@ -58,27 +61,31 @@ public class StartUpdateTaskForJobScreen extends JPanel {
                         throwables.printStackTrace();
                     }
                 } else {
+                    //Otherwise this message shows up
                     JOptionPane.showMessageDialog(showButton, "Please enter a correct status");
                 }
             }
         });
-
         updateStatusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets the value from the first column and second column of the table.
                 int column = 0;
                 int columnCompare = 1;
                 int row = table.getSelectedRow();
                 int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
                 int valueJob = Integer.parseInt(table.getModel().getValueAt(row, columnCompare).toString());
+                //Gets the value from the combobox
                 Object item = comboBox1.getSelectedItem();
                 assert item != null;
                 String status = ((ComboItem)item).getValue();
+                //Call the setStatus function
                 getGuiControl().getController().getJobControl().vecTaskForJob.setStatus(status, value, valueJob);
             }
         });
     }
 
+    //Create the table
     public void initialiseTable(){
         defaultTableModel = new DefaultTableModel();
         table.setModel(defaultTableModel);
@@ -89,6 +96,7 @@ public class StartUpdateTaskForJobScreen extends JPanel {
         defaultTableModel.addColumn("Status");
     }
 
+    //Had to define method here to pull all the records with the status. This code was copied from what Munish made
     public void viewTasksForJob(String status) {
         int TasktaskID = 0, JobjobNumber = 0, startTime = 0, duration = 0;
 

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Similar to card payments where it doesnt work
 public class CashPaymentScreen extends JPanel {
 
     private JPanel cashPaymentPanel;
