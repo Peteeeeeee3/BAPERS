@@ -91,52 +91,26 @@ public class VectorOfJobs {
 		return new Job(id, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status);
 	}
 
-	public Job viewActiveJobs() throws SQLException {
-		int JobNumber = 0, CustomerAccountNum = 0, PaymentpaymentID = 0, startTime = 0, startDate = 0, priority = 0;
-		String specialInstructions = "", status = "";
-		double price = 0;
+	public void setStatus(String status, int jobID) {  //this method is called by updateTask but can also be called manually. It updates the job status in the database.
 
 		try {
-			String sql = "SELECT * FROM job WHERE status = ?";
+			String sql = "UPDATE Job SET status = ? WHERE jobNumber = ?";
 			PreparedStatement stmt = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-			ResultSet result;
-			stmt.setString(1, "in progress");
-			result = jobControl.getControl().getDBC().read(stmt);
-
-			while (result.next()) {
-
-				JobNumber = result.getInt(1);
-				System.out.println(JobNumber);
-
-				CustomerAccountNum = result.getInt(2);
-				System.out.println(CustomerAccountNum);
-
-				PaymentpaymentID = result.getInt(3);
-				System.out.println(PaymentpaymentID);
-
-				startTime = result.getInt(4);
-				System.out.println(startTime);
-
-				startDate = result.getInt(5);
-				System.out.println(startDate);
-
-				priority = result.getInt(6);
-				System.out.println(priority);
-
-				specialInstructions = result.getString(7);
-				System.out.println(specialInstructions);
-
-				price = result.getDouble(8);
-				System.out.println(price);
-
-				status = result.getString(9);
-				System.out.println(status);
-
-			}
-		} catch (Exception e) {
+			stmt.setString(1, status);
+			stmt.setInt(2, jobID);
+			jobControl.getControl().getDBC().write(stmt);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new Job(JobNumber, CustomerAccountNum, PaymentpaymentID, startTime, startDate, priority, specialInstructions, price, status);
+	}
+
+	public boolean checkStatus(String status) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		String sql = "SELECT status FROM job WHERE status = ?";
+		PreparedStatement preparedStatement = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setString(1, status);
+		ResultSet rs = jobControl.getControl().getDBC().read(preparedStatement);
+		return rs.next();
 	}
 
 	public void incrementNoOfJobs() {

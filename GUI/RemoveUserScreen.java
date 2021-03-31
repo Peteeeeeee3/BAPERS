@@ -47,7 +47,6 @@ public class RemoveUserScreen extends JPanel{
                 } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
-
             }
         });
         backButton.addActionListener(new ActionListener() {

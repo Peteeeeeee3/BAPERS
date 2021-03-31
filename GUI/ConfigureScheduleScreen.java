@@ -11,7 +11,7 @@ public class ConfigureScheduleScreen extends JPanel {
     private JButton cancelButton;
     private JButton confirmButton;
     public GUIControl guiControl;
-    public ComboBoxClass configureScheduleComboBox;
+    public ComboItem configureScheduleComboBox;
     int flag = 0;
 
     public ConfigureScheduleScreen(GUIControl guiControl, JFrame frame) {
@@ -26,9 +26,9 @@ public class ConfigureScheduleScreen extends JPanel {
 
     public ConfigureScheduleScreen(GUIControl guiControl){
         this.guiControl = guiControl;
-        dropdownList.addItem(new ComboBoxClass("Days", "days"));
-        dropdownList.addItem(new ComboBoxClass("Hours", "hours"));
-        dropdownList.addItem(new ComboBoxClass("Weeks", "weeks"));
+        dropdownList.addItem(new ComboItem("Days", "days"));
+        dropdownList.addItem(new ComboItem("Hours", "hours"));
+        dropdownList.addItem(new ComboItem("Weeks", "weeks"));
 
         confirmButton.addActionListener(new ActionListener() {
             @Override
@@ -47,7 +47,7 @@ public class ConfigureScheduleScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object item = dropdownList.getSelectedItem();
-                String value = ((ComboBoxClass)item).getValue();
+                String value = ((ComboItem)item).getValue();
             }
         });
     }

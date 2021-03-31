@@ -61,11 +61,11 @@ public class VectorOfUsers {
     }
 
     public boolean checkId(int id) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-            String sql = "SELECT staffID FROM staff_member WHERE staffID = ?";
-            PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            ResultSet rs = accControl.read(preparedStatement);
-            return rs.next();
+    String sql = "SELECT staffID FROM staff_member WHERE staffID = ?";
+    PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+    preparedStatement.setInt(1, id);
+    ResultSet rs = accControl.read(preparedStatement);
+    return rs.next();
     }
 
     public int getLargestID() {

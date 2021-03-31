@@ -1,10 +1,10 @@
 package GUI;
 
-public class ComboBoxClass {
+public class ComboItem {
     private String key;
     private String value;
 
-    public ComboBoxClass(String key, String value){
+    public ComboItem(String key, String value){
         this.key = key;
         this.value = value;
     }

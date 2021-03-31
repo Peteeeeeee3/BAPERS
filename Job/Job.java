@@ -123,7 +123,6 @@ public class Job {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public int getStartTime() {
