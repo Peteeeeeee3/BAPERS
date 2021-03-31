@@ -108,7 +108,7 @@ public class DatabaseGateway {
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
 
             //Hanan
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/BAPERS", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/BAPER_v4", "root", "");
 
             //Tulsi
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
