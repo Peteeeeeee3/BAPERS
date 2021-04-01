@@ -9,12 +9,12 @@ import Payment.VectorOfPayments;
 
 public class PaymentScreen extends JPanel {
     private JTextArea amountDueTextArea;
-    private JTextField jobIDTextField;
     private JButton cancelButton;
     private JButton cashButton;
     private JButton cardButton;
     public GUIControl guiControl;
     public JPanel panelMain;
+    private JList list1;
     public CardPaymentScreen cardPaymentScreen;
 
     public PaymentScreen(GUIControl guiControl, JFrame frame) {
