@@ -67,15 +67,17 @@ public class TaskForJob extends Task {
 	public TaskForJob(Task task) throws SQLException {
 		super(task.getLocation(), task.getDescription(), task.getPrice(), task.getDuration(), task.vecTask);
 	}
-    
+
+	
+
+
     public void completeTask(int tasktaskID, int jobjobID, int staffMemberstaffID, double startTime, double timeOfCompletion, String date ) throws SQLException {
 
 		String task_status_complete = "complete";
 
 		try {
-
 			String update = "UPDATE Task_of_Job SET status=" + task_status_complete + "WHERE JobjobNumber =" + jobjobID + "AND TasktaskID =" + tasktaskID;
-			PreparedStatement stmt = db.getConnection().prepareStatement(update);
+			PreparedStatement stmt = vecTaskJ.jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(update);
 			stmt.executeUpdate();
 			stmt.close();
 		}
@@ -87,7 +89,7 @@ public class TaskForJob extends Task {
 
 		try {
 			String insert = "INSERT INTO Completed_Tasks VALUES(?, ?, ?, ?, ?)";
-			PreparedStatement stmt2 = db.getConnection().prepareStatement(insert);
+			PreparedStatement stmt2 = vecTaskJ.jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(insert);
 			stmt2.setInt(1, tasktaskID);
 			stmt2.setInt(2, staffMemberstaffID);
 			stmt2.setDouble(3, startTime);

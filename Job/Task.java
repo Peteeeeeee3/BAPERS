@@ -15,7 +15,7 @@ public class Task {
 	private int duration;
 	public VectorOfTasks vecTask;
     
-    DatabaseGateway db = new DatabaseGateway();
+
 
     public int currentTaskID;
 
@@ -84,10 +84,10 @@ public class Task {
 	}
 
 	public void upload(){
-		String sql = "INSERT INTO Task (`location`, `taskDescription`, `price`, `duration`) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO Task (`location`, `taskDescription`, `price`, `duration`) VALUES (?,?,?,?)";    //insert statement by passing through all the parameters
 		try(PreparedStatement prepStat = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)){
 			this.taskID = generateAccountNo();
-			prepStat.setString(1, location);
+			prepStat.setString(1, location);  //assigning each parameter to a column
 			prepStat.setString(2, description);
 			prepStat.setDouble(3, price);
 			prepStat.setInt(4, duration);
@@ -148,9 +148,9 @@ public class Task {
 
 	public void editTask(String taskDescription, String location, double price, int duration) {
 		try {
-			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID = ?";
+			String query = "UPDATE Task SET taskDescription = ? , location = ? , price = ? , duration = ? WHERE taskID = ?";     //assigning ? values from sql statement to parameters to be entered
 			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(query);
-			stmt.setString(1, taskDescription);
+			stmt.setString(1, taskDescription); //assigning the parameters to each
 			stmt.setString(2, location);
 		    stmt.setDouble(3, price);
 			stmt.setInt(4, duration);
@@ -165,9 +165,9 @@ public class Task {
 	}
 
 	public void deleteTask(int taskID){
-		try{
+		try{ 											//to delete a task in the task database
 
-			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("DELETE FROM Task WHERE taskID = ?");
+			PreparedStatement stmt = vecTask.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement("DELETE FROM Task WHERE taskID = ?");  //delete
 			stmt.executeUpdate();
 			stmt.close();
 		}

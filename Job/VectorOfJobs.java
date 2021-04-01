@@ -1,6 +1,6 @@
 package Job;
 
-import java.sql.PreparedStatement;
+import  java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -45,7 +45,7 @@ public class VectorOfJobs {
 		String specialInstructions = "", status = "";
 		float price = 0;
 
-		//updateStatus(jobID);
+		//view
 
 		try {
 
@@ -98,19 +98,20 @@ public class VectorOfJobs {
 			PreparedStatement stmt = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 			stmt.setString(1, status);
 			stmt.setInt(2, jobID);
-			jobControl.getControl().getDBC().write(stmt);
+			jobControl.getControl().getDBC().write(stmt);  //writing to the database
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+
 	public boolean checkStatus(String status) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 		String sql = "SELECT status FROM job WHERE status = ?";
 		PreparedStatement preparedStatement = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		preparedStatement.setString(1, status);
 		ResultSet rs = jobControl.getControl().getDBC().read(preparedStatement);
-		return rs.next();
+		return rs.next(); //checks the status
 	}
 
 	public boolean checkJobID(int id) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {

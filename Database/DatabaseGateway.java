@@ -49,36 +49,18 @@ public class DatabaseGateway {
     //terminates connection to localhost
     public void disconnectFromDB() {
         try {
-            connection.close();
+            connection.close();      //shuts down database connection
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean checkBackup() {
-        String backupName = null;
-        // change to directory of where backup should be
-        String directory = ("C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin");
-        File f = new File(directory);
-        for (File x : Objects.requireNonNull(f.listFiles())) {
-            if (x.getName().contains(".sql")) {
-                backupName = x.getName();
-                break;
-            } else {
-            }
-        }
-        return true;
-    }
-
-    public String checkOS() {
-        return System.getProperty("os.name");
-    }
 
     public void backupToDB() {
         try {
 
-            String os = System.getProperty("os.name");
-            System.out.println(os);
+            String os = System.getProperty("os.name");   //gets operating system
+            System.out.println(os);    //prints os for testing purposed
 
 
             if (os.contains("Mac OS X")) {
@@ -122,9 +104,45 @@ public class DatabaseGateway {
                 }
             }
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+
+            else if(os.contains("Windows")){
+
+                File restoreFile = new File("databaseRestoreWIN.bat");  //creates batch file for windows
+                FileWriter myWriter = new FileWriter(restoreFile);
+
+                Path path = Paths.get("databaseRestoreWin.bat");   //gets path for batch file
+
+                if (restoreFile.createNewFile()) {
+                    System.out.println("File created: " + restoreFile.getName());    //same as before applies
+                } else {
+                    System.out.println("file exists");
+                }
+
+                myWriter.write("@echo off \n" +
+                        "c: /"+ "\nC:\\xampp\\mysql\\bin\\mysql -uroot bapers_v6<latest_backup.sql\n");    //writes to batch file
+
+                myWriter.close();
+                Process process = Runtime.getRuntime().exec((""+path.toAbsolutePath()));    //runs batch file (quicker than mac as permissions do not need to be changed
+
+                StringBuilder output = new StringBuilder();
+                //BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+                int exitVal = process.waitFor();
+
+                if (exitVal == 0) {
+                    System.out.println("success");     //ran successfully
+                    System.exit(0);
+
+                } else {
+                    System.out.println("not working");    //didn't run
+                }
+            }
+
+            else{
+                System.out.println("OPERATING SYSTEM NOT SUPPORTED");  //error messsage (mainly to be used as a gui guide)
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -136,11 +154,11 @@ public class DatabaseGateway {
         System.out.println(os);
 
         try {
-            String dropStmt = "DROP DATABASE bapers_v6";         //drops the database
-            PreparedStatement stmt = connection.prepareStatement(dropStmt);   //
+            String dropStmt = "DROP DATABASE bapers_v6" ;         //drops the database
+            PreparedStatement stmt = connection.prepareStatement(dropStmt);
 
             String createStmt = "CREATE DATABASE bapers_v6";      //creates new one
-            PreparedStatement stmt2 = connection.prepareStatement(createStmt);
+            PreparedStatement stmt2 =connection.prepareStatement(createStmt);
 
             stmt.executeUpdate();      //do not remove
             stmt2.executeUpdate();     //do not remove
@@ -176,20 +194,26 @@ public class DatabaseGateway {
                     System.out.println("success");
                     System.out.println(output);
 
-                    Process process2 = Runtime.getRuntime().exec(path.toAbsolutePath() + "");     //runs shell file
+                    Process process2 = Runtime.getRuntime().exec(path.toAbsolutePath()+"");     //runs shell file
 
                     int exitVal2 = process2.waitFor();   //waits for this finish
                     if (exitVal2 == 0) {        //if finished do this
                         System.out.println("saved");
-                    } else {
+                    }
+                    else{
                         System.out.println("not saved");  //this means that the shell file did not run
                     }
-                    System.exit(0);
 
-                } else {
+                    System.exit(0); //exits the session
+
+                } else
+
+                {
                     System.out.println("not working");   //this means that there's a problem in the write statement (most likely)
                 }
-            } else if (os.contains("Windows")) {
+            }
+
+            else if(os.contains("Windows")){
 
                 File restoreFile = new File("databaseRestoreWIN.bat");        //creates batch file for windows
                 FileWriter myWriter = new FileWriter(restoreFile);
@@ -199,14 +223,14 @@ public class DatabaseGateway {
                 if (restoreFile.createNewFile()) {
                     System.out.println("File created: " + restoreFile.getName());    //same as before applies
                 } else {
-                    System.out.println("file exists");
+                    System.out.println("file exists");   //file already exists
                 }
 
                 myWriter.write("@echo off \n" +
-                        "c: /" + "\nC:\\xampp\\mysql\\bin\\mysql -uroot bapers_v6<latest_backup.sql\n");    //writes to batch file
+                        "c: /"+ "\nC:\\xampp\\mysql\\bin\\mysql -uroot bapers_v6<latest_backup.sql\n");    //writes to batch file
 
                 myWriter.close();
-                Process process = Runtime.getRuntime().exec(("" + path.toAbsolutePath()));    //runs batch file (quicker than mac as permissions do not need to be changed
+                Process process = Runtime.getRuntime().exec((""+path.toAbsolutePath()));    //runs batch file (quicker than mac as permissions do not need to be changed
 
                 StringBuilder output = new StringBuilder();
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -221,8 +245,10 @@ public class DatabaseGateway {
                 } else {
                     System.out.println("not working");    //didn't run
                 }
-            } else {
-                System.out.println("OPERATING SYSTEM NOT SUPPORTED");
+            }
+
+            else{
+                System.out.println("OPERATING SYSTEM NOT SUPPORTED");    //error message if operating system is foreign
             }
 
         } catch (Exception e) {
@@ -230,6 +256,10 @@ public class DatabaseGateway {
         }
 
     }
+
+    /*
+          MAKE SURE YOU DOWNLOAD THE LATEST VERSION
+     */
 
 //handles reading from database. Call this function if reading is required.
 public ResultSet read(PreparedStatement sql){
@@ -271,9 +301,15 @@ public DatabaseGateway(){
         connectToDB();
         }
 
+
 public Connection getConnection(){
         return connection;
-        }
+    }
 
 
-        }
+
+
+
+
+
+}
