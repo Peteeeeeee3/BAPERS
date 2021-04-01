@@ -48,7 +48,13 @@ public class TechHomePage extends JPanel{
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!guiControl.getViewingOrder().isEmpty()) {
+                    while (!guiControl.getViewingOrder().isEmpty()) {
+                        guiControl.getViewingOrder().pop();
+                    }
+                }
+                guiControl.useLogin(guiControl);
+                guiControl.getController().setAccess(0);
             }
         });
     }
