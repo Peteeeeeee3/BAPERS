@@ -29,7 +29,6 @@ public class CreateJob extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
 
-
     }
 
     public CreateJob(GUIControl guiControl) {
@@ -54,6 +53,13 @@ public class CreateJob extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
+            }
+        });
+        addATaskToButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+                guiControl.useAddTaskScreen(guiControl);
             }
         });
     }

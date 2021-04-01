@@ -19,6 +19,7 @@ public class JobFacadeControl implements I_Job, I_Database {
 	public VectorOfTasksForJob tfj;
 	public Task task;
 	public VectorOfTasksForJob vecTaskForJob;
+	public Job job;
 
 	public void addTask(String description, String location, float price, int duration){
 		for (int i = 0; i < vecTasks.getVector().size(); ++i) {

@@ -52,6 +52,7 @@ public class CreateCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
             }
         });
     }

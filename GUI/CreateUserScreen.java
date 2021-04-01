@@ -45,6 +45,7 @@ public class CreateUserScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
             }
         });
     }

@@ -113,6 +113,14 @@ public class VectorOfJobs {
 		return rs.next();
 	}
 
+	public boolean checkJobID(int id) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		String sql = "SELECT status FROM task_of_job WHERE status = ?";
+		PreparedStatement preparedStatement = jobControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		ResultSet rs = jobControl.getControl().getDBC().read(preparedStatement);
+		return rs.next();
+	}
+
 	public void incrementNoOfJobs() {
 		noOfJobs ++;
 	}
