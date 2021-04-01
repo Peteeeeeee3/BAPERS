@@ -4,14 +4,15 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class CreateJob extends JPanel {
     private JButton addTaskButton;
     private JButton cancelButton;
     private JButton confirmButton;
     private JPanel existingCustomerPanel;
-    private JTextField startTime;
-    private JTextField startDate;
     private JTextField priority;
     private JTextField price;
     private JTextField instruct;
@@ -38,8 +39,13 @@ public class CreateJob extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Getting the values from the text fields
-                int sTime = Integer.parseInt(startTime.getText());
-                int sDate = Integer.parseInt(startDate.getText());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
+                LocalTime now = LocalTime.now();
+                String timeString = now.format(formatter);
+                int localTime = Integer.parseInt(timeString);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+                LocalDate date_now = LocalDate.now();
+                int date = Integer.parseInt(dtf.format(date_now));
                 int prio = Integer.parseInt(priority.getText());
                 int pric = Integer.parseInt(price.getText());
                 int custID = Integer.parseInt(customerID.getText());
@@ -47,8 +53,8 @@ public class CreateJob extends JPanel {
                 String instruction = instruct.getText();
                 String stat = status.getText();
                 //Calling it from the Job control
-                getGuiControl().getController().getJobControl().acceptJob(custID, payID, sTime, sDate, prio, instruction, pric, stat);
-                addToPaymentID(payID);
+                getGuiControl().getController().getJobControl().acceptJob(custID, payID, localTime, date, prio, instruction, pric, stat);
+                addToPaymentID(pric);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -83,11 +89,11 @@ public class CreateJob extends JPanel {
         });
     }
 
-    public void addToPaymentID(int id){
+    public void addToPaymentID(int price){
         try {
-            String sql = "INSERT INTO payment(`paymentID`) VALUES (?)";
+            String sql = "INSERT INTO payment(`amount`) VALUES (?)";
             PreparedStatement preparedStatement = getGuiControl().getController().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, price);
             getGuiControl().getController().getDBC().write(preparedStatement);
         } catch (Exception e){
             e.printStackTrace();

@@ -36,24 +36,8 @@ public class AddTaskToJobScreen extends JPanel {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (guiControl.getAccess()) {
-                    case 1 -> {
-                        getGuiControl().closeCurrentFrame();
-                        guiControl.useHomepage(guiControl);
-                    }
-                    case 2 -> {
-                        getGuiControl().closeCurrentFrame();
-                        guiControl.useTechHomePage(guiControl);
-                    }
-                    case 3 -> {
-                        getGuiControl().closeCurrentFrame();
-                        guiControl.useSMHomePage(guiControl);
-                    }
-                    case 4 -> {
-                        getGuiControl().closeCurrentFrame();
-                        guiControl.useOMHomePage(guiControl);
-                    }
-                }
+                guiControl.closeCurrentFrame();
+                guiControl.openPreviousFrame();
             }
         });
         confirmButton.addActionListener(new ActionListener() {
