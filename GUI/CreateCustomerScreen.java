@@ -1,5 +1,7 @@
 package GUI;
 
+import Account.Customer;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -43,7 +45,7 @@ public class CreateCustomerScreen extends JPanel {
                 String company = companyField.getText();
                 String email = emailField.getText();
                 //Calling the method from the accountControl
-                getGuiControl().getController().getAccountControl().createCustomer(company, name, address, phone);
+                getGuiControl().getController().getAccountControl().vecAcc.customers.add(new Customer(company, name, address, phone, guiControl.getController().getAccountControl().vecAcc));
                 //uiControl.closeCurrentFrame();
                 guiControl.useExistingDeadlineCustomerScreen(guiControl);
             }
