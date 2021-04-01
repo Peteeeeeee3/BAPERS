@@ -19,9 +19,11 @@ public class CardPaymentScreen extends JPanel {
     private JTextField Last4Digits;
     private JTextField ExpiryDate;
     private JTextField CardType;
+    private JLabel priveLabel;
     public GUIControl guiControl;
     public Payment payment;
     public Card card;
+    private float total;
 
 
     int flag = 0;
@@ -32,18 +34,20 @@ public class CardPaymentScreen extends JPanel {
         return new java.sql.Date(utilDate.getTime());
     }
 
-    public CardPaymentScreen(GUIControl guiControl, JFrame frame) {
+    public CardPaymentScreen(GUIControl guiControl, JFrame frame, float total) {
         this.guiControl = guiControl;
-        frame.setContentPane(new CardPaymentScreen(guiControl).cardPaymentPanel);
+        this.total = total;
+        frame.setContentPane(new CardPaymentScreen(guiControl, total).cardPaymentPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
 
-    public CardPaymentScreen(GUIControl guiControl) {
-
+    public CardPaymentScreen(GUIControl guiControl, float total) {
         this.guiControl = guiControl;
+        this.total = total;
+        priveLabel.setText(total * 1.2f + "GBP, incl. 20% VAT");
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

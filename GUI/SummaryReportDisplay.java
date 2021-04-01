@@ -61,6 +61,7 @@ public class SummaryReportDisplay {
         shiftSumTable_M.addColumn("Packing");
 
         //shift 1
+        shift1.setModel(shift1Table_M);
         shift1Table_M.addRow(new Object[] {"Date", "Copy Room", "Development", "Finishing", "Packing"});
         for (SummaryInfo si : report.getInfo_vec()) {
             int date = si.getDate();
@@ -85,6 +86,7 @@ public class SummaryReportDisplay {
             }
         }
 
+        shift2.setModel(shift2Table_M);
         shift2Table_M.addRow(new Object[] {"Date", "Copy Room", "Development", "Finishing", "Packing"});
         //shift 2
         for (SummaryInfo si : report.getInfo_vec()) {
@@ -111,6 +113,7 @@ public class SummaryReportDisplay {
         }
 
         //shift 3
+        shift3.setModel(shift3Table_M);
         shift3Table_M.addRow(new Object[] {"Date", "Copy Room", "Development", "Finishing", "Packing"});
         for (SummaryInfo si : report.getInfo_vec()) {
             int date = si.getDate();
@@ -140,6 +143,7 @@ public class SummaryReportDisplay {
             }
         }
 
+        shiftSum.setModel(shiftSumTable_M);
         shiftSumTable_M.addRow(new Object[] {" ", "Copy Room", "Development", "Finishing", "Packing"});
         for (int r = 1; r< 5; r++) {
             String shift = "";
@@ -234,6 +238,7 @@ public class SummaryReportDisplay {
                     }
                 }
             }
+
         }
 
         //shift summary

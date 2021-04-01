@@ -39,12 +39,20 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="76971" class="javax.swing.JList" binding="list1" default-binding="true">
+          <component id="e2a8c" class="javax.swing.JTable" binding="table1" default-binding="true">
             <constraints/>
             <properties/>
           </component>
         </children>
       </scrollpane>
+      <component id="765d4" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Select jobs for payment."/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
