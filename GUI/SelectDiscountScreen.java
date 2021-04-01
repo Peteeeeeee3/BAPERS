@@ -47,22 +47,22 @@ public class SelectDiscountScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switch (guiControl.getAccess()) {
-                    case 1 -> {
+                    case 1:
                         getGuiControl().closeCurrentFrame();
                         guiControl.useHomepage(guiControl);
-                    }
-                    case 2 -> {
+                        break;
+                    case 2:
                         getGuiControl().closeCurrentFrame();
                         guiControl.useTechHomePage(guiControl);
-                    }
-                    case 3 -> {
+                        break;
+                    case 3:
                         getGuiControl().closeCurrentFrame();
                         guiControl.useSMHomePage(guiControl);
-                    }
-                    case 4 -> {
+                        break;
+                    case 4:
                         getGuiControl().closeCurrentFrame();
                         guiControl.useOMHomePage(guiControl);
-                    }
+                        break;
                 }
             }
         });

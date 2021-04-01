@@ -253,22 +253,22 @@ public class SummaryReportDisplay {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switch (guiControl.getAccess()) {
-                    case 1 -> {
+                    case 1:
                         guiControl.closeCurrentFrame();
                         guiControl.useHomepage(guiControl);
-                    }
-                    case 2 -> {
+                        break;
+                    case 2:
                         guiControl.closeCurrentFrame();
                         guiControl.useTechHomePage(guiControl);
-                    }
-                    case 3 -> {
+                        break;
+                    case 3:
                         guiControl.closeCurrentFrame();
                         guiControl.useSMHomePage(guiControl);
-                    }
-                    case 4 -> {
+                        break;
+                    case 4:
                         guiControl.closeCurrentFrame();
                         guiControl.useOMHomePage(guiControl);
-                    }
+                        break;
                 }
             }
         });
