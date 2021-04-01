@@ -20,7 +20,7 @@ public class GenerateReport extends JPanel {
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
-
+    //Switches between screens.
     public GenerateReport(GUIControl guiControl){
         this.guiControl = guiControl;
         backButton.addActionListener(new ActionListener() {

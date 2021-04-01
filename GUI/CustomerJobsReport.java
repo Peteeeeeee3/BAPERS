@@ -61,6 +61,7 @@ public class CustomerJobsReport extends JPanel {
         goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Creates object customer from return value search customer. Avoids null pointer exception. Navigates through all packages
                 customer = guiControl.getController().getAccountControl().vecAcc.searchCustomer(Integer.parseInt(textField1.getText()));
                 String valued = "";
                 if (customer.getValued() == 1) {
@@ -68,16 +69,19 @@ public class CustomerJobsReport extends JPanel {
                 } else {
                     valued += "Regular";
                 }
+                //Creates the table model so that a table can be dispalyed
                 defaultTableModel = new DefaultTableModel();
                 table1.setModel(defaultTableModel);
+                //Sets the column names
                 defaultTableModel.addColumn("Account Number");
                 defaultTableModel.addColumn("Name");
                 defaultTableModel.addColumn("Phone");
                 defaultTableModel.addColumn("Customer Type");
+                //Checks to see if a customer name exists or not. If it doeesnt exist then it shows N/A as the
                 if (customer.getName().equals("")) {
                     defaultTableModel.addRow(new Object[]{"N/A", "N/A", "N/A", "N/A"});
                 } else {
-
+                //Otherwise gets the values from customer class, and adds them as the rows
                     defaultTableModel.addRow(new Object[]{
                             customer.getAccountNo(), customer.getName(), customer.getPhone(), valued
                     });
@@ -88,9 +92,12 @@ public class CustomerJobsReport extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Error prevention.
                 if (customer != null) {
+                    //Formats date
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
                     LocalDate date = LocalDate.now();
+                    //Creates report to display on next screen
                     guiControl.useReportDisplayScreen(guiControl, new CustomerJobReport(customer.getName(),
                             Integer.parseInt(formatter.format(date).toString()), guiControl.getController().getReportFacadeControl()));
                 }

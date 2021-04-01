@@ -349,7 +349,6 @@ public class Job {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void setZero(int statusID){

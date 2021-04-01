@@ -28,6 +28,7 @@ public class FixedDiscountScreen extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets values from textfields
                 float amount = Integer.parseInt(amountField.getText());
                 int id = Integer.parseInt(upgradeCustomerScreen.searchTextField.getText());
                 if(amountField.getText().isEmpty()){

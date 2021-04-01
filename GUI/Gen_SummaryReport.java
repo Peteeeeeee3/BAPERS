@@ -28,6 +28,7 @@ public class Gen_SummaryReport {
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Calls the method, passess through proper parameters. Performance summary created object to pass through
                 guiControl.useSummaryReportDisplay(guiControl, new PerformanceSummary(Integer.parseInt(ta_startDate.getText()),
                         Integer.parseInt(ta_endDate.getText()), guiControl.getController().getReportFacadeControl()));
             }
