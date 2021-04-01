@@ -43,7 +43,7 @@ public class VectorOfJobs {
 	public Job viewJob (int jobID){
 		int id = 0, CustomerAccountNum = 0, PaymentpaymentID = 0, startTime = 0, startDate = 0, priority = 0;
 		String specialInstructions = "", status = "";
-		double price = 0;
+		float price = 0;
 
 		//updateStatus(jobID);
 
@@ -77,7 +77,7 @@ public class VectorOfJobs {
 				specialInstructions = result.getString("specialInstructions");
 				System.out.println(specialInstructions);
 
-				price = result.getDouble("price");
+				price = result.getFloat("price");
 				System.out.println(price);
 
 				status= result.getString("status");

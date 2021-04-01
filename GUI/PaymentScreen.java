@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Vector;
 
 import Account.Customer;
 import Job.Job;
@@ -21,7 +20,7 @@ public class PaymentScreen extends JPanel {
     private JTable table1;
     private JLabel priceField;
     public CardPaymentScreen cardPaymentScreen;
-    private Vector<Job> jobs;
+    private Job[] jobs = new Job[1000];
     private float total = 0;
 
 
@@ -50,8 +49,12 @@ public class PaymentScreen extends JPanel {
             defaultTableModel.addColumn("Price");
             defaultTableModel.setColumnIdentifiers(new Object[]{"Job Number", "Price"});
 
+            int i = 0;
             while (rs.next()) {
                 defaultTableModel.addRow(new Object[]{rs.getInt(1), rs.getFloat(8)});
+                jobs[i] = new Job(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),
+                        rs.getString(7), rs.getFloat(8), rs.getString(9));
+                i++;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +72,7 @@ public class PaymentScreen extends JPanel {
         cashButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.useCashPaymentScreen(guiControl, total);
+                guiControl.useCashPaymentScreen(guiControl, total, customer, jobs);
             }
         });
         cardButton.addActionListener(new ActionListener() {
@@ -77,7 +80,7 @@ public class PaymentScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //int amount = Integer.parseInt(amountDueTextArea.getText());
                 //guiControl.getController().getPaymentControl().addPayment();
-                guiControl.useCardPaymentScreen(guiControl, total);
+                guiControl.useCardPaymentScreen(guiControl, total, customer, jobs);
             }
         });
     }
@@ -86,7 +89,7 @@ public class PaymentScreen extends JPanel {
         return guiControl;
     }
 
-    public Vector<Job> getJobs() {
+    public Job[] getJobs() {
         return jobs;
     }
 

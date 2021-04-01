@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Job {
 	private int iD;
-	private double price;
+	private float price;
 	private String summary;
 	private String status;
 	private int startTime;
@@ -223,14 +223,14 @@ public class Job {
 		this.urgency = urgency;
 		this.vecJob = vecJob;
 		this.startDate = startDate;
-		this.price = price;
+		this.price = (float) price;
 		this.status = status;
 		this.customerid = customerno;
 		this.paymentid = paymentno;
 		upload();
 	}
 
-	public Job(int ID, int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status){
+	public Job(int ID, int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, float price, String status){
 		this.iD = ID;
 		this.customerid = customerno;
 		this.paymentid = paymentid;

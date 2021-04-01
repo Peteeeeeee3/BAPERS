@@ -38,7 +38,7 @@ public class Card {
 		return payment;
 	}
 
-	public Card(String type, int expiryDate, int last4Digits, Payment payment) {
+	public Card(String type, int expiryDate, int last4Digits) {
 		this.type = type;
 		this.expiryDate = expiryDate;
 		this.last4Digits = last4Digits;

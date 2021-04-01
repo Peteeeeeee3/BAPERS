@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Control implements I_Control, I_Payment {
+public class Control implements I_Control {
 
 	private int access, userID;
 	private DBControl DBC;
@@ -177,28 +177,28 @@ public class Control implements I_Control, I_Payment {
 		return printerGateway;
 	}
 
-	@Override
+
 	public Payment retrievePayment(int iD) {
 		return null;
 	}
 
-	@Override
+
 	public Payment[] retrieveListOfPayments(Customer customer) {
 		return new Payment[0];
 	}
 
-	@Override
+
 	public Card[] retrieveCards(Customer customer) {
 		return new Card[0];
 	}
 
-	@Override
+
 	public void generateInvoice() {
 
 	}
 
-	@Override
-	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
-		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card);
+
+	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card, String type) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
+		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card, type);
 	}
 }
