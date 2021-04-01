@@ -82,13 +82,15 @@ public class AdminScreen extends JPanel {
         restoreSystemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                guiControl.getController().getDBC().getDBGateway().restoreToDB();
+                JOptionPane.showMessageDialog(restoreSystemButton, "Successfully restored!");
             }
         });
         backupSystemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                guiControl.getController().getDBC().getDBGateway().backupToDB();
+                JOptionPane.showMessageDialog(restoreSystemButton, "Successful backup!");
             }
         });
     }

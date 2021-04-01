@@ -49,6 +49,7 @@ public class Control implements I_Control, I_Payment {
 		//make it be the login screen
 		controller.guiControl.useLogin(window);
 
+
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
