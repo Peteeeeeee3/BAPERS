@@ -24,7 +24,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         return vecAcc.retrieveCustAccount(accountNo);
     }
 
-    public void createCustomer(String company, String name, String address, int phone) {
+    public void createCustomer(String company, String name, String address, long phone) {
         for (int i = 0; i < vecAcc.getCustomerVector().size(); i++) {
             if (vecAcc.getCustomerVector().get(i).getName().equals(name)) {
                 break;

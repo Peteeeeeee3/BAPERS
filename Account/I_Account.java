@@ -8,7 +8,7 @@ public interface I_Account {
 
 	public Customer retrieveCustomer(int accountNo);
 
-	public void createCustomer(String company, String name, String address, int phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
+	public void createCustomer(String company, String name, String address, long phone) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
 	public boolean updateAccess(int staffID, int newAccess);
 
