@@ -36,8 +36,6 @@ public class Login extends JPanel {
                 int id = Integer.parseInt(usernameField.getText());
                 char[] pw = passwordField.getPassword();
                 getGuiControl().getController().login(id, new String(pw));
-                getGuiControl().closeCurrentFrame();
-                getGuiControl().useOMHomePage(guiControl);
                 switch (guiControl.getAccess()) {
                     case 1:
                         guiControl.useHomepage(guiControl);
@@ -50,6 +48,9 @@ public class Login extends JPanel {
                         break;
                     case 4:
                         guiControl.useOMHomePage(guiControl);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(loginButton, "Incorrect details!, Please try again.");
                         break;
                 }
             }

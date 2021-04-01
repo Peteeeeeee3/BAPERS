@@ -1,5 +1,6 @@
 package Account;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -105,7 +106,11 @@ public class VectorOfUsers {
             access = rs.getInt(1);
         }
         //System.out.println(access + " " + ID + " " + password);
-        accControl.setAccess(access);
+        if (access == 1 || access == 2 || access == 3 || access == 4) {
+            accControl.setAccess(access);
+        } else {
+            return false;
+        }
         return true;
     }
 

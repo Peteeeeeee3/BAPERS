@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 
 public class Gen_SummaryReport {
     private GUIControl guiControl;
-    private JTextArea ta_startDate;
+    private JTextField ta_startDate;
     private JPanel gen_sumPanel;
-    private JTextArea ta_endDate;
+    private JTextField ta_endDate;
     private JButton cancelButton;
     private JButton generateButton;
 
