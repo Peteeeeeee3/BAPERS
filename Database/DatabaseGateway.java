@@ -124,6 +124,7 @@ public class DatabaseGateway {
 
 
 
+
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp4", "root", "");
 
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp5", "root", "");
@@ -131,6 +132,9 @@ public class DatabaseGateway {
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp7", "root", "");
 
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp9", "root", "");
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp7", "root", "");
+
 
 
 
