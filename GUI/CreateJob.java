@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 
 public class CreateJob extends JPanel {
     private JButton addTaskButton;
@@ -47,6 +48,7 @@ public class CreateJob extends JPanel {
                 String stat = status.getText();
                 //Calling it from the Job control
                 getGuiControl().getController().getJobControl().acceptJob(custID, payID, sTime, sDate, prio, instruction, pric, stat);
+                addToPaymentID(payID);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -62,6 +64,20 @@ public class CreateJob extends JPanel {
                 guiControl.useAddTaskScreen(guiControl);
             }
         });
+    }
+
+    public void addToPaymentID(int id){
+        try {
+            String sql = "INSERT INTO payment(`paymentID`) VALUES (?)";
+            PreparedStatement preparedStatement = getGuiControl().getController().getDBC().getDBGateway().getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            getGuiControl().getController().getDBC().write(preparedStatement);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
     }
     public GUIControl getGuiControl() {
         return guiControl;
