@@ -156,7 +156,9 @@ public class DatabaseGateway {
             //Rashidul
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
 
+            //turn off auto commit
             connection.setAutoCommit(false);
+            //set isolation layer
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -341,32 +343,34 @@ public class DatabaseGateway {
             } else {
                 System.out.println("OPERATING SYSTEM NOT SUPPORTED");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-//handles reading from database. Call this function if reading is required.
-public ResultSet read(PreparedStatement sql){
-        try{
-        ResultSet rs=sql.executeQuery();
-        connection.commit();
-        return rs;
-        }catch(Exception e){
-        e.printStackTrace();
+    //handles reading from database. Call this function if reading is required.
+    public ResultSet read(PreparedStatement sql) {
+        try {
+            //execute query
+            ResultSet rs = sql.executeQuery();
+            //commit changes
+            connection.commit();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
-        }
+    }
 
-//handles writing to database. Call this function if writing is required.
-public void write(PreparedStatement sql){
-        try{
-        sql.executeUpdate();
-        connection.commit();
-        }catch(SQLException e){
-        e.printStackTrace();
+    //handles writing to database. Call this function if writing is required.
+    public void write(PreparedStatement sql) {
+        try {
+            //execute query
+            sql.executeUpdate();
+            //commit changes
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
 
 //            System.err.println("Message: " + e.getMessage());
 //
@@ -376,26 +380,30 @@ public void write(PreparedStatement sql){
 //                t = t.getCause();
 //            }
         }
-        }
+    }
 
-public DatabaseGateway(){
-        try{
-        //initialise JDBC driver for class
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch(ClassNotFoundException e){
-        e.printStackTrace();
+    public DatabaseGateway() {
+        try {
+            //initialise JDBC driver for class
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         connectToDB();
-        }
+    }
 
-public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
-        }
+    }
 
 
+<<<<<<< HEAD
 
 
 }
 
 
 
+=======
+}
+>>>>>>> 107366ccb0b8ea7d192f9a12c81549e0425929cb
