@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 
 import Payment.Payment;
 import Payment.Card;
+import Report.Invoice;
+import Report.Report;
 
 //Card Payment needs work. Currently doesnt work so please do change up where needed. Can delete whole functions from here
 public class CardPaymentScreen extends JPanel {
@@ -24,6 +26,7 @@ public class CardPaymentScreen extends JPanel {
     public Payment payment;
     public Card card;
     private float total;
+    private Report report;
 
 
     int flag = 0;
@@ -37,16 +40,17 @@ public class CardPaymentScreen extends JPanel {
     public CardPaymentScreen(GUIControl guiControl, JFrame frame, float total) {
         this.guiControl = guiControl;
         this.total = total;
-        frame.setContentPane(new CardPaymentScreen(guiControl, total).cardPaymentPanel);
+        frame.setContentPane(new CardPaymentScreen(guiControl, total, (Invoice) report).cardPaymentPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
 
-    public CardPaymentScreen(GUIControl guiControl, float total) {
+    public CardPaymentScreen(GUIControl guiControl, float total, Invoice report) {
         this.guiControl = guiControl;
         this.total = total;
+        this.report = report;
         priveLabel.setText(total * 1.2f + "GBP, incl. 20% VAT");
         confirmButton.addActionListener(new ActionListener() {
             @Override
@@ -64,13 +68,31 @@ public class CardPaymentScreen extends JPanel {
                         parseException.printStackTrace();
                     }
                     guiControl.getController().getPaymentControl().vecCard.addCard(card);
+                    guiControl.getController().getPrinterGateway().print(report);
                 }
             }
         });
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
+                switch (guiControl.getAccess()) {
+                    case 1 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useHomepage(guiControl);
+                    }
+                    case 2 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useTechHomePage(guiControl);
+                    }
+                    case 3 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useSMHomePage(guiControl);
+                    }
+                    case 4 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useOMHomePage(guiControl);
+                    }
+                }
             }
         });
         paidCheckBox.addActionListener(new ActionListener() {

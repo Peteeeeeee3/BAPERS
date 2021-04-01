@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import Account.Customer;
 import Job.Job;
+import Report.Report;
 
 public class PaymentScreen extends JPanel {
     private JTextArea amountDueTextArea;
@@ -63,7 +64,24 @@ public class PaymentScreen extends JPanel {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
+                switch (guiControl.getAccess()) {
+                    case 1 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useHomepage(guiControl);
+                    }
+                    case 2 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useTechHomePage(guiControl);
+                    }
+                    case 3 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useSMHomePage(guiControl);
+                    }
+                    case 4 -> {
+                        getGuiControl().closeCurrentFrame();
+                        guiControl.useOMHomePage(guiControl);
+                    }
+                }
             }
         });
         cashButton.addActionListener(new ActionListener() {

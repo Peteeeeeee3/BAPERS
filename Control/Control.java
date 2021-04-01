@@ -57,6 +57,7 @@ public class Control implements I_Control, I_Payment {
 
 
 
+
 		//controller.guiControl.useUpdateJobScreen(window);
 		controller.guiControl.useLogin(window);
 
@@ -71,6 +72,9 @@ public class Control implements I_Control, I_Payment {
 
 
 		//controller.guiControl.useHomepage(window);
+
+
+		//controller.guiControl.useLogin(window);
 
 
 		//controller.guiControl.useLogin(window);
