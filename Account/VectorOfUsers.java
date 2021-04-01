@@ -124,22 +124,26 @@ public class VectorOfUsers {
         this.accControl = accountControl;
     }
 
-    void editAccess(int id, int access) {
-        for (UserAccount ua : users) {
-            if (ua.getStaffID() == id) {
-                ua.setAccess(access);
-                break;
-            }
-        }
+    boolean editAccess(int id, int access) {
+//        for (UserAccount ua : users) {
+//            if (ua.getStaffID() == id) {
+//                ua.setAccess(access);
+//                break;
+//            }
+//        }
         try {
-            String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID == ?;";
+            if (access < 1 || access > 4) {
+                return false;
+            }
+            String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID = ?;";
             PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, access);
             preparedStatement.setInt(2, id);
-
             accControl.getControl().getDBC().getDBGateway().write(preparedStatement);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

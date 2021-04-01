@@ -51,8 +51,8 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecUser.removeUser(id);
     }
 
-    public void updateAccess(int id, int newAccess){
-        vecUser.editAccess(id, newAccess);
+    public boolean updateAccess(int id, int newAccess){
+        return vecUser.editAccess(id, newAccess);
     }
 
     public void upgradeCust(int accountNo) {

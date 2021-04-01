@@ -31,6 +31,12 @@ public class ReportsScreen extends JPanel {
                 guiControl.useGenerateReportScreen(guiControl);
             }
         });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
     }
 
     public GUIControl getGuiControl() {

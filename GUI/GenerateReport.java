@@ -23,6 +23,12 @@ public class GenerateReport extends JPanel {
 
     public GenerateReport(GUIControl guiControl){
         this.guiControl = guiControl;
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
         individualReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

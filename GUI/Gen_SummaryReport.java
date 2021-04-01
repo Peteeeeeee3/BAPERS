@@ -32,5 +32,11 @@ public class Gen_SummaryReport {
                         Integer.parseInt(ta_endDate.getText()), guiControl.getController().getReportFacadeControl()));
             }
         });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
     }
 }

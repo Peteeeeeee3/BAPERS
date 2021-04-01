@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import Payment.Payment;
 import Payment.Card;
 
@@ -36,7 +37,7 @@ public class CardPaymentScreen extends JPanel {
         frame.setContentPane(new CardPaymentScreen(guiControl).cardPaymentPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500,300);
+        frame.setSize(500, 300);
         frame.setVisible(true);
     }
 
@@ -46,7 +47,7 @@ public class CardPaymentScreen extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (flag == 0){
+                if (flag == 0) {
                     JOptionPane.showMessageDialog(cardPaymentPanel, "Please click the paid checkbox");
                 } else {
                     String cardType = CardType.getText();

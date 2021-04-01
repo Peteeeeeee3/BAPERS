@@ -23,12 +23,12 @@ public class CashPaymentScreen extends JPanel {
         frame.setVisible(true);
     }
 
-    public CashPaymentScreen(GUIControl guiControl){
+    public CashPaymentScreen(GUIControl guiControl) {
         this.guiControl = guiControl;
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (flag == 0){
+                if (flag == 0) {
                     JOptionPane.showMessageDialog(cashPaymentPanel, "Please click the paid checkbox");
                 } else {
                     //guiControl.getController().getPaymentControl().addPayment();
@@ -41,7 +41,6 @@ public class CashPaymentScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useCashPaymentScreen(guiControl);
             }
         });
         paidCheckBox.addActionListener(new ActionListener() {

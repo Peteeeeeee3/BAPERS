@@ -275,7 +275,16 @@ public class GUIControl extends JFrame {
 		viewingOrder.pop().dispose();
 	}
 
-	public void openPreviousFrame(){viewingOrder.peek().setVisible(true);}
+	public void openPreviousFrame() {
+		//viewingOrder.peek().setVisible(true);
+//		masterFrame.setContentPane(viewingOrder.pop().getContentPane());
+//		masterFrame.setLocationRelativeTo(null);
+//		masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		masterFrame.setSize(500, 300);
+//		masterFrame.setVisible(true);\
+		this.setMasterFrame(viewingOrder.pop());
+		this.setContentPane(masterFrame.getContentPane());
+	}
 
 	public int getAccess() {
 		return controller.getAccess();

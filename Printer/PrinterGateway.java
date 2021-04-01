@@ -624,7 +624,7 @@ public class PrinterGateway {
 		/////////////////////////////
 		//replace with JFileChooser//
 		/////////////////////////////
-		String file_name = "C:\\Users\\Peter\\Documents\\School\\UNI\\Team Project\\Code\\reports\\";
+		String file_name = "reports\\";
 		//get today's date and format it
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate date = LocalDate.now();

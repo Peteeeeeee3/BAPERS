@@ -22,7 +22,7 @@ public class CreateCustomerScreen extends JPanel {
         frame.setContentPane(new CreateCustomerScreen(guiControl).createCustomerPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500,300);
+        frame.setSize(500, 300);
         frame.setVisible(true);
 
     }
@@ -37,12 +37,12 @@ public class CreateCustomerScreen extends JPanel {
                 //Getting the inputs from the fields
                 String name = nameField.getText();
                 int phone = Integer.parseInt(phoneField.getText());
-                String address= addressField.getText();
+                String address = addressField.getText();
                 String company = companyField.getText();
                 String email = emailField.getText();
                 //Calling the method from the accountControl
-                getGuiControl().getController().getAccountControl().createCustomer(company,name,address,phone);
-                guiControl.closeCurrentFrame();
+                getGuiControl().getController().getAccountControl().createCustomer(company, name, address, phone);
+                //uiControl.closeCurrentFrame();
                 guiControl.useExistingDeadlineCustomerScreen(guiControl);
             }
         });
@@ -50,7 +50,6 @@ public class CreateCustomerScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useCreateCustomerScreen(guiControl);
             }
         });
     }

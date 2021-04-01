@@ -34,7 +34,6 @@ public class PaymentScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.usePaymentScreen(guiControl);
             }
         });
         cashButton.addActionListener(new ActionListener() {

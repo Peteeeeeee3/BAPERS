@@ -29,6 +29,7 @@ public class CreateJob extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
 
+
     }
 
     public CreateJob(GUIControl guiControl) {
@@ -49,7 +50,12 @@ public class CreateJob extends JPanel {
                 getGuiControl().getController().getJobControl().acceptJob(custID, payID, sTime, sDate, prio, instruction, pric, stat);
             }
         });
-
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
     }
     public GUIControl getGuiControl() {
         return guiControl;

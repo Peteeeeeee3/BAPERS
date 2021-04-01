@@ -27,7 +27,6 @@ public class AddNewTaskScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
-
     }
 
 
@@ -51,7 +50,6 @@ public class AddNewTaskScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.openPreviousFrame();
             }
         });

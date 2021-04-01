@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //This is where AddTaskToJob should be going
 public class AddTaskScreen extends JPanel {
@@ -20,7 +22,14 @@ public class AddTaskScreen extends JPanel {
     }
 
     public AddTaskScreen(GUIControl guiControl) {
+
         this.guiControl = guiControl;
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.openPreviousFrame();
+            }
+        });
     }
 
     public GUIControl getGuiControl() {

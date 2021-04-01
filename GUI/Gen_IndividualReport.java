@@ -34,6 +34,12 @@ public class Gen_IndividualReport extends JPanel {
                 guiControl.useReportDisplayScreen(guiControl, new IndividualPerformanceReport(Integer.parseInt(startDateField.getText()), Integer.parseInt(endDateField.getText()), guiControl.getController().getReportFacadeControl()));
             }
         });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
     }
 
     public GUIControl getGuiControl() {

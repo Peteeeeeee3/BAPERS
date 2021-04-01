@@ -244,5 +244,11 @@ public class SummaryReportDisplay {
                 guiControl.getController().getPrinterGateway().print(report);
             }
         });
+        Cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
     }
 }

@@ -18,6 +18,7 @@ public class DBConnectionScreen extends JPanel {
     }
 
     public DBConnectionScreen(GUIControl guiControl){
+
         this.guiControl = guiControl;
     }
 

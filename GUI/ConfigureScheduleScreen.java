@@ -40,7 +40,6 @@ public class ConfigureScheduleScreen extends JPanel {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.openPreviousFrame();
             }
         });
