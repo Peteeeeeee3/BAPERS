@@ -41,14 +41,14 @@ public class JobFacadeControl implements I_Job, I_Database {
 		}
 	}
 
-	public void acceptJob(int customerid, int paymentno, int startTime, int startDate, int urgency, String summary, double price, String status){
+	public void acceptJob(int customerid, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status){
 
 		for (int i = 0; i < vecJobs.getVector().size(); ++i){
 			if (vecJobs.getVector().get(i).getSummary().equals(summary)){
 				break;
 			}
 		}
-		vecJobs.addJob(new Job(customerid, paymentno, startTime, startDate, urgency, summary, price, status, this.vecJobs));
+		vecJobs.addJob(new Job(customerid, paymentid, startTime, startDate, urgency, summary, price, status, this.vecJobs));
 	}
 
 	public void viewTask(int taskID){

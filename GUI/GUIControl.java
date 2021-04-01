@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class GUIControl extends JFrame {
 	private Control controller;
-	private Stack<JFrame> viewingOrder = new Stack<>();
+	private final Stack<JFrame> viewingOrder = new Stack<>();
 	private JPanel current;
 	private JFrame masterFrame;
 
@@ -279,18 +279,12 @@ public class GUIControl extends JFrame {
 	}
 
 	public void closeCurrentFrame(){
-		viewingOrder.peek().setVisible(false);
+		getViewingOrder().peek().setVisible(false);
 	}
 
 	public void openPreviousFrame() {
-		//viewingOrder.peek().setVisible(true);
-//		masterFrame.setContentPane(viewingOrder.pop().getContentPane());
-//		masterFrame.setLocationRelativeTo(null);
-//		masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		masterFrame.setSize(500, 300);
-//		masterFrame.setVisible(true);\
-		viewingOrder.pop();
-		viewingOrder.peek().setVisible(true);
+		getViewingOrder().pop().dispose();
+		getViewingOrder().peek().setVisible(true);
 	}
 
 	public int getAccess() {

@@ -47,7 +47,7 @@ public class Control implements I_Control {
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
 		//make it be the login screen
-		controller.guiControl.useOMHomePage(window);
+		controller.guiControl.useLogin(window);
 
 		window.setVisible(true);
 

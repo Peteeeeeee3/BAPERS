@@ -217,7 +217,7 @@ public class Job {
 		}
 	}
 
-	public Job(int customerno, int paymentno, int startTime, int startDate, int urgency, String summary, double price, String status, VectorOfJobs vecJob) {
+	public Job(int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status, VectorOfJobs vecJob) {
 		this.summary = summary;
 		this.startTime = startTime;
 		this.urgency = urgency;
@@ -226,7 +226,7 @@ public class Job {
 		this.price = (float) price;
 		this.status = status;
 		this.customerid = customerno;
-		this.paymentid = paymentno;
+		this.paymentid = paymentid;
 		upload();
 	}
 
