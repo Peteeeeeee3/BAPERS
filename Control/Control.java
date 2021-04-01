@@ -41,6 +41,10 @@ public class Control implements I_Control, I_Payment {
 		controller.jobControl = new JobFacadeControl(controller);
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
+
+		//controller.getDBC().getDBGateway().backupToDB();
+		//controller.getDBC().getDBGateway().restoreToDB();
+
 		//make a window
 
 		JFrame window = new JFrame();
