@@ -38,15 +38,19 @@ public class Login extends JPanel {
                 getGuiControl().getController().login(id, new String(pw));
                 switch (guiControl.getAccess()) {
                     case 1:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useHomepage(guiControl);
                         break;
                     case 2:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useTechHomePage(guiControl);
                         break;
                     case 3:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useSMHomePage(guiControl);
                         break;
                     case 4:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useOMHomePage(guiControl);
                         break;
                     default:
