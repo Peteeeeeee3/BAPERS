@@ -50,7 +50,8 @@ public class AddNewTaskScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.openPreviousFrame();
+                guiControl.closeCurrentFrame();
+                guiControl.useViewTaskScreen(guiControl);
             }
         });
     }

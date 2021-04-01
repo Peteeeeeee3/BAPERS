@@ -35,7 +35,24 @@ public class Gen_SummaryReport {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
+                switch (guiControl.getAccess()) {
+                    case 1 -> {
+                        guiControl.closeCurrentFrame();
+                        guiControl.useHomepage(guiControl);
+                    }
+                    case 2 -> {
+                        guiControl.closeCurrentFrame();
+                        guiControl.useTechHomePage(guiControl);
+                    }
+                    case 3 -> {
+                        guiControl.closeCurrentFrame();
+                        guiControl.useSMHomePage(guiControl);
+                    }
+                    case 4 -> {
+                        guiControl.closeCurrentFrame();
+                        guiControl.useOMHomePage(guiControl);
+                    }
+                }
             }
         });
     }
