@@ -23,7 +23,6 @@ public class OMHomePage extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
-
     }
 
     public OMHomePage(GUIControl guiControl){
@@ -31,50 +30,49 @@ public class OMHomePage extends JPanel {
         jobsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useTaskManageScreen(guiControl);
             }
         });
         paymentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
-                guiControl.usePaymentScreen(guiControl);
+                guiControl.useSearchCustomerPayment(guiControl);
             }
         });
         reportsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useReportsScreen(guiControl);
             }
         });
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useChangeCustLvlScrn(guiControl);
             }
         });
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useAdminScreen(guiControl);
             }
         });
         tasksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useViewTaskScreen(guiControl);
             }
         });
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
-                guiControl.openPreviousFrame();
+                if (!guiControl.getViewingOrder().isEmpty()) {
+                    while (!guiControl.getViewingOrder().isEmpty()) {
+                        guiControl.getViewingOrder().pop();
+                    }
+                }
+                guiControl.useLogin(guiControl);
+                guiControl.getController().setAccess(0);
             }
         });
     }

@@ -467,7 +467,12 @@ public class PrinterGateway {
 			datePos = 0;
 			int columnItr = 0;
 			for (SummaryInfo si : report.getInfo_vec()) {
-				if (datePos % 5 == 0 && columnItr == 1) {
+				if (datePos % 5 == 0 && columnItr == 0) {
+					new_cell = new PdfPCell(new Phrase(" "));
+					shiftSum_table.addCell(new_cell);
+					datePos++;
+					columnItr++;
+				} else if (datePos % 5 == 0 && columnItr == 1) {
 					new_cell = new PdfPCell(new Phrase("Day Shift 1"));
 					shiftSum_table.addCell(new_cell);
 					datePos++;
@@ -619,7 +624,7 @@ public class PrinterGateway {
 		/////////////////////////////
 		//replace with JFileChooser//
 		/////////////////////////////
-		String file_name = "C:\\Users\\Peter\\Documents\\School\\UNI\\Team Project\\Code\\reports\\";
+		String file_name = "reports\\";
 		//get today's date and format it
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate date = LocalDate.now();

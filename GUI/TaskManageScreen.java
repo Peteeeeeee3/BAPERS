@@ -10,6 +10,7 @@ public class TaskManageScreen extends JPanel {
     private JButton updateTaskButton;
     private JButton viewJobButton;
     private JButton backButton;
+    private JButton newJobButton;
     public GUIControl guiControl;
 
     public TaskManageScreen(GUIControl guiControl, JFrame frame) {
@@ -19,36 +20,37 @@ public class TaskManageScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
-
     }
 
     public TaskManageScreen(GUIControl guiControl){
         this.guiControl = guiControl;
+        newJobButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.useSearchCustomerScreen(guiControl);
+            }
+        });
         startTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useStartTaskScreen(guiControl);
             }
         });
         updateTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useUpdateJobScreen(guiControl);
             }
         });
         viewJobButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useViewJobScreen(guiControl);
             }
         });
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.openPreviousFrame();
             }
         });

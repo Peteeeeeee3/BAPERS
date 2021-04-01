@@ -35,6 +35,12 @@ public class CustomerJobsReport extends JPanel {
 
     public CustomerJobsReport(GUIControl guiControl) {
         this.guiControl = guiControl;
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
         goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

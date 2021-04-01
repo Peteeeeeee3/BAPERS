@@ -1,5 +1,6 @@
 package Account;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -105,7 +106,11 @@ public class VectorOfUsers {
             access = rs.getInt(1);
         }
         //System.out.println(access + " " + ID + " " + password);
-        accControl.setAccess(access);
+        if (access == 1 || access == 2 || access == 3 || access == 4) {
+            accControl.setAccess(access);
+        } else {
+            return false;
+        }
         return true;
     }
 
@@ -119,22 +124,26 @@ public class VectorOfUsers {
         this.accControl = accountControl;
     }
 
-    void editAccess(int id, int access) {
-        for (UserAccount ua : users) {
-            if (ua.getStaffID() == id) {
-                ua.setAccess(access);
-                break;
-            }
-        }
+    boolean editAccess(int id, int access) {
+//        for (UserAccount ua : users) {
+//            if (ua.getStaffID() == id) {
+//                ua.setAccess(access);
+//                break;
+//            }
+//        }
         try {
-            String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID == ?;";
+            if (access < 1 || access > 4) {
+                return false;
+            }
+            String sql = "UPDATE `staff_member` SET `access`= ? WHERE staffID = ?;";
             PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, access);
             preparedStatement.setInt(2, id);
-
             accControl.getControl().getDBC().getDBGateway().write(preparedStatement);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

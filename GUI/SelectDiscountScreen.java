@@ -27,7 +27,6 @@ public class SelectDiscountScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.useFixedDiscountScreen(guiControl);
             }
         });
         variableDiscountButton.addActionListener(new ActionListener() {

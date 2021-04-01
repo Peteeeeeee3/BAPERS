@@ -4,14 +4,11 @@ import Account.Customer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class SearchCustomerScreen extends JPanel {
+public class SearchCustomerScreenPayment extends JPanel {
     public JPanel searchCustomerPanel;
     public JButton Search;
     public JTextField searchBar;
@@ -25,19 +22,18 @@ public class SearchCustomerScreen extends JPanel {
     public Customer customer;
     int flag = 0;
 
-    public SearchCustomerScreen(GUIControl guiControl, JFrame frame) {
+    public SearchCustomerScreenPayment(GUIControl guiControl, JFrame frame) {
         //Initialise//
         this.guiControl = guiControl;
         //JFrame frame = new JFrame("Search Customer");
-        frame.setContentPane(new SearchCustomerScreen(guiControl).searchCustomerPanel);
+        frame.setContentPane(new SearchCustomerScreenPayment(guiControl).searchCustomerPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,300);
         frame.setVisible(true);
-
     }
 
-    public SearchCustomerScreen(GUIControl guiControl) {
+    public SearchCustomerScreenPayment(GUIControl guiControl) {
         this.guiControl = guiControl;
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -48,14 +44,13 @@ public class SearchCustomerScreen extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    guiControl.closeCurrentFrame();
-                    guiControl.useExistingDeadlineCustomerScreen(guiControl);
+                    guiControl.usePaymentScreen(guiControl, customer);
             }
         });
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Gets the value from textfield
+                //Gets the value from text field
                 int id = Integer.parseInt(searchBar.getText());
                 try {
                     //This if statement checks if the id is already in the database or not

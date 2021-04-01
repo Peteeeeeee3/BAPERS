@@ -36,9 +36,10 @@ public class Login extends JPanel {
                 int id = Integer.parseInt(usernameField.getText());
                 char[] pw = passwordField.getPassword();
                 getGuiControl().getController().login(id, new String(pw));
+
                 getGuiControl().closeCurrentFrame();
                 getGuiControl().useOMHomePage(guiControl);
-//<<<<<<< HEAD
+
 //                if (getGuiControl().getController().getAccountControl().userAccount.getAccess() == 1) {
 //                    getGuiControl().closeCurrentFrame();
 //                    getGuiControl().useHomepage(guiControl);
@@ -53,21 +54,29 @@ public class Login extends JPanel {
 //                    getGuiControl().useTechHomePage(guiControl);
 //                } else {
 //                    JOptionPane.showMessageDialog(loginButton, "Cannot log you in");
-//=======
+
+
                 switch (guiControl.getAccess()) {
                     case 1:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useHomepage(guiControl);
                         break;
                     case 2:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useTechHomePage(guiControl);
                         break;
                     case 3:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useSMHomePage(guiControl);
                         break;
                     case 4:
+                        getGuiControl().closeCurrentFrame();
                         guiControl.useOMHomePage(guiControl);
                         break;
 
+                    default:
+                        JOptionPane.showMessageDialog(loginButton, "Incorrect details!, Please try again.");
+                        break;
                 }
             }
         });

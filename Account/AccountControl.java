@@ -24,7 +24,7 @@ public class AccountControl implements Account.I_Account, I_Database {
         return vecAcc.retrieveCustAccount(accountNo);
     }
 
-    public void createCustomer(String company, String name, String address, int phone) {
+    public void createCustomer(String company, String name, String address, long phone) {
         for (int i = 0; i < vecAcc.getCustomerVector().size(); i++) {
             if (vecAcc.getCustomerVector().get(i).getName().equals(name)) {
                 break;
@@ -51,8 +51,8 @@ public class AccountControl implements Account.I_Account, I_Database {
         vecUser.removeUser(id);
     }
 
-    public void updateAccess(int id, int newAccess){
-        vecUser.editAccess(id, newAccess);
+    public boolean updateAccess(int id, int newAccess){
+        return vecUser.editAccess(id, newAccess);
     }
 
     public void upgradeCust(int accountNo) {

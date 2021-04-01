@@ -24,7 +24,7 @@ public class HomePage extends JPanel {
 
     }
 
-    public HomePage(GUIControl guiControl){
+    public HomePage(GUIControl guiControl) {
         this.guiControl = guiControl;
 
         newJobButton.addActionListener(new ActionListener() {
@@ -39,7 +39,7 @@ public class HomePage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guiControl.closeCurrentFrame();
-                guiControl.usePaymentScreen(guiControl);
+                guiControl.useSearchCustomerPayment(guiControl);
             }
         });
 
@@ -53,7 +53,13 @@ public class HomePage extends JPanel {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
+                if (!guiControl.getViewingOrder().isEmpty()) {
+                    while (!guiControl.getViewingOrder().isEmpty()) {
+                        guiControl.getViewingOrder().pop();
+                    }
+                }
+                guiControl.useLogin(guiControl);
+                guiControl.getController().setAccess(0);
             }
         });
 

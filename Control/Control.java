@@ -49,11 +49,15 @@ public class Control implements I_Control, I_Payment {
 		//make it be the login screen
 
 
+
 		//controller.guiControl.useUpdateJobScreen(window);
 		controller.guiControl.useLogin(window);
 
 		//controller.guiControl.useHomepage(window);
 
+
+
+		//controller.guiControl.useHomepage(window);
 
 
 		window.setVisible(true);
@@ -119,10 +123,8 @@ public class Control implements I_Control, I_Payment {
 //      controller.printerGateway.print(new Invoice("Julie Jolly", "No Company", "Everywhere Road 27", 2, 1, 1456634535, 20210320, job, 0.4f));
 		//controller.printerGateway.print(new PerformanceSummary(20201201, 20210320, controller.reportFacadeControl));
 		////test code tend////
-		//controller.getDBC().getDBGateway().dbBackup("root", "", "bapers_v4");
+		//controller.getDBC().getDBGateway().dbBackup();
 	}
-
-
 
 	public Control() throws ClassNotFoundException, SQLException {
 		DBC = new DBControl();
@@ -203,7 +205,7 @@ public class Control implements I_Control, I_Payment {
 	}
 
 	@Override
-	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
+	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
 		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card);
 	}
 }

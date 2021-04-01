@@ -31,55 +31,54 @@ public class SMHomePage extends JPanel {
         newJobButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useSearchCustomerScreen(guiControl);
             }
         });
         paymentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
-                guiControl.usePaymentScreen(guiControl);
+                guiControl.useSearchCustomerPayment(guiControl);
             }
         });
         startTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useStartTaskScreen(guiControl);
             }
         });
         updateTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useUpdateJobScreen(guiControl);
             }
         });
         viewJobButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useViewJobScreen(guiControl);
             }
         });
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!guiControl.getViewingOrder().isEmpty()) {
+                    while (!guiControl.getViewingOrder().isEmpty()) {
+                        guiControl.getViewingOrder().pop();
+                    }
+                }
+                guiControl.useLogin(guiControl);
+                guiControl.getController().setAccess(0);
             }
         });
         configureScheduleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useGenerateReportScreen(guiControl);
             }
         });
         generateReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.closeCurrentFrame();
                 guiControl.useGenerateReportScreen(guiControl);
             }
         });

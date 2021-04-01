@@ -35,7 +35,6 @@ public class EditAccessScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getGuiControl().closeCurrentFrame();
                 getGuiControl().openPreviousFrame();
             }
         });
@@ -48,13 +47,21 @@ public class EditAccessScreen extends JPanel {
                 //If the flag is 1
                 if (flag == 1){
                     //Then the method gets called
-                    getGuiControl().getController().getAccountControl().updateAccess(id, nAccessLevel);
-                    //And the popup shows this
-                    JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
+                    boolean check = getGuiControl().getController().getAccountControl().updateAccess(id, nAccessLevel);
+
+                    if (!check) {
+                        JOptionPane.showMessageDialog(confirmButton, "Incorrect entries! Please try again.");
+                    } else {
+                        //And the popup shows this
+                        JOptionPane.showMessageDialog(confirmButton, "Access level has been changed.");
+                    }
                 } else {
                     //If flag is still 0, this message will pop up
-                    JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");
+                    if (flag == 0) {
+                        JOptionPane.showMessageDialog(confirmButton, "Please tick the checkbox.");
+                    }
                 }
+                guiControl.useEditAccessScreen(guiControl);
             }
         });
     }

@@ -38,6 +38,12 @@ public class UpdateJobScreen extends JPanel {
         comboBox1.addItem(new ComboItem("Pending", "pending"));
         comboBox1.addItem(new ComboItem("In Progress", "in progress"));
         comboBox1.addItem(new ComboItem("Completed", "completed"));
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
         showButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class VariableDiscountScreen extends JPanel {
     private JTable variableDiscountField;
@@ -18,7 +20,15 @@ public class VariableDiscountScreen extends JPanel {
         frame.setVisible(true);
     }
 
-    public VariableDiscountScreen(GUIControl guiControl){this.guiControl = guiControl;}
+    public VariableDiscountScreen(GUIControl guiControl){
+        this.guiControl = guiControl;
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
+            }
+        });
+    }
 
     public GUIControl getGuiControl() {
         return guiControl;
