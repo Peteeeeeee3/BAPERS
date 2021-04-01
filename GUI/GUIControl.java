@@ -80,7 +80,7 @@ public class GUIControl extends JFrame {
 	}
 
 	public void useAddTaskScreen(JFrame addTask){
-		new AddTaskScreen(this, addTask);
+		new AddTaskToJobScreen(this, addTask);
 		setMasterFrame(this);
 		viewingOrder.push(addTask);
 	}
@@ -278,7 +278,7 @@ public class GUIControl extends JFrame {
 	}
 
 	public void closeCurrentFrame(){
-		viewingOrder.pop().dispose();
+		viewingOrder.peek().setVisible(false);
 	}
 
 	public void openPreviousFrame() {
@@ -288,8 +288,8 @@ public class GUIControl extends JFrame {
 //		masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		masterFrame.setSize(500, 300);
 //		masterFrame.setVisible(true);\
-		this.setMasterFrame(viewingOrder.pop());
-		this.setContentPane(masterFrame.getContentPane());
+		viewingOrder.pop();
+		viewingOrder.peek().setVisible(true);
 	}
 
 	public int getAccess() {

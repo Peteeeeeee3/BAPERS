@@ -54,6 +54,7 @@ public class OMHomePage extends JPanel {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                guiControl.closeCurrentFrame();
                 guiControl.useAdminScreen(guiControl);
             }
         });
