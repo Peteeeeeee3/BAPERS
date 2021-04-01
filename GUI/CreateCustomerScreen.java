@@ -36,7 +36,7 @@ public class CreateCustomerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //Getting the inputs from the fields
                 String name = nameField.getText();
-                int phone = Integer.parseInt(phoneField.getText());
+                long phone = Integer.parseInt(phoneField.getText());
                 String address = addressField.getText();
                 String company = companyField.getText();
                 String email = emailField.getText();
