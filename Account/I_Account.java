@@ -12,9 +12,9 @@ public interface I_Account {
 
 	public boolean updateAccess(int staffID, int newAccess);
 
-	public void upgradeCust(int accountNo);
+	public void upgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
-	public void downgradeCust(int accountNo);
+	public void downgradeCust(int accountNo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException;
 
 	public void editDiscount(int accountNo);
 

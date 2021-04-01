@@ -12,21 +12,21 @@ public class VectorOfAccounts {
 	public AccountControl accControl;
 	public Vector<Customer> customers= new Vector<Customer>();
 
+	// allows the user to add a customer and stores it into the vector 'customer'. All the vector values will be added to the local host
 	public void addCustAccount(Customer customer) {
 		customers.add(customer);
-		incrementNoOfCustAccounts();
-
-//		accControl.write("INSERT INTO Customer_Table" + "(company, name, address, phone)" + customer.getAccountNo() +customer.getCompany()+ "has been inserted");
-//		System.out.println("Data: " + customer.getCompany() + customer.getName() + customer.getAddress() + customer.getPhone() + "have been inserted");
+		incrementNoOfCustAccounts(); // once add it will increment the vector size by one
 
 	}
-
+// this allows the user to remove customer from and remove it from the vector
 	public void removeCustAccount(int accountNo) {
 		customers.remove(accountNo);
-		decrementNoOfCustAccounts();
+		decrementNoOfCustAccounts(); //ensure that it decrements the vector bu 1.
 	}
 
+
 	public Customer retrieveCustAccount(int accountNo) {
+		//loops through the vector finds the accountNo value and the one set in customer, once found it retrieves the data.
 		for(int i=0; i<customers.size(); ++i) {
 			if(customers.get(i).getAccountNo()==accountNo){
 				return customers.get(i);
@@ -45,15 +45,15 @@ public class VectorOfAccounts {
 	}
 
 	public void incrementNoOfCustAccounts() {
-		noOfCustAccounts++;
+		noOfCustAccounts++;  // increments the vector
 	}
 
 	public void decrementNoOfCustAccounts() {
-		noOfCustAccounts--;
+		noOfCustAccounts--;  //decrement the vector
 	}
 
 	public Vector<Customer> getCustomerVector(){
-		return customers;
+		return customers; //vector that stores all the vector
 	}
 
 	public AccountControl getAccControl() {
@@ -61,11 +61,11 @@ public class VectorOfAccounts {
 	}
 
 	public VectorOfAccounts(AccountControl accountControl) {
-		this.accControl = accountControl;
+		this.accControl = accountControl;  //call function to connect to the account control.
 	}
 
 	public Customer searchCustomer(int id) {
-		//Database version might need fixing//
+		//allows to retrieve all the information regarding the customer and displays it on the screen
 		int accountno = 0, valued = 0;
 		long phone = 0;
 		String name = "", company = "", address = "";
@@ -75,7 +75,8 @@ public class VectorOfAccounts {
 			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 			ResultSet rs;
 			preparedStatement.setInt(1, id);
-			rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement);
+			rs = accControl.getControl().getDBC().getDBGateway().read(preparedStatement); //handle result
+			// displays the results.
 			while (rs.next()) {
 				accountno = rs.getInt("accountNo");
 				name = rs.getString("name");
@@ -90,13 +91,14 @@ public class VectorOfAccounts {
 			} else {
 				return new Customer(company, name, address, phone, this, accountno, valued);
 			}
-		} catch (Exception e){
+		} catch (Exception e){ // check error.
 			e.printStackTrace();
 		}
 		return new Customer(company, name, address, phone, this, accountno, valued);
 	}
 
 	public void upgradeCustomer(int customerID) {
+		//retrieves the customer and upgrades the value from 0 to 1, stores in sql host.
 		try {
 			//Database Update//
 			String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
@@ -110,6 +112,7 @@ public class VectorOfAccounts {
 	}
 
 	public void downgradeCust(int custID) {
+		//retrieves customer and downgrades the value from 0 to 1, stores in sql host.
 		try {
 			//Database Update//
 			String sql = "UPDATE Customer SET `valued` = ? WHERE `accountNo` = ?";
@@ -123,6 +126,7 @@ public class VectorOfAccounts {
 	}
 
 	public void defineFlatDiscount(int custID, float rate) {
+		// provides a discount value and stores in sql host.
 		try {
 			String sql = "INSERT INTO Flat_Discount (`rate`) VALUES (?)";
 			PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -133,6 +137,7 @@ public class VectorOfAccounts {
 		}
 	}
 	public boolean checkId(int id) throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+		// retrieves the account number from sql and reads it
 		String sql = "SELECT accountNo FROM customer WHERE accountNo = ?";
 		PreparedStatement preparedStatement = accControl.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 		preparedStatement.setInt(1, id);

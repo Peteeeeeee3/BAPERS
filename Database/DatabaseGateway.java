@@ -10,6 +10,96 @@ import java.util.Objects;
 
 public class DatabaseGateway {
 
+//	private Connection connection;
+//
+//	//connects to localhost
+//	public void connectToDB() {
+//		try {
+//			//Peter
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v4", "root", "");
+//
+//		    //Hanan
+//			connection = DriverManager.getConnection("jdbc:mysql://localhost/BAPERS", "root", "");
+//
+//			//Tulsi
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
+//
+//			//Abdullah
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
+//
+//			//Farhan
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject", "root", "");
+//
+//			//Abdullah
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+//
+//			//Munish
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+//
+//			//Rashidul
+//			//connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
+//
+//			connection.setAutoCommit(false);
+//			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+//		} catch (Exception e){
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	//terminates connection to localhost
+//	public void disconnectFromDB()  {
+//		try {
+//			connection.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	public void backupToDB() {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void restoreFromDB() {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	//handles reading from database. Call this function if reading is required.
+//	public ResultSet read(PreparedStatement sql) {
+//		try {
+//			ResultSet rs = sql.executeQuery();
+//			connection.commit();
+//			return rs;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+//
+//	//handles writing to database. Call this function if writing is required.
+//	public void write(PreparedStatement sql) {
+//		try {
+//			sql.executeUpdate();
+//			connection.commit();
+//		} catch (SQLException e ) {
+//			e.printStackTrace();
+//		}
+//}
+//
+//	public DatabaseGateway() {
+//		try {
+//			//initialise JDBC driver for class
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		connectToDB();
+//	}
+//
+//	public Connection getConnection() {
+//		return connection;
+//	}
+//=======
+
     private Connection connection;
 
     //connects to localhost
@@ -19,7 +109,7 @@ public class DatabaseGateway {
             connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_v6", "root", "");
 
             //Hanan
-            //connection = DriverManager.getConnection("jdbc:mysql://localhost/Bapers_data", "root", "");
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/BAPER_v4", "root", "");
 
             //Tulsi
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers_database", "root", "");
@@ -28,7 +118,34 @@ public class DatabaseGateway {
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/bapers", "root", "");
 
             //Farhan
+
+
+
+
+
+
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp4", "root", "");
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp5", "root", "");
+
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp7", "root", "");
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp9", "root", "");
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp7", "root", "");
+
+
+
+
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/teamproject2", "root", "");Customer
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp5", "root", "");
+
+
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost/tp5", "root", "");
+
 
             //Abdullah
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
@@ -39,7 +156,9 @@ public class DatabaseGateway {
             //Rashidul
             //connection = DriverManager.getConnection("jdbc:mysql://localhost/<replace this with name of your database>", "root", "");
 
+            //turn off auto commit
             connection.setAutoCommit(false);
+            //set isolation layer
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -224,32 +343,34 @@ public class DatabaseGateway {
             } else {
                 System.out.println("OPERATING SYSTEM NOT SUPPORTED");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-//handles reading from database. Call this function if reading is required.
-public ResultSet read(PreparedStatement sql){
-        try{
-        ResultSet rs=sql.executeQuery();
-        connection.commit();
-        return rs;
-        }catch(Exception e){
-        e.printStackTrace();
+    //handles reading from database. Call this function if reading is required.
+    public ResultSet read(PreparedStatement sql) {
+        try {
+            //execute query
+            ResultSet rs = sql.executeQuery();
+            //commit changes
+            connection.commit();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
-        }
+    }
 
-//handles writing to database. Call this function if writing is required.
-public void write(PreparedStatement sql){
-        try{
-        sql.executeUpdate();
-        connection.commit();
-        }catch(SQLException e){
-        e.printStackTrace();
+    //handles writing to database. Call this function if writing is required.
+    public void write(PreparedStatement sql) {
+        try {
+            //execute query
+            sql.executeUpdate();
+            //commit changes
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
 
 //            System.err.println("Message: " + e.getMessage());
 //
@@ -259,21 +380,30 @@ public void write(PreparedStatement sql){
 //                t = t.getCause();
 //            }
         }
-        }
+    }
 
-public DatabaseGateway(){
-        try{
-        //initialise JDBC driver for class
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch(ClassNotFoundException e){
-        e.printStackTrace();
+    public DatabaseGateway() {
+        try {
+            //initialise JDBC driver for class
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         connectToDB();
-        }
+    }
 
-public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
-        }
+    }
 
 
-        }
+<<<<<<< HEAD
+
+
+}
+
+
+
+=======
+}
+>>>>>>> 107366ccb0b8ea7d192f9a12c81549e0425929cb

@@ -45,8 +45,10 @@ public class CustomerJobReport extends Report {
 					"FROM customer " +
 					"WHERE name = ?";
 
+			//run query
 			preparedStatement = RFC.getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql_id);
 			preparedStatement.setString(1, customerName);
+			//handle results
 			ResultSet rs = RFC.getControl().getDBC().getDBGateway().read(preparedStatement);
 			while (rs.next()) {
 				accNo = rs.getInt(1);
@@ -59,6 +61,7 @@ public class CustomerJobReport extends Report {
 
 	private void getInfo(int id) {
 		try {
+			//run query
 			PreparedStatement preparedStatement;
 			String sql_main = "SELECT job.jobNumber, task.price, task.taskID, task.location, task_of_job.startTime, " +
 					"task_of_job.duration, staff_member.name, job.startTime, job.priority, job.startDate " +
@@ -78,6 +81,8 @@ public class CustomerJobReport extends Report {
 				System.out.println("accNo = " + id);
 				throw new Exception();
 			}
+
+			//handle results
 			handleResultSet(RFC.getControl().getDBC().getDBGateway().read(preparedStatement));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,6 +91,7 @@ public class CustomerJobReport extends Report {
 
 	private void handleResultSet(ResultSet rs) {
     	try {
+    		//handle results
 			while (rs.next()) {
 				//System.out.println(rs.getInt(1) + " " + rs.getFloat(2) + " " + rs.getInt(3) + " " + rs.getString(4) + " " + rs.getInt(5) + " " + rs.getInt(6) + " " + rs.getString(7));
 				infoVec.add(new ReportTask(rs.getInt(1), rs.getFloat(2), rs.getInt(3),

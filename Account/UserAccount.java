@@ -85,6 +85,7 @@ public class UserAccount {
 	}
 
 	public UserAccount(String password, String name, int access, VectorOfUsers vecUser) {
+
 		this.password = password;
 		this.access = access;
 		this.name = name;
