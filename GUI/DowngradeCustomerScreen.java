@@ -96,7 +96,7 @@ public class DowngradeCustomerScreen extends JPanel {
             }
         });
     }
-
+    //Initialises the table
     public void fetchData(){
         defaultTableModel = new DefaultTableModel();
         table1.setModel(defaultTableModel);

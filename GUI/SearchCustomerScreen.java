@@ -40,6 +40,7 @@ public class SearchCustomerScreen extends JPanel {
     public SearchCustomerScreen(GUIControl guiControl) {
         this.guiControl = guiControl;
         backButton.addActionListener(new ActionListener() {
+            //Switches between frames when back clicked depending on the access level
             @Override
             public void actionPerformed(ActionEvent e) {
                 switch (guiControl.getAccess()) {

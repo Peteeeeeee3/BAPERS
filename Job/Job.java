@@ -349,7 +349,6 @@ public class Job {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 		/*
  	updateStatus checks through the job's tasks and determines whether the job is in progress, pending or complete.

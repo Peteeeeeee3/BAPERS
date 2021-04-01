@@ -24,6 +24,7 @@ import java.util.Map;
 
 public class Control implements I_Control {
 
+	//Variables.
 	private int access, userID;
 	private DBControl DBC;
 	private AccountControl accountControl;
@@ -33,6 +34,7 @@ public class Control implements I_Control {
 	private PrinterGateway printerGateway;
 	private GUIControl guiControl;
 
+	//main class to run entire program.
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException, ParseException {
 		//controller setup
 		Control controller = new Control();
@@ -41,14 +43,14 @@ public class Control implements I_Control {
 		controller.jobControl = new JobFacadeControl(controller);
 		controller.reportFacadeControl = new ReportFacadeControl(controller);
 		controller.printerGateway = new PrinterGateway();
-		//make a window
 
+		//make a window
 		JFrame window = new JFrame();
 		// set this to a GUIControl
 		controller.guiControl = new GUIControl(controller, window);
-		//make it be the login screen
+		//make it be the login screen on launch.
 		controller.guiControl.useLogin(window);
-
+		//makes window visibile.
 		window.setVisible(true);
 
 		////Test Login Start (do not remove)////
@@ -119,86 +121,102 @@ public class Control implements I_Control {
 //		System.out.println(controller.getDBC().getDBGateway().checkOS());
 	}
 
+	//control method
 	public Control() throws ClassNotFoundException, SQLException {
 		DBC = new DBControl();
 	}
 
+	//get Database control.
 	public DBControl getDBC() {
 		return DBC;
 	}
 
+	//get Account Control.
 	public AccountControl getAccountControl() {
 		return accountControl;
 	}
 
+	//set account control.
 	public void setAccountControl(AccountControl accountControl) {
 		this.accountControl = accountControl;
 	}
 
+	//get payment control.
 	public PaymentControl getPaymentControl() {
 		return paymentControl;
 	}
 
+	//set JobControl.
 	public void setJobControl(JobFacadeControl jobControl){this.jobControl = jobControl;}
 
+	//get Job Control.
 	public JobFacadeControl getJobControl(){ return jobControl; }
 
+	//login method.
 	public boolean login(int id, String password) {
 		try {
+			//returns id and password.
 			return accountControl.login(id, new String(password));
 		} catch (Exception e) {
+			//handle exceptions.
 			e.printStackTrace();
 		}
 		return false;
 	}
-
+	//Edit access.
 	public OfficeManager editAccess(int id, int access){
 		try{
 			accountControl.updateAccess(id, access);
 		} catch (Exception e){
+			//handle exceptions.
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	//return ReportFacadeControl.
 	public ReportFacadeControl getReportFacadeControl() {
 		return reportFacadeControl;
 	}
 
+	//return access.
 	public int getAccess() {
 		return access;
 	}
 
+	//set access method.
 	public void setAccess(int access) {
 		this.access = access;
 	}
 
+	//return printerGateway.
 	public PrinterGateway getPrinterGateway() {
 		return printerGateway;
 	}
 
-
+	//retrieve payment.
 	public Payment retrievePayment(int iD) {
 		return null;
 	}
 
-
+	//return payment list.
 	public Payment[] retrieveListOfPayments(Customer customer) {
 		return new Payment[0];
 	}
 
-
+	//return cards.
 	public Card[] retrieveCards(Customer customer) {
 		return new Card[0];
 	}
 
-
+	//generate invoice method.
 	public void generateInvoice() {
 
 	}
 
-
+	//add payment method.
 	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card, String type) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
+		//add payment.
 		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card, type);
 	}
 }

@@ -70,7 +70,9 @@ public class UpgradeCustomerScreen extends JPanel {
                 int id = Integer.parseInt(searchTextField.getText());
                 if (flag == 1){
                     getGuiControl().getController().getAccountControl().upgradeCust(id);
+                    //Creates the table
                     fetchData();
+                    //Type handling between valued and not valued
                     if (customer.getValued() == 0){
                         JOptionPane.showMessageDialog(upgradeButton, "Customer has been upgraded. Click search again to see result.");
                     } else {

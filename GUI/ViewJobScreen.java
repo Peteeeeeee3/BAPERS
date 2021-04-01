@@ -29,7 +29,7 @@ public class ViewJobScreen extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
     }
-
+    //This function switches between screens when the back button is clicked depending on access level
     public ViewJobScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         backButton.addActionListener(new ActionListener() {
@@ -58,8 +58,10 @@ public class ViewJobScreen extends JPanel {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets the value from the text field and passes it through
                 int id = Integer.parseInt(jobIDTextField.getText());
                 job = getGuiControl().getController().getJobControl().vecJobs.viewJob(id);
+                //Checks the job id for error handling.
                 if (job.getID() == 0){
                     JOptionPane.showMessageDialog(searchButton, "This job does not exist.");
                 } else {
@@ -68,7 +70,7 @@ public class ViewJobScreen extends JPanel {
             }
         });
     }
-
+    //Creates the table
     public void fetchData(){
         defaultTableModel = new DefaultTableModel();
         jobTable.setModel(defaultTableModel);
@@ -81,7 +83,7 @@ public class ViewJobScreen extends JPanel {
         defaultTableModel.addColumn("Special Instructions");
         defaultTableModel.addColumn("Price");
         defaultTableModel.addColumn("Status");
-
+        //Gets the rows from the database
         defaultTableModel.addRow(new Object[]{job.getID(), job.getCustomerid(), job.getPaymentid(), job.getStartTime(), job.getStartDate(), job.getUrgency(), job.getSummary(), job.getPrice(), job.getStatus()});
     }
 

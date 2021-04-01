@@ -20,7 +20,7 @@ public class SelectDiscountScreen extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
     }
-
+    //Switches between screens when the correct buttons are called
     public SelectDiscountScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         fixedDiscountButton.addActionListener(new ActionListener() {
@@ -43,6 +43,7 @@ public class SelectDiscountScreen extends JPanel {
                 guiControl.useFlexibleDiscScreen(guiControl);
             }
         });
+        //Switches between correct screens when back button is called depending on access level
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

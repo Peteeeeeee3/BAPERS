@@ -7,22 +7,22 @@ public class DiscountSet {
 	private int noOfDiscounts = 0;
 	private Vector<Discount> discounts;
 
-	public void addDiscount(Discount discount) {
+	public void addDiscount(Discount discount) { // adds discount and stored into vector
 		discounts.add(discount);
-		incrementNoOfDiscounts();
+		incrementNoOfDiscounts(); // increment the size of the vector.
 	}
 
 	public void removeDiscount(Discount discount) {
-		discounts.remove(discount);
-		decrementNoOfDiscounts();
+		discounts.remove(discount); //removes discount from the vector
+		decrementNoOfDiscounts(); // reduces vector size
 	}
 
 	public void incrementNoOfDiscounts() {
-		noOfDiscounts++;
+		noOfDiscounts++; // increments the size of the vector
 	}
 
 	public void decrementNoOfDiscounts() {
-		noOfDiscounts--;
+		noOfDiscounts--; //decrements the size of the vector
 	}
 
 	public int getNoOfDiscounts() {
@@ -30,7 +30,7 @@ public class DiscountSet {
 	}
 
 	public Vector<Discount> getDiscounts() {
-		return discounts;
+		return discounts; //retrieves all values within the vector.
 	}
 
 	public DiscountSet() {

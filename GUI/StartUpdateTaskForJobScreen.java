@@ -31,7 +31,7 @@ public class StartUpdateTaskForJobScreen extends JPanel {
         frame.setVisible(true);
 
     }
-
+    //When back button is clicked, switches between screens depending on access level
     public StartUpdateTaskForJobScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         backButton.addActionListener(new ActionListener() {
@@ -84,6 +84,8 @@ public class StartUpdateTaskForJobScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Gets the value from the first column and second column of the table.
+                //3 Different column variables because want to select from 3 different columns.
+                //If uncomment farhan connection this should work properly
                 int column = 0;
                 int columnCompare = 1;
                 int columnStatus = 4;
@@ -91,6 +93,7 @@ public class StartUpdateTaskForJobScreen extends JPanel {
                 int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
                 int valueJob = Integer.parseInt(table.getModel().getValueAt(row, columnCompare).toString());
                 String status = table.getModel().getValueAt(row, columnStatus).toString();
+                //Error handling. If the status is pending then it sets the status to in progress. If in progress sets to completed
                 if (status.equals("pending")) {
                     getGuiControl().getController().getJobControl().vecTaskForJob.setStatus("in progress", value, valueJob);
                 } else if (status.equals("in progress")){

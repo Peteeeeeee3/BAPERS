@@ -45,8 +45,10 @@ public class PerformanceSummary extends Report {
             //loop query for each day
             ResultSet rs;
             String location = "";
+            //query by dates
             for (int date = startDate; date <= endDate; date++) {
                 preparedStatement.setInt(1, date);
+                //search by location
                 for (int loc = 0; loc < 4; loc++) {
                     if (loc == 0) {
                         location = "Copy Room";
@@ -58,6 +60,7 @@ public class PerformanceSummary extends Report {
                         location = "Packing";
                     }
                     preparedStatement.setString(4,location);
+                    //search by shift
                     for (int shift = 0; shift < 3; shift++) {
                         if (shift == 0) {
                             preparedStatement.setInt(2, 501);
@@ -71,6 +74,7 @@ public class PerformanceSummary extends Report {
                         }
                         rs = RFC.getControl().getDBC().getDBGateway().read(preparedStatement);
 
+                        //handle results
                         while (rs.next()) {
                             info_vec.add(new SummaryInfo(location, rs.getInt(1), shift, date));
                             System.out.println(rs.getInt(1));

@@ -19,7 +19,7 @@ public class ViewTaskScreen extends JPanel{
     DefaultTableModel defaultTableModel;
     int flag = 0;
     public Task task;
-
+    //Same as ViewJobScreen
     public ViewTaskScreen(GUIControl guiControl, JFrame frame){
         this.guiControl = guiControl;
         frame.setContentPane(new ViewTaskScreen(guiControl).viewTaskPanel);

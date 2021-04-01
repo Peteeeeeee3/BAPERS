@@ -38,7 +38,8 @@ public class CreateJob extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Getting the values from the text fields
+                //Getting the values from the text fields as well as
+                //Similar to comment in AddTaskToJob, formats date&time
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
                 LocalTime now = LocalTime.now();
                 String timeString = now.format(formatter);
