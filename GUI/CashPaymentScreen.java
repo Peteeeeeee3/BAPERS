@@ -11,20 +11,22 @@ public class CashPaymentScreen extends JPanel {
     private JCheckBox paidCheckBox;
     private JButton confirmButton;
     private JButton cancelButton;
+    private JLabel pricaLabel;
     public GUIControl guiControl;
     int flag = 0;
 
-    public CashPaymentScreen(GUIControl guiControl, JFrame frame) {
+    public CashPaymentScreen(GUIControl guiControl, JFrame frame, float total) {
         this.guiControl = guiControl;
-        frame.setContentPane(new CashPaymentScreen(guiControl).cashPaymentPanel);
+        frame.setContentPane(new CashPaymentScreen(guiControl, total).cashPaymentPanel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
 
-    public CashPaymentScreen(GUIControl guiControl) {
+    public CashPaymentScreen(GUIControl guiControl, float total) {
         this.guiControl = guiControl;
+        pricaLabel.setText(total * 1.2f + "GBP, incl. 20% VAT");
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,7 +35,7 @@ public class CashPaymentScreen extends JPanel {
                 } else {
                     //guiControl.getController().getPaymentControl().addPayment();
                     guiControl.closeCurrentFrame();
-                    guiControl.useCashPaymentScreen(guiControl);
+                    guiControl.useCashPaymentScreen(guiControl, total);
                 }
             }
         });

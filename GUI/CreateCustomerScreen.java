@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -30,6 +31,7 @@ public class CreateCustomerScreen extends JPanel {
     //Where button functions are called
     public CreateCustomerScreen(GUIControl guiControl) {
         this.guiControl = guiControl;
+        DefaultTableModel defaultListModel = new DefaultTableModel();
 
         confirmButton.addActionListener(new ActionListener() {
             @Override

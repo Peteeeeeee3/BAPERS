@@ -1,7 +1,8 @@
 package GUI;
 
 import Control.Control;
-import Report.Report;
+import Report.*;
+import Account.*;
 
 import javax.swing.*;
 import java.util.Stack;
@@ -60,8 +61,8 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(searchCustomerScreen);
 	}
 
-	public void usePaymentScreen(JFrame paymentScreen){
-		new PaymentScreen(this, paymentScreen);
+	public void usePaymentScreen(JFrame paymentScreen, Customer customer){
+		new PaymentScreen(this, paymentScreen, customer);
 		setMasterFrame(this);
 		viewingOrder.push(paymentScreen);
 	}
@@ -84,14 +85,14 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(addTask);
 	}
 
-	public void useCardPaymentScreen(JFrame cardPayment){
-		new CardPaymentScreen(this, cardPayment);
+	public void useCardPaymentScreen(JFrame cardPayment, float price){
+		new CardPaymentScreen(this, cardPayment, price);
 		setMasterFrame(this);
 		viewingOrder.push(cardPayment);
 	}
 
-	public void useCashPaymentScreen(JFrame cashPayment){
-		new CashPaymentScreen(this, cashPayment);
+	public void useCashPaymentScreen(JFrame cashPayment, float price){
+		new CashPaymentScreen(this, cashPayment, price);
 		setMasterFrame(this);
 		viewingOrder.push(cashPayment);
 	}
@@ -270,6 +271,11 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(genPerformanceSummary);
 	}
 
+	public void useSearchCustomerPayment(JFrame frame) {
+		new SearchCustomerScreenPayment(this, frame);
+		setMasterFrame(this);
+		viewingOrder.push(frame);
+	}
 
 	public void closeCurrentFrame(){
 		viewingOrder.peek().setVisible(false);

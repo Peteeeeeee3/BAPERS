@@ -37,7 +37,7 @@ public class SMHomePage extends JPanel {
         paymentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.usePaymentScreen(guiControl);
+                guiControl.useSearchCustomerPayment(guiControl);
             }
         });
         startTaskButton.addActionListener(new ActionListener() {

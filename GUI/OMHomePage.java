@@ -36,7 +36,7 @@ public class OMHomePage extends JPanel {
         paymentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guiControl.usePaymentScreen(guiControl);
+                guiControl.useSearchCustomerPayment(guiControl);
             }
         });
         reportsButton.addActionListener(new ActionListener() {
