@@ -50,6 +50,7 @@ public class PaymentControl implements I_Payment {
     public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card, String type) {
         //VectorOfPayments vecp = null;
         try {
+            //add values
             String sql = "INSERT INTO `payment`(`date`, `paymentType`, `amount`) VALUES (?,?,?)";
             PreparedStatement preparedStatement = control.getDBC().getDBGateway().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, date);
@@ -58,6 +59,7 @@ public class PaymentControl implements I_Payment {
 
             control.getDBC().write(preparedStatement);
 
+            //get id
             String sql3 = "SELECT paymentID FROM payment WHERE date = ? AND paymentType = ? and amount = ?";
             PreparedStatement prepStat = control.getDBC().getDBGateway().getConnection().prepareStatement(sql3);
             prepStat.setInt(1, date);
@@ -66,12 +68,14 @@ public class PaymentControl implements I_Payment {
 
             ResultSet rs = control.getDBC().read(prepStat);
 
+            //handle result
             int id = 0;
             while (rs.next()) {
                 id = rs.getInt(1);
                 break;
             }
 
+            //add card details
             if (id != 0) {
                 if (card != null) {
                     String sql2 = "INSERT INTO `card_details`(`PaymentpaymentID`, `type`, `expiryDate`, `last4Dig`) VALUES (?,?,?,?)";
