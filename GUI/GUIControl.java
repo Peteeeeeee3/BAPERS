@@ -1,6 +1,7 @@
 package GUI;
 
 import Control.Control;
+import Job.Job;
 import Report.*;
 import Account.*;
 
@@ -85,14 +86,14 @@ public class GUIControl extends JFrame {
 		viewingOrder.push(addTask);
 	}
 
-	public void useCardPaymentScreen(JFrame cardPayment, float price){
-		new CardPaymentScreen(this, cardPayment, price);
+	public void useCardPaymentScreen(JFrame cardPayment, float price, Customer customer, Job[] jobs){
+		new CardPaymentScreen(this, cardPayment, price, customer, jobs);
 		setMasterFrame(this);
 		viewingOrder.push(cardPayment);
 	}
 
-	public void useCashPaymentScreen(JFrame cashPayment, float price){
-		new CashPaymentScreen(this, cashPayment, price);
+	public void useCashPaymentScreen(JFrame cashPayment, float price, Customer customer, Job[] jobs){
+		new CashPaymentScreen(this, cashPayment, price, customer, jobs);
 		setMasterFrame(this);
 		viewingOrder.push(cashPayment);
 	}
