@@ -54,7 +54,6 @@ public class CreateJob extends JPanel {
                 String stat = status.getText();
                 //Calling it from the Job control
                 getGuiControl().getController().getJobControl().acceptJob(custID, payID, localTime, date, prio, instruction, pric, stat);
-                addToPaymentID(pric);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -89,17 +88,6 @@ public class CreateJob extends JPanel {
         });
     }
 
-    public void addToPaymentID(int price){
-        try {
-            String sql = "INSERT INTO payment(`amount`) VALUES (?)";
-            PreparedStatement preparedStatement = getGuiControl().getController().getDBC().getDBGateway().getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, price);
-            getGuiControl().getController().getDBC().write(preparedStatement);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
     public GUIControl getGuiControl() {
         return guiControl;
     }

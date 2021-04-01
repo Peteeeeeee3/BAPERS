@@ -141,6 +141,29 @@ public class ReportDisplayScreen {
                 guiControl.getController().getPrinterGateway().print(report);
             }
         });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (guiControl.getAccess()) {
+                    case 1:
+                        guiControl.closeCurrentFrame();
+                        guiControl.useHomepage(guiControl);
+                        break;
+                    case 2:
+                        guiControl.closeCurrentFrame();
+                        guiControl.useTechHomePage(guiControl);
+                        break;
+                    case 3:
+                        guiControl.closeCurrentFrame();
+                        guiControl.useSMHomePage(guiControl);
+                        break;
+                    case 4:
+                        guiControl.closeCurrentFrame();
+                        guiControl.useOMHomePage(guiControl);
+                        break;
+                }
+            }
+        });
 
     }
 }
