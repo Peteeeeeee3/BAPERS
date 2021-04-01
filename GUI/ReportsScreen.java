@@ -21,7 +21,7 @@ public class ReportsScreen extends JPanel {
     }
 
 
-
+    p
     public ReportsScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         generateReportButton.addActionListener(new ActionListener() {

@@ -39,9 +39,11 @@ public class CashPaymentScreen extends JPanel {
                     JOptionPane.showMessageDialog(cashPaymentPanel, "Please click the paid checkbox");
                 } else {
                     try {
+                        //Formats date and time
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
                         LocalDate date_now = LocalDate.now();
                         int date = Integer.parseInt(dtf.format(date_now));
+                        //Passes through the proper variables to add payment
                         guiControl.getController().getPaymentControl().addPayment(total * 1.2f, date, customer, jobs, 20210402, null, "cash");
                         guiControl.closeCurrentFrame();
                         guiControl.useCashPaymentScreen(guiControl, total, customer, jobs);

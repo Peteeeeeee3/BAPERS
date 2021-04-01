@@ -3,7 +3,7 @@ package Account;
 public class DiscountBand extends Discount {
 	private float range_min;
 	private float range_max;
-
+//getter and setters the variables provided by this class.
 	public float getRange_min() {
 		return this.range_min;
 	}

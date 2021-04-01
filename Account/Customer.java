@@ -17,16 +17,8 @@ public class Customer {
     private int valued;
     public Payment payment;
     private DiscountSet discountSet;
-    //private VectorOfJobs jobs = new VectorOfJobs(vecAcc.getAccControl().getControl().getJobControl());
 
-
-    public void addJob() {
-        throw new UnsupportedOperationException();
-    }
-
-    public void makePayment(Object[] jobs) {
-        throw new UnsupportedOperationException();
-    }
+// all the getter and setter of the variables.
 
     public String getCompany() {
         return this.company;
@@ -82,10 +74,8 @@ public class Customer {
         this.discountSet = discountSet;
     }
 
-    //public VectorOfJobs getJobs() {
-    //    return jobs;
-    //}
 
+// this method automatically generates id's for the customers and i stored within the variable accountNo.
     public int generateAccountNo() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         String sql = "SELECT `accountNo` FROM `Customer` WHERE Customer.name = ? AND Customer.company = ? AND Customer.address = ? AND phone=?";
         PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
@@ -115,13 +105,14 @@ public class Customer {
         return finalValue;
     }
 
+    //class that set all the variables within the class and insert the inputs into the sql local host.
     public Customer(String company, String name, String address, long phone, VectorOfAccounts vecAcc) {
         this.company = company;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.vecAcc = vecAcc;
-
+        
         String sql = "INSERT INTO `customer`(`name`, `company`, `phone`, `address`) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = vecAcc.getAccControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
             this.accountNo = generateAccountNo();

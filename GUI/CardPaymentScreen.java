@@ -63,12 +63,14 @@ public class CardPaymentScreen extends JPanel {
                     JOptionPane.showMessageDialog(cardPaymentPanel, "Please click the paid checkbox");
                 } else {
                     try {
+                        //Sets proper variable names
                         String cardType = CardType.getText();
                         int last4Digits = Integer.parseInt(Last4Digits.getText());
                         int expiryDate = Integer.parseInt(ExpiryDate.getText());
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
                         LocalDate date_now = LocalDate.now();
                         int date = Integer.parseInt(dtf.format(date_now));
+                        //Parameter passed through
                         guiControl.getController().getPaymentControl().addPayment(total * 1.2f, date, customer, jobs, 20210402, new Card(cardType, expiryDate, last4Digits), "card");
                         //convertDate(expiryDate);
                     } catch (Exception parseException) {

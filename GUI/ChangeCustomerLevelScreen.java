@@ -21,7 +21,7 @@ public class ChangeCustomerLevelScreen extends JPanel {
         frame.setVisible(true);
 
     }
-
+    //Switches between screens
     public ChangeCustomerLevelScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         upgradeCustomerButton.addActionListener(new ActionListener() {

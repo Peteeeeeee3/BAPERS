@@ -50,9 +50,14 @@ public class AddNewTaskScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //This is how we go back from a current page to the respectful homepage. Utlising a switch case.
+                //Switch case statement used by getting access.
                 switch (guiControl.getAccess()) {
                     case 1:
+                        //Close current frame method defined in GUIControl
                         getGuiControl().closeCurrentFrame();
+                        //Calls the respective homepage screen and displays it all other functions with use
+                        //does exactly the same thing as what happens here
                         guiControl.useHomepage(guiControl);
                         break;
                     case 2:

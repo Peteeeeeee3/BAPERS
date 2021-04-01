@@ -24,8 +24,7 @@ public class VectorOfUsers {
         users.add(user);
         incrementNoOfUsers();
 
-        //accControl.write("INSERT INTO Staff_Member " + "(staffID, password, name, access) " + " VALUES (" + user.getStaffID() + ", " + user.getPassword() + ", " + user.getName() + ", " + user.getAccess() + ")");
-        //System.out.println("Data: " + user.getStaffID() + user.getPassword() + user.getName() + user.getAccess() + "has been inserted");
+
     }
 
     public void removeUser(int id) {

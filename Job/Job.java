@@ -36,48 +36,49 @@ public class Job {
 
 	public void updateStatus(int jobID) throws SQLException {
 
-		ArrayList<String> statusArray = new ArrayList<>();
-		ArrayList<String> statusCompleteArray = new ArrayList<>();
+		ArrayList<String> statusArray = new ArrayList<>();       //creates array to store
+		ArrayList<String> statusCompleteArray = new ArrayList<>();    //creates duplicate array filled with 'complete' for comparision
 
 
 		try {
 
-			String find = "SELECT status FROM task_of_job WHERE" + jobID;
+			String find = "SELECT status FROM task_of_job WHERE" + jobID;  //defining the sql query
 			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
-			ResultSet result = stmt.executeQuery(find);
+			ResultSet result = stmt.executeQuery(find);  //assign query to Result object
+
 
 			while (result.next()) {
-				statusArray.add(result.getString(1));
+				statusArray.add(result.getString(1));    //populating the array with the status'. as you're selecting status in sql, there will only be one column to interact with.
 			}
 
 
 			for(int i = 0; i<statusArray.size(); i++){
-				statusCompleteArray.add("complete");
+				statusCompleteArray.add("complete");				//populating the clone array with the same amount of elements the main array (which stores all the status')
 			}
 
-			int count = 0;
+			int count = 0;   	//creating a counter to count the matches between the lists
 
-			if(statusArray.contains("in progress") | statusArray.contains("complete")){
 
-				for(int i = 0; i<statusArray.size(); i++){
+			if(statusArray.contains("in progress") | statusArray.contains("complete")){      //if 'in progress' OR 'complete' is detected it the main array
 
+				for(int i = 0; i<statusArray.size(); i++){									//every time there's a match, count is incremented by 1
 					if(statusArray.get(i).equals(statusCompleteArray.get(i))){
 						count++;
 					}
 				}
 
-				if(count == statusArray.size()){
+				if(count == statusArray.size()){											//if the count matches the size of the clone array, status = complete
 					System.out.println("complete");
 					setStatus("complete", jobID);
 				}
 
 				else{
-					System.out.println("in progress");
+					System.out.println("in progress");										//if the count is different to the size of the array, then status = in progress
 					setStatus("in progress", jobID);
 				}
 			}
 
-			else{
+			else{																			//anything else would be pending
 				System.out.println("pending");
 				setStatus("pending", jobID);
 			}
@@ -118,11 +119,9 @@ public class Job {
 
 		try {
 
-			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement
-					("UPDATE Job SET status=" + status + " WHERE jobNumber=" + jobID);
+			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement    //sql statement
+					("UPDATE Job SET status=" + status + " WHERE jobNumber=" + jobID);   //update job status with job ID
 
-			stmt.executeUpdate();
-			stmt.close();
 		}
 
 		catch (SQLException e) {
@@ -170,7 +169,7 @@ public class Job {
 		String sql = "SELECT `jobNumber` FROM `job` WHERE `startTime` = ? AND `startDate` = ? AND `priority` = ? AND `specialInstructions` = ? AND `price` = ? AND `status` = ? AND `CustomeraccountNo` = ? AND `PaymentpaymentID` = ?";
 		PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql);
 
-		preparedStatement.setInt(1, startTime);
+		preparedStatement.setInt(1, startTime);  //assigning each parameter to a column
 		preparedStatement.setInt(2, startDate);
 		preparedStatement.setInt(3, urgency);
 		preparedStatement.setString(4, summary);
@@ -203,7 +202,7 @@ public class Job {
 		String sql = "INSERT INTO `job`(`CustomeraccountNo`,`PaymentpaymentID`,`startTime`, `startDate`, `priority`, `specialInstructions`, `price`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement preparedStatement = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(sql)) {
 			this.iD = generateJobNo();
-			preparedStatement.setInt(1, customerid);
+			preparedStatement.setInt(1, customerid);    //assigning each parameter to a column
 			preparedStatement.setInt(2, paymentid);
 			preparedStatement.setInt(3, startTime);
 			preparedStatement.setInt(4, startDate);
@@ -218,7 +217,7 @@ public class Job {
 	}
 
 	public Job(int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, double price, String status, VectorOfJobs vecJob) {
-		this.summary = summary;
+		this.summary = summary;			//assigning each parameter to a column
 		this.startTime = startTime;
 		this.urgency = urgency;
 		this.vecJob = vecJob;
@@ -231,7 +230,7 @@ public class Job {
 	}
 
 	public Job(int ID, int customerno, int paymentid, int startTime, int startDate, int urgency, String summary, float price, String status){
-		this.iD = ID;
+		this.iD = ID;							//assigning each parameter to a column
 		this.customerid = customerno;
 		this.paymentid = paymentid;
 		this.startTime = startTime;
@@ -249,13 +248,14 @@ public class Job {
 
 		try {
 
-			String find = "SELECT * FROM Job WHERE jobNumber=" + jobID;
+			String find = "SELECT * FROM Job WHERE jobNumber=" + jobID;     //create select statement
+
 			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement(find);
-			ResultSet result = stmt.executeQuery(find);
+			ResultSet result = stmt.executeQuery(find);  //execute query
 
-			while (result.next()) {
+			while (result.next()) {  //loop through all the column
 
-				int CustomerAccountNum = result.getInt(2);
+				int CustomerAccountNum = result.getInt(2);   //assigning each parameter to a column
 				System.out.println(CustomerAccountNum);
 
 				int PaymentpaymentID = result.getInt(3);
@@ -293,7 +293,7 @@ public class Job {
 			ResultSet result = stmt.executeQuery(find);
 
 			while (result.next()) {
-
+																			//loop through all results
 				int jobIDTemp = result.getInt(1);
 				updateStatus(jobIDTemp);
 			}
@@ -310,13 +310,13 @@ public class Job {
 		try {
 
 			PreparedStatement stmt = vecJob.getControl().getControl().getDBC().getDBGateway().getConnection().prepareStatement
-					("SELECT FROM job WHERE status = 'in progress'");
+					("SELECT FROM job WHERE status = 'in progress'");  //sql statement
 
 			ResultSet result = stmt.executeQuery();
 
 			while (result.next()) {
 
-				int JobNumber = result.getInt(1);
+				int JobNumber = result.getInt(1);  //assigning each parameter to a column
 				System.out.println(JobNumber);
 
 				int CustomerAccountNum = result.getInt(2);
@@ -349,18 +349,19 @@ public class Job {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
+		/*
+ 	updateStatus checks through the job's tasks and determines whether the job is in progress, pending or complete.
+ 	In update job, setStatus is called to set whatever status thats determined for the job.
+ 	ViewJob is to view a specific job, updateStatus is called to make sure the status is the latest one.
+ 	ViewActiveJobs views all jobs that are active, updateAllJobs is called which updates(checks status etc) all the jobs beforehand
+	 	*/
 
-	public void setZero(int statusID){
+
+
+		public void setZero(int statusID){
 		statusID = 0;
 	}
     
 }
 
-/*
- updateStatus checks through the job's tasks and determines whether the job is in progress, pending or complete.
- In update job, setStatus is called to set whatever status thats determined for the job.
- ViewJob is to view a specific job, updateStatus is called to make sure the status is the latest one.
- ViewActiveJobs views all jobs that are active, updateAllJobs is called which updates(checks status etc) all the jobs beforehand
- */

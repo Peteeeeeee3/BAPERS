@@ -49,7 +49,7 @@ public class PaymentScreen extends JPanel {
             defaultTableModel.addColumn("Job Number");
             defaultTableModel.addColumn("Price");
             defaultTableModel.setColumnIdentifiers(new Object[]{"Job Number", "Price"});
-
+            //Sets row to proper database rows. Gets from the result set
             int i = 0;
             while (rs.next()) {
                 defaultTableModel.addRow(new Object[]{rs.getInt(1), rs.getFloat(8)});

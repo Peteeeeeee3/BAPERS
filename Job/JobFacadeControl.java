@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import Control.Control;
-import Job.JobHistory;
+import Job.*;
 import Account.Customer;
 import Database.I_Database;
 

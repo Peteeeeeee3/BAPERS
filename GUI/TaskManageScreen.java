@@ -21,7 +21,7 @@ public class TaskManageScreen extends JPanel {
         frame.setSize(500,300);
         frame.setVisible(true);
     }
-
+    //Switches between screens
     public TaskManageScreen(GUIControl guiControl){
         this.guiControl = guiControl;
         newJobButton.addActionListener(new ActionListener() {
