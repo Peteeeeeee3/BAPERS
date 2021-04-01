@@ -23,6 +23,7 @@ public class PrinterGateway {
 	private String calc_etc(CustomerJobReport report) {
 		String ret_val = "";
 		int estimatedDuration = 0, estD_itr = 0, check;
+		//get longest duration
 		for (int i = 0; i < report.getStartTimes().size(); i++) {
 			check = report.getStartTimes().get(i) + report.getPriorities().get(i);
 			if (check > estimatedDuration) {
@@ -30,10 +31,12 @@ public class PrinterGateway {
 				estD_itr = i;
 			}
 		}
+		//format date
 		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
 		try {
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			String date = "";
+			//format time
 			if (estimatedDuration < 1000) {
 				if (Integer.parseInt(Integer.toString(estimatedDuration).substring(1, 3)) / 60 != 0) {
 					estimatedDuration -= 60;
@@ -253,6 +256,7 @@ public class PrinterGateway {
 				}
 				table.addCell(new_cell);
 			}
+			//add table to document
 			doc.add(table);
 
 			//close document
@@ -264,9 +268,11 @@ public class PrinterGateway {
 
 	private void prt_psr(PerformanceSummary report, String file_name) {
 		try {
+			//create document
 			Document doc = new Document();
 			PdfWriter.getInstance(doc, new FileOutputStream(file_name));
 			doc.open();
+			//add descriptive values e.g. title, time interval, etc.
 			String title = "Summary Performance Report";
 			String period = "Period: ";
 			String yearS = Integer.toString(report.getStartDate()).substring(0, 4);
@@ -278,12 +284,15 @@ public class PrinterGateway {
 			period += yearS + "/" + monthS + "/" + dayS + " - " + yearE + "/" + monthE + "/" + dayE;
 			String _break = " ";
 			String shift1 = "Day Shift 1 (5 am - 2:30 pm)";
+			//add above values as components of the document
 			Paragraph p_title = new Paragraph(new Phrase(title, FontFactory.getFont(FontFactory.defaultEncoding, 20.0f))),
 					p_period = new Paragraph(period), p_break = new Paragraph(_break), p_shift1 = new Paragraph(shift1);
+			//appropriate positioning
 			p_title.setIndentationLeft(130);
 			p_period.setIndentationLeft(180);
 			p_shift1.setIndentationLeft(180);
 
+			//add to document
 			doc.add(p_title);
 			doc.add(p_period);
 			doc.add(p_break);
@@ -306,7 +315,9 @@ public class PrinterGateway {
 
 			//shift 1
 			int datePos = 0;
+			//search for each object
 			for (SummaryInfo si : report.getInfo_vec()) {
+				//first column
 				if (datePos % 5 == 0) {
 					int date = si.getDate();
 					String dateStr = Integer.toString(date).substring(0, 4) + "/" + Integer.toString(date).substring(4, 6) + "/" +
@@ -315,18 +326,22 @@ public class PrinterGateway {
 					shift1_table.addCell(new_cell);
 					datePos++;
 				}
+				//second column
 				if (si.getShift() == 1 && si.getLocation().equals("Copy Room")) {
 					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
 					shift1_table.addCell(new_cell);
 					datePos++;
+					//third column
 				} else if (si.getShift() == 1 && si.getLocation().equals("Development")) {
 					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
 					shift1_table.addCell(new_cell);
 					datePos++;
+					//fourth column
 				} else if (si.getShift() == 1 && si.getLocation().equals("Finishing")) {
 					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
 					shift1_table.addCell(new_cell);
 					datePos++;
+					//fifth column
 				} else if (si.getShift() == 1 && si.getLocation().equals("Packing")) {
 					new_cell = new PdfPCell(new Phrase(Integer.toString(si.getValue())));
 					shift1_table.addCell(new_cell);
@@ -439,6 +454,7 @@ public class PrinterGateway {
 
 			//shift summary
 			doc.add(new Paragraph(" "));
+			//format date
 			String dateS = Integer.toString(report.getStartDate()).substring(0, 4) + "/" +
 					Integer.toString(report.getStartDate()).substring(4, 6) + "/" +
 					Integer.toString(report.getStartDate()).substring(6, 8);
@@ -466,7 +482,9 @@ public class PrinterGateway {
 			//shift totals
 			datePos = 0;
 			int columnItr = 0;
+			//loop for each summary info
 			for (SummaryInfo si : report.getInfo_vec()) {
+				//display appropriate text in cell
 				if (datePos % 5 == 0 && columnItr == 0) {
 					new_cell = new PdfPCell(new Phrase(" "));
 					shiftSum_table.addCell(new_cell);
@@ -494,6 +512,7 @@ public class PrinterGateway {
 					columnItr++;
 				}
 
+				//add and display totals
 				int total = 0;
 				if (datePos % 5 == 1) {
 					for (SummaryInfo si2 : report.getInfo_vec()) {
