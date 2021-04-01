@@ -27,7 +27,8 @@ public class TableMouseListener extends MouseAdapter {
 
         if (SwingUtilities.isLeftMouseButton(e)) {
             s.setTotal(s.getTotal() + Float.parseFloat(table.getValueAt(row, 1).toString()));
-            System.out.println(s.getTotal());
+            //System.out.println(s.getTotal());
+            s.getPriceField().setText("Price: " + s.getTotal() + "GBP");
         }
     }
 }

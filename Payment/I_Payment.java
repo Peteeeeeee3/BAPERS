@@ -14,7 +14,7 @@ public interface I_Payment {
 
 	public Card[] retrieveCards(Customer customer);
 
-	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card)
+	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card)
 			throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException;
 
 	public void generateInvoice();

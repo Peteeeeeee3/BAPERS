@@ -1,6 +1,7 @@
 package Payment;
 
 import Account.Customer;
+import Account.DiscountBand;
 import Account.ValuedCustomer;
 import Job.Job;
 import Control.Control;
@@ -33,7 +34,18 @@ public class PaymentControl implements I_Payment {
 		throw new UnsupportedOperationException();
 	}
 
-	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card)
+	public float applyDiscount (float price, Customer customer) {
+		if (customer.getValued() == 1) {
+			if (customer.getDiscountSet().getDiscounts().get(0) instanceof DiscountBand) {
+				return 0f;
+			}
+		} else {
+			return price;
+		}
+		return price;
+	}
+
+	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card)
 			throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
 		VectorOfPayments vecp = null;
 		float price;

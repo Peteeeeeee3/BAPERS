@@ -19,6 +19,7 @@ public class PaymentScreen extends JPanel {
     public GUIControl guiControl;
     public JPanel panelMain;
     private JTable table1;
+    private JLabel priceField;
     public CardPaymentScreen cardPaymentScreen;
     private Vector<Job> jobs;
     private float total = 0;
@@ -74,7 +75,7 @@ public class PaymentScreen extends JPanel {
         cardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int amount = Integer.parseInt(amountDueTextArea.getText());
+                //int amount = Integer.parseInt(amountDueTextArea.getText());
                 //guiControl.getController().getPaymentControl().addPayment();
                 guiControl.useCardPaymentScreen(guiControl, total);
             }
@@ -95,6 +96,10 @@ public class PaymentScreen extends JPanel {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public JLabel getPriceField() {
+        return priceField;
     }
 
     //    public static void main(String[] args){

@@ -192,7 +192,7 @@ public class Control implements I_Control, I_Payment {
 	}
 
 	@Override
-	public void addPayment(int amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
+	public void addPayment(float amount, int date, Customer customer, Job[] jobs, int dueDate, Card card) throws ClassNotFoundException, SQLException, InstantiationException, ParseException, IllegalAccessException {
 		paymentControl.addPayment(amount, date, customer, jobs, dueDate, card);
 	}
 }
